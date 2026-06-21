@@ -1,0 +1,12 @@
+﻿ID,Fecha,Tipo,Bloque,Cambio,Estado,Evidencia
+CHG-S0-001,2026-06-21,Proceso,S0.1,Congelación de Unity 6000.3.18f1 y toolchain,Accepted,Evidence/S0.1_UnityHub_EditorVersion.png
+CHG-S0-002,2026-06-21,Proceso,S0.2,Creación de proyecto Unity URP desde cero,Accepted,6429c7cff05fb8e77e7161ce72f28fb79d03383f
+CHG-S0-003,2026-06-21,Proceso,S0.3,Línea base de paquetes,Accepted,Packages/manifest.json
+CHG-S0-004,2026-06-21,Proceso,S0.4,Flujo de repositorio mediante GitHub Desktop,Accepted,46c76312fe3f2e93da48334be4862d019e34019d
+CHG-S0-005,2026-06-21,Proceso,S0.4,Atributos de repositorio Unity,Accepted,3d49ef4fae0ebbe4f5739b58d1ac08c5dd068264
+CHG-S0-006,2026-06-21,Documentación,S0.5,Integración de documentación oficial v0.3,Accepted,1cc30ad69a2c093a8e1e0686451302689eb632bb
+CHG-S0-007,2026-06-21,Proceso,S0.5,Creación de estructura Assets/_Project,Accepted,1cc30ad69a2c093a8e1e0686451302689eb632bb
+CHG-S0-008,2026-06-21,Código nuevo,S0.6,Creación de assemblies de producción,Accepted,7f32381d94af98f283fa0cb26b4cbf5b0ba84fe9
+CHG-S0-009,2026-06-21,Código nuevo,S0.6,Creación de assemblies de pruebas,Accepted,7f32381d94af98f283fa0cb26b4cbf5b0ba84fe9
+CHG-S0-010,2026-06-21,Refactor,S0.6,Eliminación de carpeta Shared,Accepted,7f32381d94af98f283fa0cb26b4cbf5b0ba84fe9
+CHG-S0-011,2026-06-21,Documentación,S0.6D,Creación de seguimiento operativo,Pending validation,S0.6D package
