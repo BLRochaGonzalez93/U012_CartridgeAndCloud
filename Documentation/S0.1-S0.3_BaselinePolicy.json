@@ -1,0 +1,24 @@
+{
+  "project": "CartridgeAndCloud",
+  "unityEditor": "6000.3.18f1",
+  "companyName": "VRM Games",
+  "productName": "Cartridge & Cloud",
+  "productVersion": "0.0.1",
+  "applicationIdentifier": "com.vrmgames.cartridgeandcloud",
+  "requiredPackages": [
+    "com.unity.render-pipelines.universal",
+    "com.unity.inputsystem",
+    "com.unity.ai.navigation",
+    "com.unity.localization",
+    "com.unity.test-framework"
+  ],
+  "packagePolicy": {
+    "allowPrereleaseForRequiredPackages": false,
+    "allowThirdPartyScopedRegistries": false,
+    "copyManifestFromAnotherProject": false,
+    "recordResolvedVersions": true
+  },
+  "servicesPolicy": {
+    "initializeUnityGamingServices": false
+  }
+}
