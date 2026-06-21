@@ -1,0 +1,25 @@
+{
+    "name": "VRMGames.CartridgeAndCloud.Tests.EditMode",
+    "rootNamespace": "VRMGames.CartridgeAndCloud.Tests.EditMode",
+    "references": [
+        "VRMGames.CartridgeAndCloud.Domain",
+        "VRMGames.CartridgeAndCloud.Application",
+        "VRMGames.CartridgeAndCloud.Infrastructure",
+        "VRMGames.CartridgeAndCloud.Presentation",
+        "UnityEngine.TestRunner",
+        "UnityEditor.TestRunner"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": true,
+    "precompiledReferences": [
+        "nunit.framework.dll"
+    ],
+    "autoReferenced": false,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

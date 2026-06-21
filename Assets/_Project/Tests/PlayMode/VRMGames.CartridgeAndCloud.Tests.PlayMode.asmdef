@@ -1,0 +1,22 @@
+{
+    "name": "VRMGames.CartridgeAndCloud.Tests.PlayMode",
+    "rootNamespace": "VRMGames.CartridgeAndCloud.Tests.PlayMode",
+    "references": [
+        "VRMGames.CartridgeAndCloud.Domain",
+        "VRMGames.CartridgeAndCloud.Application",
+        "VRMGames.CartridgeAndCloud.Infrastructure",
+        "VRMGames.CartridgeAndCloud.Presentation",
+        "UnityEngine.TestRunner"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": true,
+    "precompiledReferences": [
+        "nunit.framework.dll"
+    ],
+    "autoReferenced": false,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

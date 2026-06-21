@@ -1,0 +1,16 @@
+{
+    "name": "VRMGames.CartridgeAndCloud.Application",
+    "rootNamespace": "VRMGames.CartridgeAndCloud.Application",
+    "references": [
+        "VRMGames.CartridgeAndCloud.Domain"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": false,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": true
+}
