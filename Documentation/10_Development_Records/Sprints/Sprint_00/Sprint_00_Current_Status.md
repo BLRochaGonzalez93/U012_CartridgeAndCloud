@@ -4,7 +4,7 @@
 **Repositorio:** `BLRochaGonzalez93/U012_CartridgeAndCloud`  
 **Rama:** `main`  
 **Unity:** `6000.3.18f1`  
-**Último commit auditado:** `e67555b4f5d6e6cc3d5564fc10573a92b2f80cf2`  
+**Último commit auditado:** `04264a362e33c6b823a51f82434b38d879c3dae1`  
 **Fecha:** 2026-06-22
 
 ## Estado
@@ -19,30 +19,29 @@
 | S0.6 | Closed | PASS |
 | S0.6D | Closed | PASS |
 | S0.7 | Closed | PASS |
-| S0.8 | In Progress | Tests preparados; ejecución pendiente |
-| S0.9 | Pending | Bloqueado por S0.8 |
-| S0.10 | Pending | No iniciado |
+| S0.8 | Closed | PASS — 9/9 tests |
+| S0.9 | In Progress | Build preparado; ejecución pendiente |
+| S0.10 | Pending | Bloqueado por S0.9 |
 
 ## Estado técnico
 
-- Cuatro escenas base validadas.
+- Unity y URP congelados.
+- Repositorio reproducible.
 - Cuatro assemblies de producción.
 - Dos assemblies de pruebas.
-- Test Framework `1.6.0`.
-- Nueve smoke tests preparados.
+- Cuatro escenas base.
+- Nueve smoke tests aprobados.
+- Primer perfil Windows preparado documentalmente.
 - Ningún gameplay implementado.
-- Ningún build generado.
+- Ningún build validado todavía.
 
-## Próximo criterio
+## Siguiente criterio
 
-S0.8 se cierra con:
+S0.9 se cierra cuando el Development Build Windows x64:
 
-```text
-EditMode 5/5 PASS
-PlayMode 4/4 PASS
-Console 0 errores rojos
-Segunda ejecución 9/9 PASS
-Commit y push
-```
-
-S0.9 no está autorizado hasta confirmar esos resultados.
+- se construye sin errores;
+- arranca fuera del Editor;
+- permanece estable;
+- genera un Player.log válido;
+- tiene ZIP y SHA-256 registrados;
+- está documentado y publicado sin versionar `Builds/`.
