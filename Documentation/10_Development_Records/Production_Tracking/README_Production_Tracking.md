@@ -1,42 +1,28 @@
 # Production Tracking — Operational Layer
 
-## Fuente vigente
-
-La versión operativa actual al iniciar S0.7 es `v0.3.2`.
-
-```text
-Cartridge_And_Cloud_Production_Tracking_Operational_v0.3.2.xlsx
-Cartridge_And_Cloud_QA_Operational_v0.3.2.xlsx
-Cartridge_And_Cloud_Traceability_Operational_v0.3.2.xlsx
-```
-
-Las copias v0.3.1 deben retirarse del árbol actual. Permanecen conservadas en el
-historial de Git mediante el commit de S0.6D.
-
 ## Propósito
 
-Estos libros reflejan el estado real de producción posterior a la línea base:
+Estos libros reflejan el estado real posterior a la línea base oficial v0.3.
+
+La línea base permanece inmutable en:
 
 ```text
 Documentation/00_Official_Baseline/v0.3
 ```
 
-La línea base no se modifica ni se sustituye.
+## Versión operativa vigente
 
-## Política de actualización
+- `Cartridge_And_Cloud_Production_Tracking_Operational_v0.3.3.xlsx`
+- `Cartridge_And_Cloud_QA_Operational_v0.3.3.xlsx`
+- `Cartridge_And_Cloud_Traceability_Operational_v0.3.3.xlsx`
 
-1. Actualizar los tres libros al iniciar y cerrar cada bloque relevante.
-2. No declarar PASS sin confirmación del desarrollador.
-3. Registrar deuda y observaciones.
-4. Usar exclusivamente los tipos de trazabilidad permitidos.
-5. No mantener dos versiones como fuentes operativas simultáneas.
-6. Conservar el histórico mediante Git, no mediante duplicados activos.
-7. Preparar una nueva versión oficial consolidada durante S0.10.
+La versión v0.3.3 registra el cierre PASS de S0.7, los commits de escenas y la
+corrección de la referencia obsoleta de `SampleScene`.
 
-## Estado v0.3.2
+## Política
 
-- S0.6D: Closed / PASS.
-- S0.7: In Progress.
-- ADR-0005: Accepted.
-- Casos QA de escenas: Pending.
-- Cambio de escenas y Scene List: Pending validation.
+1. Mantener una única versión operativa vigente en el árbol de trabajo.
+2. Conservar versiones anteriores mediante el historial Git.
+3. Actualizar los libros al iniciar y cerrar bloques que cambien el estado real.
+4. No declarar PASS sin validación del desarrollador.
+5. No editar la línea base oficial.
