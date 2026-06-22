@@ -1,28 +1,22 @@
 # Production Tracking — Operational Layer
 
-## Propósito
+## Versión vigente para S0.8
 
-Estos libros reflejan el estado real posterior a la línea base oficial v0.3.
+- `Cartridge_And_Cloud_Production_Tracking_Operational_v0.3.4.xlsx`
+- `Cartridge_And_Cloud_QA_Operational_v0.3.4.xlsx`
+- `Cartridge_And_Cloud_Traceability_Operational_v0.3.4.xlsx`
 
-La línea base permanece inmutable en:
+La versión v0.3.4 registra S0.7 como cerrado y S0.8 como `In Progress`.
+
+Los libros v0.3.3 deben retirarse del árbol de trabajo. El historial Git conserva
+su versión de cierre.
+
+## Regla
+
+S0.8 no se marcará PASS hasta ejecutar dos veces la suite completa con:
 
 ```text
-Documentation/00_Official_Baseline/v0.3
+EditMode 5/5
+PlayMode 4/4
+Console limpia
 ```
-
-## Versión operativa vigente
-
-- `Cartridge_And_Cloud_Production_Tracking_Operational_v0.3.3.xlsx`
-- `Cartridge_And_Cloud_QA_Operational_v0.3.3.xlsx`
-- `Cartridge_And_Cloud_Traceability_Operational_v0.3.3.xlsx`
-
-La versión v0.3.3 registra el cierre PASS de S0.7, los commits de escenas y la
-corrección de la referencia obsoleta de `SampleScene`.
-
-## Política
-
-1. Mantener una única versión operativa vigente en el árbol de trabajo.
-2. Conservar versiones anteriores mediante el historial Git.
-3. Actualizar los libros al iniciar y cerrar bloques que cambien el estado real.
-4. No declarar PASS sin validación del desarrollador.
-5. No editar la línea base oficial.

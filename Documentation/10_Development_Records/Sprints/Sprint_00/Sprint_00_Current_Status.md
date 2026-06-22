@@ -4,7 +4,7 @@
 **Repositorio:** `BLRochaGonzalez93/U012_CartridgeAndCloud`  
 **Rama:** `main`  
 **Unity:** `6000.3.18f1`  
-**Último commit auditado:** `6416ca107509dd81428575ff9400215022bc7610`  
+**Último commit auditado:** `e67555b4f5d6e6cc3d5564fc10573a92b2f80cf2`  
 **Fecha:** 2026-06-22
 
 ## Estado
@@ -19,48 +19,30 @@
 | S0.6 | Closed | PASS |
 | S0.6D | Closed | PASS |
 | S0.7 | Closed | PASS |
-| S0.8 | Pending | Autorizado |
-| S0.9 | Pending | No iniciado |
+| S0.8 | In Progress | Tests preparados; ejecución pendiente |
+| S0.9 | Pending | Bloqueado por S0.8 |
 | S0.10 | Pending | No iniciado |
 
 ## Estado técnico
 
-- Proyecto Unity URP creado.
-- Toolchain congelada.
-- Paquetes requeridos presentes.
-- Repositorio y atributos configurados.
-- Estructura `Assets/_Project` creada.
-- Línea base documental v0.3 incorporada e inmutable.
-- Seguimiento operativo activo.
+- Cuatro escenas base validadas.
 - Cuatro assemblies de producción.
 - Dos assemblies de pruebas.
-- Cuatro escenas base creadas y validadas.
-- Scene List global limpia y ordenada.
+- Test Framework `1.6.0`.
+- Nueve smoke tests preparados.
 - Ningún gameplay implementado.
 - Ningún build generado.
-- Ningún smoke test implementado todavía.
 
-## Escenas vigentes
+## Próximo criterio
 
-```text
-0 — Bootstrap
-1 — MainMenu
-2 — Store
-3 — TestLab
-```
-
-## Deuda y observaciones
-
-1. Completar `DevelopmentEnvironment_Record.md` antes de S0.10.
-2. Revisar paquetes de plantilla no necesarios.
-3. Mantener la línea base oficial intacta.
-4. No añadir gameplay durante S0.8.
-
-## Siguiente paso autorizado
+S0.8 se cierra con:
 
 ```text
-S0.8 — Smoke Tests
+EditMode 5/5 PASS
+PlayMode 4/4 PASS
+Console 0 errores rojos
+Segunda ejecución 9/9 PASS
+Commit y push
 ```
 
-El bloque deberá introducir pruebas mínimas EditMode y PlayMode sin implementar
-sistemas de gameplay.
+S0.9 no está autorizado hasta confirmar esos resultados.
