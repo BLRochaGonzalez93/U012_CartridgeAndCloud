@@ -1,12 +1,12 @@
 # Development Environment Record
 
 **Proyecto:** Cartridge & Cloud  
-**Responsable:** Blas Luis Rocha González / VRM Games  
-**Estado:** In Progress  
+**Responsable:** Blas Luis Rocha GonzÃ¡lez / VRM Games  
+**Estado:** Captured â€” pending final Unity validation  
 **Bloque:** S0.10  
-**Fecha de actualización:** 2026-06-22
+**Fecha de actualizaciÃ³n:** 2026-06-22
 
-## Línea base conocida
+## LÃ­nea base de proyecto
 
 | Campo | Valor |
 |---|---|
@@ -16,41 +16,43 @@
 | Repositorio | `BLRochaGonzalez93/U012_CartridgeAndCloud` |
 | Rama | `main` |
 | Flujo Git | GitHub Desktop |
-| Compañía | VRM Games |
+| CompaÃ±Ã­a | VRM Games |
 | Producto | Cartridge & Cloud |
-| Versión | `0.0.1` |
+| VersiÃ³n | `0.0.1` |
 | Root Namespace | `VRMGames.CartridgeAndCloud` |
-| Application Identifier objetivo | `com.vrmgames.cartridgeandcloud` |
+| Application Identifier | `com.vrmgames.cartridgeandcloud` |
 | Build Profile | `Windows_Development` |
 | Scripting Backend de desarrollo | Mono |
 | Test Framework | `1.6.0` |
+| Windows Build Support | Instalado y validado mediante S0.9 |
 
-## Equipo local — completar
+## Equipo local
 
 | Campo | Valor |
 |---|---|
-| Windows edición | PENDIENTE |
-| Windows versión / build | PENDIENTE |
-| CPU | PENDIENTE |
-| RAM | PENDIENTE |
-| GPU | PENDIENTE |
-| Driver GPU | PENDIENTE |
-| Disco de proyecto | PENDIENTE |
-| Espacio libre aproximado | PENDIENTE |
-| Unity Hub | PENDIENTE |
-| IDE principal | PENDIENTE |
-| Versión del IDE | PENDIENTE |
-| SDK / Build Support Windows | PENDIENTE |
+| Windows ediciÃ³n | Microsoft Windows 10 Pro |
+| Windows versiÃ³n / build | 10.0.19045 / 19045 |
+| CPU | Intel(R) Core(TM) i9-9900K CPU @ 3.60GHz |
+| RAM | 31.9 GB |
+| GPU / driver | Intel(R) UHD Graphics 630 (driver 31.0.101.2140); NVIDIA GeForce RTX 3060 (driver 32.0.15.9186) |
+| Disco del proyecto | D:\ |
+| Espacio libre aproximado | 2297.9 GB |
+| Unity Hub | No detectado |
+| IDE principal | Visual Studio Community 2026 |
+| VersiÃ³n del IDE | 18.7.0 |
 
-## Validación
+## ValidaciÃ³n pendiente
 
-- [ ] Unity abre el proyecto.
-- [ ] Compilación limpia.
-- [ ] 9/9 tests.
-- [ ] Build Windows disponible.
-- [ ] GitHub Desktop sincroniza `main`.
-- [ ] Todos los campos locales están completados.
+- [ ] Unity reimporta el proyecto despuÃ©s de los cambios.
+- [ ] Package Manager resuelve el nuevo manifiesto.
+- [ ] CompilaciÃ³n limpia.
+- [ ] EditMode 5/5 PASS.
+- [ ] PlayMode 4/4 PASS.
+- [ ] Segunda ejecuciÃ³n 9/9 PASS.
+- [ ] Build002 Windows disponible.
+- [ ] GitHub Desktop limpio antes del commit final.
 
-## Observaciones
+## Privacidad
 
-Registrar aquí cualquier requisito de restauración en una máquina nueva.
+No se registran nombre de equipo, usuario, seriales, tokens, claves ni rutas
+personales completas.

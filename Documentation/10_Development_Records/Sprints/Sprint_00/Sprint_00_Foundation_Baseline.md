@@ -1,35 +1,41 @@
 # Sprint 00 — Foundation Baseline
 
-**Estado:** In Progress  
-**Versión objetivo:** `0.0.1`  
-**Tag objetivo:** `v0.0.1-project-foundation`  
-**Último commit de partida:** `e1998dffe52d0d4191abe3f8bda3b577d84bdb04`
+**Estado técnico:** Validated  
+**Resultado:** PASS  
+**Versión:** `0.0.1`  
+**Commit final:** PENDIENTE PUBLICACIÓN  
+**Tag objetivo:** `v0.0.1-project-foundation`
 
 ## Bloques
 
 | Bloque | Estado | Resultado |
 |---|---|---|
-| S0.1 | Closed | PASS con deuda documental |
+| S0.1 | Closed | PASS con deuda documental resuelta en S0.10 |
 | S0.2 | Closed | PASS |
-| S0.3 | Closed | PASS con observación |
+| S0.3 | Closed | PASS con observación resuelta en S0.10 |
 | S0.4 | Closed | PASS |
 | S0.5 | Closed | PASS |
 | S0.6 | Closed | PASS |
 | S0.6D | Closed | PASS |
 | S0.7 | Closed | PASS |
 | S0.8 | Closed | PASS |
-| S0.9 | Closed | PASS con observaciones |
-| S0.10 | In Progress | PENDIENTE |
+| S0.9 | Closed | PASS con observaciones transferidas |
+| S0.10 | Validated | PASS — publicación pendiente |
 
-## Arquitectura
+## Base técnica
 
-- Root namespace: `VRMGames.CartridgeAndCloud`.
-- Domain.
-- Application.
-- Infrastructure.
-- Presentation.
-- Tests EditMode.
-- Tests PlayMode.
+- Unity `6000.3.18f1`.
+- URP `17.3.0`.
+- Windows x64.
+- Application Identifier `com.vrmgames.cartridgeandcloud`.
+- Perfil `Windows_Development`.
+- Mono + LZ4 Development Build.
+- Root namespace `VRMGames.CartridgeAndCloud`.
+- Cuatro assemblies de producción.
+- Dos assemblies de pruebas.
+- Cuatro escenas.
+- Nueve smoke tests.
+- Cinco paquetes no esenciales retirados.
 
 ## Escenas
 
@@ -43,32 +49,34 @@
 ## QA
 
 ```text
-EditMode: 5 tests
-PlayMode: 4 tests
-Total: 9 tests
+EditMode: 5/5 PASS
+PlayMode: 4/4 PASS
+Pre-build: 9/9 PASS
+Post-build: 9/9 PASS
 ```
 
-## Build validado de S0.9
+## Build final
 
 ```text
-Build ID: S0.9-WIN-DEV-001
-Commit: e1998dffe52d0d4191abe3f8bda3b577d84bdb04
-SHA-256: 55e50d174b7de4c33308309824cd3990760f7dc421b98d9ee61fdefd83ff8f6e
+Build ID: S0.10-WIN-FINAL-002
+Duration: 74 seconds
+Folder size: 157 MB (165,653,511 bytes)
+ZIP size: 65.6 MB (68,875,051 bytes)
+SHA-256: 897d85a00e5afd3d3d019ebf646f2128fa9a27e3bcfa8c50ec3e4ee56c3a2ad6
+External execution: PASS
+Player.log: PASS
 ```
 
-## Deudas pendientes de S0.10
+## Estado de publicación
 
-- Completar registro de entorno.
-- Corregir Application Identifier.
-- Resolver paquetes no requeridos.
-- Dar Scene List propia al perfil.
-- Resolver `Assets/Resources.meta`.
-- Generar Build002 de cierre.
-- Registrar tamaños del nuevo artefacto.
-- Completar el informe final y tag.
+El contenido técnico de Sprint 0 está validado. Quedan exclusivamente:
 
-## Resultado final
+- commit final;
+- push;
+- verificación en `main`;
+- tag posterior.
 
-**Estado:** PENDIENTE  
-**Resultado:** PENDIENTE  
-**Siguiente fase:** PENDIENTE
+## Siguiente fase
+
+La siguiente fase queda autorizada después de publicar el commit final y crear
+el tag de fundación.
