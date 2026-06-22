@@ -4,7 +4,7 @@
 **Repositorio:** `BLRochaGonzalez93/U012_CartridgeAndCloud`  
 **Rama:** `main`  
 **Unity:** `6000.3.18f1`  
-**Último commit auditado:** `04264a362e33c6b823a51f82434b38d879c3dae1`  
+**Último commit auditado:** `e1998dffe52d0d4191abe3f8bda3b577d84bdb04`  
 **Fecha:** 2026-06-22
 
 ## Estado
@@ -19,29 +19,33 @@
 | S0.6 | Closed | PASS |
 | S0.6D | Closed | PASS |
 | S0.7 | Closed | PASS |
-| S0.8 | Closed | PASS — 9/9 tests |
-| S0.9 | In Progress | Build preparado; ejecución pendiente |
-| S0.10 | Pending | Bloqueado por S0.9 |
+| S0.8 | Closed | PASS — 9/9 |
+| S0.9 | Closed | PASS con observaciones |
+| S0.10 | In Progress | Auditoría final pendiente |
 
 ## Estado técnico
 
-- Unity y URP congelados.
-- Repositorio reproducible.
-- Cuatro assemblies de producción.
-- Dos assemblies de pruebas.
-- Cuatro escenas base.
-- Nueve smoke tests aprobados.
-- Primer perfil Windows preparado documentalmente.
-- Ningún gameplay implementado.
-- Ningún build validado todavía.
+- Proyecto Unity 6.3 LTS operativo.
+- URP configurado.
+- Repositorio y documentación operativos.
+- Seis assemblies.
+- Cuatro escenas.
+- Nueve smoke tests.
+- Primer Player Windows validado.
+- SHA-256 del build S0.9 registrado.
+- S0.10 autorizado.
 
-## Siguiente criterio
+## Observaciones activas
 
-S0.9 se cierra cuando el Development Build Windows x64:
+1. Application Identifier conserva valores de plantilla.
+2. Build Profile hereda la Scene List global.
+3. Paquetes no esenciales requieren decisión.
+4. Development Environment Record está incompleto.
+5. `Assets/Resources.meta` requiere eliminación o justificación.
+6. Los tamaños del build S0.9 no fueron registrados.
 
-- se construye sin errores;
-- arranca fuera del Editor;
-- permanece estable;
-- genera un Player.log válido;
-- tiene ZIP y SHA-256 registrados;
-- está documentado y publicado sin versionar `Builds/`.
+## Siguiente bloque
+
+```text
+S0.10 — Sprint Closure and Foundation Audit
+```
