@@ -1,32 +1,34 @@
 # Sprint 00 — Current Status
 
 **Proyecto:** Cartridge & Cloud  
-**Repositorio:** `BLRochaGonzalez93/U012_CartridgeAndCloud`  
 **Rama:** `main`  
-**Unity:** `6000.3.18f1`  
-**Último commit publicado:** `69493d5da35873258395808ed9cf9e196f182cd8`  
+**Estado técnico:** Closed / PASS  
+**Commit técnico:** `478794017015054571d6ca22332a201589abbe5c`  
+**Local state:** No local changes  
 **Fecha:** 2026-06-22
 
 ## Estado
 
-| Ámbito | Estado |
+| Ámbito | Resultado |
 |---|---|
-| Validación técnica S0.10 | PASS |
-| Smoke tests | 9/9 antes y después de Build002 |
+| S0.10 | Closed / PASS |
+| Tests antes de Build002 | 9/9 PASS |
 | Build002 | PASS |
-| Ejecución externa | PASS |
-| Player.log | PASS |
-| Documentación final | Preparada |
-| Commit final | Pendiente |
-| Tag | Pendiente tras commit |
+| Player externo | PASS |
+| Player.log | Sin errores |
+| Tests después de Build002 | 9/9 PASS |
+| Commit y push | Completados |
+| Commit visible en main | Sí |
+| Parche UTF-8 | Preparado |
+| Tag | Pendiente tras parche |
 
-## Siguiente acción
+## Próxima acción
 
 ```text
-chore: close Sprint 0 project foundation
+docs: repair Sprint 0 closure metadata
 ```
 
-Después del push se debe verificar `main` y crear:
+Después de verificar ese commit se creará:
 
 ```text
 v0.0.1-project-foundation

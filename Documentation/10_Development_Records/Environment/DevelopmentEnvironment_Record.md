@@ -1,12 +1,13 @@
 # Development Environment Record
 
 **Proyecto:** Cartridge & Cloud  
-**Responsable:** Blas Luis Rocha GonzÃ¡lez / VRM Games  
-**Estado:** Captured â€” pending final Unity validation  
+**Responsable:** Blas Luis Rocha González / VRM Games  
+**Estado:** Validated  
 **Bloque:** S0.10  
-**Fecha de actualizaciÃ³n:** 2026-06-22
+**Fecha de actualización:** 2026-06-22  
+**Commit técnico de cierre:** `478794017015054571d6ca22332a201589abbe5c`
 
-## LÃ­nea base de proyecto
+## Línea base de proyecto
 
 | Campo | Valor |
 |---|---|
@@ -16,41 +17,42 @@
 | Repositorio | `BLRochaGonzalez93/U012_CartridgeAndCloud` |
 | Rama | `main` |
 | Flujo Git | GitHub Desktop |
-| CompaÃ±Ã­a | VRM Games |
+| Compañía | VRM Games |
 | Producto | Cartridge & Cloud |
-| VersiÃ³n | `0.0.1` |
+| Versión | `0.0.1` |
 | Root Namespace | `VRMGames.CartridgeAndCloud` |
 | Application Identifier | `com.vrmgames.cartridgeandcloud` |
 | Build Profile | `Windows_Development` |
 | Scripting Backend de desarrollo | Mono |
 | Test Framework | `1.6.0` |
-| Windows Build Support | Instalado y validado mediante S0.9 |
+| Windows Build Support | Instalado y validado |
 
 ## Equipo local
 
 | Campo | Valor |
 |---|---|
-| Windows ediciÃ³n | Microsoft Windows 10 Pro |
-| Windows versiÃ³n / build | 10.0.19045 / 19045 |
+| Windows edición | Microsoft Windows 10 Pro |
+| Windows versión / build | 10.0.19045 / 19045 |
 | CPU | Intel(R) Core(TM) i9-9900K CPU @ 3.60GHz |
 | RAM | 31.9 GB |
 | GPU / driver | Intel(R) UHD Graphics 630 (driver 31.0.101.2140); NVIDIA GeForce RTX 3060 (driver 32.0.15.9186) |
-| Disco del proyecto | D:\ |
+| Disco del proyecto | `D:\` |
 | Espacio libre aproximado | 2297.9 GB |
-| Unity Hub | No detectado |
+| Unity Hub | No detectado por el script |
 | IDE principal | Visual Studio Community 2026 |
-| VersiÃ³n del IDE | 18.7.0 |
+| Versión del IDE | 18.7.0 |
 
-## ValidaciÃ³n pendiente
+## Validación
 
-- [ ] Unity reimporta el proyecto despuÃ©s de los cambios.
-- [ ] Package Manager resuelve el nuevo manifiesto.
-- [ ] CompilaciÃ³n limpia.
-- [ ] EditMode 5/5 PASS.
-- [ ] PlayMode 4/4 PASS.
-- [ ] Segunda ejecuciÃ³n 9/9 PASS.
-- [ ] Build002 Windows disponible.
-- [ ] GitHub Desktop limpio antes del commit final.
+- [x] Unity reimportó el proyecto después de los cambios.
+- [x] Package Manager resolvió el nuevo manifiesto.
+- [x] Compilación limpia.
+- [x] EditMode 5/5 PASS.
+- [x] PlayMode 4/4 PASS.
+- [x] Segunda ejecución 9/9 PASS.
+- [x] Build002 Windows generado y validado.
+- [x] GitHub Desktop quedó limpio después del commit y push.
+- [x] El commit técnico de cierre aparece en `main`.
 
 ## Privacidad
 

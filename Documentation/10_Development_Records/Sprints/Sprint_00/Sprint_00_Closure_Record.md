@@ -1,27 +1,12 @@
 # Sprint 00 — Closure Record
 
-**Estado técnico:** PASS  
+**Estado técnico:** Closed  
+**Resultado:** PASS  
 **Fecha:** 2026-06-22  
-**Commit final:** PENDIENTE PUBLICACIÓN  
-**Tag:** PENDIENTE TRAS VERIFICACIÓN
+**Commit técnico:** `478794017015054571d6ca22332a201589abbe5c`  
+**Tag:** pendiente tras el parche documental
 
-## Resumen
-
-Sprint 0 ha establecido:
-
-- entorno Unity y URP;
-- repositorio reproducible;
-- documentación operativa;
-- límites de assemblies;
-- cuatro escenas base;
-- nueve smoke tests;
-- perfil Windows;
-- dos builds externos validados;
-- limpieza de paquetes;
-- identificadores canónicos;
-- trazabilidad y QA.
-
-## Evidencia final
+## Evidencia
 
 ```text
 Build002 duration: 74 seconds
@@ -30,15 +15,16 @@ Build002 ZIP: 65.6 MB (68,875,051 bytes)
 Build002 SHA-256: 897d85a00e5afd3d3d019ebf646f2128fa9a27e3bcfa8c50ec3e4ee56c3a2ad6
 External player: PASS
 Player.log: PASS
-Tests before build: 9/9 PASS
-Tests after build: 9/9 PASS
+Pre-build tests: 9/9 PASS
+Post-build tests: 9/9 PASS
 ```
 
-## Publicación
+## Observación post-publicación
 
-El cierre técnico está completado. La publicación formal requiere:
+La auditoría del commit detectó mojibake UTF-8 en:
 
-1. commit final;
-2. push;
-3. verificación en `main`;
-4. tag de fundación.
+- `DevelopmentEnvironment_Record.md`;
+- `S0.10_Applied_Changes_Report.md`.
+
+Este paquete corrige ambos archivos y actualiza el registro operativo con el
+commit técnico real. El tag se creará después de publicar la corrección.
