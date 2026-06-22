@@ -1,0 +1,8 @@
+ID,Date,Type,Block,Change,State,Evidence
+CHG-S1-001,,Code,S1.2,Add scene-flow application contracts,Pending,
+CHG-S1-002,,Code,S1.3,Add persistent Bootstrap ApplicationRoot,Pending,
+CHG-S1-003,,Code,S1.4,Add MainMenu technical controller and UI,Pending,
+CHG-S1-004,,Code,S1.5,Add Store return flow,Pending,
+CHG-S1-005,,Test,S1.6,Expand automatic suite from 9 to 14 tests,Pending,
+CHG-S1-006,,Configuration,S1.7,Prepare application version 0.0.2,Pending,
+CHG-S1-007,,Documentation,S1.8,Record Sprint 1 QA traceability and impact,Pending,
