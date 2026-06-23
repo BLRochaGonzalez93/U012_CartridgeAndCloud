@@ -1,0 +1,8 @@
+ID,Date,Type,SubSprint,Change,State,Evidence
+CHG-S3-001,,Application,S3.1,Add input context identifiers and service,Pending,
+CHG-S3-002,,Application,S3.1,Add input context consumer contract,Pending,
+CHG-S3-003,,Infrastructure,S3.1,Compose and switch input context from ApplicationRoot,Pending,
+CHG-S3-004,,Test,S3.1,Add input context EditMode and PlayMode coverage,Pending,
+CHG-S3-005,,Gameplay,S3.2,Implement click-to-move,Not started,
+CHG-S3-006,,Camera,S3.3,Implement orbit follow and zoom,Not started,
+CHG-S3-007,,Integration,S3.4,Integrate Input System and close Sprint 3,Not started,

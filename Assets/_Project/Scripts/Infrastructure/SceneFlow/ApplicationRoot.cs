@@ -2,6 +2,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using VRMGames.CartridgeAndCloud.Application.GameSession;
+using VRMGames.CartridgeAndCloud.Application.InputContexts;
 using VRMGames.CartridgeAndCloud.Application.SceneFlow;
 using VRMGames.CartridgeAndCloud.Domain.Identifiers;
 using VRMGames.CartridgeAndCloud.Infrastructure.GameSession;
@@ -9,21 +10,25 @@ using VRMGames.CartridgeAndCloud.Infrastructure.GameSession;
 namespace VRMGames.CartridgeAndCloud.Infrastructure.SceneFlow
 {
     /// <summary>
-    /// Persistent composition root for scene flow and the minimal game session.
+    /// Persistent composition root for scene flow, game session and input context.
     /// </summary>
     public sealed class ApplicationRoot : MonoBehaviour, ISceneNavigator
     {
         public const string RootObjectName = "ApplicationRoot";
 
-        private readonly SceneTransitionGate _transitionGate = new SceneTransitionGate();
+        private readonly SceneTransitionGate _transitionGate =
+            new SceneTransitionGate();
 
         public static ApplicationRoot Instance { get; private set; }
 
         public bool IsTransitioning => _transitionGate.IsEntered;
 
-        public SceneId ActiveScene => ResolveSceneId(SceneManager.GetActiveScene().name);
+        public SceneId ActiveScene =>
+            ResolveSceneId(SceneManager.GetActiveScene().name);
 
         public IGameSessionService GameSessionService { get; private set; }
+
+        public IInputContextService InputContextService { get; private set; }
 
         private void Awake()
         {
@@ -42,15 +47,19 @@ namespace VRMGames.CartridgeAndCloud.Infrastructure.SceneFlow
                 new SystemUtcClock());
 
             GameSessionService.StartNew(new SaveSlotId(0));
+            InputContextService = new InputContextService();
 
             SceneManager.sceneLoaded += HandleSceneLoaded;
         }
 
         private void Start()
         {
-            InjectSceneConsumers(SceneManager.GetActiveScene());
+            Scene activeScene = SceneManager.GetActiveScene();
 
-            if (SceneManager.GetActiveScene().name == GetSceneName(SceneId.Bootstrap))
+            ApplySceneInputContext(activeScene);
+            InjectSceneConsumers(activeScene);
+
+            if (activeScene.name == GetSceneName(SceneId.Bootstrap))
             {
                 RequestLoad(SceneId.MainMenu);
             }
@@ -93,7 +102,8 @@ namespace VRMGames.CartridgeAndCloud.Infrastructure.SceneFlow
         public void Quit()
         {
 #if UNITY_EDITOR
-            Debug.Log("[SceneFlow] Quit requested. Application.Quit is ignored inside the Unity Editor.");
+            Debug.Log(
+                "[SceneFlow] Quit requested. Application.Quit is ignored inside the Unity Editor.");
 #else
             UnityEngine.Application.Quit();
 #endif
@@ -107,7 +117,8 @@ namespace VRMGames.CartridgeAndCloud.Infrastructure.SceneFlow
 
             if (operation == null)
             {
-                Debug.LogError($"[SceneFlow] Unity could not start loading scene '{targetSceneName}'.");
+                Debug.LogError(
+                    $"[SceneFlow] Unity could not start loading scene '{targetSceneName}'.");
                 _transitionGate.Exit();
                 yield break;
             }
@@ -120,9 +131,18 @@ namespace VRMGames.CartridgeAndCloud.Infrastructure.SceneFlow
             _transitionGate.Exit();
         }
 
-        private void HandleSceneLoaded(Scene scene, LoadSceneMode loadSceneMode)
+        private void HandleSceneLoaded(
+            Scene scene,
+            LoadSceneMode loadSceneMode)
         {
+            ApplySceneInputContext(scene);
             InjectSceneConsumers(scene);
+        }
+
+        private void ApplySceneInputContext(Scene scene)
+        {
+            InputContextId context = ResolveInputContext(scene.name);
+            InputContextService.SetContext(context);
         }
 
         private void InjectSceneConsumers(Scene scene)
@@ -136,7 +156,8 @@ namespace VRMGames.CartridgeAndCloud.Infrastructure.SceneFlow
 
             foreach (GameObject root in roots)
             {
-                MonoBehaviour[] behaviours = root.GetComponentsInChildren<MonoBehaviour>(true);
+                MonoBehaviour[] behaviours =
+                    root.GetComponentsInChildren<MonoBehaviour>(true);
 
                 foreach (MonoBehaviour behaviour in behaviours)
                 {
@@ -149,7 +170,26 @@ namespace VRMGames.CartridgeAndCloud.Infrastructure.SceneFlow
                     {
                         sessionConsumer.Initialize(GameSessionService);
                     }
+
+                    if (behaviour is IInputContextConsumer inputConsumer)
+                    {
+                        inputConsumer.Initialize(InputContextService);
+                    }
                 }
+            }
+        }
+
+        private static InputContextId ResolveInputContext(string sceneName)
+        {
+            switch (sceneName)
+            {
+                case "MainMenu":
+                    return InputContextId.UI;
+                case "Store":
+                case "TestLab":
+                    return InputContextId.Gameplay;
+                default:
+                    return InputContextId.None;
             }
         }
 
