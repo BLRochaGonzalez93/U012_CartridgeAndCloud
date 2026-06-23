@@ -1,0 +1,8 @@
+ID,Date,Type,SubSprint,Change,State,Evidence
+CHG-S2-001,,Domain,2.1,Add StableId and SaveSlotId,Pending,
+CHG-S2-002,,Domain,2.1,Add minimal GameSession and schema-v1 snapshot,Pending,
+CHG-S2-003,,Application,2.2,Add session service repository clock and consumer contracts,Pending,
+CHG-S2-004,,Infrastructure,2.3,Add JSON slot repository,Pending,
+CHG-S2-005,,Infrastructure,2.3,Compose minimal session in ApplicationRoot,Pending,
+CHG-S2-006,,Test,2.3,Add Core Data and Save Skeleton test coverage,Pending,
+CHG-S2-007,,Documentation,2.4,Close QA traceability and document impact,Pending,

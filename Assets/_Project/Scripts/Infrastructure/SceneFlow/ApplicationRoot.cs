@@ -1,12 +1,15 @@
 using System.Collections;
-using VRMGames.CartridgeAndCloud.Application.SceneFlow;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using VRMGames.CartridgeAndCloud.Application.GameSession;
+using VRMGames.CartridgeAndCloud.Application.SceneFlow;
+using VRMGames.CartridgeAndCloud.Domain.Identifiers;
+using VRMGames.CartridgeAndCloud.Infrastructure.GameSession;
 
 namespace VRMGames.CartridgeAndCloud.Infrastructure.SceneFlow
 {
     /// <summary>
-    /// Persistent Sprint 1 composition root and Unity scene navigator.
+    /// Persistent composition root for scene flow and the minimal game session.
     /// </summary>
     public sealed class ApplicationRoot : MonoBehaviour, ISceneNavigator
     {
@@ -20,6 +23,8 @@ namespace VRMGames.CartridgeAndCloud.Infrastructure.SceneFlow
 
         public SceneId ActiveScene => ResolveSceneId(SceneManager.GetActiveScene().name);
 
+        public IGameSessionService GameSessionService { get; private set; }
+
         private void Awake()
         {
             if (Instance != null && Instance != this)
@@ -31,6 +36,13 @@ namespace VRMGames.CartridgeAndCloud.Infrastructure.SceneFlow
             Instance = this;
             gameObject.name = RootObjectName;
             DontDestroyOnLoad(gameObject);
+
+            GameSessionService = new GameSessionService(
+                JsonSaveGameRepository.CreateDefault(),
+                new SystemUtcClock());
+
+            GameSessionService.StartNew(new SaveSlotId(0));
+
             SceneManager.sceneLoaded += HandleSceneLoaded;
         }
 
@@ -128,9 +140,14 @@ namespace VRMGames.CartridgeAndCloud.Infrastructure.SceneFlow
 
                 foreach (MonoBehaviour behaviour in behaviours)
                 {
-                    if (behaviour is ISceneNavigationConsumer consumer)
+                    if (behaviour is ISceneNavigationConsumer sceneConsumer)
                     {
-                        consumer.Initialize(this);
+                        sceneConsumer.Initialize(this);
+                    }
+
+                    if (behaviour is IGameSessionConsumer sessionConsumer)
+                    {
+                        sessionConsumer.Initialize(GameSessionService);
                     }
                 }
             }
