@@ -1,73 +1,82 @@
 # Sprint 04 — Grid & Placement Foundation
 
-**State:** Started  
+**State:** Completed  
+**Result:** PASS  
 **Dependency:** Sprint 3 Closed / PASS  
-**Final target version:** `0.0.5`
+**Closure date:** 2026-06-25  
+**Final application version:** `0.0.5`  
+**Final technical commit:** `bcf8cdd309d89570b5b58a0735154b4863e2aebc`
 
 ## Sprint objective
 
 Establish a deterministic 0.5-metre logical grid and the minimum placement
-pipeline required to preview, rotate, validate and confirm technical objects
-without introducing the final Store shell or product systems.
+pipeline required to preview, rotate, validate, confirm and remove technical
+objects without introducing the final Store shell or product systems.
 
-## SubSprint plan
+## Completed SubSprints
 
 ### CC_S4.1 — Grid Coordinate Foundation
 
-- Pure grid coordinates.
-- Positive integer sizes.
+- Pure integer grid coordinates.
+- Positive integer grid sizes.
 - Quarter-turn rotations.
 - Rectangular footprints.
 - Logical bounds.
 - World-to-cell and cell-to-world projection.
+- Negative-coordinate support.
 - EditMode coverage.
-- No scene or Input Action changes.
 
 ### CC_S4.2 — Placement Preview & Rotation
 
-- Technical placeable definition.
+- Technical ScriptableObject placeable definition.
 - TestLab placement surface.
-- Placement ghost.
-- Pointer-driven snapped preview.
-- Q/E rotation in 90-degree steps.
-- Valid/invalid visual state.
-- Input-context integration.
+- Snapped placement ghost.
+- Pointer-driven preview.
+- Q/E quarter-turn rotation.
+- Green/red bounds feedback.
+- Gameplay Input Action integration.
 
 ### CC_S4.3 — Occupancy & Base Validation
 
-- Logical occupancy registry.
-- Bounds validation.
-- Overlap rejection.
-- Confirm/cancel/remove technical placement.
+- Explicit construction mode.
+- Atomic logical occupancy.
+- Bounds and overlap rejection.
 - Stable placement identifiers.
-- EditMode and PlayMode coverage.
+- Confirm, cancel and remove flow.
+- Click-to-move conflict policy.
+- Collider and logical-cell removal fallback.
 
 ### CC_S4.4 — Integration, Regression & Closure
 
-- Complete placement flow regression.
-- Movement/camera/input-context regression.
+- Reproducible empty TestLab baseline.
 - Version `0.0.5`.
+- Complete `118/118` automated regression.
+- Full manual placement and scene-flow regression.
 - Windows x64 build and external execution.
 - QA, traceability and documentation closure.
 
-## Frozen decisions
+## Accepted decisions
 
 - Logical cell size: `0.5 m`.
 - Object footprints use positive integer cells.
-- Rotation uses four quarter turns: 0°, 90°, 180° and 270°.
-- The footprint anchor is the minimum X/Z occupied cell.
+- Rotation uses 0°, 90°, 180° and 270°.
+- Footprint anchor is the minimum occupied X/Z cell.
 - Logical occupancy is separated from visual representation.
+- Validation completes before occupancy mutation.
+- Placement mode owns confirmation input.
+- Click-to-move is suppressed only during placement mode.
 - Sprint 4 validates bounds and overlap only.
-- Door/access/interactability blocking belongs to Sprint 5.
+- Door/access/interactability blocking remains Sprint 5 scope.
 - Store remains unchanged until Sprint 5.
-- Sprint 4 technical validation occurs in TestLab.
+- Technical validation occurs in TestLab.
 
-## Out of scope
+## Deferred scope
 
 - Final Store shell.
-- Doors and access-path validation.
-- NavMesh rebake.
-- Furniture economy, purchasing or refunds.
-- Product inventory or display assignment.
+- Door and access-route validation.
+- Interaction-point validation.
+- NavMesh updates after construction.
+- Furniture economy, purchasing and refunds.
+- Product inventory and display assignment.
 - Save persistence of placed objects.
-- Final furniture art.
+- Final placeable catalogue and art.

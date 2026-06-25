@@ -1,10 +1,11 @@
 # ADR-0016 — Grid Coordinate and Footprint Foundation
 
-**Status:** Proposed  
+**Status:** Accepted  
 **Sprint:** 4  
-**SubSprint:** CC_S4.1
+**SubSprint:** CC_S4.1  
+**Accepted date:** 2026-06-25
 
-## Proposed decision
+## Decision
 
 The construction grid uses:
 
@@ -23,10 +24,14 @@ centre is `(0.25, 0.25)`.
 ## Rationale
 
 This model avoids Unity dependencies in Domain and Application, supports
-negative coordinates, makes rotations deterministic and separates occupancy
-from scene representation.
+negative coordinates, makes rotations deterministic and separates
+occupancy from scene representation.
+
+## Validation
+
+The decision is accepted by the CC_S4.1 automated suite and remained
+green through the final `118/118` Sprint 4 regression.
 
 ## Deferred
 
-Ghost rendering, input, placement confirmation, occupancy mutation, access
-validation, NavMesh updates, economy and persistence are deferred.
+Access validation, NavMesh updates, economy and persistence remain deferred.

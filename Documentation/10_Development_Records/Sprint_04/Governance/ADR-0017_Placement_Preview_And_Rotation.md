@@ -1,31 +1,34 @@
 # ADR-0017 — Placement Preview and Rotation
 
-**Status:** Proposed  
+**Status:** Accepted  
 **Sprint:** 4  
-**SubSprint:** CC_S4.2
+**SubSprint:** CC_S4.2  
+**Accepted date:** 2026-06-25
 
-## Proposed decision
+## Decision
 
-- Technical placeables use ScriptableObject definitions for footprint and
-  preview dimensions.
-- Presentation owns surface projection, preview state presentation and
-  ghost transforms.
-- Infrastructure.InputSystem owns pointer and Q/E action polling.
-- The preview uses the existing Gameplay Input Action map.
+- Technical placeables use ScriptableObject definitions.
+- Presentation owns surface projection, preview state and ghost transforms.
+- Infrastructure.InputSystem owns pointer and placement-action polling.
+- Placement uses the existing Gameplay Input Action map.
 - Q rotates counter-clockwise and E rotates clockwise.
 - Rotation occurs in quarter turns.
-- The TestLab preview uses a 4x2 technical shelf.
-- The logical preview area is 16x16 cells at 0.5 metres per cell.
-- Green indicates the footprint is inside logical bounds.
-- Red indicates the footprint crosses logical bounds.
-- No cell is occupied and no object is confirmed in CC_S4.2.
+- TestLab uses a 4 x 2 technical shelf.
+- The logical preview area is 16 x 16 cells at 0.5 metres per cell.
+- Green indicates a valid preview.
+- Red indicates bounds or occupancy rejection.
 
 ## Rationale
 
-Keeping preview and rotation separate from occupancy makes the visual/input
-pipeline independently testable before mutable construction state is added.
+Separating preview from occupancy allowed visual/input behaviour to be
+tested independently before mutable construction state was introduced.
+
+## Validation
+
+Snapping, rotation, bounds feedback and input-context coexistence passed
+automated and manual validation and remained green through final regression.
 
 ## Deferred
 
-Confirm, cancel, removal, overlap rejection, stable placement IDs, access
-validation, NavMesh updates, economy and persistence remain deferred.
+Store construction integration, NavMesh updates, economy and persistence
+remain deferred.
