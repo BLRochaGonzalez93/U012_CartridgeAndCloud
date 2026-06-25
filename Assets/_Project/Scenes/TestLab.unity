@@ -291,7 +291,7 @@ GameObject:
   - component: {fileID: 961739751}
   - component: {fileID: 961739750}
   - component: {fileID: 961739755}
-  - component: {fileID: 961739754}
+  - component: {fileID: 961739756}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -417,21 +417,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &961739754
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 961739749}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9ad479ec04ef433daf23bbbe906b93a9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: VRMGames.CartridgeAndCloud.Infrastructure.InputSystem::VRMGames.CartridgeAndCloud.Infrastructure.InputSystem.Camera.MouseOrbitZoomDriver
-  _orbitSensitivity: 0.2
-  _zoomSensitivity: 0.02
-  _allowStandaloneGameplay: 1
 --- !u!114 &961739755
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -452,6 +437,23 @@ MonoBehaviour:
   _maximumPitchDegrees: 75
   _minimumDistance: 6
   _maximumDistance: 24
+--- !u!114 &961739756
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 961739749}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4cb59ed56dd84c73b53057e62bb60e74, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: VRMGames.CartridgeAndCloud.Infrastructure.InputSystem::VRMGames.CartridgeAndCloud.Infrastructure.InputSystem.Actions.GameplayInputActionDriver
+  _contextRouter: {fileID: 0}
+  _destinationInput: {fileID: 1910838464}
+  _cameraRig: {fileID: 961739755}
+  _orbitSensitivity: 0.2
+  _zoomSensitivity: 0.5
 --- !u!1 &997482525
 GameObject:
   m_ObjectHideFlags: 0
@@ -612,7 +614,6 @@ GameObject:
   - component: {fileID: 1910838466}
   - component: {fileID: 1910838465}
   - component: {fileID: 1910838464}
-  - component: {fileID: 1910838463}
   m_Layer: 0
   m_Name: TechnicalPlayer
   m_TagString: Untagged
@@ -636,18 +637,6 @@ Transform:
   - {fileID: 556887072}
   m_Father: {fileID: 1883396451}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1910838463
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1910838461}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0d5075a634404659a36bbeeb9aea2546, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: VRMGames.CartridgeAndCloud.Infrastructure.InputSystem::VRMGames.CartridgeAndCloud.Infrastructure.InputSystem.PlayerMovement.MouseClickDestinationDriver
 --- !u!114 &1910838464
 MonoBehaviour:
   m_ObjectHideFlags: 0

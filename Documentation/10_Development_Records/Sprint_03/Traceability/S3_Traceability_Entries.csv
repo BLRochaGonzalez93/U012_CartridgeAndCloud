@@ -8,9 +8,15 @@ CHG-S3-006,2026-06-25,Presentation,S3.2,Add CharacterController click-to-move ag
 CHG-S3-007,2026-06-25,Infrastructure,S3.2,Add isolated Input System mouse adapter,Closed,46/46 PASS
 CHG-S3-008,2026-06-25,Editor,S3.2,Build technical movement laboratory in TestLab,Closed,Manual PASS
 CHG-S3-009,2026-06-25,Test,S3.2,Add movement and pointer raycast coverage,Closed,Commit f5a03fb986c241b3062f989524cf0b5737c0b32a
-CHG-S3-010,,Application,S3.3,Add pure orbit camera constraints state and calculation,Pending,
-CHG-S3-011,,Presentation,S3.3,Add orbit follow and zoom camera rig,Pending,
-CHG-S3-012,,Infrastructure,S3.3,Add temporary right-drag and wheel camera adapter,Pending,
-CHG-S3-013,,Editor,S3.3,Integrate camera target and rig into TestLab,Pending,
-CHG-S3-014,,Test,S3.3,Add orbit camera EditMode and PlayMode coverage,Pending,
-CHG-S3-015,,Integration,S3.4,Integrate final InputActions and close Sprint 3,Not started,
+CHG-S3-010,2026-06-25,Application,S3.3,Add pure orbit camera constraints state and calculation,Closed,56/56 PASS
+CHG-S3-011,2026-06-25,Presentation,S3.3,Add orbit follow and zoom camera rig,Closed,56/56 PASS
+CHG-S3-012,2026-06-25,Infrastructure,S3.3,Add temporary right-drag and wheel camera adapter,Closed,Manual PASS
+CHG-S3-013,2026-06-25,Editor,S3.3,Integrate camera target and rig into TestLab,Closed,Manual PASS
+CHG-S3-014,2026-06-25,Test,S3.3,Add orbit camera EditMode and PlayMode coverage,Closed,Commit a4e56e7b16f16c385a350cf3078f2e70f280a45f
+CHG-S3-015,,Input,S3.4,Add UI and Gameplay Input Action maps,Pending,
+CHG-S3-016,,Infrastructure,S3.4,Attach persistent context router to ApplicationRoot,Pending,
+CHG-S3-017,,Integration,S3.4,Replace TestLab temporary drivers with final action driver,Pending,
+CHG-S3-018,,Versioning,S3.4,Set application version to 0.0.4,Pending,
+CHG-S3-019,,Test,S3.4,Add Input Action and runtime context coverage,Pending,
+CHG-S3-020,,QA,S3.4,Run full regression Windows build and external execution,Pending,
+CHG-S3-021,,Documentation,S3.4,Close Sprint 3 records and traceability,Pending,

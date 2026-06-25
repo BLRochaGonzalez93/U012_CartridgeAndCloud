@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.InputSystem;
 using VRMGames.CartridgeAndCloud.Presentation.PlayerMovement;
 
 namespace VRMGames.CartridgeAndCloud.Infrastructure.InputSystem.PlayerMovement
@@ -11,13 +10,23 @@ namespace VRMGames.CartridgeAndCloud.Infrastructure.InputSystem.PlayerMovement
 
         private void Awake()
         {
-            _destinationInput = GetComponent<ClickDestinationInput>();
+            _destinationInput =
+                GetComponent<ClickDestinationInput>();
         }
 
-        private void Update()
+        public bool TrySetDestinationFromScreenPosition(
+            Vector2 screenPosition)
         {
-            if (Mouse.current == null || !Mouse.current.leftButton.wasPressedThisFrame) return;
-            _destinationInput.TrySetDestinationFromScreenPosition(Mouse.current.position.ReadValue());
+            if (_destinationInput == null)
+            {
+                _destinationInput =
+                    GetComponent<ClickDestinationInput>();
+            }
+
+            return _destinationInput != null &&
+                   _destinationInput
+                       .TrySetDestinationFromScreenPosition(
+                           screenPosition);
         }
     }
 }

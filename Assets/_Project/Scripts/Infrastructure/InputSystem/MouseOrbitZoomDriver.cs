@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.InputSystem;
 using VRMGames.CartridgeAndCloud.Application.InputContexts;
 using VRMGames.CartridgeAndCloud.Presentation.Camera;
 
@@ -33,31 +32,6 @@ namespace VRMGames.CartridgeAndCloud.Infrastructure.InputSystem.Camera
             _cameraRig = GetComponent<OrbitCameraRig>();
         }
 
-        private void Update()
-        {
-            if (!IsInputEnabled ||
-                Mouse.current == null)
-            {
-                return;
-            }
-
-            if (Mouse.current.rightButton.isPressed)
-            {
-                Vector2 pointerDelta =
-                    Mouse.current.delta.ReadValue();
-
-                ApplyOrbitDelta(pointerDelta);
-            }
-
-            float scrollDelta =
-                Mouse.current.scroll.ReadValue().y;
-
-            if (Mathf.Abs(scrollDelta) > 0.001f)
-            {
-                ApplyZoomDelta(scrollDelta);
-            }
-        }
-
         public void Initialize(
             IInputContextService inputContextService)
         {
@@ -71,8 +45,10 @@ namespace VRMGames.CartridgeAndCloud.Infrastructure.InputSystem.Camera
         {
             _orbitSensitivity =
                 Mathf.Max(0f, orbitSensitivity);
+
             _zoomSensitivity =
                 Mathf.Max(0f, zoomSensitivity);
+
             _allowStandaloneGameplay =
                 allowStandaloneGameplay;
         }

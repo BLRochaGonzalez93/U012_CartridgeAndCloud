@@ -3,6 +3,7 @@
     "rootNamespace": "VRMGames.CartridgeAndCloud.Infrastructure.InputSystem",
     "references": [
         "VRMGames.CartridgeAndCloud.Application",
+        "VRMGames.CartridgeAndCloud.Infrastructure",
         "VRMGames.CartridgeAndCloud.Presentation",
         "Unity.InputSystem"
     ],
