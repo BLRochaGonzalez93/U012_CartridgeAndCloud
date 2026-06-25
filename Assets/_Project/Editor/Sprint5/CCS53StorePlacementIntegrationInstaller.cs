@@ -64,7 +64,7 @@ namespace VRMGames.CartridgeAndCloud.Editor.Sprint5
             "/CC_S5_AccessAnchorMarker.mat";
 
         private const string ExpectedVersion =
-            "0.0.5";
+            "0.0.6";
 
         private static readonly Vector3 GridOrigin =
             new Vector3(
