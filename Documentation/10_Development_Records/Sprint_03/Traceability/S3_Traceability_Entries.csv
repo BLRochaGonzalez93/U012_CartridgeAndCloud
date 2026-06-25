@@ -2,21 +2,25 @@ ID,Date,Type,SubSprint,Change,State,Evidence
 CHG-S3-001,2026-06-23,Application,S3.1,Add input context identifiers and service,Closed,35/35 PASS
 CHG-S3-002,2026-06-23,Application,S3.1,Add input context consumer contract,Closed,35/35 PASS
 CHG-S3-003,2026-06-23,Infrastructure,S3.1,Compose and switch input context from ApplicationRoot,Closed,35/35 PASS
-CHG-S3-004,2026-06-23,Test,S3.1,Add input context EditMode and PlayMode coverage,Closed,Commit 9acb74af4946c9a2f889d9e2b9180700ff3807d1
+CHG-S3-004,2026-06-23,Test,S3.1,Add input context EditMode and PlayMode coverage,Closed,9acb74af4946c9a2f889d9e2b9180700ff3807d1
 CHG-S3-005,2026-06-25,Application,S3.2,Add pure planar movement calculator,Closed,46/46 PASS
 CHG-S3-006,2026-06-25,Presentation,S3.2,Add CharacterController click-to-move agent,Closed,46/46 PASS
-CHG-S3-007,2026-06-25,Infrastructure,S3.2,Add isolated Input System mouse adapter,Closed,46/46 PASS
+CHG-S3-007,2026-06-25,Infrastructure,S3.2,Add isolated Input System adapter,Closed,46/46 PASS
 CHG-S3-008,2026-06-25,Editor,S3.2,Build technical movement laboratory in TestLab,Closed,Manual PASS
-CHG-S3-009,2026-06-25,Test,S3.2,Add movement and pointer raycast coverage,Closed,Commit f5a03fb986c241b3062f989524cf0b5737c0b32a
+CHG-S3-009,2026-06-25,Test,S3.2,Add movement and pointer raycast coverage,Closed,f5a03fb986c241b3062f989524cf0b5737c0b32a
 CHG-S3-010,2026-06-25,Application,S3.3,Add pure orbit camera constraints state and calculation,Closed,56/56 PASS
 CHG-S3-011,2026-06-25,Presentation,S3.3,Add orbit follow and zoom camera rig,Closed,56/56 PASS
 CHG-S3-012,2026-06-25,Infrastructure,S3.3,Add temporary right-drag and wheel camera adapter,Closed,Manual PASS
 CHG-S3-013,2026-06-25,Editor,S3.3,Integrate camera target and rig into TestLab,Closed,Manual PASS
-CHG-S3-014,2026-06-25,Test,S3.3,Add orbit camera EditMode and PlayMode coverage,Closed,Commit a4e56e7b16f16c385a350cf3078f2e70f280a45f
-CHG-S3-015,,Input,S3.4,Add UI and Gameplay Input Action maps,Pending,
-CHG-S3-016,,Infrastructure,S3.4,Attach persistent context router to ApplicationRoot,Pending,
-CHG-S3-017,,Integration,S3.4,Replace TestLab temporary drivers with final action driver,Pending,
-CHG-S3-018,,Versioning,S3.4,Set application version to 0.0.4,Pending,
-CHG-S3-019,,Test,S3.4,Add Input Action and runtime context coverage,Pending,
-CHG-S3-020,,QA,S3.4,Run full regression Windows build and external execution,Pending,
-CHG-S3-021,,Documentation,S3.4,Close Sprint 3 records and traceability,Pending,
+CHG-S3-014,2026-06-25,Test,S3.3,Add orbit camera EditMode and PlayMode coverage,Closed,a4e56e7b16f16c385a350cf3078f2e70f280a45f
+CHG-S3-015,2026-06-25,Input,S3.4,Add UI and Gameplay Input Action maps,Closed,fe3f83ce9d52ded6944f4b57b3b0b6724ceeb7a6
+CHG-S3-016,2026-06-25,Infrastructure,S3.4,Attach persistent context router to ApplicationRoot,Closed,fe3f83ce9d52ded6944f4b57b3b0b6724ceeb7a6
+CHG-S3-017,2026-06-25,Integration,S3.4,Replace active TestLab temporary drivers with final action driver,Closed,fe3f83ce9d52ded6944f4b57b3b0b6724ceeb7a6
+CHG-S3-018,2026-06-25,Versioning,S3.4,Set application version to 0.0.4,Closed,fe3f83ce9d52ded6944f4b57b3b0b6724ceeb7a6
+CHG-S3-019,2026-06-25,Test,S3.4,Add Input Action and runtime context coverage,Closed,66/66 PASS
+CHG-S3-020,2026-06-25,QA,S3.4,Run full regression Windows build and external execution,Closed,PASS
+INC-S3-001,2026-06-25,Incident,S3.3,Resolve Presentation Camera namespace collision with UnityEngine.Camera,Closed,CC_S3.3 hotfix v002
+INC-S3-002,2026-06-25,Incident,S3.4,Resolve project Application namespace collision with UnityEngine.Application,Closed,CC_S3.4 hotfix v002
+INC-S3-003,2026-06-25,Incident,S3.4,Add Unity.InputSystem reference to EditMode test assembly,Closed,CC_S3.4 hotfix v003
+INC-S3-004,2026-06-25,Incident,S3.4,Exclude PlayMode tests from Player build with UNITY_INCLUDE_TESTS,Closed,CC_S3.4 hotfix v004
+CHG-S3-021,2026-06-25,Documentation,S3.4,Close QA traceability ADRs and document impact,Closed,Documentation closure package v001

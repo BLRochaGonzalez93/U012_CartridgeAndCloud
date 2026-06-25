@@ -1,42 +1,42 @@
 # ADR-0014 — Orbit, Zoom and Follow Camera
 
-**Status:** Proposed  
+**Status:** Accepted  
 **Sprint:** 3  
-**SubSprint:** CC_S3.3
+**SubSprint:** CC_S3.3  
+**Accepted:** 2026-06-25  
+**Technical commits:** `a4e56e7b16f16c385a350cf3078f2e70f280a45f`, `fe3f83ce9d52ded6944f4b57b3b0b6724ceeb7a6`
 
 ## Decision
 
-CC_S3.3 introduces:
+Sprint 3 uses:
 
 - Pure orbit-state constraints and calculations in Application.
-- An `OrbitCameraRig` in Presentation.
-- A `CameraTarget` below the technical player.
-- Right-mouse drag orbit.
+- `OrbitCameraRig` in Presentation.
+- A CameraTarget below the technical player.
+- Right-button drag orbit.
 - Mouse-wheel zoom.
 - Pitch limits of 25–75 degrees.
 - Distance limits of 6–24 units.
 - Automatic follow through the player-owned target transform.
+- Zoom sensitivity `0.5`.
 
 ## Architectural boundaries
 
-- Presentation does not reference `Unity.InputSystem`.
-- Mouse reading remains isolated in the existing
-  `Infrastructure.InputSystem` adapter assembly.
+- Presentation does not reference Unity.InputSystem.
+- Input is routed through Infrastructure.InputSystem.
 - No Cinemachine dependency is introduced.
 - No new TestLab root object is introduced.
 - Store remains unchanged.
-- Final InputAction routing remains deferred to CC_S3.4.
 
-## Rationale
+## Validation
 
-A small deterministic rig is sufficient to validate movement-camera composition
-before committing to final bindings, presentation polish or camera collision.
+- Orbit state normalization and constraint tests passed.
+- Camera rig pose, follow, distance and aiming tests passed.
+- Manual orbit, pitch, zoom and follow regression passed.
+- Final Input Action routing preserved all camera behaviour.
+- Full automated suite completed `66/66 PASS`.
 
 ## Deferred
 
-- Camera collision and obstruction handling.
-- Edge scrolling.
-- Keyboard camera movement.
-- InputAction bindings.
-- Saved camera state.
-- Final smoothing and accessibility tuning.
+Camera collision, obstruction handling, smoothing polish, edge scrolling,
+keyboard camera movement and saved camera state remain deferred.
