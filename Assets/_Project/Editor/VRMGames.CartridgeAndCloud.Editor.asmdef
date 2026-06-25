@@ -4,9 +4,12 @@
     "references": [
         "VRMGames.CartridgeAndCloud.Application",
         "VRMGames.CartridgeAndCloud.Presentation",
-        "VRMGames.CartridgeAndCloud.Infrastructure.InputSystem"
+        "VRMGames.CartridgeAndCloud.Infrastructure.InputSystem",
+        "Unity.InputSystem"
     ],
-    "includePlatforms": ["Editor"],
+    "includePlatforms": [
+        "Editor"
+    ],
     "excludePlatforms": [],
     "allowUnsafeCode": false,
     "overrideReferences": false,

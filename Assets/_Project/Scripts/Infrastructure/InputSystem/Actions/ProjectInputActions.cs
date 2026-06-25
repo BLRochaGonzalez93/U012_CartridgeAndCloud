@@ -23,6 +23,8 @@ namespace VRMGames.CartridgeAndCloud.Infrastructure.InputSystem.Actions
         public InputAction OrbitDelta { get; }
         public InputAction OrbitHold { get; }
         public InputAction Zoom { get; }
+        public InputAction RotatePlacementCounterClockwise { get; }
+        public InputAction RotatePlacementClockwise { get; }
 
         private bool _disposed;
 
@@ -36,65 +38,66 @@ namespace VRMGames.CartridgeAndCloud.Infrastructure.InputSystem.Actions
             UiPoint = UI.AddAction(
                 "Point",
                 InputActionType.PassThrough);
-
             UiPoint.AddBinding("<Pointer>/position");
 
             UiClick = UI.AddAction(
                 "Click",
                 InputActionType.Button);
-
             UiClick.AddBinding("<Mouse>/leftButton");
 
             UiSubmit = UI.AddAction(
                 "Submit",
                 InputActionType.Button);
-
             UiSubmit.AddBinding("<Keyboard>/enter");
             UiSubmit.AddBinding("<Gamepad>/buttonSouth");
 
             UiCancel = UI.AddAction(
                 "Cancel",
                 InputActionType.Button);
-
             UiCancel.AddBinding("<Keyboard>/escape");
             UiCancel.AddBinding("<Gamepad>/buttonEast");
 
-            Gameplay =
-                new InputActionMap(GameplayMapName);
+            Gameplay = new InputActionMap(GameplayMapName);
 
             PointerPosition = Gameplay.AddAction(
                 "PointerPosition",
                 InputActionType.PassThrough);
-
             PointerPosition.AddBinding("<Pointer>/position");
 
             SetDestination = Gameplay.AddAction(
                 "SetDestination",
                 InputActionType.Button);
-
             SetDestination.AddBinding("<Mouse>/leftButton");
 
             OrbitDelta = Gameplay.AddAction(
                 "OrbitDelta",
                 InputActionType.PassThrough);
-
             OrbitDelta.AddBinding("<Pointer>/delta");
 
             OrbitHold = Gameplay.AddAction(
                 "OrbitHold",
                 InputActionType.Button);
-
             OrbitHold.AddBinding("<Mouse>/rightButton");
 
             Zoom = Gameplay.AddAction(
                 "Zoom",
                 InputActionType.PassThrough);
-
             Zoom.AddBinding("<Mouse>/scroll");
+
+            RotatePlacementCounterClockwise =
+                Gameplay.AddAction(
+                    "RotatePlacementCounterClockwise",
+                    InputActionType.Button);
+            RotatePlacementCounterClockwise.AddBinding("<Keyboard>/q");
+
+            RotatePlacementClockwise =
+                Gameplay.AddAction(
+                    "RotatePlacementClockwise",
+                    InputActionType.Button);
+            RotatePlacementClockwise.AddBinding("<Keyboard>/e");
 
             Asset.AddActionMap(UI);
             Asset.AddActionMap(Gameplay);
-
             DisableAll();
         }
 
