@@ -124,6 +124,20 @@ namespace VRMGames.CartridgeAndCloud.Application.Placement
             return true;
         }
 
+
+        public GridCoordinate[] GetOccupiedCells()
+        {
+            GridCoordinate[] cells =
+                new GridCoordinate[
+                    _occupantsByCell.Count];
+
+            _occupantsByCell.Keys.CopyTo(
+                cells,
+                0);
+
+            return cells;
+        }
+
         public bool IsOccupied(GridCoordinate cell)
         {
             return _occupantsByCell.ContainsKey(cell);

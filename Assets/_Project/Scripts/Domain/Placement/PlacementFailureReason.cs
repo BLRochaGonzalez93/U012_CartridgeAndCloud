@@ -6,6 +6,7 @@ namespace VRMGames.CartridgeAndCloud.Domain.Placement
         OutOfBounds = 1,
         Overlap = 2,
         DuplicateId = 3,
-        NotFound = 4
+        NotFound = 4,
+        AccessBlocked = 5
     }
 }

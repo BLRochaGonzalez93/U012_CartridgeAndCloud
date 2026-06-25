@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using VRMGames.CartridgeAndCloud.Application.Access;
 using VRMGames.CartridgeAndCloud.Application.Placement;
 using VRMGames.CartridgeAndCloud.Domain.Grid;
 using VRMGames.CartridgeAndCloud.Domain.Placement;
@@ -31,6 +32,9 @@ namespace VRMGames.CartridgeAndCloud.Presentation.Placement
         [SerializeField, Min(0.01f)]
         private float _removalRaycastDistance = 500f;
 
+        [SerializeField]
+        private bool _useInitialStoreAccessLayout;
+
         private readonly Dictionary<
             PlacementInstanceId,
             PlacedObjectView> _viewsById =
@@ -39,6 +43,8 @@ namespace VRMGames.CartridgeAndCloud.Presentation.Placement
                     PlacedObjectView>();
 
         private PlacementOccupancyRegistry _registry;
+        private StorePlacementAccessValidator
+            _accessValidator;
         private int _nextSequence = 1;
 
         public bool IsPlacementModeActive { get; private set; }
@@ -54,6 +60,29 @@ namespace VRMGames.CartridgeAndCloud.Presentation.Placement
             private set;
         }
 
+        public AccessValidationFailureReason
+            CurrentAccessFailureReason
+        {
+            get;
+            private set;
+        }
+
+        public bool IsAccessValidationEnabled =>
+            _useInitialStoreAccessLayout ||
+            _accessValidator != null;
+
+        public StoreAccessLayout AccessLayout
+        {
+            get
+            {
+                EnsureAccessValidator();
+
+                return _accessValidator != null
+                    ? _accessValidator.Layout
+                    : null;
+            }
+        }
+
         public PlacementOccupancyRegistry Registry
         {
             get
@@ -67,6 +96,7 @@ namespace VRMGames.CartridgeAndCloud.Presentation.Placement
         {
             ResolveReferences();
             EnsureRegistry();
+            EnsureAccessValidator();
             SetPlacementMode(false);
         }
 
@@ -85,7 +115,79 @@ namespace VRMGames.CartridgeAndCloud.Presentation.Placement
             _placedMaterial = placedMaterial;
             _camera = camera;
             _registry = null;
+            _accessValidator = null;
+            _useInitialStoreAccessLayout = false;
+            CurrentAccessFailureReason =
+                AccessValidationFailureReason.None;
             EnsureRegistry();
+        }
+
+
+        public void ConfigureAccessValidation(
+            StoreAccessLayout layout)
+        {
+            if (layout == null)
+            {
+                throw new ArgumentNullException(
+                    nameof(layout));
+            }
+
+            ResolveReferences();
+
+            if (_surface == null)
+            {
+                throw new InvalidOperationException(
+                    "Placement surface must be configured first.");
+            }
+
+            if (!HasMatchingBounds(
+                    _surface.Bounds,
+                    layout.Bounds))
+            {
+                throw new ArgumentException(
+                    "Access layout bounds must match " +
+                    "the placement surface bounds.",
+                    nameof(layout));
+            }
+
+            _useInitialStoreAccessLayout = false;
+            _accessValidator =
+                new StorePlacementAccessValidator(
+                    layout);
+
+            CurrentAccessFailureReason =
+                AccessValidationFailureReason.None;
+
+            RefreshPreviewValidity();
+        }
+
+        public void ConfigureInitialStoreAccessValidation()
+        {
+            _useInitialStoreAccessLayout = true;
+            _accessValidator = null;
+
+            EnsureAccessValidator();
+
+            if (_accessValidator == null)
+            {
+                throw new InvalidOperationException(
+                    "Initial Store access layout could not be configured.");
+            }
+
+            CurrentAccessFailureReason =
+                AccessValidationFailureReason.None;
+
+            RefreshPreviewValidity();
+        }
+
+        public void ClearAccessValidation()
+        {
+            _useInitialStoreAccessLayout = false;
+            _accessValidator = null;
+            CurrentAccessFailureReason =
+                AccessValidationFailureReason.None;
+
+            RefreshPreviewValidity();
         }
 
         public void TogglePlacementMode()
@@ -99,6 +201,8 @@ namespace VRMGames.CartridgeAndCloud.Presentation.Placement
             IsPlacementModeActive = active;
             CurrentFailureReason =
                 PlacementFailureReason.None;
+            CurrentAccessFailureReason =
+                AccessValidationFailureReason.None;
 
             if (!active)
             {
@@ -137,6 +241,8 @@ namespace VRMGames.CartridgeAndCloud.Presentation.Placement
             {
                 CurrentFailureReason =
                     PlacementFailureReason.None;
+                CurrentAccessFailureReason =
+                    AccessValidationFailureReason.None;
 
                 return false;
             }
@@ -221,6 +327,8 @@ namespace VRMGames.CartridgeAndCloud.Presentation.Placement
             CreatePlacedView(record);
             CurrentFailureReason =
                 PlacementFailureReason.None;
+            CurrentAccessFailureReason =
+                AccessValidationFailureReason.None;
 
             RefreshPreviewValidity();
             return true;
@@ -330,6 +438,8 @@ namespace VRMGames.CartridgeAndCloud.Presentation.Placement
 
             CurrentFailureReason =
                 PlacementFailureReason.None;
+            CurrentAccessFailureReason =
+                AccessValidationFailureReason.None;
 
             RefreshPreviewValidity();
             return true;
@@ -342,14 +452,51 @@ namespace VRMGames.CartridgeAndCloud.Presentation.Placement
                 !_previewController.HasPreview ||
                 _definition == null)
             {
+                CurrentAccessFailureReason =
+                    AccessValidationFailureReason.None;
+
                 return PlacementValidationResult.Invalid(
                     PlacementFailureReason.OutOfBounds);
             }
 
-            return Registry.Validate(
-                _previewController.CurrentState.Anchor,
-                _definition.GridSize,
-                _previewController.Rotation);
+            PlacementValidationResult occupancyValidation =
+                Registry.Validate(
+                    _previewController.CurrentState.Anchor,
+                    _definition.GridSize,
+                    _previewController.Rotation);
+
+            if (!occupancyValidation.IsValid)
+            {
+                CurrentAccessFailureReason =
+                    AccessValidationFailureReason.None;
+
+                return occupancyValidation;
+            }
+
+            EnsureAccessValidator();
+
+            if (_accessValidator == null)
+            {
+                CurrentAccessFailureReason =
+                    AccessValidationFailureReason.None;
+
+                return occupancyValidation;
+            }
+
+            AccessValidationResult accessValidation =
+                _accessValidator.ValidateCandidate(
+                    Registry.GetOccupiedCells(),
+                    _previewController.CurrentState.Anchor,
+                    _definition.GridSize,
+                    _previewController.Rotation);
+
+            CurrentAccessFailureReason =
+                accessValidation.FailureReason;
+
+            return accessValidation.IsValid
+                ? occupancyValidation
+                : PlacementValidationResult.Invalid(
+                    PlacementFailureReason.AccessBlocked);
         }
 
         private void RefreshPreviewValidity()
@@ -463,6 +610,51 @@ namespace VRMGames.CartridgeAndCloud.Presentation.Placement
                     new PlacementOccupancyRegistry(
                         _surface.Bounds);
             }
+        }
+
+
+        private void EnsureAccessValidator()
+        {
+            if (_accessValidator != null ||
+                !_useInitialStoreAccessLayout)
+            {
+                return;
+            }
+
+            ResolveReferences();
+
+            if (_surface == null)
+            {
+                return;
+            }
+
+            StoreAccessLayout layout =
+                StoreAccessLayout.InitialTier();
+
+            if (!HasMatchingBounds(
+                    _surface.Bounds,
+                    layout.Bounds))
+            {
+                Debug.LogError(
+                    "[Placement] Initial Store access layout bounds " +
+                    "do not match the placement surface.");
+
+                return;
+            }
+
+            _accessValidator =
+                new StorePlacementAccessValidator(
+                    layout);
+        }
+
+        private static bool HasMatchingBounds(
+            GridBounds left,
+            GridBounds right)
+        {
+            return left.Minimum ==
+                   right.Minimum &&
+                   left.Size ==
+                   right.Size;
         }
 
         private void ResolveReferences()

@@ -1,42 +1,40 @@
 # Sprint 05 — Current Status
 
-**State:** CC_S5.2 package prepared  
+**State:** CC_S5.3 package prepared  
 **Result:** In progress  
 **Current application version:** `0.0.5`
 
 | SubSprint | State |
 |---|---|
 | CC_S5.1 — Store Shell Foundation | Published / PASS |
-| CC_S5.2 — Access Validation Foundation | Ready for integration |
-| CC_S5.3 — Store Placement Integration | Not started |
+| CC_S5.2 — Access Validation Foundation | Published / PASS |
+| CC_S5.3 — Store Placement Integration | Ready for integration |
 | CC_S5.4 — Integration, Regression & Closure | Not started |
 
-## Accepted CC_S5.1 baseline
+## Published baseline
 
-- Store shell: `10 x 15 m`.
-- Future logical grid: `20 x 30` cells.
-- Cell size: `0.5 m`.
-- Central entrance: `4 cells` / `2 m`.
-- Technical player, click-to-move, orbit and zoom.
-- Normal and direct Store return flow.
-- Full automated baseline: `129/129 PASS`.
-- Technical commit:
-  `7acbdd7e3860238f5a4961f8f17537cd6c505231`.
+- CC_S5.1 commit:
+  `7acbdd7e3860238f5a4961f8f17537cd6c505231`
+- CC_S5.2 commit:
+  `3b4d33698dd4f71c8499960887a39cfb43a414e9`
+- Automated baseline:
+  `119 EditMode + 34 PlayMode = 153`.
 
-## CC_S5.2 target
+## CC_S5.3 target
 
-- Add pure access-anchor domain concepts.
-- Add immutable Store access layout.
-- Add four-direction breadth-first connectivity validation.
-- Require at least two adjacent open entrance cells.
-- Reserve all four entrance cells against placement candidates.
-- Require access to rear, left-display and right-display anchors.
-- Validate candidate footprints without mutating occupancy.
-- Cover barriers, gaps, rotations and route restoration.
-- Add `24` EditMode tests.
-- Expected full suite: `153/153`.
+- Integrate Sprint 4 placement runtime into Store.
+- Use the Store floor as a `20 x 30` placement surface.
+- Keep all Store root objects unchanged.
+- Add placement as a child of `S5_StoreShell`.
+- Enable B, left click, Q/E, Escape and Delete.
+- Preserve movement and camera routing.
+- Reject bounds, overlap and access failures.
+- Show valid candidates green and invalid candidates red.
+- Add technical entrance and required-anchor markers.
+- Add 15 tests.
+- Expected full suite: `168/168`.
 
 ## Scope boundary
 
-CC_S5.2 changes no scene, runtime presentation, Input Action, asmdef,
-ProjectSettings or application version. Store integration remains CC_S5.3.
+Persistence, economy, furniture catalogue, customers and dynamic NavMesh
+remain deferred.
