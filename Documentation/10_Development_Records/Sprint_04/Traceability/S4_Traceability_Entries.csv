@@ -1,0 +1,6 @@
+ID,Date,Type,SubSprint,Change,State,Evidence
+CHG-S4-001,,Domain,S4.1,Add integer grid coordinates and sizes,Pending,
+CHG-S4-002,,Domain,S4.1,Add quarter-turn rotation model,Pending,
+CHG-S4-003,,Domain,S4.1,Add rectangular footprint and bounds model,Pending,
+CHG-S4-004,,Application,S4.1,Add deterministic world-grid projection,Pending,
+CHG-S4-005,,Test,S4.1,Add grid foundation EditMode coverage,Pending,
