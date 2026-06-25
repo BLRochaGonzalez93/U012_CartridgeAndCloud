@@ -1,0 +1,18 @@
+ChangeId,Sprint,SubSprint,Area,Description,Evidence,Status
+CHG-S5-001,5,S5.1,Presentation,10x15 Store shell and 2m entrance,11 new tests and 129 full tests,Closed
+CHG-S5-002,5,S5.1,Movement,Technical Store player and click-to-move,Manual and automated validation,Closed
+CHG-S5-003,5,S5.1,Camera,Store orbit and zoom integration,Manual and automated validation,Closed
+CHG-S5-004,5,S5.1,SceneFlow,Normal and direct Store return flow,Scene smoke and manual validation,Closed
+CHG-S5-005,5,S5.2,Domain,Access anchors and IDs,24 new tests and 153 full tests,Closed
+CHG-S5-006,5,S5.2,Application,20x30 Store access layout,24 new tests and 153 full tests,Closed
+CHG-S5-007,5,S5.2,Application,Four-direction access validator,Barrier gap and rotation coverage,Closed
+CHG-S5-008,5,S5.2,Application,Reserved entrance and required anchors,Automated access coverage,Closed
+CHG-S5-009,5,S5.3,Presentation,Store placement runtime integration,15 new tests and 168 full tests,Closed
+CHG-S5-010,5,S5.3,Input,Construction controls through existing actions,Manual and automated validation,Closed
+CHG-S5-011,5,S5.3,Application,Occupancy snapshot and access adapter,Integration test coverage,Closed
+CHG-S5-012,5,S5.3,UX,Green red preview and access markers,Manual validation,Closed
+CHG-S5-013,5,S5.4,Integration,Reproducible empty Store closure baseline,Final validator PASS,Closed
+CHG-S5-014,5,S5.4,Versioning,Application version 0.0.6,EditMode build and Player PASS,Closed
+CHG-S5-015,5,S5.4,QA,Final 168 test regression,127 EditMode and 41 PlayMode PASS,Closed
+CHG-S5-016,5,S5.4,Build,Windows x64 Development build and external run,Build and execution PASS,Closed
+CHG-S5-017,5,S5.4,Governance,Final technical implementation published,22d62967aaf9895db7bce75afd2ffa11f7858e0c,Closed

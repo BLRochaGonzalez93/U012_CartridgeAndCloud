@@ -1,16 +1,7 @@
-# Production Tracking — Operational Layer
+# Production Tracking Operational v0.5.0
 
-## Versión post-publicación
+These workbooks are editable operational copies derived from official baseline v0.5. The official copies under `00_Official_Baseline/v0.5/04_QA_Production` are immutable after publication.
 
-- `Cartridge_And_Cloud_Production_Tracking_Operational_v0.3.9.xlsx`
-- `Cartridge_And_Cloud_QA_Operational_v0.3.9.xlsx`
-- `Cartridge_And_Cloud_Traceability_Operational_v0.3.9.xlsx`
-
-v0.3.9 registra el commit técnico real:
-
-```text
-478794017015054571d6ca22332a201589abbe5c
-```
-
-También registra el hotfix documental UTF-8 pendiente de publicación y deja el
-tag bloqueado hasta verificar ese commit.
+- Production tracking: Sprints 0-17, backlog, milestones and risks.
+- QA operational: baseline 168 tests, regression and Sprint 6 acceptance seeds.
+- Traceability operational: ADRs, commits, changes and document impact.

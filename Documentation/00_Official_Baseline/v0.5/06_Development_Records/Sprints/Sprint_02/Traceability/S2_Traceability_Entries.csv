@@ -1,0 +1,10 @@
+ID,Date,Type,SubSprint,Change,State,Evidence
+CHG-S2-001,2026-06-23,Domain,2.1,Add StableId and SaveSlotId,Closed,c55b5d04a150c2fc452e37ff0fc5be3f9633e80d
+CHG-S2-002,2026-06-23,Domain,2.1,Add minimal GameSession and schema-v1 snapshot,Closed,c55b5d04a150c2fc452e37ff0fc5be3f9633e80d
+CHG-S2-003,2026-06-23,Application,2.2,Add session service repository clock and consumer contracts,Closed,c55b5d04a150c2fc452e37ff0fc5be3f9633e80d
+CHG-S2-004,2026-06-23,Infrastructure,2.3,Add JSON slot repository,Closed,c55b5d04a150c2fc452e37ff0fc5be3f9633e80d
+CHG-S2-005,2026-06-23,Infrastructure,2.3,Compose minimal session in ApplicationRoot,Closed,c55b5d04a150c2fc452e37ff0fc5be3f9633e80d
+CHG-S2-006,2026-06-23,Test,2.3,Expand automated suite from 14 to 29 tests,Closed,29/29 PASS
+CHG-S2-007,2026-06-23,Configuration,2.3,Advance application version to 0.0.3,Closed,c55b5d04a150c2fc452e37ff0fc5be3f9633e80d
+INC-S2-001,2026-06-23,Incident,2.3,Resolve Application GameSession namespace collision with Domain GameSession type,Closed,Hotfix v002
+CHG-S2-008,2026-06-23,Documentation,2.4,Close QA traceability ADR and document impact,Closed,Documentation closure package v001
