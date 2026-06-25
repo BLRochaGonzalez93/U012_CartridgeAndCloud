@@ -1,0 +1,17 @@
+ChangeId,Sprint,SubSprint,Area,Description,Evidence,Status
+CHG-S8-001,8,S8.1,Domain,Display definitions and identifiers,Focused EditMode,PASS
+CHG-S8-002,8,S8.1,Domain,Capacity and visible-unit invariants,Focused EditMode,PASS
+CHG-S8-003,8,S8.1,Domain,Single-product assignment and category policy,Focused EditMode,PASS
+CHG-S8-004,8,S8.1,Domain,Display inventory and registries,Focused EditMode,PASS
+CHG-S8-005,8,S8.2,Domain,RestockTask lifecycle,Focused EditMode,PASS
+CHG-S8-006,8,S8.2,Application,Atomic exact restocking and restock-to-capacity,Focused EditMode,PASS
+CHG-S8-007,8,S8.2,Application,Return stock and clear assignment,Focused EditMode,PASS
+CHG-S8-008,8,S8.3,Infrastructure,Display ScriptableObject authoring,Focused EditMode and manual inspection,PASS
+CHG-S8-009,8,S8.3,Infrastructure,Runtime authoring bridge,Focused EditMode and manual smoke,PASS
+CHG-S8-010,8,S8.3,Content,Three technical display definitions and catalog,Manual inspection,PASS
+CHG-S8-011,8,S8.4,Versioning,Application target 0.0.9 and version assertion,333/333 EditMode PASS,PASS
+CHG-S8-012,8,S8.4,QA,NUnit Assert.Multiple compatibility correction,Recompile and 374/374 regression,PASS
+CHG-S8-013,8,S8.4,QA,74 focused and 374 full automated regression,Unity Test Runner,PASS
+CHG-S8-014,8,S8.4,Manual,Authoring runtime and existing gameplay regression,Manual validation record,PASS
+CHG-S8-015,8,S8.4,Build,Windows x64 Development and external run,Build and external smoke evidence,PASS
+CHG-S8-016,8,S8.4,Governance,Evidence-gated Sprint 8 closure and Sprint 9 handoff,Closure report and handoff,PASS
