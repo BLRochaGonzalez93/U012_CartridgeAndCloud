@@ -1,6 +1,18 @@
-ID,Date,Type,SubSprint,Change,State,Evidence
-CHG-S4-001,,Domain,S4.1,Add integer grid coordinates and sizes,Pending,
-CHG-S4-002,,Domain,S4.1,Add quarter-turn rotation model,Pending,
-CHG-S4-003,,Domain,S4.1,Add rectangular footprint and bounds model,Pending,
-CHG-S4-004,,Application,S4.1,Add deterministic world-grid projection,Pending,
-CHG-S4-005,,Test,S4.1,Add grid foundation EditMode coverage,Pending,
+ChangeId,Sprint,SubSprint,Area,Description,Evidence,Status
+CHG-S4-001,4,S4.1,Domain,Deterministic grid coordinates and rotations,18 new tests and 84 full tests,PASS
+CHG-S4-002,4,S4.1,Application,World/grid projection and logical bounds,18 new tests and 84 full tests,PASS
+CHG-S4-003,4,S4.2,Presentation,Snapped placement preview and bounds feedback,12 new tests and 96 full tests,PASS
+CHG-S4-004,4,S4.2,Input,Q/E quarter-turn rotation through Gameplay actions,12 new tests and 96 full tests,PASS
+CHG-S4-005,4,S4.2,Editor,TestLab preview installer and validator,Manual and automated validation,PASS
+CHG-S4-006,4,S4.3,Domain,Stable placement instance IDs and records,22 new tests and 118 full tests,PASS
+CHG-S4-007,4,S4.3,Application,Atomic occupancy registry and overlap validation,22 new tests and 118 full tests,PASS
+CHG-S4-008,4,S4.3,Application,Movement and placement input conflict policy,Regression validation,PASS
+CHG-S4-009,4,S4.3,Presentation,Confirmed placement views and removal,Manual removal validation,PASS
+CHG-S4-010,4,S4.3,Input,B Escape Delete Backspace construction controls,Input tests and manual validation,PASS
+CHG-S4-011,4,S4.3,Editor,Occupancy TestLab installer and validator,Manual and automated validation,PASS
+CHG-S4-012,4,S4.3,QA,Occupancy overlap removal and runtime coverage,118 full tests,PASS
+CHG-S4-013,4,S4.4,Integration,Reproducible empty TestLab closure baseline,Pending final validator,Pending
+CHG-S4-014,4,S4.4,Versioning,Application version 0.0.5,Pending integration,Pending
+CHG-S4-015,4,S4.4,QA,Final 118 test regression,Pending execution,Pending
+CHG-S4-016,4,S4.4,Build,Windows x64 development build and external run,Pending evidence,Pending
+CHG-S4-017,4,S4.4,Governance,Final technical and documentation closure,Pending commits,Pending

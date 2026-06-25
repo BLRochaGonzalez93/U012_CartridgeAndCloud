@@ -1,30 +1,49 @@
 # Sprint 04 — Current Status
 
-**State:** CC_S4.3 package prepared  
+**State:** CC_S4.4 ready for integration and evidence  
 **Result:** In progress  
-**Application version:** `0.0.4`  
+**Application version before integration:** `0.0.4`  
 **Target version:** `0.0.5`
 
 | SubSprint | State |
 |---|---|
 | CC_S4.1 — Grid Coordinate Foundation | Published / PASS |
 | CC_S4.2 — Placement Preview & Rotation | Published / PASS |
-| CC_S4.3 — Occupancy & Base Validation | Ready for integration |
-| CC_S4.4 — Integration, Regression & Closure | Not started |
+| CC_S4.3 — Occupancy & Base Validation | Published / PASS |
+| CC_S4.4 — Integration, Regression & Closure | Ready for validation |
 
-## Published evidence
+## Verified technical commits
 
-- CC_S4.1 commit:
-  `1e19509edd9c729fb1d2af7b6ef580eabbb670d8`.
-- CC_S4.1 full suite: `84/84 PASS`.
-- CC_S4.2 commit:
-  `bda38e0e84654aaabe8414b772d6c88e25e70e41`.
-- CC_S4.2 full suite: `96/96 PASS`.
+- CC_S4.1:
+  `1e19509edd9c729fb1d2af7b6ef580eabbb670d8`
+- CC_S4.2:
+  `bda38e0e84654aaabe8414b772d6c88e25e70e41`
+- CC_S4.3:
+  `8c3cad65c7968e5317cde64177803f7f705f484f`
 
-## CC_S4.3 target
+## Current validated baseline
 
-Add explicit placement mode, atomic logical occupancy, overlap rejection,
-stable placement instance IDs, confirmation, cancellation and removal in
-TestLab while preserving movement, orbit, zoom and scene-root baselines.
+- Grid cell size: `0.5 m`.
+- Technical placement surface: `16 x 16` cells.
+- Technical placeable: `technical-shelf-4x2`.
+- Quarter-turn rotation: Q/E.
+- Explicit placement mode: B.
+- Confirm: left click.
+- Cancel: Escape.
+- Remove: Delete or Backspace.
+- Logical bounds and overlap validation: PASS.
+- Atomic occupancy and removal: PASS.
+- Full automated suite before CC_S4.4: `118/118 PASS`.
 
-Access-path and mandatory interaction validation remain deferred to Sprint 5.
+## Remaining closure gates
+
+- Integrate final version `0.0.5`.
+- Run CC_S4.4 validator.
+- Run full automated regression `118/118`.
+- Run final TestLab manual regression.
+- Run MainMenu/Store scene-flow regression.
+- Build Windows x64 development player.
+- Execute the player externally.
+- Record final evidence.
+- Publish the final technical commit.
+- Publish documentation closure.

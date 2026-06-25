@@ -138,11 +138,11 @@ namespace VRMGames.CartridgeAndCloud.InputSystem.Tests.EditMode
         }
 
         [Test]
-        public void ProjectVersion_IsSprintThreeTarget()
+        public void ProjectVersion_IsSprintFourTarget()
         {
             Assert.That(
                 PlayerSettings.bundleVersion,
-                Is.EqualTo("0.0.4"));
+                Is.EqualTo("0.0.5"));
         }
 
         private static void TestRouterContext(
