@@ -1,44 +1,35 @@
 # ADR-0022 — Store Placement and Access Integration
 
-**Status:** Proposed  
+**Status:** Accepted  
 **Sprint:** 5  
-**SubSprint:** CC_S5.3
+**Decision date:** 2026-06-25
 
-## Proposed decision
+## Decision
 
 Store reuses the Sprint 4 placement components and Input Actions.
 
-The placement runtime validates candidates in this order:
+Candidates are validated in this order:
 
-1. placement surface bounds;
-2. logical occupancy overlap;
-3. Store entrance and required-anchor connectivity.
+1. placement-surface bounds;
+2. occupancy overlap;
+3. entrance and required-anchor access.
 
-Access validation is optional on `PlacementRuntimeController`. TestLab does
-not configure it and therefore preserves Sprint 4 behaviour.
+Access validation is optional on `PlacementRuntimeController`. Store enables the
+initial Store access layout; TestLab does not, preserving its Sprint 4
+behaviour.
 
-Store configures `StoreAccessLayout.InitialTier()` and exposes the detailed
-failure through `CurrentAccessFailureReason`. The generic placement failure
-is `AccessBlocked`, allowing the existing ghost view to use its invalid
-material.
+Store exposes the detailed access failure while mapping invalid access to the
+generic `AccessBlocked` placement failure for red preview feedback.
 
 ## Scene structure
 
-`S5_StorePlacement` is created below `S5_StoreShell`; no additional root is
-introduced.
+`S5_StorePlacement` is a child of `S5_StoreShell`. No extra Store root is added.
 
-It contains:
+It contains the input driver, preview controller, runtime controller, ghost
+visual, placed-object root and technical access markers.
 
-- placement input driver;
-- preview controller;
-- runtime controller;
-- ghost visual;
-- placed-object root;
-- entrance and required-anchor technical markers.
+## Consequences
 
-## Deferred
-
-- Save persistence.
-- Catalogue and purchase flows.
-- Final models and materials.
-- Dynamic navigation mesh updates.
+- Construction coexists with movement, orbit and zoom.
+- Movement input is suppressed only while construction mode is active.
+- Store maintains the approved six-root scene structure.

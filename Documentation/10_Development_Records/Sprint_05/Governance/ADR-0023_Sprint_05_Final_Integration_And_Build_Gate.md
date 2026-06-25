@@ -1,44 +1,30 @@
 # ADR-0023 — Sprint 05 Final Integration and Build Gate
 
-**Status:** Proposed  
+**Status:** Accepted  
 **Sprint:** 5  
-**SubSprint:** CC_S5.4
+**Decision date:** 2026-06-25
 
 ## Decision
 
-Sprint 5 closes through an evidence-gated integration rather than by adding
-new gameplay scope.
+Sprint 5 closes through an evidence-gated integration.
 
-The final integration:
+The accepted closure baseline:
 
-- Resets Store to an empty and reproducible placement baseline.
-- Keeps construction mode inactive and the ghost hidden.
-- Preserves the six approved Store scene roots.
-- Verifies the 10 x 15 metre Store shell.
-- Verifies the 20 x 30 placement surface at 0.5 metres per cell.
-- Verifies the technical 4 x 2 placeable.
-- Verifies placement, movement and camera input wiring.
-- Verifies reserved entrance and required-anchor validation is enabled.
-- Verifies Bootstrap, MainMenu and Store are enabled build scenes.
-- Requires Bootstrap to be the first enabled build scene.
-- Sets `PlayerSettings.bundleVersion` to `0.0.6`.
-- Requires the existing `168/168` automated suite to remain green.
-- Requires Windows x64 Development build and external execution evidence.
+- resets Store to zero confirmed placements;
+- starts with construction inactive and ghost hidden;
+- preserves the six approved Store roots;
+- verifies Store shell, placement surface, input wiring and access validation;
+- enables Bootstrap, MainMenu and Store as build scenes;
+- keeps Bootstrap as the first enabled build scene;
+- sets application version `0.0.6`;
+- requires the complete `168/168` automated regression;
+- requires Windows x64 Development build and external execution.
 
-## Rationale
+## Final evidence
 
-CC_S5.1 through CC_S5.3 already deliver and validate the Store shell,
-access foundation and placement integration. CC_S5.4 therefore protects
-the integrated baseline and produces release-oriented evidence without
-introducing another gameplay feature.
+All technical, automated, manual, build and external-execution gates passed.
 
-## Deferred
+## Release disposition
 
-- Placement persistence.
-- Economy, purchase and refund flows.
-- Furniture catalogue.
-- Products and inventory.
-- Customers and employees.
-- Checkout gameplay.
-- Dynamic NavMesh updates.
-- Final Store art and expansion.
+No sprint tag, GitHub release, build archive or checksum is required. These
+remain reserved for the final build of the current phase.

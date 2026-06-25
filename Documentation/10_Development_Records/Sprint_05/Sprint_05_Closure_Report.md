@@ -1,61 +1,80 @@
 # Sprint 05 — Closure Report
 
-**Sprint:** Store Shell & Access Validation  
-**Status:** Pending evidence-gated closure  
-**Target version:** `0.0.6`
+**Sprint:** 05 — Store Shell & Access Validation  
+**Application version:** `0.0.6`  
+**Technical result:** PASS  
+**QA result:** PASS  
+**Closure date:** `2026-06-25`  
+**Technical commit:** `22d62967aaf9895db7bce75afd2ffa11f7858e0c`
 
-## Delivered scope
+## Delivered outcome
 
-- Playable 10 x 15 metre Store shell.
-- Central 2-metre entrance and exterior apron.
-- Technical player, click-to-move, orbit and zoom.
-- 20 x 30 logical Store grid at 0.5 metres per cell.
-- Four-cell entrance reserve.
-- Required Store access anchors.
-- Deterministic four-direction connectivity validation.
-- Store construction mode using Sprint 4 placement foundation.
-- Bounds, overlap, entrance and route validation.
-- Green/red placement preview.
+Sprint 5 establishes the playable initial Store and connects the existing grid
+and placement foundation to deterministic access preservation:
+
+- `10 x 15 m` Store shell.
+- Central `2 m` entrance.
+- Technical player, movement, orbit and zoom.
+- `20 x 30` grid at `0.5 m`.
+- Entrance reservation and minimum open width.
+- Three required access anchors.
+- Four-direction route validation.
+- Store construction mode.
+- Bounds, overlap and access rejection.
+- Green/red preview.
 - Confirmation, rotation, cancellation and removal.
-- MainMenu/Store scene-flow preservation.
+- Reproducible empty Store closure baseline.
 
-## Deferred scope
+## SubSprint results
 
-- Persistence.
-- Economy and purchase/refund flow.
-- Furniture catalogue.
-- Products and inventory.
-- Customers, employees and checkout.
-- Dynamic NavMesh.
-- Final Store art.
-- Store expansion.
+| SubSprint | Result |
+|---|---|
+| CC_S5.1 — Store Shell Foundation | PASS |
+| CC_S5.2 — Access Validation Foundation | PASS |
+| CC_S5.3 — Store Placement Integration | PASS |
+| CC_S5.4 — Integration, Regression & Closure | PASS |
 
-## Technical commits
+## Final evidence
 
-- CC_S5.1:
-  `7acbdd7e3860238f5a4961f8f17537cd6c505231`
-- CC_S5.2:
-  `3b4d33698dd4f71c8499960887a39cfb43a414e9`
-- CC_S5.3:
-  `0c71fd1c622d86947483a12455ff83fb9585665b`
-- CC_S5.4:
-  Pending.
+- Clean compilation after cumulative fixes.
+- EditMode `127/127 PASS`.
+- PlayMode `41/41 PASS`.
+- Full suite `168/168 PASS`.
+- Final Store shell and construction regression PASS.
+- TestLab placement regression PASS.
+- MainMenu/Store scene and context regression PASS.
+- Direct Store execution and return PASS.
+- Windows x64 Development build PASS.
+- External Player launch, construction, navigation and Quit PASS.
+- Application version `0.0.6`.
+- Final technical implementation published on `main`.
+- No open Sprint 5 defect.
 
-## Automated evidence
+## Incident disposition
 
-- CC_S5.1 full suite: `129/129 PASS`.
-- CC_S5.2 full suite: `153/153 PASS`.
-- CC_S5.3 full suite: `168/168 PASS`.
-- CC_S5.4 final suite: Pending.
+Three package incidents were corrected and two risks were prevented before
+delivery:
 
-## Manual evidence
+1. Invalid helper reference in the initial S5.1 package.
+2. Outdated Store root expectation in smoke tests.
+3. Missing direct-Store scene-navigation fallback.
+4. Direct Editor-to-Domain dependency risk prevented in S5.3.
+5. Non-serialized Store access configuration risk prevented in S5.3.
 
-Pending final Store, TestLab and scene-flow regression.
+All are closed or prevented; none remains in the accepted implementation.
 
-## Build evidence
+## Release disposition
 
-Pending Windows x64 Development build and external execution.
+No tag, GitHub release, build ZIP or SHA-256 is produced for Sprint 5.
+Phase-level release evidence remains deferred to the final phase build.
+
+## Baseline disposition
+
+Official baseline v0.4 remains immutable.
+No interim official baseline is created for Sprint 5.
 
 ## Final decision
 
-Pending.
+**Sprint 05 is approved for CLOSED / PASS upon publication of this documentation commit.**
+
+**Next sprint:** to be selected from the approved production roadmap.

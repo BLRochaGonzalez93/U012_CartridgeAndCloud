@@ -1,43 +1,80 @@
 # Sprint 05 — QA Execution Record
 
-**Status:** Pending final CC_S5.4 evidence
+**Date:** `2026-06-25`  
+**Result:** PASS  
+**Application version:** `0.0.6`  
+**Technical commit:** `22d62967aaf9895db7bce75afd2ffa11f7858e0c`
 
-## Automated history
+## Final automated execution
 
-| Milestone | New tests | Full suite | Result |
-|---|---:|---:|---|
-| CC_S5.1 | 11 | 129 | PASS |
-| CC_S5.2 | 24 | 153 | PASS |
-| CC_S5.3 | 15 | 168 | PASS |
-| CC_S5.4 | 0 | 168 | Pending final regression |
+| Suite | Result |
+|---|---|
+| EditMode | `127/127 PASS` |
+| PlayMode | `41/41 PASS` |
+| Full suite | `168/168 PASS` |
 
-## Manual history
+## Progressive regression totals
 
-- Store shell, movement and camera: PASS.
-- Store/MainMenu return flow: PASS.
-- Logical access validation: PASS through automated coverage.
-- Store placement integration: PASS.
-- Entrance and route-blocking rejection: PASS.
-- TestLab regression: PASS.
-- Final integrated regression: Pending.
+| Milestone | EditMode | PlayMode | Total |
+|---|---:|---:|---:|
+| Sprint 4 baseline | 87 | 31 | 118 |
+| CC_S5.1 | 95 | 34 | 129 |
+| CC_S5.2 | 119 | 34 | 153 |
+| CC_S5.3 | 127 | 41 | 168 |
+| CC_S5.4 final | 127 | 41 | 168 |
 
-## Build history
+## Coverage added by Sprint 5
 
-- Windows x64 version `0.0.6`: Pending.
-- External execution: Pending.
+- Store shell specification and descriptor.
+- Store player, camera and scene wiring.
+- Access-anchor IDs and layout invariants.
+- Four-direction reachability.
+- Entrance-width and reservation policy.
+- Required-anchor reachability.
+- Candidate footprint access validation.
+- Occupancy snapshots.
+- Optional Store access integration in placement runtime.
+- Store placement runtime persistence after scene reload.
+- Placement and movement conflict policy in Store.
 
-## Incidents resolved during Sprint 5
+## Final manual execution
 
-- S5.1 invalid helper reference prevented compilation: Resolved.
-- S5.1 Store root smoke baseline was outdated: Resolved.
-- S5.1 direct Store execution lacked scene navigator: Resolved.
-- S5.3 Editor-to-Domain asmdef risk detected before delivery: Prevented.
-- S5.3 non-serialized access-layout risk detected before delivery: Prevented.
+| Check | Result |
+|---|---|
+| Store empty closure baseline | PASS |
+| Store dimensions and entrance | PASS |
+| Click-to-move and collision | PASS |
+| Orbit and zoom | PASS |
+| B construction activation | PASS |
+| 0.5-metre snapping | PASS |
+| Q/E rotation | PASS |
+| Bounds and overlap feedback | PASS |
+| Entrance reservation feedback | PASS |
+| Required-route feedback | PASS |
+| Confirmation and cancellation | PASS |
+| Delete and Backspace removal | PASS |
+| Occupancy and route restoration | PASS |
+| Movement conflict handling | PASS |
+| TestLab regression | PASS |
+| Bootstrap/MainMenu/Store flow | PASS |
+| Direct Store execution and return | PASS |
+| Exclusive UI/Gameplay contexts | PASS |
+| Windows x64 build | PASS |
+| External Player execution | PASS |
+| External Quit | PASS |
 
-## Open defects
+## Integration incidents
 
-None known at package preparation time.
+| Incident | Resolution | State |
+|---|---|---|
+| Invalid helper reference in initial S5.1 package | Corrected helper usage | Closed |
+| Store smoke root baseline expected five roots | Updated accepted six-root baseline | Closed |
+| Direct Store execution lacked injected navigator | Added Bootstrap fallback | Closed |
+| Editor installer risked direct Domain dependency | Removed direct dependency before delivery | Prevented |
+| Store access layout risked loss after scene reload | Added serialized activation and reconstruction | Prevented |
 
-## Final result
+No incident remains in the accepted implementation.
 
-Pending CC_S5.4 validation.
+## Final decision
+
+**QA PASS. No open Sprint 5 defect is carried forward.**
