@@ -67,11 +67,19 @@ namespace VRMGames.CartridgeAndCloud.Tests.PlayMode
                 "Directional Light",
                 "StoreSceneController",
                 "Canvas",
-                "EventSystem");
+                "EventSystem",
+                "S5_StoreShell");
+
+            StoreSceneController controller =
+                Object.FindFirstObjectByType<StoreSceneController>();
 
             Assert.That(
-                Object.FindFirstObjectByType<StoreSceneController>(),
+                controller,
                 Is.Not.Null);
+
+            controller.ReturnToMainMenu();
+
+            yield return WaitForActiveScene("MainMenu");
         }
 
         [UnityTest]
@@ -233,6 +241,7 @@ namespace VRMGames.CartridgeAndCloud.Tests.PlayMode
         private static void AssertActiveSceneRootNames(params string[] expectedRootNames)
         {
             Scene activeScene = SceneManager.GetActiveScene();
+
             string[] actualRootNames = activeScene
                 .GetRootGameObjects()
                 .Select(root => root.name)
