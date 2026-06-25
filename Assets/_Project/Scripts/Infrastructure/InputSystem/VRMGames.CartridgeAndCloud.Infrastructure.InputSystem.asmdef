@@ -1,0 +1,18 @@
+{
+    "name": "VRMGames.CartridgeAndCloud.Infrastructure.InputSystem",
+    "rootNamespace": "VRMGames.CartridgeAndCloud.Infrastructure.InputSystem",
+    "references": [
+        "VRMGames.CartridgeAndCloud.Application",
+        "VRMGames.CartridgeAndCloud.Presentation",
+        "Unity.InputSystem"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": false,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
