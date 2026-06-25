@@ -1,6 +1,8 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using VRMGames.CartridgeAndCloud.Application.Placement;
 using VRMGames.CartridgeAndCloud.Presentation.Camera;
+using VRMGames.CartridgeAndCloud.Presentation.Placement;
 using VRMGames.CartridgeAndCloud.Presentation.PlayerMovement;
 
 namespace VRMGames.CartridgeAndCloud.Infrastructure.InputSystem.Actions
@@ -17,6 +19,9 @@ namespace VRMGames.CartridgeAndCloud.Infrastructure.InputSystem.Actions
         [SerializeField]
         private OrbitCameraRig _cameraRig;
 
+        [SerializeField]
+        private PlacementRuntimeController _placementRuntimeController;
+
         [SerializeField, Min(0f)]
         private float _orbitSensitivity = 0.2f;
 
@@ -31,6 +36,9 @@ namespace VRMGames.CartridgeAndCloud.Infrastructure.InputSystem.Actions
 
         public OrbitCameraRig CameraRig =>
             _cameraRig;
+
+        public PlacementRuntimeController PlacementRuntimeController =>
+            _placementRuntimeController;
 
         public float OrbitSensitivity =>
             _orbitSensitivity;
@@ -87,6 +95,13 @@ namespace VRMGames.CartridgeAndCloud.Infrastructure.InputSystem.Actions
                 Mathf.Max(0f, zoomSensitivity);
         }
 
+        public void SetPlacementRuntimeController(
+            PlacementRuntimeController placementRuntimeController)
+        {
+            _placementRuntimeController =
+                placementRuntimeController;
+        }
+
         public bool ApplyFrame(
             GameplayInputFrame frame)
         {
@@ -99,8 +114,15 @@ namespace VRMGames.CartridgeAndCloud.Infrastructure.InputSystem.Actions
             }
 
             bool handled = false;
+            bool placementModeActive =
+                _placementRuntimeController != null &&
+                _placementRuntimeController
+                    .IsPlacementModeActive;
 
-            if (frame.DestinationPressed &&
+            if (GameplayDestinationInputPolicy
+                    .ShouldSetDestination(
+                        frame.DestinationPressed,
+                        placementModeActive) &&
                 _destinationInput != null)
             {
                 handled |=
@@ -167,6 +189,13 @@ namespace VRMGames.CartridgeAndCloud.Infrastructure.InputSystem.Actions
             {
                 _cameraRig =
                     GetComponent<OrbitCameraRig>();
+            }
+
+            if (_placementRuntimeController == null)
+            {
+                _placementRuntimeController =
+                    Object.FindFirstObjectByType<
+                        PlacementRuntimeController>();
             }
         }
     }

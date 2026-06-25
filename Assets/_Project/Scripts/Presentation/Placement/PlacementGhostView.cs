@@ -43,6 +43,19 @@ namespace VRMGames.CartridgeAndCloud.Presentation.Placement
             TechnicalPlaceableDefinition definition,
             PlacementPreviewState state)
         {
+            ApplyPreview(
+                surface,
+                definition,
+                state,
+                state.IsWithinBounds);
+        }
+
+        public void ApplyPreview(
+            PlacementSurface surface,
+            TechnicalPlaceableDefinition definition,
+            PlacementPreviewState state,
+            bool isValid)
+        {
             if (_visualRoot == null ||
                 surface == null ||
                 definition == null)
@@ -51,23 +64,31 @@ namespace VRMGames.CartridgeAndCloud.Presentation.Placement
             }
 
             _visualRoot.gameObject.SetActive(true);
+
             _visualRoot.position =
                 surface.GetFootprintWorldCenter(
                     state,
                     definition.PreviewHeight);
 
-            _visualRoot.rotation = Quaternion.Euler(
-                0f,
-                state.Rotation.ToDegrees(),
-                0f);
+            _visualRoot.rotation =
+                Quaternion.Euler(
+                    0f,
+                    state.Rotation.ToDegrees(),
+                    0f);
 
-            _visualRoot.localScale = new Vector3(
-                definition.WidthCells * surface.CellSize,
-                definition.PreviewHeight,
-                definition.DepthCells * surface.CellSize);
+            _visualRoot.localScale =
+                new Vector3(
+                    definition.WidthCells *
+                    surface.CellSize,
+                    definition.PreviewHeight,
+                    definition.DepthCells *
+                    surface.CellSize);
 
-            IsValid = state.IsWithinBounds;
-            ApplyMaterial(IsValid ? _validMaterial : _invalidMaterial);
+            IsValid = isValid;
+            ApplyMaterial(
+                IsValid
+                    ? _validMaterial
+                    : _invalidMaterial);
         }
 
         public void ClearPreview()
@@ -82,7 +103,8 @@ namespace VRMGames.CartridgeAndCloud.Presentation.Placement
 
         private void ApplyMaterial(Material material)
         {
-            if (material == null || _renderers == null)
+            if (material == null ||
+                _renderers == null)
             {
                 return;
             }

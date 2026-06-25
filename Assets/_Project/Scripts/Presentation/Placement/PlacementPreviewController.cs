@@ -19,7 +19,8 @@ namespace VRMGames.CartridgeAndCloud.Presentation.Placement
         private UnityEngine.Camera _camera;
 
         [SerializeField]
-        private GridRotation _rotation = GridRotation.Degrees0;
+        private GridRotation _rotation =
+            GridRotation.Degrees0;
 
         public PlacementSurface Surface => _surface;
         public TechnicalPlaceableDefinition Definition => _definition;
@@ -32,7 +33,8 @@ namespace VRMGames.CartridgeAndCloud.Presentation.Placement
         {
             ResolveReferences();
 
-            if (!HasPreview && _ghostView != null)
+            if (!HasPreview &&
+                _ghostView != null)
             {
                 _ghostView.ClearPreview();
             }
@@ -78,7 +80,8 @@ namespace VRMGames.CartridgeAndCloud.Presentation.Placement
             return true;
         }
 
-        public void UpdatePreviewAtCell(GridCoordinate anchor)
+        public void UpdatePreviewAtCell(
+            GridCoordinate anchor)
         {
             ResolveReferences();
 
@@ -90,28 +93,51 @@ namespace VRMGames.CartridgeAndCloud.Presentation.Placement
                 return;
             }
 
-            CurrentState = PlacementPreviewCalculator.Calculate(
-                anchor,
-                _definition.GridSize,
-                _rotation,
-                _surface.Bounds);
+            CurrentState =
+                PlacementPreviewCalculator.Calculate(
+                    anchor,
+                    _definition.GridSize,
+                    _rotation,
+                    _surface.Bounds);
 
             HasPreview = true;
+
             _ghostView.ApplyPreview(
                 _surface,
                 _definition,
                 CurrentState);
         }
 
+        public void ApplyValidity(bool isValid)
+        {
+            if (!HasPreview ||
+                _ghostView == null ||
+                _surface == null ||
+                _definition == null)
+            {
+                return;
+            }
+
+            _ghostView.ApplyPreview(
+                _surface,
+                _definition,
+                CurrentState,
+                isValid);
+        }
+
         public void RotateClockwise()
         {
-            _rotation = _rotation.RotateClockwise();
+            _rotation =
+                _rotation.RotateClockwise();
+
             RefreshCurrentPreview();
         }
 
         public void RotateCounterClockwise()
         {
-            _rotation = _rotation.RotateCounterClockwise();
+            _rotation =
+                _rotation.RotateCounterClockwise();
+
             RefreshCurrentPreview();
         }
 
@@ -125,7 +151,8 @@ namespace VRMGames.CartridgeAndCloud.Presentation.Placement
         {
             if (HasPreview)
             {
-                UpdatePreviewAtCell(CurrentState.Anchor);
+                UpdatePreviewAtCell(
+                    CurrentState.Anchor);
             }
         }
 
@@ -133,17 +160,21 @@ namespace VRMGames.CartridgeAndCloud.Presentation.Placement
         {
             if (_surface == null)
             {
-                _surface = Object.FindFirstObjectByType<PlacementSurface>();
+                _surface =
+                    Object.FindFirstObjectByType<
+                        PlacementSurface>();
             }
 
             if (_ghostView == null)
             {
-                _ghostView = GetComponent<PlacementGhostView>();
+                _ghostView =
+                    GetComponent<PlacementGhostView>();
             }
 
             if (_camera == null)
             {
-                _camera = UnityEngine.Camera.main;
+                _camera =
+                    UnityEngine.Camera.main;
             }
         }
     }

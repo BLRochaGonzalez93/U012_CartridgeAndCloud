@@ -542,6 +542,7 @@ MonoBehaviour:
   _contextRouter: {fileID: 0}
   _destinationInput: {fileID: 1910838464}
   _cameraRig: {fileID: 961739755}
+  _placementRuntimeController: {fileID: 1510452610}
   _orbitSensitivity: 0.2
   _zoomSensitivity: 0.5
 --- !u!1 &997482525
@@ -676,6 +677,37 @@ MonoBehaviour:
   _gridDepth: 16
   _cellSize: 0.5
   _raycastDistance: 500
+--- !u!1 &1138710327
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1138710328}
+  m_Layer: 0
+  m_Name: PlacedObjects
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1138710328
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1138710327}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1510452606}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1510452605
 GameObject:
   m_ObjectHideFlags: 0
@@ -688,6 +720,7 @@ GameObject:
   - component: {fileID: 1510452609}
   - component: {fileID: 1510452608}
   - component: {fileID: 1510452607}
+  - component: {fileID: 1510452610}
   m_Layer: 0
   m_Name: S4_PlacementPreviewLab
   m_TagString: Untagged
@@ -709,6 +742,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 382724620}
+  - {fileID: 1138710328}
   m_Father: {fileID: 1883396451}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1510452607
@@ -725,6 +759,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: VRMGames.CartridgeAndCloud.Infrastructure.InputSystem::VRMGames.CartridgeAndCloud.Infrastructure.InputSystem.Placement.PlacementInputActionDriver
   _contextRouter: {fileID: 0}
   _previewController: {fileID: 1510452608}
+  _runtimeController: {fileID: 1510452610}
 --- !u!114 &1510452608
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -759,6 +794,25 @@ MonoBehaviour:
   - {fileID: 382724621}
   _validMaterial: {fileID: 2100000, guid: 2c5dceb53ebc55240bae2b0418adb5c4, type: 2}
   _invalidMaterial: {fileID: 2100000, guid: 93e1a822e9cc2bd45a73e82e53b83c83, type: 2}
+--- !u!114 &1510452610
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1510452605}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cafafcaa55234797ac010b31601dad6b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: VRMGames.CartridgeAndCloud.Presentation::VRMGames.CartridgeAndCloud.Presentation.Placement.PlacementRuntimeController
+  _surface: {fileID: 997482530}
+  _previewController: {fileID: 1510452608}
+  _definition: {fileID: 11400000, guid: 3f776f1a19c6dcb48911922c376a4af5, type: 2}
+  _placedObjectsRoot: {fileID: 1138710328}
+  _placedMaterial: {fileID: 2100000, guid: 73280ea062c7a6940aa81ddf62e17915, type: 2}
+  _camera: {fileID: 961739752}
+  _removalRaycastDistance: 500
 --- !u!1 &1883396450
 GameObject:
   m_ObjectHideFlags: 0

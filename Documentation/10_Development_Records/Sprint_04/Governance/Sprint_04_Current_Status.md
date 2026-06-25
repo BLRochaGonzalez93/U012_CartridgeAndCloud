@@ -1,6 +1,6 @@
 # Sprint 04 — Current Status
 
-**State:** CC_S4.2 package prepared  
+**State:** CC_S4.3 package prepared  
 **Result:** In progress  
 **Application version:** `0.0.4`  
 **Target version:** `0.0.5`
@@ -8,21 +8,23 @@
 | SubSprint | State |
 |---|---|
 | CC_S4.1 — Grid Coordinate Foundation | Published / PASS |
-| CC_S4.2 — Placement Preview & Rotation | Ready for integration |
-| CC_S4.3 — Occupancy & Base Validation | Not started |
+| CC_S4.2 — Placement Preview & Rotation | Published / PASS |
+| CC_S4.3 — Occupancy & Base Validation | Ready for integration |
 | CC_S4.4 — Integration, Regression & Closure | Not started |
 
-## CC_S4.1 evidence
+## Published evidence
 
-- Technical commit:
+- CC_S4.1 commit:
   `1e19509edd9c729fb1d2af7b6ef580eabbb670d8`.
-- New tests: 18/18 PASS.
-- Full suite: 84/84 PASS.
+- CC_S4.1 full suite: `84/84 PASS`.
+- CC_S4.2 commit:
+  `bda38e0e84654aaabe8414b772d6c88e25e70e41`.
+- CC_S4.2 full suite: `96/96 PASS`.
 
-## CC_S4.2 target
+## CC_S4.3 target
 
-Add a technical 4x2 placement definition, snapped ghost preview, logical
-16x16 placement area on the existing TestLab floor, Q/E quarter-turn
-rotation and green/red feedback for logical bounds.
+Add explicit placement mode, atomic logical occupancy, overlap rejection,
+stable placement instance IDs, confirmation, cancellation and removal in
+TestLab while preserving movement, orbit, zoom and scene-root baselines.
 
-Confirmation, occupancy and overlap rejection remain deferred to CC_S4.3.
+Access-path and mandatory interaction validation remain deferred to Sprint 5.

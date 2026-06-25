@@ -35,8 +35,11 @@ namespace VRMGames.CartridgeAndCloud.InputSystem.Tests.EditMode
                     "OrbitDelta",
                     "OrbitHold",
                     "Zoom",
+                    "TogglePlacementMode",
                     "RotatePlacementCounterClockwise",
-                    "RotatePlacementClockwise"
+                    "RotatePlacementClockwise",
+                    "CancelPlacement",
+                    "RemovePlacement"
                 },
                 actions.Gameplay.actions
                     .Select(action => action.name)
@@ -49,8 +52,13 @@ namespace VRMGames.CartridgeAndCloud.InputSystem.Tests.EditMode
             using ProjectInputActions actions =
                 new ProjectInputActions();
 
-            Assert.That(actions.UI.enabled, Is.False);
-            Assert.That(actions.Gameplay.enabled, Is.False);
+            Assert.That(
+                actions.UI.enabled,
+                Is.False);
+
+            Assert.That(
+                actions.Gameplay.enabled,
+                Is.False);
         }
 
         [Test]
@@ -97,19 +105,35 @@ namespace VRMGames.CartridgeAndCloud.InputSystem.Tests.EditMode
 
                 router.Configure(
                     allowStandaloneGameplay: false);
+
                 router.Initialize(service);
 
-                service.SetContext(InputContextId.UI);
-                Assert.That(router.IsUiMapEnabled, Is.True);
-                Assert.That(router.IsGameplayMapEnabled, Is.False);
+                service.SetContext(
+                    InputContextId.UI);
 
-                service.SetContext(InputContextId.Gameplay);
-                Assert.That(router.IsUiMapEnabled, Is.False);
-                Assert.That(router.IsGameplayMapEnabled, Is.True);
+                Assert.That(
+                    router.IsUiMapEnabled,
+                    Is.True);
+
+                Assert.That(
+                    router.IsGameplayMapEnabled,
+                    Is.False);
+
+                service.SetContext(
+                    InputContextId.Gameplay);
+
+                Assert.That(
+                    router.IsUiMapEnabled,
+                    Is.False);
+
+                Assert.That(
+                    router.IsGameplayMapEnabled,
+                    Is.True);
             }
             finally
             {
-                Object.DestroyImmediate(routerObject);
+                Object.DestroyImmediate(
+                    routerObject);
             }
         }
 
@@ -133,6 +157,7 @@ namespace VRMGames.CartridgeAndCloud.InputSystem.Tests.EditMode
             {
                 InputContextService service =
                     new InputContextService();
+
                 service.SetContext(context);
 
                 InputActionContextRouter router =
@@ -141,6 +166,7 @@ namespace VRMGames.CartridgeAndCloud.InputSystem.Tests.EditMode
 
                 router.Configure(
                     allowStandaloneGameplay: false);
+
                 router.Initialize(service);
 
                 Assert.That(
@@ -157,7 +183,8 @@ namespace VRMGames.CartridgeAndCloud.InputSystem.Tests.EditMode
             }
             finally
             {
-                Object.DestroyImmediate(routerObject);
+                Object.DestroyImmediate(
+                    routerObject);
             }
         }
     }

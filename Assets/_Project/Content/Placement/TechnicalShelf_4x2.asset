@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a2c0c3291a4c4ae3a60c68300e4151d1, type: 3}
   m_Name: TechnicalShelf_4x2
   m_EditorClassIdentifier: VRMGames.CartridgeAndCloud.Presentation::VRMGames.CartridgeAndCloud.Presentation.Placement.TechnicalPlaceableDefinition
+  _definitionId: technical-shelf-4x2
   _widthCells: 4
   _depthCells: 2
   _previewHeight: 1.2

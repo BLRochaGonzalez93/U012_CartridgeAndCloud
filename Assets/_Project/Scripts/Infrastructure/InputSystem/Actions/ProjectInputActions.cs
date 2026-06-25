@@ -23,15 +23,19 @@ namespace VRMGames.CartridgeAndCloud.Infrastructure.InputSystem.Actions
         public InputAction OrbitDelta { get; }
         public InputAction OrbitHold { get; }
         public InputAction Zoom { get; }
+        public InputAction TogglePlacementMode { get; }
         public InputAction RotatePlacementCounterClockwise { get; }
         public InputAction RotatePlacementClockwise { get; }
+        public InputAction CancelPlacement { get; }
+        public InputAction RemovePlacement { get; }
 
         private bool _disposed;
 
         public ProjectInputActions()
         {
             Asset =
-                ScriptableObject.CreateInstance<InputActionAsset>();
+                ScriptableObject.CreateInstance<
+                    InputActionAsset>();
 
             UI = new InputActionMap(UiMapName);
 
@@ -57,47 +61,80 @@ namespace VRMGames.CartridgeAndCloud.Infrastructure.InputSystem.Actions
             UiCancel.AddBinding("<Keyboard>/escape");
             UiCancel.AddBinding("<Gamepad>/buttonEast");
 
-            Gameplay = new InputActionMap(GameplayMapName);
+            Gameplay =
+                new InputActionMap(
+                    GameplayMapName);
 
             PointerPosition = Gameplay.AddAction(
                 "PointerPosition",
                 InputActionType.PassThrough);
-            PointerPosition.AddBinding("<Pointer>/position");
+            PointerPosition.AddBinding(
+                "<Pointer>/position");
 
             SetDestination = Gameplay.AddAction(
                 "SetDestination",
                 InputActionType.Button);
-            SetDestination.AddBinding("<Mouse>/leftButton");
+            SetDestination.AddBinding(
+                "<Mouse>/leftButton");
 
             OrbitDelta = Gameplay.AddAction(
                 "OrbitDelta",
                 InputActionType.PassThrough);
-            OrbitDelta.AddBinding("<Pointer>/delta");
+            OrbitDelta.AddBinding(
+                "<Pointer>/delta");
 
             OrbitHold = Gameplay.AddAction(
                 "OrbitHold",
                 InputActionType.Button);
-            OrbitHold.AddBinding("<Mouse>/rightButton");
+            OrbitHold.AddBinding(
+                "<Mouse>/rightButton");
 
             Zoom = Gameplay.AddAction(
                 "Zoom",
                 InputActionType.PassThrough);
-            Zoom.AddBinding("<Mouse>/scroll");
+            Zoom.AddBinding(
+                "<Mouse>/scroll");
+
+            TogglePlacementMode =
+                Gameplay.AddAction(
+                    "TogglePlacementMode",
+                    InputActionType.Button);
+            TogglePlacementMode.AddBinding(
+                "<Keyboard>/b");
 
             RotatePlacementCounterClockwise =
                 Gameplay.AddAction(
                     "RotatePlacementCounterClockwise",
                     InputActionType.Button);
-            RotatePlacementCounterClockwise.AddBinding("<Keyboard>/q");
+            RotatePlacementCounterClockwise
+                .AddBinding("<Keyboard>/q");
 
             RotatePlacementClockwise =
                 Gameplay.AddAction(
                     "RotatePlacementClockwise",
                     InputActionType.Button);
-            RotatePlacementClockwise.AddBinding("<Keyboard>/e");
+            RotatePlacementClockwise
+                .AddBinding("<Keyboard>/e");
+
+            CancelPlacement =
+                Gameplay.AddAction(
+                    "CancelPlacement",
+                    InputActionType.Button);
+            CancelPlacement.AddBinding(
+                "<Keyboard>/escape");
+
+            RemovePlacement =
+                Gameplay.AddAction(
+                    "RemovePlacement",
+                    InputActionType.Button);
+            RemovePlacement.AddBinding(
+                "<Keyboard>/delete");
+            RemovePlacement.AddBinding(
+                "<Keyboard>/backspace");
 
             Asset.AddActionMap(UI);
             Asset.AddActionMap(Gameplay);
+
             DisableAll();
         }
 
@@ -123,7 +160,8 @@ namespace VRMGames.CartridgeAndCloud.Infrastructure.InputSystem.Actions
             }
             else
             {
-                UnityEngine.Object.DestroyImmediate(Asset);
+                UnityEngine.Object.DestroyImmediate(
+                    Asset);
             }
         }
     }

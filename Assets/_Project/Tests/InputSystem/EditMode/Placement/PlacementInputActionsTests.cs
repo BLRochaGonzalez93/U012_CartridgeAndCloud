@@ -13,16 +13,28 @@ namespace VRMGames.CartridgeAndCloud.InputSystem.Tests.EditMode
                 new ProjectInputActions();
 
             Assert.That(
+                actions.TogglePlacementMode.actionMap,
+                Is.SameAs(actions.Gameplay));
+
+            Assert.That(
                 actions.RotatePlacementCounterClockwise.actionMap,
                 Is.SameAs(actions.Gameplay));
 
             Assert.That(
                 actions.RotatePlacementClockwise.actionMap,
                 Is.SameAs(actions.Gameplay));
+
+            Assert.That(
+                actions.CancelPlacement.actionMap,
+                Is.SameAs(actions.Gameplay));
+
+            Assert.That(
+                actions.RemovePlacement.actionMap,
+                Is.SameAs(actions.Gameplay));
         }
 
         [Test]
-        public void PlacementActions_UseQAndEBindings()
+        public void PlacementRotationActions_UseQAndEBindings()
         {
             using ProjectInputActions actions =
                 new ProjectInputActions();
