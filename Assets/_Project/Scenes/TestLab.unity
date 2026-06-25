@@ -813,6 +813,7 @@ MonoBehaviour:
   _placedMaterial: {fileID: 2100000, guid: 73280ea062c7a6940aa81ddf62e17915, type: 2}
   _camera: {fileID: 961739752}
   _removalRaycastDistance: 500
+  _useInitialStoreAccessLayout: 0
 --- !u!1 &1883396450
 GameObject:
   m_ObjectHideFlags: 0

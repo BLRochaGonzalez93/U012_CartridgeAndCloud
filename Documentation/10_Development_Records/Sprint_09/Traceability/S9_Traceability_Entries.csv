@@ -1,0 +1,6 @@
+id,source,implementation,evidence,status
+S9-TR-001,Roadmap Sprint 9,CustomerProfile and registry,S9 tests and asset inspection,PASS
+S9-TR-002,Roadmap arrival,CustomerArrivalClock and spawn queue,S9 tests and runtime validation,PASS
+S9-TR-003,Roadmap navigation,CustomerNavigationPlan and technical agent,S9 tests and manual validation,PASS
+S9-TR-004,Roadmap patience,CustomerInstance patience transitions,S9 tests and manual validation,PASS
+S9-TR-005,Vertical-slice quality,Full regression and build,QA and build records,PASS
