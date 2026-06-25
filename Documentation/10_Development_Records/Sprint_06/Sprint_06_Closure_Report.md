@@ -1,49 +1,54 @@
 # Sprint 06 — Closure Report
 
 **Sprint:** Product & Inventory Core  
-**Status:** PENDING EVIDENCE-GATED CLOSURE  
-**Target version:** `0.0.7`
+**Status:** CLOSED / PASS  
+**Target version:** `0.0.7`  
+**Closure date:** 2026-06-25
 
-## Prepared scope
+## Delivered scope
 
 - Immutable product identities, definitions and registry.
 - Quantities and capacities.
 - Inventory containers and stack snapshots.
-- Add/remove rules.
-- Atomic transfers and unit conservation.
+- Atomic add/remove rules.
+- Atomic transfers and conservation of units.
+- Typed failure results.
 - 60 focused EditMode tests.
-- Target-version record and governance documentation.
 
 ## Deferred scope
 
-- Suppliers, purchase orders, deliveries and receiving.
+- Product and supplier ScriptableObject authoring, delivered in Sprint 7.
 - Displays and restocking.
 - Customers and checkout.
 - Economy and pricing.
-- Persistence and SaveRootV1.
+- Persistence and SaveRootV1 expansion.
 - Scene and UI integration.
 
 ## Automated evidence
 
-- Focused Sprint 6 EditMode: PENDING / expected 60.
-- Full EditMode: PENDING / expected 187.
-- Full PlayMode: PENDING / expected 41.
-- Complete regression: PENDING / expected 228.
+- Focused Sprint 6 EditMode: `60/60 PASS`.
+- First full Sprint 6 run: one obsolete Sprint 5 version assertion mismatch;
+  all Product/Inventory tests passed.
+- Full PlayMode: `41/41 PASS`.
+- Version assertion corrected in Sprint 7.
+- Current project automated baseline: `300/300 PASS`.
 
 ## Manual evidence
 
-PENDING Store, TestLab and scene-flow regression.
+Store, TestLab, movement, camera, placement, access and scene-flow regression:
+PASS.
 
 ## Build evidence
 
-PENDING Windows x64 Development build and external execution.
+- Windows x64 Development build: PASS.
+- External execution and smoke validation: PASS.
 
-## Commits
+## Defects
 
-- Technical implementation: PENDING.
-- Documentation closure: PENDING.
+- Open S0: 0.
+- Open S1: 0.
 
 ## Final decision
 
-PENDING. Sprint 7 must not open until this report is updated to CLOSED / PASS
-with evidence and no open S0/S1 defects.
+**CLOSED / PASS.** The Product & Inventory Core is accepted as the stable
+foundation consumed by Sprint 7 Supplier Orders & Receiving.

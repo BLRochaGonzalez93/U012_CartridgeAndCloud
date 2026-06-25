@@ -1,0 +1,17 @@
+ChangeId,Sprint,SubSprint,Area,Description,Evidence,Status
+CHG-S7-001,7,S7.1,Infrastructure,ProductDefinitionAsset and ProductCatalogAsset,Authoring tests and inspection,PASS
+CHG-S7-002,7,S7.1,Content,Six technical product definitions,Asset inspection,PASS
+CHG-S7-003,7,S7.1,Infrastructure,SupplierDefinitionAsset and SupplierCatalogAsset,Authoring tests and inspection,PASS
+CHG-S7-004,7,S7.1,Content,Two technical suppliers and catalogs,Asset inspection,PASS
+CHG-S7-005,7,S7.2,Domain,Supplier identity and catalog invariants,Supplier tests,PASS
+CHG-S7-006,7,S7.2,Domain,Purchase-order aggregate and lifecycle,Order tests,PASS
+CHG-S7-007,7,S7.2,Application,Draft order creation from supplier terms,Order-service tests,PASS
+CHG-S7-008,7,S7.3,Domain,Delivery and shipment-box aggregate,Delivery tests,PASS
+CHG-S7-009,7,S7.3,Application,Deterministic delivery generation,Delivery tests,PASS
+CHG-S7-010,7,S7.3,Application,Atomic shipment-box receiving,Receiving tests,PASS
+CHG-S7-011,7,S7.3,QA,Duplicate receipt and failure non-mutation coverage,Receiving tests,PASS
+CHG-S7-012,7,S7.4,Versioning,Application target 0.0.8 and inherited test correction,259/259 EditMode PASS,PASS
+CHG-S7-013,7,S7.4,QA,72 focused and 300 full automated regression,Unity Test Runner,PASS
+CHG-S7-014,7,S7.4,Build,Windows x64 Development and external run,Build and external smoke evidence,PASS
+CHG-S7-015,7,S7.4,Governance,Evidence-gated Sprint 7 closure,Closure report,PASS
+CHG-S7-016,7,S7.4,Services,Unity Cloud membership warning accepted as non-blocking,Build services record,PASS

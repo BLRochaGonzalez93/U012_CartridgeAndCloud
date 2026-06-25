@@ -1,15 +1,15 @@
 ChangeId,Sprint,SubSprint,Area,Description,Evidence,Status
-CHG-S6-001,6,S6.1,Domain,Product definition category and tag IDs,Focused EditMode tests,Prepared
-CHG-S6-002,6,S6.1,Domain,Immutable ProductDefinition,Focused EditMode tests,Prepared
-CHG-S6-003,6,S6.1,Domain,Immutable ProductDefinitionRegistry,Focused EditMode tests,Prepared
-CHG-S6-004,6,S6.2,Domain,Non-negative Quantity and InventoryCapacity,Focused EditMode tests,Prepared
-CHG-S6-005,6,S6.2,Domain,InventoryContainerId and container type,Focused EditMode tests,Prepared
-CHG-S6-006,6,S6.2,Domain,One stack per product and deterministic snapshots,Focused EditMode tests,Prepared
-CHG-S6-007,6,S6.2,Domain,Atomic local add and remove results,Focused EditMode tests,Prepared
-CHG-S6-008,6,S6.3,Domain,Atomic InventoryTransferService,Focused EditMode tests,Prepared
-CHG-S6-009,6,S6.3,Domain,Typed transfer failure reasons and state result,Focused EditMode tests,Prepared
-CHG-S6-010,6,S6.3,QA,Unit conservation and failure atomicity coverage,60 new EditMode tests,Prepared
-CHG-S6-011,6,S6.4,Editor,Explicit 0.0.7 version setter and validator,Manual Editor evidence,Prepared
-CHG-S6-012,6,S6.4,QA,Full automated and manual regression,Pending Unity execution,Pending
-CHG-S6-013,6,S6.4,Build,Windows x64 Development build and external run,Pending build evidence,Pending
-CHG-S6-014,6,S6.4,Governance,Sprint 6 closure and baseline handoff,Pending commits,Pending
+CHG-S6-001,6,S6.1,Domain,Product definition category and tag IDs,Focused EditMode tests,PASS
+CHG-S6-002,6,S6.1,Domain,Immutable ProductDefinition,Focused EditMode tests,PASS
+CHG-S6-003,6,S6.1,Domain,Immutable ProductDefinitionRegistry,Focused EditMode tests,PASS
+CHG-S6-004,6,S6.2,Domain,Non-negative Quantity and InventoryCapacity,Focused EditMode tests,PASS
+CHG-S6-005,6,S6.2,Domain,InventoryContainerId and container type,Focused EditMode tests,PASS
+CHG-S6-006,6,S6.2,Domain,One stack per product and deterministic snapshots,Focused EditMode tests,PASS
+CHG-S6-007,6,S6.2,Domain,Atomic local add and remove results,Focused EditMode tests,PASS
+CHG-S6-008,6,S6.3,Domain,Atomic InventoryTransferService,Focused EditMode tests,PASS
+CHG-S6-009,6,S6.3,Domain,Typed transfer failure reasons and state result,Focused EditMode tests,PASS
+CHG-S6-010,6,S6.3,QA,Unit conservation and failure atomicity coverage,60/60 focused EditMode PASS,PASS
+CHG-S6-011,6,S6.4,Versioning,Application target 0.0.7,Player Settings and build,PASS
+CHG-S6-012,6,S6.4,QA,Automated and manual regression,QA execution record,PASS
+CHG-S6-013,6,S6.4,Build,Windows x64 Development build and external run,Developer validation,PASS
+CHG-S6-014,6,S6.4,Governance,Sprint 6 closure and handoff consolidation,Closure documentation,PASS

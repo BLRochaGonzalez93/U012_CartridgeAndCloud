@@ -1,20 +1,35 @@
 # Sprint 06 — Current Status
 
 **Sprint:** Product & Inventory Core  
-**Status:** OPEN / IMPLEMENTATION PACKAGE PREPARED  
-**Target version:** `0.0.7`
+**Target version:** `0.0.7`  
+**Final status:** CLOSED / PASS  
+**Closure date:** 2026-06-25
 
-## Current position
+## Delivered
 
-- Baseline v0.5 reviewed.
-- Sprint 6 charter frozen.
-- Product and inventory code prepared.
-- 60 focused EditMode tests prepared.
-- Unity compilation and execution evidence pending.
-- Full regression pending.
-- Build and external execution pending.
+- Immutable product identifiers, categories, tags and definitions.
+- Deterministic product registry.
+- Non-negative quantities and inventory capacities.
+- Inventory container identities and types.
+- One logical stack per product and container.
+- Atomic add, remove and transfer operations.
+- Typed operational failure results.
+- Conservation-of-units coverage.
+- 60 focused EditMode tests.
 
-## Blocking rule
+## Validation
 
-Do not advance to Sprint 7 Supplier Orders & Receiving until Sprint 6 is
-CLOSED / PASS and the product/inventory invariants have real test evidence.
+- Focused Sprint 6 tests: `60/60 PASS`.
+- Full Sprint 6 execution initially exposed one obsolete Sprint 5 version assertion.
+- The assertion mismatch was isolated to expected version `0.0.6` versus actual
+  version `0.0.7`; it did not represent a functional Product/Inventory defect.
+- Full PlayMode, manual regression, Windows x64 Development build and external
+  execution: PASS.
+- The inherited assertion was formally replaced during Sprint 7 and the current
+  project regression is clean.
+
+## Decision
+
+Sprint 6 is accepted as the pure C# Product & Inventory foundation. Product
+and supplier authoring through ScriptableObjects is intentionally introduced
+in Sprint 7 rather than retrofitted into the Sprint 6 domain.

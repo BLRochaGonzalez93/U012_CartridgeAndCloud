@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a01d5a4e015148f4a20330686475e477, type: 3}
+  m_Name: CC_SupplierCatalog_PixelParcel
+  m_EditorClassIdentifier: 
+  _catalogId: catalog-pixel-parcel
+  _supplier: {fileID: 11400000, guid: 58adf7b912ac4984a21146cb7e7ccc72, type: 2}
+  _productCatalog: {fileID: 11400000, guid: 81c580a2fb544c9d9eccac12c15163bf, type: 2}
+  _entries:
+  - _product: {fileID: 11400000, guid: 5d7be371bd8a4bc48df30a4adc2a1a48, type: 2}
+    _unitCostCents: 1349
+    _unitsPerBox: 4
+    _minimumBoxes: 1
+    _maximumBoxes: 10
+  - _product: {fileID: 11400000, guid: b43b3ab75c6e45c69fbb1fb70efa9bc8, type: 2}
+    _unitCostCents: 1099
+    _unitsPerBox: 4
+    _minimumBoxes: 1
+    _maximumBoxes: 10
+  - _product: {fileID: 11400000, guid: b9f100846f074d75ba09c52b44f28b3a, type: 2}
+    _unitCostCents: 1599
+    _unitsPerBox: 3
+    _minimumBoxes: 1
+    _maximumBoxes: 8
