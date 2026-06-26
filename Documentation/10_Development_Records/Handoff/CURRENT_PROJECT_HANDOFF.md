@@ -1,28 +1,27 @@
 # Cartridge & Cloud - Current Project Handoff
 
 **Fecha:** 2026-06-26  
-**Uso:** pegar o adjuntar al iniciar un nuevo chat de desarrollo  
 **Repositorio:** `BLRochaGonzalez93/U012_CartridgeAndCloud`  
 **Rama objetivo:** `main`  
-**Versión:** `0.0.11`  
-**Commit de cierre Sprint 8:** `409b7fe8653aa12ece7d484eb414172e1ed38f70`  
+**Versión:** `0.0.12`  
 **Commit de cierre Sprint 9:** `b8ddf15356c73cd7d0c88a32805f0c6ee4058422`  
-**Commit de cierre Sprint 10:** este commit; registrar SHA después de publicarlo
+**Commit de cierre Sprint 10:** `f91c8fda6c1ff1ff9e811717b05fc8fa427707e6`  
+**Commit de cierre Sprint 11:** este commit; registrar SHA después de publicarlo
 
-## Fuente oficial y registros operativos
+## Fuente oficial
 
 - `Documentation/00_Official_Baseline/v0.5` permanece histórica e inmutable.
-- El estado posterior está en `Documentation/10_Development_Records/Sprint_06`
-  a `Sprint_10`.
+- El estado operativo posterior se conserva en
+  `Documentation/10_Development_Records/Sprint_06` a `Sprint_11`.
 - No modificar retrospectivamente la baseline v0.5.
 
 ## Estado
 
-Sprints 0–10 `CLOSED / PASS`.
+Sprints 0–11 `CLOSED / PASS`.
 
-- EditMode: `508/508 PASS`.
+- EditMode: `613/613 PASS`.
 - PlayMode: `41/41 PASS`.
-- Total automatizado: `549/549 PASS`.
+- Total automatizado: `654/654 PASS`.
 - Regresión manual: PASS.
 - Windows x64 Development build: PASS.
 - Ejecución externa: PASS.
@@ -35,13 +34,12 @@ Sprints 0–10 `CLOSED / PASS`.
 - Bootstrap, MainMenu, Store, TestLab y ApplicationRoot.
 - Save skeleton.
 - Movimiento y cámara.
-- Grid, placement, ocupación y acceso.
+- Grid, placement, ocupación, retirada y acceso.
 - Store 10x15 m.
 
 ### Sprint 6 — Product & Inventory Core
 
-- Productos, cantidades, contenedores y transferencias.
-- Invariantes y conservación de unidades.
+- Productos, cantidades, contenedores, transferencias e invariantes.
 
 ### Sprint 7 — Supplier Orders & Receiving
 
@@ -57,71 +55,72 @@ Sprints 0–10 `CLOSED / PASS`.
 
 ### Sprint 10 — Shopping & Reservations
 
-- ShoppingIntent y política autorable.
-- Disponibilidad on-hand/reserved/available.
-- Búsqueda determinista por preferencias.
-- Reservas atómicas con procedencia.
-- Prevención de sobreventa.
-- Carrito respaldado por reservas.
-- CustomerShoppingSession.
-- Liberación por abandono.
-- Consistencia y conservación.
-- ShoppingTechnicalScenarioRunner.
-- 79 tests específicos.
+- Intents, búsqueda, disponibilidad, reservas, carrito y abandono.
+
+### Sprint 11 — Queue & Checkout
+
+- Cola FIFO y posiciones.
+- Entradas Waiting, Called, Processing, Completed y Cancelled.
+- Estación Closed, Available y Busy.
+- Validación completa de carrito, reservas, display y stock.
+- Consumo de stock físico y reservas.
+- Carrito vacío y sesión CheckedOut.
+- Prevención de doble checkout.
+- Cancelación segura y rollback.
+- Registro técnico de transacción.
+- CheckoutTechnicalScenarioRunner.
+- 105 tests específicos.
 
 ## Invariantes vigentes
 
-- Inventario físico autoritativo en DisplayInstance.Inventory.
-- `on-hand = available + reserved`.
-- El carrito no duplica inventario.
-- Cada línea del carrito requiere una reserva activa coincidente.
-- El abandono libera reservas.
-- El consumo definitivo se realizará en checkout.
+- El inventario físico es autoritativo.
+- Las reservas activas respaldan el carrito.
+- Solo la primera entrada avanza en la cola.
+- Una estación procesa una sola entrada.
+- Un carrito completado no puede procesarse otra vez.
+- Checkout consume stock y reservas exactamente una vez.
+- Los fallos de validación no mutan el estado.
 
 ## Límites actuales
 
-- No existe cola de checkout.
-- No existe interacción de caja.
-- Las reservas no se consumen definitivamente.
-- No existe transacción económica final.
-- No existen impuestos, ledger ni reportes.
-- No existe ciclo de día completo.
-- El estado integral no está en SaveRootV1.
-- UI, modelos y animaciones finales siguen diferidos.
+- No existe ciclo de día.
+- No existe apertura o cierre operativo de tienda.
+- No existen precios, ingresos, impuestos o ledger.
+- No existen reportes de fin de día.
+- No existe persistencia integral.
+- UI, audio y arte finales siguen diferidos.
 
 ## Próximo trabajo
 
-Abrir **Sprint 11 — Queue & Checkout**.
+Abrir **Sprint 12 — Day Cycle & Store Closure**.
 
 Debe cubrir:
 
-- identificadores y estados de cola;
-- entrada y salida determinista de clientes con carrito;
-- orden FIFO y posición de cola;
-- estación de checkout técnica;
-- interacción mínima de procesamiento;
-- validación de carrito y reservas activas;
-- consumo atómico de reservas y stock del display;
-- prevención de doble checkout;
-- resultado de transacción sin introducir todavía economía completa;
-- liberación segura ante cancelación o fallo;
-- integración con CustomerShoppingSession;
+- reloj lógico del día;
+- estados BeforeOpen, Open, Closing y Closed;
+- apertura y cierre controlados;
+- bloqueo de nuevos spawns durante Closing;
+- drenaje de clientes activos;
+- cierre seguro de cola y checkout;
+- resolución de reservas y carritos pendientes;
+- condiciones deterministas de fin de día;
+- resumen técnico de actividad sin economía completa;
+- integración con Store, customers, shopping y checkout;
 - tests, validación manual, regresión y build externa.
 
 No introducir todavía:
 
-- ledger económico completo;
-- impuestos o reportes;
-- ciclo de día;
+- precios e ingresos definitivos;
+- impuestos;
+- ledger y reportes económicos;
 - persistencia integral;
 - UI, audio o arte definitivos.
 
-## Reglas de trabajo
+## Reglas
 
-1. Congelar charter y acceptance criteria antes de código.
+1. Congelar charter y acceptance criteria.
 2. Preservar `.meta` y GUIDs.
-3. Mantener Domain/Application sin dependencias de escenas.
-4. Usar ScriptableObjects para autoría, no como dominio.
-5. Mantener inventario, reservas y transacción atómicos.
-6. No declarar PASS sin evidencia completa.
-7. Cerrar cada sprint con QA, trazabilidad, closure report y handoff.
+3. Mantener Domain/Application independientes de escenas.
+4. Mantener operaciones atómicas.
+5. No declarar PASS sin evidencia completa.
+6. Cerrar cada sprint con QA, trazabilidad, cierre y handoff.

@@ -61,6 +61,14 @@ namespace VRMGames.CartridgeAndCloud.Domain.Shopping
             State = ShoppingReservationState.Consumed;
             return true;
         }
+
+        public bool TryRollbackConsumption()
+        {
+            if (State != ShoppingReservationState.Consumed)
+                return false;
+            State = ShoppingReservationState.Active;
+            return true;
+        }
     }
 
     public sealed class ShoppingReservationRegistry

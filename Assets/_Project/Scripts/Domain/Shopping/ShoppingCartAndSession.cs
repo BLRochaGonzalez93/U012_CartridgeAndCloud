@@ -136,7 +136,8 @@ namespace VRMGames.CartridgeAndCloud.Domain.Shopping
         Searching = 0,
         HoldingReservations = 1,
         ReadyForCheckout = 2,
-        Abandoned = 3
+        Abandoned = 3,
+        CheckedOut = 4
     }
 
     public sealed class CustomerShoppingSession
@@ -180,8 +181,19 @@ namespace VRMGames.CartridgeAndCloud.Domain.Shopping
 
         public bool TryAbandon()
         {
-            if (State == CustomerShoppingState.Abandoned) return false;
+            if (State == CustomerShoppingState.Abandoned ||
+                State == CustomerShoppingState.CheckedOut)
+                return false;
             State = CustomerShoppingState.Abandoned;
+            return true;
+        }
+
+        public bool TryMarkCheckedOut()
+        {
+            if (State != CustomerShoppingState.ReadyForCheckout ||
+                !Cart.IsEmpty)
+                return false;
+            State = CustomerShoppingState.CheckedOut;
             return true;
         }
     }

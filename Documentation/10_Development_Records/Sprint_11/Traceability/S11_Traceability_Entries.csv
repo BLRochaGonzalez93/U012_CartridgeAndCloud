@@ -1,0 +1,7 @@
+id,source,implementation,evidence,status
+S11-TR-001,Roadmap queue,CheckoutQueue and QueueService,Queue tests,PASS
+S11-TR-002,Roadmap interaction,CheckoutStation and authoring,Station tests,PASS
+S11-TR-003,Roadmap transaction,CheckoutService and transaction registry,Checkout tests,PASS
+S11-TR-004,S10 reservations,Reservation consumption and rollback,Integration tests,PASS
+S11-TR-005,S10 cart,Cart empty and session CheckedOut,Success tests,PASS
+S11-TR-006,Vertical slice quality,Regression and build,QA records,PASS
