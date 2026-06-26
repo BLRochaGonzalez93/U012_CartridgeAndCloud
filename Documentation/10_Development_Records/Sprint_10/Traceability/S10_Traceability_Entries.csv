@@ -1,0 +1,7 @@
+id,source,implementation,evidence,status
+S10-TR-001,Roadmap shopping intent,ShoppingIntent and factory,Shopping tests,PASS
+S10-TR-002,Roadmap evaluation,ShoppingSearchService,Search tests,PASS
+S10-TR-003,Roadmap reservation,ShoppingReservationService,Reservation tests,PASS
+S10-TR-004,Roadmap cart,ShoppingCart and session,Cart tests,PASS
+S10-TR-005,Roadmap abandonment,ShoppingCartService.Abandon,Tests and technical scenario,PASS
+S10-TR-006,Vertical slice quality,Regression and build,QA and build records,PASS

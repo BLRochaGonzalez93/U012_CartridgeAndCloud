@@ -1,140 +1,127 @@
 # Cartridge & Cloud - Current Project Handoff
 
-**Fecha:** 2026-06-25  
+**Fecha:** 2026-06-26  
 **Uso:** pegar o adjuntar al iniciar un nuevo chat de desarrollo  
 **Repositorio:** `BLRochaGonzalez93/U012_CartridgeAndCloud`  
 **Rama objetivo:** `main`  
-**Versión:** `0.0.10`  
-**Commit de cierre Sprint 7:** `b997377eae720e960c02ee5dce53da8b37f66b19`  
+**Versión:** `0.0.11`  
 **Commit de cierre Sprint 8:** `409b7fe8653aa12ece7d484eb414172e1ed38f70`  
-**Commit de cierre Sprint 9:** este commit; registrar SHA después de publicarlo
+**Commit de cierre Sprint 9:** `b8ddf15356c73cd7d0c88a32805f0c6ee4058422`  
+**Commit de cierre Sprint 10:** este commit; registrar SHA después de publicarlo
 
 ## Fuente oficial y registros operativos
 
-- La baseline publicada `Documentation/00_Official_Baseline/v0.5` permanece
-  histórica e inmutable.
-- El estado operativo posterior está documentado en
-  `Documentation/10_Development_Records/Sprint_06` a `Sprint_09`.
-- No modificar retrospectivamente la baseline v0.5; publicar una baseline nueva
-  únicamente mediante su gate documental específico.
+- `Documentation/00_Official_Baseline/v0.5` permanece histórica e inmutable.
+- El estado posterior está en `Documentation/10_Development_Records/Sprint_06`
+  a `Sprint_10`.
+- No modificar retrospectivamente la baseline v0.5.
 
 ## Estado
 
-Sprints 0–9 `CLOSED / PASS`.
+Sprints 0–10 `CLOSED / PASS`.
 
-- EditMode: `429/429 PASS`.
+- EditMode: `508/508 PASS`.
 - PlayMode: `41/41 PASS`.
-- Baseline automatizada: `470/470 PASS`.
+- Total automatizado: `549/549 PASS`.
 - Regresión manual: PASS.
 - Windows x64 Development build: PASS.
 - Ejecución externa: PASS.
-- Defectos S0/S1 abiertos: ninguno comunicado.
+- Defectos S0/S1: ninguno comunicado.
 
 ## Implementado
 
-### Fundación previa
+### Fundación y tienda
 
 - Bootstrap, MainMenu, Store, TestLab y ApplicationRoot.
-- Scene flow y contextos UI/Gameplay.
-- Save skeleton mínimo.
-- Click-to-move, cámara orbital y zoom.
-- Grid, placement, ocupación, retirada y validación de acceso.
-- Store 10x15 m con baseline vacía reproducible.
+- Save skeleton.
+- Movimiento y cámara.
+- Grid, placement, ocupación y acceso.
+- Store 10x15 m.
 
 ### Sprint 6 — Product & Inventory Core
 
-- Definiciones e identificadores de producto.
-- Registro determinista.
-- Cantidades, capacidades, stacks y contenedores.
-- Mutaciones y transferencias atómicas.
-- Conservación de unidades.
+- Productos, cantidades, contenedores y transferencias.
+- Invariantes y conservación de unidades.
 
 ### Sprint 7 — Supplier Orders & Receiving
 
-- Autoría de productos, catálogos y proveedores.
-- Pedidos, líneas, estados y totales.
-- Entregas y cajas deterministas.
-- Recepción atómica hacia inventario.
-- Prevención de recepción duplicada.
+- Catálogo, proveedores, pedidos, entregas, cajas y recepción.
 
 ### Sprint 8 — Displays & Restocking
 
-- Definiciones, catálogos e instancias de display.
-- Un producto asignado por display.
-- Capacidad lógica y límite visible.
-- Reposición desde Storage o Transit.
-- Devolución de stock y limpieza de asignación.
-- RestockTask y runtime authoring técnico.
+- Displays, asignación, capacidad, stock y reposición.
 
 ### Sprint 9 — Customer Profiles & Spawning
 
-- CustomerProfile, IDs, registros y catálogo autorable.
-- Cuatro perfiles técnicos y spawn settings.
-- Selección ponderada reproducible.
-- Cola FIFO, reloj de llegada y límite de población.
-- CustomerInstance y ciclo de vida inicial.
-- Planes técnicos Entry → Browse* → Exit.
-- Paciencia y salida automática.
-- CustomerSpawnAreaAuthoring, CustomerTechnicalSpawner y cápsulas de fallback.
-- Sin dependencia de modelos o animaciones finales.
+- Perfiles, llegada, población, navegación técnica y paciencia.
 
-## Incidencias conocidas resueltas
+### Sprint 10 — Shopping & Reservations
 
-- Sprint 8: incompatibilidad de `Assert.Multiple` con la versión de NUnit del
-  proyecto, corregida sin impacto en producción.
-- No se comunicaron incidencias bloqueantes durante Sprint 9.
+- ShoppingIntent y política autorable.
+- Disponibilidad on-hand/reserved/available.
+- Búsqueda determinista por preferencias.
+- Reservas atómicas con procedencia.
+- Prevención de sobreventa.
+- Carrito respaldado por reservas.
+- CustomerShoppingSession.
+- Liberación por abandono.
+- Consistencia y conservación.
+- ShoppingTechnicalScenarioRunner.
+- 79 tests específicos.
+
+## Invariantes vigentes
+
+- Inventario físico autoritativo en DisplayInstance.Inventory.
+- `on-hand = available + reserved`.
+- El carrito no duplica inventario.
+- Cada línea del carrito requiere una reserva activa coincidente.
+- El abandono libera reservas.
+- El consumo definitivo se realizará en checkout.
 
 ## Límites actuales
 
-- Los clientes todavía no buscan ni evalúan productos concretos.
-- No existen reservas de unidades ni carrito.
-- No existe abandono de compra con liberación de reservas.
-- No existe cola de checkout ni transacción de venta.
-- La navegación de clientes es técnica, no NavMesh final.
-- Los modelos, animaciones y prefabs finales siguen diferidos.
-- El estado completo todavía no está integrado en SaveRootV1.
-- No existe economía completa ni ledger de ventas.
-
-## Unity Services
-
-Existe un aviso conocido de membresía del proyecto de Unity Cloud durante
-algunas builds. Las builds se han continuado sin Unity Services y han pasado.
-Ningún sistema vigente depende de Unity Gaming Services.
+- No existe cola de checkout.
+- No existe interacción de caja.
+- Las reservas no se consumen definitivamente.
+- No existe transacción económica final.
+- No existen impuestos, ledger ni reportes.
+- No existe ciclo de día completo.
+- El estado integral no está en SaveRootV1.
+- UI, modelos y animaciones finales siguen diferidos.
 
 ## Próximo trabajo
 
-Abrir **Sprint 10 — Shopping & Reservations**.
+Abrir **Sprint 11 — Queue & Checkout**.
 
-Debe cubrir, como mínimo:
+Debe cubrir:
 
-- `ShoppingIntent` y criterios deterministas de búsqueda;
-- evaluación de productos disponibles en displays;
-- selección de producto y display objetivo;
-- reserva atómica de unidades para evitar sobreventa;
-- carrito mínimo del cliente;
-- liberación de reservas por abandono, fallo o salida;
-- conservación de unidades entre display, reserva y carrito;
-- integración con CustomerInstance sin introducir todavía cola o checkout;
-- pruebas EditMode prioritarias, validación manual y regresión completa.
+- identificadores y estados de cola;
+- entrada y salida determinista de clientes con carrito;
+- orden FIFO y posición de cola;
+- estación de checkout técnica;
+- interacción mínima de procesamiento;
+- validación de carrito y reservas activas;
+- consumo atómico de reservas y stock del display;
+- prevención de doble checkout;
+- resultado de transacción sin introducir todavía economía completa;
+- liberación segura ante cancelación o fallo;
+- integración con CustomerShoppingSession;
+- tests, validación manual, regresión y build externa.
 
 No introducir todavía:
 
-- cola de caja;
-- interacción de checkout;
-- transacción económica final;
-- impuestos, ledger o reportes;
-- ciclo de día completo;
+- ledger económico completo;
+- impuestos o reportes;
+- ciclo de día;
 - persistencia integral;
-- UI o arte definitivos.
+- UI, audio o arte definitivos.
 
 ## Reglas de trabajo
 
-1. Leer handoff, Guía Maestra, Roadmap, TDD, Modelo de Datos y QA Plan.
-2. Congelar charter y acceptance criteria antes de código.
-3. Preservar `.meta` y GUIDs existentes.
-4. Mantener Domain/Application independientes de escenas y MonoBehaviour.
-5. Usar ScriptableObjects como autoría, no como sustituto del dominio.
-6. Mantener inventario y reservas como estado lógico autoritativo.
-7. Exigir compilación, Test Runner, regresión manual y build externa.
-8. No declarar PASS sin evidencia completa.
-9. Cerrar cada sprint con QA, trazabilidad, closure report y handoff.
+1. Congelar charter y acceptance criteria antes de código.
+2. Preservar `.meta` y GUIDs.
+3. Mantener Domain/Application sin dependencias de escenas.
+4. Usar ScriptableObjects para autoría, no como dominio.
+5. Mantener inventario, reservas y transacción atómicos.
+6. No declarar PASS sin evidencia completa.
+7. Cerrar cada sprint con QA, trazabilidad, closure report y handoff.

@@ -12,20 +12,11 @@ namespace VRMGames.CartridgeAndCloud.InputSystem.Tests.EditMode
         [Test]
         public void Actions_DefineExpectedMapsAndActions()
         {
-            using ProjectInputActions actions =
-                new ProjectInputActions();
+            using ProjectInputActions actions = new ProjectInputActions();
 
             CollectionAssert.AreEquivalent(
-                new[]
-                {
-                    "Point",
-                    "Click",
-                    "Submit",
-                    "Cancel"
-                },
-                actions.UI.actions
-                    .Select(action => action.name)
-                    .ToArray());
+                new[] { "Point", "Click", "Submit", "Cancel" },
+                actions.UI.actions.Select(action => action.name).ToArray());
 
             CollectionAssert.AreEquivalent(
                 new[]
@@ -41,24 +32,15 @@ namespace VRMGames.CartridgeAndCloud.InputSystem.Tests.EditMode
                     "CancelPlacement",
                     "RemovePlacement"
                 },
-                actions.Gameplay.actions
-                    .Select(action => action.name)
-                    .ToArray());
+                actions.Gameplay.actions.Select(action => action.name).ToArray());
         }
 
         [Test]
         public void Actions_StartWithBothMapsDisabled()
         {
-            using ProjectInputActions actions =
-                new ProjectInputActions();
-
-            Assert.That(
-                actions.UI.enabled,
-                Is.False);
-
-            Assert.That(
-                actions.Gameplay.enabled,
-                Is.False);
+            using ProjectInputActions actions = new ProjectInputActions();
+            Assert.That(actions.UI.enabled, Is.False);
+            Assert.That(actions.Gameplay.enabled, Is.False);
         }
 
         [Test]
@@ -91,58 +73,33 @@ namespace VRMGames.CartridgeAndCloud.InputSystem.Tests.EditMode
         [Test]
         public void Router_ContextChange_SwitchesMapsExclusively()
         {
-            GameObject routerObject =
-                new GameObject("InputRouterTest");
-
+            GameObject routerObject = new GameObject("InputRouterTest");
             try
             {
-                InputContextService service =
-                    new InputContextService();
-
+                InputContextService service = new InputContextService();
                 InputActionContextRouter router =
-                    routerObject.AddComponent<
-                        InputActionContextRouter>();
-
-                router.Configure(
-                    allowStandaloneGameplay: false);
-
+                    routerObject.AddComponent<InputActionContextRouter>();
+                router.Configure(allowStandaloneGameplay: false);
                 router.Initialize(service);
 
-                service.SetContext(
-                    InputContextId.UI);
+                service.SetContext(InputContextId.UI);
+                Assert.That(router.IsUiMapEnabled, Is.True);
+                Assert.That(router.IsGameplayMapEnabled, Is.False);
 
-                Assert.That(
-                    router.IsUiMapEnabled,
-                    Is.True);
-
-                Assert.That(
-                    router.IsGameplayMapEnabled,
-                    Is.False);
-
-                service.SetContext(
-                    InputContextId.Gameplay);
-
-                Assert.That(
-                    router.IsUiMapEnabled,
-                    Is.False);
-
-                Assert.That(
-                    router.IsGameplayMapEnabled,
-                    Is.True);
+                service.SetContext(InputContextId.Gameplay);
+                Assert.That(router.IsUiMapEnabled, Is.False);
+                Assert.That(router.IsGameplayMapEnabled, Is.True);
             }
             finally
             {
-                Object.DestroyImmediate(
-                    routerObject);
+                Object.DestroyImmediate(routerObject);
             }
         }
 
         [Test]
-        public void ProjectVersion_IsSprintNineTarget()
+        public void ProjectVersion_IsSprintTenTarget()
         {
-            Assert.That(
-                PlayerSettings.bundleVersion,
-                Is.EqualTo("0.0.10"));
+            Assert.That(PlayerSettings.bundleVersion, Is.EqualTo("0.0.11"));
         }
 
         private static void TestRouterContext(
@@ -150,41 +107,26 @@ namespace VRMGames.CartridgeAndCloud.InputSystem.Tests.EditMode
             bool expectedUi,
             bool expectedGameplay)
         {
-            GameObject routerObject =
-                new GameObject("InputRouterTest");
-
+            GameObject routerObject = new GameObject("InputRouterTest");
             try
             {
-                InputContextService service =
-                    new InputContextService();
-
+                InputContextService service = new InputContextService();
                 service.SetContext(context);
 
                 InputActionContextRouter router =
-                    routerObject.AddComponent<
-                        InputActionContextRouter>();
-
-                router.Configure(
-                    allowStandaloneGameplay: false);
-
+                    routerObject.AddComponent<InputActionContextRouter>();
+                router.Configure(allowStandaloneGameplay: false);
                 router.Initialize(service);
 
-                Assert.That(
-                    router.IsUiMapEnabled,
-                    Is.EqualTo(expectedUi));
-
+                Assert.That(router.IsUiMapEnabled, Is.EqualTo(expectedUi));
                 Assert.That(
                     router.IsGameplayMapEnabled,
                     Is.EqualTo(expectedGameplay));
-
-                Assert.That(
-                    router.EffectiveContext,
-                    Is.EqualTo(context));
+                Assert.That(router.EffectiveContext, Is.EqualTo(context));
             }
             finally
             {
-                Object.DestroyImmediate(
-                    routerObject);
+                Object.DestroyImmediate(routerObject);
             }
         }
     }
