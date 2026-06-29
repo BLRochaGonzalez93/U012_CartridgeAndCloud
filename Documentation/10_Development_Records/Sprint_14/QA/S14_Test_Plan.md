@@ -1,0 +1,21 @@
+# S14 Test Plan
+
+- validación de records;
+- referencias cruzadas;
+- estados Closed y Busy;
+- schema y slot;
+- checksum y timestamp;
+- round-trip JSON;
+- generaciones;
+- escritura temporal;
+- slots aislados;
+- backup persistente;
+- corrupción y recuperación;
+- primario reparado;
+- primario y backup corruptos;
+- compatibilidad schema v1;
+- captura y restauración en dos fases;
+- builder GameSession;
+- asset y escenario técnico;
+- regresión S0–S13;
+- build externa.
