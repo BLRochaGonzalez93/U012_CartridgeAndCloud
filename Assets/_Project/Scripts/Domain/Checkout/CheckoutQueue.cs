@@ -18,11 +18,8 @@ namespace VRMGames.CartridgeAndCloud.Domain.Checkout
     public sealed class CheckoutQueueEntry
     {
         public CheckoutQueueEntryId Id { get; }
-
         public CustomerInstanceId CustomerId { get; }
-
         public ShoppingCartId CartId { get; }
-
         public CheckoutQueueEntryState State { get; private set; }
 
         public bool IsActive =>
@@ -36,18 +33,13 @@ namespace VRMGames.CartridgeAndCloud.Domain.Checkout
             ShoppingCartId cartId)
         {
             if (string.IsNullOrWhiteSpace(customerId.Value))
-            {
                 throw new ArgumentException(
                     "Customer ID must be initialized.",
                     nameof(customerId));
-            }
-
             if (string.IsNullOrWhiteSpace(cartId.Value))
-            {
                 throw new ArgumentException(
                     "Cart ID must be initialized.",
                     nameof(cartId));
-            }
 
             Id = id;
             CustomerId = customerId;
@@ -58,10 +50,7 @@ namespace VRMGames.CartridgeAndCloud.Domain.Checkout
         public bool TryCall()
         {
             if (State != CheckoutQueueEntryState.Waiting)
-            {
                 return false;
-            }
-
             State = CheckoutQueueEntryState.Called;
             return true;
         }
@@ -69,10 +58,7 @@ namespace VRMGames.CartridgeAndCloud.Domain.Checkout
         public bool TryBeginProcessing()
         {
             if (State != CheckoutQueueEntryState.Called)
-            {
                 return false;
-            }
-
             State = CheckoutQueueEntryState.Processing;
             return true;
         }
@@ -80,10 +66,7 @@ namespace VRMGames.CartridgeAndCloud.Domain.Checkout
         public bool TryComplete()
         {
             if (State != CheckoutQueueEntryState.Processing)
-            {
                 return false;
-            }
-
             State = CheckoutQueueEntryState.Completed;
             return true;
         }
@@ -92,10 +75,7 @@ namespace VRMGames.CartridgeAndCloud.Domain.Checkout
         {
             if (State != CheckoutQueueEntryState.Waiting &&
                 State != CheckoutQueueEntryState.Called)
-            {
                 return false;
-            }
-
             State = CheckoutQueueEntryState.Cancelled;
             return true;
         }
@@ -112,17 +92,15 @@ namespace VRMGames.CartridgeAndCloud.Domain.Checkout
         CurrentEntryBusy = 6,
         EntryNotFound = 7,
         EntryNotAtFront = 8,
-        InvalidEntryState = 9
+        InvalidEntryState = 9,
+        QueueSealed = 10
     }
 
     public sealed class CheckoutQueueResult
     {
         public bool Succeeded { get; }
-
         public CheckoutQueueFailureReason FailureReason { get; }
-
         public CheckoutQueueEntry Entry { get; }
-
         public int Position { get; }
 
         private CheckoutQueueResult(
@@ -168,12 +146,12 @@ namespace VRMGames.CartridgeAndCloud.Domain.Checkout
         private readonly Dictionary<
             CheckoutQueueEntryId,
             CheckoutQueueEntry> _allById;
+        private bool _acceptingEntries;
 
         public int Capacity => _capacity;
-
         public int ActiveCount => _active.Count;
-
         public bool IsEmpty => _active.Count == 0;
+        public bool IsAcceptingEntries => _acceptingEntries;
 
         public CheckoutQueueEntry CurrentEntry =>
             _active.Count == 0 ? null : _active[0];
@@ -185,10 +163,8 @@ namespace VRMGames.CartridgeAndCloud.Domain.Checkout
         public CheckoutQueue(int capacity)
         {
             if (capacity <= 0)
-            {
                 throw new ArgumentOutOfRangeException(
                     nameof(capacity));
-            }
 
             _capacity = capacity;
             _active = new List<CheckoutQueueEntry>();
@@ -196,14 +172,28 @@ namespace VRMGames.CartridgeAndCloud.Domain.Checkout
                 new Dictionary<
                     CheckoutQueueEntryId,
                     CheckoutQueueEntry>();
+            _acceptingEntries = true;
+        }
+
+        public bool TrySeal()
+        {
+            if (!_acceptingEntries)
+                return false;
+
+            _acceptingEntries = false;
+            return true;
         }
 
         public CheckoutQueueResult TryEnqueue(
             CheckoutQueueEntry entry)
         {
             if (entry == null)
-            {
                 throw new ArgumentNullException(nameof(entry));
+
+            if (!_acceptingEntries)
+            {
+                return CheckoutQueueResult.Failure(
+                    CheckoutQueueFailureReason.QueueSealed);
             }
 
             if (_active.Count >= _capacity)
@@ -248,9 +238,7 @@ namespace VRMGames.CartridgeAndCloud.Domain.Checkout
             for (int index = 0; index < _active.Count; index++)
             {
                 if (_active[index].Id == entryId)
-                {
                     return index + 1;
-                }
             }
 
             return 0;
@@ -346,9 +334,7 @@ namespace VRMGames.CartridgeAndCloud.Domain.Checkout
             {
                 CheckoutQueueEntry entry = _active[index];
                 if (entry.Id != entryId)
-                {
                     continue;
-                }
 
                 int previousPosition = index + 1;
                 if (!entry.TryCancel())

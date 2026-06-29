@@ -23,6 +23,9 @@ namespace VRMGames.CartridgeAndCloud.Infrastructure.Customers
         [Min(0)]
         private int _browseDwellSeconds = 2;
 
+        [SerializeField]
+        private bool _spawningEnabled = true;
+
         private CustomerProfileRegistry _profiles;
         private CustomerInstanceRegistry _instances;
         private CustomerSpawnQueue _queue;
@@ -38,14 +41,15 @@ namespace VRMGames.CartridgeAndCloud.Infrastructure.Customers
 
         public bool IsInitialized => _spawnService != null;
 
+        public bool SpawningEnabled => _spawningEnabled;
+
         public void Initialize()
         {
             if (IsInitialized)
-            {
                 return;
-            }
 
-            if (_profileCatalog == null || _spawnSettings == null ||
+            if (_profileCatalog == null ||
+                _spawnSettings == null ||
                 _spawnArea == null)
             {
                 throw new InvalidOperationException(
@@ -66,27 +70,30 @@ namespace VRMGames.CartridgeAndCloud.Infrastructure.Customers
 
         public void Tick(float deltaTime)
         {
-            if (deltaTime < 0f || float.IsNaN(deltaTime) ||
+            if (deltaTime < 0f ||
+                float.IsNaN(deltaTime) ||
                 float.IsInfinity(deltaTime))
             {
-                throw new ArgumentOutOfRangeException(nameof(deltaTime));
+                throw new ArgumentOutOfRangeException(
+                    nameof(deltaTime));
             }
 
             if (!IsInitialized)
-            {
                 Initialize();
-            }
+
+            if (!_spawningEnabled)
+                return;
 
             _secondAccumulator += deltaTime;
-            int wholeSeconds = Mathf.FloorToInt(_secondAccumulator);
+            int wholeSeconds =
+                Mathf.FloorToInt(_secondAccumulator);
             if (wholeSeconds <= 0)
-            {
                 return;
-            }
 
             _secondAccumulator -= wholeSeconds;
             int due = _clock.Advance(wholeSeconds);
-            for (int i = 0; i < due; i++)
+
+            for (int index = 0; index < due; index++)
             {
                 QueueNextRequest();
                 SpawnQueuedCustomer();
@@ -105,7 +112,18 @@ namespace VRMGames.CartridgeAndCloud.Infrastructure.Customers
             _spawnArea = spawnArea;
             _autoRun = autoRun;
             _browseDwellSeconds = browseDwellSeconds;
+            _spawningEnabled = true;
             ClearRuntimeState();
+        }
+
+        public void SetSpawningEnabled(bool enabled)
+        {
+            _spawningEnabled = enabled;
+
+            if (!enabled)
+            {
+                _secondAccumulator = 0f;
+            }
         }
 
         private void Update()
@@ -118,19 +136,25 @@ namespace VRMGames.CartridgeAndCloud.Infrastructure.Customers
 
         private void QueueNextRequest()
         {
-            int roll = _sequence % _profiles.TotalSpawnWeight;
-            CustomerProfile profile = _selector.SelectByRoll(roll);
+            int roll =
+                _sequence % _profiles.TotalSpawnWeight;
+            CustomerProfile profile =
+                _selector.SelectByRoll(roll);
             CustomerNavigationPlan plan =
                 _spawnArea.BuildNavigationPlan(
                     profile.BrowseStopCount,
                     _browseDwellSeconds);
 
             string suffix = _sequence.ToString("D4");
-            CustomerSpawnRequest request = new CustomerSpawnRequest(
-                new CustomerSpawnRequestId("spawn-request-" + suffix),
-                new CustomerInstanceId("customer-" + suffix),
-                profile.Id,
-                plan);
+            CustomerSpawnRequest request =
+                new CustomerSpawnRequest(
+                    new CustomerSpawnRequestId(
+                        "spawn-request-" + suffix),
+                    new CustomerInstanceId(
+                        "customer-" + suffix),
+                    profile.Id,
+                    plan);
+
             _sequence++;
             _queue.TryEnqueue(request);
         }
@@ -138,24 +162,31 @@ namespace VRMGames.CartridgeAndCloud.Infrastructure.Customers
         private void SpawnQueuedCustomer()
         {
             CustomerSpawnResult result =
-                _spawnService.TrySpawnNext(_queue, _policy);
+                _spawnService.TrySpawnNext(
+                    _queue,
+                    _policy);
+
             if (!result.Succeeded)
-            {
                 return;
-            }
 
             CustomerProfile profile =
-                _profiles.Get(result.Customer.ProfileId);
+                _profiles.Get(
+                    result.Customer.ProfileId);
             CustomerProfileAsset authoringProfile =
                 FindProfileAsset(profile.Id);
-            GameObject instance = CreateTechnicalView(authoringProfile);
-            instance.transform.position = _spawnArea.SpawnPoint.position;
+            GameObject instance =
+                CreateTechnicalView(authoringProfile);
+            instance.transform.position =
+                _spawnArea.SpawnPoint.position;
 
             CustomerTechnicalAgentView view =
-                instance.GetComponent<CustomerTechnicalAgentView>();
+                instance.GetComponent<
+                    CustomerTechnicalAgentView>();
+
             if (view == null)
             {
-                view = instance.AddComponent<CustomerTechnicalAgentView>();
+                view = instance.AddComponent<
+                    CustomerTechnicalAgentView>();
             }
 
             view.Configure(
@@ -164,13 +195,15 @@ namespace VRMGames.CartridgeAndCloud.Infrastructure.Customers
                     profile.BrowseStopCount),
                 profile.WalkSpeed,
                 0.05f,
-                _spawnSettings.DestroyTechnicalViewOnExit);
+                _spawnSettings
+                    .DestroyTechnicalViewOnExit);
         }
 
         private CustomerProfileAsset FindProfileAsset(
             CustomerProfileId id)
         {
-            foreach (CustomerProfileAsset profile in _profileCatalog.Profiles)
+            foreach (CustomerProfileAsset profile
+                     in _profileCatalog.Profiles)
             {
                 if (profile != null &&
                     string.Equals(
@@ -190,14 +223,15 @@ namespace VRMGames.CartridgeAndCloud.Infrastructure.Customers
             CustomerProfileAsset profile)
         {
             if (profile.TechnicalPrefab != null)
-            {
-                return Instantiate(profile.TechnicalPrefab);
-            }
+                return Instantiate(
+                    profile.TechnicalPrefab);
 
             GameObject fallback =
-                GameObject.CreatePrimitive(PrimitiveType.Capsule);
+                GameObject.CreatePrimitive(
+                    PrimitiveType.Capsule);
             fallback.name =
-                "TechnicalCustomer_" + profile.CustomerProfileId;
+                "TechnicalCustomer_" +
+                profile.CustomerProfileId;
             return fallback;
         }
 

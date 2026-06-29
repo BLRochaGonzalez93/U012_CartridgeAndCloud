@@ -1,0 +1,9 @@
+id,source,implementation,evidence,status
+S12-TR-001,Handoff logical clock,StoreDay and policy,Transition tests,PASS
+S12-TR-002,Handoff states,BeforeOpen Open Closing Closed,Domain tests,PASS
+S12-TR-003,Handoff block spawning,Spawner gate and runtime controller,Authoring tests,PASS
+S12-TR-004,Handoff drain customers,CustomerDrainService,Drain tests,PASS
+S12-TR-005,Handoff close queue,Queue seal and coordinator,Coordinator tests,PASS
+S12-TR-006,Handoff resolve reservations,Cart cancellation and registry counts,Integration tests,PASS
+S12-TR-007,Handoff deterministic end,Closure snapshot and summary,Snapshot tests,PASS
+S12-TR-008,Vertical slice quality,Regression and build,QA records,PASS

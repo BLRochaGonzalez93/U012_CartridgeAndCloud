@@ -23,7 +23,8 @@ namespace VRMGames.CartridgeAndCloud.Domain.Shopping
         public ProductDefinitionId ProductId { get; }
         public Quantity Quantity { get; }
         public ShoppingReservationState State { get; private set; }
-        public bool IsActive => State == ShoppingReservationState.Active;
+        public bool IsActive =>
+            State == ShoppingReservationState.Active;
 
         public ShoppingReservation(
             ShoppingReservationId id,
@@ -33,13 +34,21 @@ namespace VRMGames.CartridgeAndCloud.Domain.Shopping
             Quantity quantity)
         {
             if (string.IsNullOrWhiteSpace(customerId.Value))
-                throw new ArgumentException("Customer ID must be initialized.", nameof(customerId));
+                throw new ArgumentException(
+                    "Customer ID must be initialized.",
+                    nameof(customerId));
             if (string.IsNullOrWhiteSpace(displayId.Value))
-                throw new ArgumentException("Display ID must be initialized.", nameof(displayId));
+                throw new ArgumentException(
+                    "Display ID must be initialized.",
+                    nameof(displayId));
             if (string.IsNullOrWhiteSpace(productId.Value))
-                throw new ArgumentException("Product ID must be initialized.", nameof(productId));
+                throw new ArgumentException(
+                    "Product ID must be initialized.",
+                    nameof(productId));
             if (quantity.IsZero)
-                throw new ArgumentOutOfRangeException(nameof(quantity));
+                throw new ArgumentOutOfRangeException(
+                    nameof(quantity));
+
             Id = id;
             CustomerId = customerId;
             DisplayId = displayId;
@@ -50,14 +59,16 @@ namespace VRMGames.CartridgeAndCloud.Domain.Shopping
 
         public bool TryRelease()
         {
-            if (!IsActive) return false;
+            if (!IsActive)
+                return false;
             State = ShoppingReservationState.Released;
             return true;
         }
 
         public bool TryConsume()
         {
-            if (!IsActive) return false;
+            if (!IsActive)
+                return false;
             State = ShoppingReservationState.Consumed;
             return true;
         }
@@ -73,57 +84,128 @@ namespace VRMGames.CartridgeAndCloud.Domain.Shopping
 
     public sealed class ShoppingReservationRegistry
     {
-        private readonly Dictionary<ShoppingReservationId, ShoppingReservation> _byId =
-            new Dictionary<ShoppingReservationId, ShoppingReservation>();
+        private readonly Dictionary<
+            ShoppingReservationId,
+            ShoppingReservation> _byId =
+                new Dictionary<
+                    ShoppingReservationId,
+                    ShoppingReservation>();
 
         public int Count => _byId.Count;
 
+        public int ActiveCount
+        {
+            get
+            {
+                int count = 0;
+
+                foreach (ShoppingReservation reservation
+                         in _byId.Values)
+                {
+                    if (reservation.IsActive)
+                        count++;
+                }
+
+                return count;
+            }
+        }
+
+        public IReadOnlyList<ShoppingReservation> Reservations
+        {
+            get
+            {
+                List<ShoppingReservation> reservations =
+                    new List<ShoppingReservation>(
+                        _byId.Values);
+                reservations.Sort(
+                    (left, right) =>
+                        StringComparer.Ordinal.Compare(
+                            left.Id.Value,
+                            right.Id.Value));
+                return new ReadOnlyCollection<
+                    ShoppingReservation>(reservations);
+            }
+        }
+
         public bool TryRegister(ShoppingReservation reservation)
         {
-            if (reservation == null) throw new ArgumentNullException(nameof(reservation));
-            if (_byId.ContainsKey(reservation.Id)) return false;
+            if (reservation == null)
+                throw new ArgumentNullException(
+                    nameof(reservation));
+            if (_byId.ContainsKey(reservation.Id))
+                return false;
             _byId.Add(reservation.Id, reservation);
             return true;
         }
 
-        public bool Contains(ShoppingReservationId id) => _byId.ContainsKey(id);
+        public bool Contains(ShoppingReservationId id) =>
+            _byId.ContainsKey(id);
 
-        public bool TryGet(ShoppingReservationId id, out ShoppingReservation reservation) =>
+        public bool TryGet(
+            ShoppingReservationId id,
+            out ShoppingReservation reservation) =>
             _byId.TryGetValue(id, out reservation);
 
-        public ShoppingReservation Get(ShoppingReservationId id)
+        public ShoppingReservation Get(
+            ShoppingReservationId id)
         {
-            if (!_byId.TryGetValue(id, out ShoppingReservation reservation))
-                throw new KeyNotFoundException($"Shopping reservation {id} was not found.");
+            if (!_byId.TryGetValue(
+                    id,
+                    out ShoppingReservation reservation))
+            {
+                throw new KeyNotFoundException(
+                    $"Shopping reservation {id} was not found.");
+            }
+
             return reservation;
         }
 
-        public Quantity GetActiveReservedQuantity(DisplayInstanceId displayId, ProductDefinitionId productId)
+        public Quantity GetActiveReservedQuantity(
+            DisplayInstanceId displayId,
+            ProductDefinitionId productId)
         {
             int total = 0;
-            foreach (ShoppingReservation reservation in _byId.Values)
+            foreach (ShoppingReservation reservation
+                     in _byId.Values)
             {
                 if (reservation.IsActive &&
                     reservation.DisplayId == displayId &&
                     reservation.ProductId == productId)
                 {
-                    total = checked(total + reservation.Quantity.Value);
+                    total = checked(
+                        total + reservation.Quantity.Value);
                 }
             }
+
             return new Quantity(total);
         }
 
-        public IReadOnlyList<ShoppingReservation> GetForCustomer(CustomerInstanceId customerId, bool activeOnly)
+        public IReadOnlyList<ShoppingReservation>
+            GetForCustomer(
+                CustomerInstanceId customerId,
+                bool activeOnly)
         {
-            List<ShoppingReservation> matches = new List<ShoppingReservation>();
-            foreach (ShoppingReservation reservation in _byId.Values)
+            List<ShoppingReservation> matches =
+                new List<ShoppingReservation>();
+
+            foreach (ShoppingReservation reservation
+                     in _byId.Values)
             {
-                if (reservation.CustomerId == customerId && (!activeOnly || reservation.IsActive))
+                if (reservation.CustomerId == customerId &&
+                    (!activeOnly || reservation.IsActive))
+                {
                     matches.Add(reservation);
+                }
             }
-            matches.Sort((left, right) =>
-                StringComparer.Ordinal.Compare(left.Id.Value, right.Id.Value));
-            return new ReadOnlyCollection<ShoppingReservation>(matches);
+
+            matches.Sort(
+                (left, right) =>
+                    StringComparer.Ordinal.Compare(
+                        left.Id.Value,
+                        right.Id.Value));
+
+            return new ReadOnlyCollection<
+                ShoppingReservation>(matches);
         }
     }
 }
