@@ -50,7 +50,8 @@ namespace VRMGames.CartridgeAndCloud.Tests.PlayMode
                 "Directional Light",
                 "MainMenuController",
                 "Canvas",
-                "EventSystem");
+                "EventSystem",
+                "Sprint15MainMenuUI");
 
             Assert.That(
                 Object.FindFirstObjectByType<MainMenuController>(),
@@ -68,7 +69,8 @@ namespace VRMGames.CartridgeAndCloud.Tests.PlayMode
                 "StoreSceneController",
                 "Canvas",
                 "EventSystem",
-                "S5_StoreShell");
+                "S5_StoreShell",
+                "Sprint15StoreUI");
 
             StoreSceneController controller =
                 Object.FindFirstObjectByType<StoreSceneController>();

@@ -1,0 +1,12 @@
+id,source,implementation,evidence,status
+S15-TR-001,Slot selection,MainMenuSlotScreen and SlotSelectionService,Automated and manual,PASS
+S15-TR-002,Runtime persistence,ActiveGameSessionService and bridge,Technical scenario and manual,PASS
+S15-TR-003,Daily autosave,DailyAutosaveService,Automated and manual,PASS
+S15-TR-004,HUD,StoreHudScreen and StoreHudSnapshot,Automated and manual,PASS
+S15-TR-005,System panels,StoreUiProjectionService,Automated and manual,PASS
+S15-TR-006,Floating tutorial,TutorialService and bubbles,Automated and manual,PASS
+S15-TR-007,Accessibility,AccessibilitySettingsService,Automated and manual,PASS
+S15-TR-008,Keyboard navigation,Focus and EventSystem,PlayMode and manual,PASS
+S15-TR-009,Input exclusivity,InputContextService and bridge,PlayMode and manual,PASS
+S15-TR-010,Versioning,Player version and version assertion,Build and tests,PASS
+S15-TR-011,Scene roots,Runtime UI roots and smoke tests,PlayMode 53/53,PASS

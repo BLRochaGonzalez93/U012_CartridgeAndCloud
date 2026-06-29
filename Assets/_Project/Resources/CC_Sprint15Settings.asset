@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d83ee47255b64733863a12a81783f88b, type: 3}
+  m_Name: CC_Sprint15Settings
+  m_EditorClassIdentifier:
+  _mainMenuSceneName: MainMenu
+  _storeSceneName: Store
+  _currencyCode: EUR
+  _initialCashCents: 100000
+  _dayDurationSeconds: 300
+  _showTutorialOnNewGame: 1
