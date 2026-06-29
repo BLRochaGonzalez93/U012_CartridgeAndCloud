@@ -1,0 +1,66 @@
+category,id,path,replacement_boundary
+furniture,checkout-counter,Sprint16Phase1/Prefabs/Furniture/CheckoutCounter,prefab/material
+furniture,wall-shelf,Sprint16Phase1/Prefabs/Furniture/WallShelf,prefab/material
+furniture,central-shelf,Sprint16Phase1/Prefabs/Furniture/CentralShelf,prefab/material
+furniture,low-display,Sprint16Phase1/Prefabs/Furniture/LowDisplay,prefab/material
+furniture,featured-display,Sprint16Phase1/Prefabs/Furniture/FeaturedDisplay,prefab/material
+furniture,backroom-storage,Sprint16Phase1/Prefabs/Furniture/BackroomStorage,prefab/material
+furniture,receiving-crate,Sprint16Phase1/Prefabs/Furniture/ReceivingCrate,prefab/material
+furniture,decoration-plant,Sprint16Phase1/Prefabs/Furniture/DecorationPlant,prefab/material
+product,game-neon-drift,Sprint16Phase1/Prefabs/Products/NeonDrift,prefab/material/icon/cover
+product,case-cloud-runner,Sprint16Phase1/Prefabs/Products/CloudRunnerCase,prefab/material/icon/cover
+product,console-vertex-one,Sprint16Phase1/Prefabs/Products/VertexOneConsole,prefab/material/icon/cover
+product,controller-orbit-pad,Sprint16Phase1/Prefabs/Products/OrbitPadController,prefab/material/icon/cover
+product,headset-signal-pro,Sprint16Phase1/Prefabs/Products/SignalProHeadset,prefab/material/icon/cover
+product,accessory-memory-core,Sprint16Phase1/Prefabs/Products/MemoryCoreAccessory,prefab/material/icon/cover
+character,employee-main,Sprint16Phase1/Prefabs/Characters/Employee,prefab/material
+character,customer-base,Sprint16Phase1/Prefabs/Characters/Customer,prefab/material
+character,supplier-base,Sprint16Phase1/Prefabs/Characters/Supplier,prefab/material
+animation,idle,Sprint16Phase1/Animations/CC_S16_P1_Anim_Idle,animation clip
+animation,walk,Sprint16Phase1/Animations/CC_S16_P1_Anim_Walk,animation clip
+animation,observe,Sprint16Phase1/Animations/CC_S16_P1_Anim_Observe,animation clip
+animation,pick-product,Sprint16Phase1/Animations/CC_S16_P1_Anim_PickProduct,animation clip
+animation,queue-wait,Sprint16Phase1/Animations/CC_S16_P1_Anim_QueueWait,animation clip
+animation,checkout,Sprint16Phase1/Animations/CC_S16_P1_Anim_Checkout,animation clip
+animation,satisfied,Sprint16Phase1/Animations/CC_S16_P1_Anim_Satisfied,animation clip
+animation,frustrated,Sprint16Phase1/Animations/CC_S16_P1_Anim_Frustrated,animation clip
+animation,move-crate,Sprint16Phase1/Animations/CC_S16_P1_Anim_MoveCrate,animation clip
+animation,player-place,Sprint16Phase1/Animations/CC_S16_P1_Anim_PlayerPlace,animation clip
+animation,player-remove,Sprint16Phase1/Animations/CC_S16_P1_Anim_PlayerRemove,animation clip
+material,shell-wall,Sprint16Phase1/Materials/CC_S16_P1_ShellWall,material/texture
+material,shell-glass,Sprint16Phase1/Materials/CC_S16_P1_ShellGlass,material/texture
+material,shell-floor,Sprint16Phase1/Materials/CC_S16_P1_ShellFloor,material/texture
+material,zone-marker,Sprint16Phase1/Materials/CC_S16_P1_ZoneMarker,material/texture
+material,zone-checkout,Sprint16Phase1/Materials/CC_S16_P1_ZoneCheckout,material/texture
+material,zone-receiving,Sprint16Phase1/Materials/CC_S16_P1_ZoneReceiving,material/texture
+material,zone-backroom,Sprint16Phase1/Materials/CC_S16_P1_ZoneBackroom,material/texture
+material,furniture-checkout,Sprint16Phase1/Materials/CC_S16_P1_FurnitureCheckout,material/texture
+material,furniture-wall-shelf,Sprint16Phase1/Materials/CC_S16_P1_FurnitureWallShelf,material/texture
+material,furniture-central-shelf,Sprint16Phase1/Materials/CC_S16_P1_FurnitureCentralShelf,material/texture
+material,furniture-low-display,Sprint16Phase1/Materials/CC_S16_P1_FurnitureLowDisplay,material/texture
+material,furniture-featured,Sprint16Phase1/Materials/CC_S16_P1_FurnitureFeatured,material/texture
+material,furniture-storage,Sprint16Phase1/Materials/CC_S16_P1_FurnitureStorage,material/texture
+material,furniture-crate,Sprint16Phase1/Materials/CC_S16_P1_FurnitureCrate,material/texture
+material,decoration,Sprint16Phase1/Materials/CC_S16_P1_Decoration,material/texture
+material,product-game,Sprint16Phase1/Materials/CC_S16_P1_ProductGame,material/texture
+material,product-case,Sprint16Phase1/Materials/CC_S16_P1_ProductCase,material/texture
+material,product-console,Sprint16Phase1/Materials/CC_S16_P1_ProductConsole,material/texture
+material,product-controller,Sprint16Phase1/Materials/CC_S16_P1_ProductController,material/texture
+material,product-headset,Sprint16Phase1/Materials/CC_S16_P1_ProductHeadset,material/texture
+material,product-accessory,Sprint16Phase1/Materials/CC_S16_P1_ProductAccessory,material/texture
+material,character-employee,Sprint16Phase1/Materials/CC_S16_P1_CharacterEmployee,material/texture
+material,character-customer,Sprint16Phase1/Materials/CC_S16_P1_CharacterCustomer,material/texture
+material,character-supplier,Sprint16Phase1/Materials/CC_S16_P1_CharacterSupplier,material/texture
+material,feedback-valid,Sprint16Phase1/Materials/CC_S16_P1_FeedbackValid,material/texture
+material,feedback-invalid,Sprint16Phase1/Materials/CC_S16_P1_FeedbackInvalid,material/texture
+material,feedback-warning,Sprint16Phase1/Materials/CC_S16_P1_FeedbackWarning,material/texture
+audio,CC_S16_P1_MusicStore.wav,Sprint16Phase1/Audio/CC_S16_P1_MusicStore.wav,audio clip
+audio,CC_S16_P1_AmbienceStore.wav,Sprint16Phase1/Audio/CC_S16_P1_AmbienceStore.wav,audio clip
+audio,CC_S16_P1_UiConfirm.wav,Sprint16Phase1/Audio/CC_S16_P1_UiConfirm.wav,audio clip
+audio,CC_S16_P1_UiError.wav,Sprint16Phase1/Audio/CC_S16_P1_UiError.wav,audio clip
+audio,CC_S16_P1_PlacementValid.wav,Sprint16Phase1/Audio/CC_S16_P1_PlacementValid.wav,audio clip
+audio,CC_S16_P1_PlacementInvalid.wav,Sprint16Phase1/Audio/CC_S16_P1_PlacementInvalid.wav,audio clip
+audio,CC_S16_P1_OrderReceived.wav,Sprint16Phase1/Audio/CC_S16_P1_OrderReceived.wav,audio clip
+audio,CC_S16_P1_Checkout.wav,Sprint16Phase1/Audio/CC_S16_P1_Checkout.wav,audio clip
+audio,CC_S16_P1_Door.wav,Sprint16Phase1/Audio/CC_S16_P1_Door.wav,audio clip
+audio,CC_S16_P1_DayClosed.wav,Sprint16Phase1/Audio/CC_S16_P1_DayClosed.wav,audio clip

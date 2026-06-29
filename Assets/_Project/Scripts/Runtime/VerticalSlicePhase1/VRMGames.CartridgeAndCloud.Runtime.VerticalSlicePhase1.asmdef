@@ -1,0 +1,19 @@
+{
+    "name": "VRMGames.CartridgeAndCloud.Runtime.VerticalSlicePhase1",
+    "rootNamespace": "VRMGames.CartridgeAndCloud.Runtime.VerticalSlicePhase1",
+    "references": [
+        "VRMGames.CartridgeAndCloud.Domain",
+        "VRMGames.CartridgeAndCloud.Application",
+        "VRMGames.CartridgeAndCloud.Infrastructure",
+        "VRMGames.CartridgeAndCloud.Presentation"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

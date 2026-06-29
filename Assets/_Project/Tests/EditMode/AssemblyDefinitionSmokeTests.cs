@@ -102,6 +102,7 @@ namespace VRMGames.CartridgeAndCloud.Tests.EditMode
                     "VRMGames.CartridgeAndCloud.Application",
                     "VRMGames.CartridgeAndCloud.Infrastructure",
                     "VRMGames.CartridgeAndCloud.Presentation",
+                    "VRMGames.CartridgeAndCloud.Runtime.VerticalSlicePhase1",
                     "UnityEngine.TestRunner"
                 },
                 noEngineReferences: false,

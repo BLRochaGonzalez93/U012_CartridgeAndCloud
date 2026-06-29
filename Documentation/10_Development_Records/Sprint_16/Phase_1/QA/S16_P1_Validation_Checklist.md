@@ -1,0 +1,24 @@
+# S16 Phase 1 Validation Checklist
+
+- [ ] Unity compiles.
+- [ ] No Missing Script.
+- [ ] Phase 1 EditMode `134/134`.
+- [ ] Full EditMode `1215/1215`.
+- [ ] Phase 1 PlayMode `17/17`.
+- [ ] Full PlayMode `70/70`.
+- [ ] Total `1285/1285`.
+- [ ] Technical scenario PASS.
+- [ ] Golden Path PASS.
+- [ ] Wall occlusion PASS.
+- [ ] Automatic door PASS.
+- [ ] Furniture economy PASS.
+- [ ] Product economy PASS.
+- [ ] Customer checkout PASS.
+- [ ] Save/load PASS.
+- [ ] Next Day PASS.
+- [ ] Regression S0–S15 PASS.
+- [ ] Windows x64 build PASS.
+- [ ] External Player PASS.
+- [ ] Version `0.0.17`.
+- [ ] No S0/S1.
+- [ ] Phase 2 gate explicitly approved.

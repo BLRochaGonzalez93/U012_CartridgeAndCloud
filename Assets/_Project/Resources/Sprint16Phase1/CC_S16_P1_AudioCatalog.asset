@@ -1,0 +1,154 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b73fb5591684dfe5ca35d53ce5d429d, type: 3}
+  m_Name: CC_S16_P1_AudioCatalog
+  m_EditorClassIdentifier:
+
+  _entries:
+  - eventId: music.store
+    channel: 0
+    clip: {fileID: 8300000, guid: 0690c7c8ed5fb2713089b8f9a4ac688f, type: 3}
+    volume: 0.45
+    pitch: 1.0
+    loop: 1
+  - eventId: ambience.store
+    channel: 1
+    clip: {fileID: 8300000, guid: cb709afe7703b9cab572cc895a085ff2, type: 3}
+    volume: 0.45
+    pitch: 1.0
+    loop: 1
+  - eventId: feedback.placementvalid
+    channel: 3
+    clip: {fileID: 8300000, guid: 7481deec07256d3dfc630e4a8f73719e, type: 3}
+    volume: 0.75
+    pitch: 1.0
+    loop: 0
+  - eventId: feedback.placementinvalid
+    channel: 3
+    clip: {fileID: 8300000, guid: ee743d39450d02dbca20e8ce90864804, type: 3}
+    volume: 0.75
+    pitch: 1.0
+    loop: 0
+  - eventId: feedback.objectselected
+    channel: 2
+    clip: {fileID: 8300000, guid: d9bc385fea51b0ff5f60db1d28fe4650, type: 3}
+    volume: 0.75
+    pitch: 1.0
+    loop: 0
+  - eventId: feedback.objecthovered
+    channel: 2
+    clip: {fileID: 8300000, guid: d9bc385fea51b0ff5f60db1d28fe4650, type: 3}
+    volume: 0.75
+    pitch: 1.0
+    loop: 0
+  - eventId: feedback.productassigned
+    channel: 2
+    clip: {fileID: 8300000, guid: d9bc385fea51b0ff5f60db1d28fe4650, type: 3}
+    volume: 0.75
+    pitch: 1.0
+    loop: 0
+  - eventId: feedback.outofstock
+    channel: 3
+    clip: {fileID: 8300000, guid: b2633481fff90cc387bf1bf6d7429bc1, type: 3}
+    volume: 0.75
+    pitch: 1.0
+    loop: 0
+  - eventId: feedback.reserved
+    channel: 3
+    clip: {fileID: 8300000, guid: d9bc385fea51b0ff5f60db1d28fe4650, type: 3}
+    volume: 0.75
+    pitch: 1.0
+    loop: 0
+  - eventId: feedback.restocked
+    channel: 3
+    clip: {fileID: 8300000, guid: 8e2b37d1127285ee1cc44a3d0a8a98c4, type: 3}
+    volume: 0.75
+    pitch: 1.0
+    loop: 0
+  - eventId: feedback.orderreceived
+    channel: 3
+    clip: {fileID: 8300000, guid: 8e2b37d1127285ee1cc44a3d0a8a98c4, type: 3}
+    volume: 0.75
+    pitch: 1.0
+    loop: 0
+  - eventId: feedback.customersatisfied
+    channel: 3
+    clip: {fileID: 8300000, guid: ba31e4719471578fa9cae09368b54822, type: 3}
+    volume: 0.75
+    pitch: 1.0
+    loop: 0
+  - eventId: feedback.customerfrustrated
+    channel: 3
+    clip: {fileID: 8300000, guid: b2633481fff90cc387bf1bf6d7429bc1, type: 3}
+    volume: 0.75
+    pitch: 1.0
+    loop: 0
+  - eventId: feedback.queueentered
+    channel: 3
+    clip: {fileID: 8300000, guid: ba31e4719471578fa9cae09368b54822, type: 3}
+    volume: 0.75
+    pitch: 1.0
+    loop: 0
+  - eventId: feedback.checkoutcompleted
+    channel: 3
+    clip: {fileID: 8300000, guid: ba31e4719471578fa9cae09368b54822, type: 3}
+    volume: 0.75
+    pitch: 1.0
+    loop: 0
+  - eventId: feedback.revenue
+    channel: 3
+    clip: {fileID: 8300000, guid: ba31e4719471578fa9cae09368b54822, type: 3}
+    volume: 0.75
+    pitch: 1.0
+    loop: 0
+  - eventId: feedback.expense
+    channel: 3
+    clip: {fileID: 8300000, guid: d9bc385fea51b0ff5f60db1d28fe4650, type: 3}
+    volume: 0.75
+    pitch: 1.0
+    loop: 0
+  - eventId: feedback.closingwarning
+    channel: 3
+    clip: {fileID: 8300000, guid: afa05dd2e9a4ff3ace16f07967ef65c9, type: 3}
+    volume: 0.75
+    pitch: 1.0
+    loop: 0
+  - eventId: feedback.dayclosed
+    channel: 3
+    clip: {fileID: 8300000, guid: afa05dd2e9a4ff3ace16f07967ef65c9, type: 3}
+    volume: 0.75
+    pitch: 1.0
+    loop: 0
+  - eventId: feedback.autosavesucceeded
+    channel: 2
+    clip: {fileID: 8300000, guid: d9bc385fea51b0ff5f60db1d28fe4650, type: 3}
+    volume: 0.75
+    pitch: 1.0
+    loop: 0
+  - eventId: feedback.autosavefailed
+    channel: 2
+    clip: {fileID: 8300000, guid: b2633481fff90cc387bf1bf6d7429bc1, type: 3}
+    volume: 0.75
+    pitch: 1.0
+    loop: 0
+  - eventId: feedback.dooropened
+    channel: 3
+    clip: {fileID: 8300000, guid: 2a3bd6d7753bf8508bed82d14fa64b9f, type: 3}
+    volume: 0.75
+    pitch: 1.0
+    loop: 0
+  - eventId: feedback.doorclosed
+    channel: 3
+    clip: {fileID: 8300000, guid: 2a3bd6d7753bf8508bed82d14fa64b9f, type: 3}
+    volume: 0.75
+    pitch: 1.0
+    loop: 0

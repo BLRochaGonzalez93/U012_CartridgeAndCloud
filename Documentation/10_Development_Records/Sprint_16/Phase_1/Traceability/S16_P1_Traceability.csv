@@ -1,0 +1,19 @@
+id,requirement,implementation,evidence,status
+S16P1-TR-001,Store walls and storefront,Phase1StoreBlockoutBuilder,PlayMode and manual,PENDING
+S16P1-TR-002,Wall occlusion option,Phase1WallOcclusionController,PlayMode and manual,PENDING
+S16P1-TR-003,Automatic sliding door,AutomaticSlidingDoorController,PlayMode and manual,PENDING
+S16P1-TR-004,Backroom checkout receiving zones,Store shell asset and builder,Manual,PENDING
+S16P1-TR-005,Lighting rig,Store blockout builder,PlayMode and manual,PENDING
+S16P1-TR-006,Furniture catalog,Content catalog and operations UI,EditMode and manual,PENDING
+S16P1-TR-007,Furniture economy,VerticalSliceService,EditMode and technical scenario,PENDING
+S16P1-TR-008,Product catalog,Content catalog,EditMode and manual,PENDING
+S16P1-TR-009,Receiving and stock,VerticalSliceService,EditMode and technical scenario,PENDING
+S16P1-TR-010,Placement and removal,PlacementCompatibilityBridge,EditMode and manual,PENDING
+S16P1-TR-011,Display assignment and restock,VerticalSliceService,EditMode and manual,PENDING
+S16P1-TR-012,Playable customer purchase,CharacterLoop and VerticalSliceService,Technical scenario and manual,PENDING
+S16P1-TR-013,Checkout records,Integrated snapshot mutation,EditMode,PENDING
+S16P1-TR-014,Feedback and VFX,FeedbackPresenter and VfxPool,PlayMode and manual,PENDING
+S16P1-TR-015,Audio channels,AudioRouter and AudioCatalog,PlayMode and manual,PENDING
+S16P1-TR-016,Phase 1 persistence,JsonPhase1StateRepository,EditMode and reload,PENDING
+S16P1-TR-017,Golden Path,PlayableProcedure and Operations UI,Manual,PENDING
+S16P1-TR-018,Phase 2 gate,Governance documentation,QA approval,PENDING
