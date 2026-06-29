@@ -52,12 +52,8 @@ namespace VRMGames.CartridgeAndCloud.InputSystem.Tests.EditMode
             using ProjectInputActions actions =
                 new ProjectInputActions();
 
-            Assert.That(
-                actions.UI.enabled,
-                Is.False);
-            Assert.That(
-                actions.Gameplay.enabled,
-                Is.False);
+            Assert.That(actions.UI.enabled, Is.False);
+            Assert.That(actions.Gameplay.enabled, Is.False);
         }
 
         [Test]
@@ -97,7 +93,6 @@ namespace VRMGames.CartridgeAndCloud.InputSystem.Tests.EditMode
             {
                 InputContextService service =
                     new InputContextService();
-
                 InputActionContextRouter router =
                     routerObject.AddComponent<
                         InputActionContextRouter>();
@@ -129,11 +124,11 @@ namespace VRMGames.CartridgeAndCloud.InputSystem.Tests.EditMode
         }
 
         [Test]
-        public void ProjectVersion_IsSprintTwelveTarget()
+        public void ProjectVersion_IsSprintThirteenTarget()
         {
             Assert.That(
                 PlayerSettings.bundleVersion,
-                Is.EqualTo("0.0.13"));
+                Is.EqualTo("0.0.14"));
         }
 
         private static void TestRouterContext(

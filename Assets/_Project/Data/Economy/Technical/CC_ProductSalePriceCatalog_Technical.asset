@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ae2f861562e493e8fbb45d87eb118c2, type: 3}
+  m_Name: CC_ProductSalePriceCatalog_Technical
+  m_EditorClassIdentifier:
+  _entries:
+  - _productId: cartridge-cloud-racers
+    _unitSalePriceCents: 2799
+  - _productId: cartridge-pixel-quest
+    _unitSalePriceCents: 2999
+  - _productId: controller-orbit-pad
+    _unitSalePriceCents: 3499
+  - _productId: memory-card-64
+    _unitSalePriceCents: 2499
+  - _productId: console-nebula-8
+    _unitSalePriceCents: 8999
+  - _productId: collectible-cloud-hero
+    _unitSalePriceCents: 1999

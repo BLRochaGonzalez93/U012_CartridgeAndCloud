@@ -1,0 +1,8 @@
+id,source,implementation,evidence,status
+S13-TR-001,Handoff deterministic money,CurrencyCode and Money,Money tests,PASS
+S13-TR-002,Handoff sale price,ProductSalePriceCatalog,Pricing tests,PASS
+S13-TR-003,Handoff checkout revenue,EconomicCheckoutService,Checkout tests,PASS
+S13-TR-004,Handoff supplier costs,SupplierReceivingEconomyService,Receiving tests,PASS
+S13-TR-005,Handoff no double counting,EconomyLedger,Ledger tests,PASS
+S13-TR-006,Handoff daily result,DailyResultsService,Daily result tests,PASS
+S13-TR-007,Vertical slice quality,Regression and build,QA records,PASS
