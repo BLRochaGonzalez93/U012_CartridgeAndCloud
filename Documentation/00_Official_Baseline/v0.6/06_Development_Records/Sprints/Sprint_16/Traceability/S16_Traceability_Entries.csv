@@ -1,0 +1,6 @@
+ChangeId,Requirement,Implementation,Evidence,Status
+S16-001,Representative prefabs,RepresentativePrefabCatalogAsset,Validation tool PASS,Validated
+S16-002,Runtime catalog availability,RuntimeAssetRegistry link,Manual prefabs visible,Validated
+S16-003,Correct initial store scene,StoreInitial and context,Not implemented,Open
+S16-004,UI click suppression,EventSystem guard,Not implemented,Open
+S16-005,Post-integration build,Windows x64 build,Not executed,Open
