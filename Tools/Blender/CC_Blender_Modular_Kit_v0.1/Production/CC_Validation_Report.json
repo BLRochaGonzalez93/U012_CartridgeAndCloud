@@ -1,0 +1,71 @@
+{
+  "kit_version": "0.1",
+  "grid_m": 0.5,
+  "stats": {
+    "objects": 1148,
+    "meshes": 1097,
+    "conceptual": 16
+  },
+  "issues": [
+    {
+      "severity": "info",
+      "object": "CC_S16_P2_Furniture_DecorativePlant_LOD0_Leaf_00",
+      "message": "Mesh has non-zero rotation. Apply before FBX if intentional."
+    },
+    {
+      "severity": "info",
+      "object": "CC_S16_P2_Furniture_DecorativePlant_LOD0_Leaf_00_LOD1",
+      "message": "Mesh has non-zero rotation. Apply before FBX if intentional."
+    },
+    {
+      "severity": "info",
+      "object": "CC_S16_P2_Furniture_DecorativePlant_LOD0_Leaf_00_LOD2",
+      "message": "Mesh has non-zero rotation. Apply before FBX if intentional."
+    },
+    {
+      "severity": "info",
+      "object": "CC_S16_P2_Furniture_DecorativePlant_LOD0_Leaf_01",
+      "message": "Mesh has non-zero rotation. Apply before FBX if intentional."
+    },
+    {
+      "severity": "info",
+      "object": "CC_S16_P2_Furniture_DecorativePlant_LOD0_Leaf_01_LOD1",
+      "message": "Mesh has non-zero rotation. Apply before FBX if intentional."
+    },
+    {
+      "severity": "info",
+      "object": "CC_S16_P2_Furniture_DecorativePlant_LOD0_Leaf_01_LOD2",
+      "message": "Mesh has non-zero rotation. Apply before FBX if intentional."
+    },
+    {
+      "severity": "info",
+      "object": "CC_S16_P2_Furniture_DecorativePlant_LOD0_Leaf_03",
+      "message": "Mesh has non-zero rotation. Apply before FBX if intentional."
+    },
+    {
+      "severity": "info",
+      "object": "CC_S16_P2_Furniture_DecorativePlant_LOD0_Leaf_03_LOD1",
+      "message": "Mesh has non-zero rotation. Apply before FBX if intentional."
+    },
+    {
+      "severity": "info",
+      "object": "CC_S16_P2_Furniture_DecorativePlant_LOD0_Leaf_03_LOD2",
+      "message": "Mesh has non-zero rotation. Apply before FBX if intentional."
+    },
+    {
+      "severity": "info",
+      "object": "CC_S16_P2_Furniture_DecorativePlant_LOD0_Leaf_04",
+      "message": "Mesh has non-zero rotation. Apply before FBX if intentional."
+    },
+    {
+      "severity": "info",
+      "object": "CC_S16_P2_Furniture_DecorativePlant_LOD0_Leaf_04_LOD1",
+      "message": "Mesh has non-zero rotation. Apply before FBX if intentional."
+    },
+    {
+      "severity": "info",
+      "object": "CC_S16_P2_Furniture_DecorativePlant_LOD0_Leaf_04_LOD2",
+      "message": "Mesh has non-zero rotation. Apply before FBX if intentional."
+    }
+  ]
+}

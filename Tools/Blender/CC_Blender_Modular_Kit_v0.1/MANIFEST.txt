@@ -1,0 +1,15 @@
+README.md
+scripts/cc_config.py
+scripts/cc_common.py
+scripts/generate_architecture.py
+scripts/generate_furniture.py
+scripts/generate_products.py
+scripts/generate_expansions.py
+scripts/generate_materials.py
+scripts/generate_lods_colliders.py
+scripts/validate_scene.py
+scripts/export_unity_fbx.py
+scripts/build_all.py
+scripts/install_addon.py
+docs/CC_Blender_Modular_Kit_User_Guide_v0.1.pdf
+docs/CC_Blender_Modular_Kit_User_Guide_v0.1.docx
