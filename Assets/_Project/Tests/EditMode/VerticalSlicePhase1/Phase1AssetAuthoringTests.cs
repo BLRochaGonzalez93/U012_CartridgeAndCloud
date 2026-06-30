@@ -1,23 +1,54 @@
 using NUnit.Framework;
+using UnityEditor;
 using UnityEngine;
-using VRMGames.CartridgeAndCloud.Infrastructure.VerticalSlicePhase1;
 using VRMGames.CartridgeAndCloud.Domain.VerticalSlicePhase1;
+using VRMGames.CartridgeAndCloud.Infrastructure.VerticalSlicePhase1;
 using VRMGames.CartridgeAndCloud.Presentation.Placement;
 
 namespace VRMGames.CartridgeAndCloud.Tests.EditMode.VerticalSlicePhase1
 {
     public sealed class Phase1AssetAuthoringTests
     {
-        private const string Root =
-            "Sprint16Phase1/";
+        private const string CatalogRoot =
+            "Assets/_Project/Data/Catalogs/";
+        private const string StoreRoot =
+            "Assets/_Project/Data/Store/";
+        private const string SettingsRoot =
+            "Assets/_Project/Settings/Runtime/";
+        private const string DefinitionRoot =
+            "Assets/_Project/Data/Placement/Definitions/";
+        private const string PrefabRoot =
+            "Assets/_Project/Prefabs/";
+        private const string ProductTextureRoot =
+            "Assets/_Project/Art/Textures/Products/";
 
         [Test]
         public void ContentCatalog_Loads()
         {
             Assert.That(
                 Load<Phase1ContentCatalogAsset>(
-                    "CC_S16_P1_ContentCatalog"),
+                    CatalogRoot +
+                    "ContentCatalog.asset"),
                 Is.Not.Null);
+
+            Phase1RuntimeAssetRegistryAsset registry =
+                Load<Phase1RuntimeAssetRegistryAsset>(
+                    SettingsRoot +
+                    "RuntimeAssetRegistry.asset");
+
+            Assert.That(registry, Is.Not.Null);
+            Assert.That(registry.Settings, Is.Not.Null);
+            Assert.That(
+                registry.ContentCatalog,
+                Is.Not.Null);
+            Assert.That(registry.StoreShell, Is.Not.Null);
+            Assert.That(
+                registry.MaterialPalette,
+                Is.Not.Null);
+            Assert.That(
+                registry.PresentationCatalog,
+                Is.Not.Null);
+            Assert.That(registry.AudioCatalog, Is.Not.Null);
         }
 
         [Test]
@@ -25,7 +56,8 @@ namespace VRMGames.CartridgeAndCloud.Tests.EditMode.VerticalSlicePhase1
         {
             Phase1ContentCatalogAsset asset =
                 Load<Phase1ContentCatalogAsset>(
-                    "CC_S16_P1_ContentCatalog");
+                    CatalogRoot +
+                    "ContentCatalog.asset");
 
             Assert.That(
                 asset.Furniture.Count,
@@ -37,7 +69,8 @@ namespace VRMGames.CartridgeAndCloud.Tests.EditMode.VerticalSlicePhase1
         {
             Phase1ContentCatalogAsset asset =
                 Load<Phase1ContentCatalogAsset>(
-                    "CC_S16_P1_ContentCatalog");
+                    CatalogRoot +
+                    "ContentCatalog.asset");
 
             Assert.That(
                 asset.Products.Count,
@@ -49,7 +82,8 @@ namespace VRMGames.CartridgeAndCloud.Tests.EditMode.VerticalSlicePhase1
         {
             var catalog =
                 Load<Phase1ContentCatalogAsset>(
-                    "CC_S16_P1_ContentCatalog")
+                    CatalogRoot +
+                    "ContentCatalog.asset")
                     .BuildCatalog();
 
             Assert.That(
@@ -67,7 +101,8 @@ namespace VRMGames.CartridgeAndCloud.Tests.EditMode.VerticalSlicePhase1
         {
             var catalog =
                 Load<Phase1ContentCatalogAsset>(
-                    "CC_S16_P1_ContentCatalog")
+                    CatalogRoot +
+                    "ContentCatalog.asset")
                     .BuildCatalog();
 
             catalog.TryGetFurniture(
@@ -84,7 +119,8 @@ namespace VRMGames.CartridgeAndCloud.Tests.EditMode.VerticalSlicePhase1
         {
             Phase1StoreShellAsset shell =
                 Load<Phase1StoreShellAsset>(
-                    "CC_S16_P1_StoreShell");
+                    StoreRoot +
+                    "StoreShell.asset");
 
             Assert.That(
                 shell.WidthCells,
@@ -102,7 +138,8 @@ namespace VRMGames.CartridgeAndCloud.Tests.EditMode.VerticalSlicePhase1
         {
             Phase1MaterialPaletteAsset palette =
                 Load<Phase1MaterialPaletteAsset>(
-                    "CC_S16_P1_MaterialPalette");
+                    CatalogRoot +
+                    "MaterialPalette.asset");
 
             Assert.That(
                 palette.Find("shell-wall"),
@@ -114,7 +151,8 @@ namespace VRMGames.CartridgeAndCloud.Tests.EditMode.VerticalSlicePhase1
         {
             Phase1MaterialPaletteAsset palette =
                 Load<Phase1MaterialPaletteAsset>(
-                    "CC_S16_P1_MaterialPalette");
+                    CatalogRoot +
+                    "MaterialPalette.asset");
 
             Assert.That(
                 palette.Find("feedback-valid"),
@@ -129,20 +167,21 @@ namespace VRMGames.CartridgeAndCloud.Tests.EditMode.VerticalSlicePhase1
         {
             Phase1PresentationCatalogAsset asset =
                 Load<Phase1PresentationCatalogAsset>(
-                    "CC_S16_P1_PresentationCatalog");
+                    CatalogRoot +
+                    "PresentationCatalog.asset");
 
             Assert.That(
                 asset.Characters.Length,
                 Is.EqualTo(3));
         }
 
-
         [Test]
         public void PresentationCatalog_HasPlaceholderAnimations()
         {
             Phase1PresentationCatalogAsset asset =
                 Load<Phase1PresentationCatalogAsset>(
-                    "CC_S16_P1_PresentationCatalog");
+                    CatalogRoot +
+                    "PresentationCatalog.asset");
 
             Assert.That(
                 asset.Animations.Length,
@@ -163,7 +202,8 @@ namespace VRMGames.CartridgeAndCloud.Tests.EditMode.VerticalSlicePhase1
         {
             Phase1PresentationCatalogAsset asset =
                 Load<Phase1PresentationCatalogAsset>(
-                    "CC_S16_P1_PresentationCatalog");
+                    CatalogRoot +
+                    "PresentationCatalog.asset");
 
             Assert.That(
                 asset.FindFeedback(
@@ -176,7 +216,8 @@ namespace VRMGames.CartridgeAndCloud.Tests.EditMode.VerticalSlicePhase1
         {
             Phase1AudioCatalogAsset asset =
                 Load<Phase1AudioCatalogAsset>(
-                    "CC_S16_P1_AudioCatalog");
+                    CatalogRoot +
+                    "AudioCatalog.asset");
 
             Assert.That(
                 asset.Find("music.store"),
@@ -191,7 +232,8 @@ namespace VRMGames.CartridgeAndCloud.Tests.EditMode.VerticalSlicePhase1
         {
             Phase1SettingsAsset settings =
                 Load<Phase1SettingsAsset>(
-                    "CC_S16_P1_Settings");
+                    SettingsRoot +
+                    "StoreRuntimeSettings.asset");
 
             Assert.That(
                 settings.BuildBlockoutOnLoad,
@@ -205,11 +247,9 @@ namespace VRMGames.CartridgeAndCloud.Tests.EditMode.VerticalSlicePhase1
         public void PlacementDefinitions_Load()
         {
             TechnicalPlaceableDefinition definition =
-                Resources.Load<
-                    TechnicalPlaceableDefinition>(
-                        Root +
-                        "PlacementDefinitions/" +
-                        "CC_S16_P1_CentralShelf");
+                Load<TechnicalPlaceableDefinition>(
+                    DefinitionRoot +
+                    "CentralShelf.asset");
 
             Assert.That(definition, Is.Not.Null);
             Assert.That(
@@ -221,10 +261,9 @@ namespace VRMGames.CartridgeAndCloud.Tests.EditMode.VerticalSlicePhase1
         public void FurniturePrefab_Loads()
         {
             GameObject prefab =
-                Resources.Load<GameObject>(
-                    Root +
-                    "Prefabs/Furniture/" +
-                    "CheckoutCounter");
+                Load<GameObject>(
+                    PrefabRoot +
+                    "Furniture/CheckoutCounter.prefab");
 
             Assert.That(prefab, Is.Not.Null);
             Assert.That(
@@ -237,10 +276,9 @@ namespace VRMGames.CartridgeAndCloud.Tests.EditMode.VerticalSlicePhase1
         public void ProductPrefab_Loads()
         {
             GameObject prefab =
-                Resources.Load<GameObject>(
-                    Root +
-                    "Prefabs/Products/" +
-                    "NeonDrift");
+                Load<GameObject>(
+                    PrefabRoot +
+                    "Products/NeonDrift.prefab");
 
             Assert.That(prefab, Is.Not.Null);
             Assert.That(
@@ -253,10 +291,9 @@ namespace VRMGames.CartridgeAndCloud.Tests.EditMode.VerticalSlicePhase1
         public void CharacterPrefab_Loads()
         {
             GameObject prefab =
-                Resources.Load<GameObject>(
-                    Root +
-                    "Prefabs/Characters/" +
-                    "Customer");
+                Load<GameObject>(
+                    PrefabRoot +
+                    "Characters/Customer.prefab");
 
             Assert.That(prefab, Is.Not.Null);
             Assert.That(
@@ -269,25 +306,24 @@ namespace VRMGames.CartridgeAndCloud.Tests.EditMode.VerticalSlicePhase1
         public void ProductIconAndCover_Load()
         {
             Texture2D icon =
-                Resources.Load<Texture2D>(
-                    Root +
-                    "Icons/" +
-                    "game-neon-drift_icon");
+                Load<Texture2D>(
+                    ProductTextureRoot +
+                    "Icons/game-neon-drift_icon.png");
             Texture2D cover =
-                Resources.Load<Texture2D>(
-                    Root +
-                    "Covers/" +
-                    "game-neon-drift_cover");
+                Load<Texture2D>(
+                    ProductTextureRoot +
+                    "Covers/game-neon-drift_cover.png");
 
             Assert.That(icon, Is.Not.Null);
             Assert.That(cover, Is.Not.Null);
         }
 
-        private static T Load<T>(string name)
+
+        private static T Load<T>(string path)
             where T : Object
         {
-            return Resources.Load<T>(
-                Root + name);
+            return AssetDatabase.LoadAssetAtPath<T>(
+                path);
         }
     }
 }

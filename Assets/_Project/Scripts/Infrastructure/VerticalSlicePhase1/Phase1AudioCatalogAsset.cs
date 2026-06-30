@@ -6,14 +6,14 @@ namespace VRMGames.CartridgeAndCloud.Infrastructure.VerticalSlicePhase1
 {
     [CreateAssetMenu(
         menuName =
-            "Cartridge & Cloud/Sprint 16 Phase 1/Audio Catalog",
+            "Cartridge & Cloud/Runtime/Audio Catalog",
         fileName =
-            "CC_S16_P1_AudioCatalog")]
+            "AudioCatalog")]
     public sealed class Phase1AudioCatalogAsset :
         ScriptableObject
     {
         private const string ResourceRoot =
-            "Sprint16Phase1/Audio/";
+            "Audio/";
 
         [Serializable]
         public sealed class Entry
@@ -68,83 +68,83 @@ namespace VRMGames.CartridgeAndCloud.Infrastructure.VerticalSlicePhase1
                     EntryFor(
                         "music.store",
                         Phase1AudioChannel.Music,
-                        "CC_S16_P1_MusicStore",
+                        "MusicStore",
                         0.45f,
                         true),
                     EntryFor(
                         "ambience.store",
                         Phase1AudioChannel.Ambience,
-                        "CC_S16_P1_AmbienceStore",
+                        "AmbienceStore",
                         0.45f,
                         true),
                     Feedback(
                         Phase1FeedbackKind.PlacementValid,
-                        "CC_S16_P1_PlacementValid"),
+                        "PlacementValid"),
                     Feedback(
                         Phase1FeedbackKind.PlacementInvalid,
-                        "CC_S16_P1_PlacementInvalid"),
+                        "PlacementInvalid"),
                     Feedback(
                         Phase1FeedbackKind.ObjectSelected,
-                        "CC_S16_P1_UiConfirm",
+                        "UiConfirm",
                         Phase1AudioChannel.Ui),
                     Feedback(
                         Phase1FeedbackKind.ObjectHovered,
-                        "CC_S16_P1_UiConfirm",
+                        "UiConfirm",
                         Phase1AudioChannel.Ui),
                     Feedback(
                         Phase1FeedbackKind.ProductAssigned,
-                        "CC_S16_P1_UiConfirm",
+                        "UiConfirm",
                         Phase1AudioChannel.Ui),
                     Feedback(
                         Phase1FeedbackKind.OutOfStock,
-                        "CC_S16_P1_UiError"),
+                        "UiError"),
                     Feedback(
                         Phase1FeedbackKind.Reserved,
-                        "CC_S16_P1_UiConfirm"),
+                        "UiConfirm"),
                     Feedback(
                         Phase1FeedbackKind.Restocked,
-                        "CC_S16_P1_OrderReceived"),
+                        "OrderReceived"),
                     Feedback(
                         Phase1FeedbackKind.OrderReceived,
-                        "CC_S16_P1_OrderReceived"),
+                        "OrderReceived"),
                     Feedback(
                         Phase1FeedbackKind.CustomerSatisfied,
-                        "CC_S16_P1_Checkout"),
+                        "Checkout"),
                     Feedback(
                         Phase1FeedbackKind.CustomerFrustrated,
-                        "CC_S16_P1_UiError"),
+                        "UiError"),
                     Feedback(
                         Phase1FeedbackKind.QueueEntered,
-                        "CC_S16_P1_Checkout"),
+                        "Checkout"),
                     Feedback(
                         Phase1FeedbackKind.CheckoutCompleted,
-                        "CC_S16_P1_Checkout"),
+                        "Checkout"),
                     Feedback(
                         Phase1FeedbackKind.Revenue,
-                        "CC_S16_P1_Checkout"),
+                        "Checkout"),
                     Feedback(
                         Phase1FeedbackKind.Expense,
-                        "CC_S16_P1_UiConfirm"),
+                        "UiConfirm"),
                     Feedback(
                         Phase1FeedbackKind.ClosingWarning,
-                        "CC_S16_P1_DayClosed"),
+                        "DayClosed"),
                     Feedback(
                         Phase1FeedbackKind.DayClosed,
-                        "CC_S16_P1_DayClosed"),
+                        "DayClosed"),
                     Feedback(
                         Phase1FeedbackKind.AutosaveSucceeded,
-                        "CC_S16_P1_UiConfirm",
+                        "UiConfirm",
                         Phase1AudioChannel.Ui),
                     Feedback(
                         Phase1FeedbackKind.AutosaveFailed,
-                        "CC_S16_P1_UiError",
+                        "UiError",
                         Phase1AudioChannel.Ui),
                     Feedback(
                         Phase1FeedbackKind.DoorOpened,
-                        "CC_S16_P1_Door"),
+                        "Door"),
                     Feedback(
                         Phase1FeedbackKind.DoorClosed,
-                        "CC_S16_P1_Door")
+                        "Door")
                 };
         }
 

@@ -1,0 +1,20 @@
+{
+    "name": "VRMGames.CartridgeAndCloud.Editor.ProjectOrganization",
+    "rootNamespace": "VRMGames.CartridgeAndCloud.Editor.ProjectOrganization",
+    "references": [
+        "VRMGames.CartridgeAndCloud.Domain",
+        "VRMGames.CartridgeAndCloud.Infrastructure",
+        "VRMGames.CartridgeAndCloud.Presentation"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": false,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

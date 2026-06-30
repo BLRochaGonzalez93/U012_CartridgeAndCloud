@@ -6,14 +6,14 @@ namespace VRMGames.CartridgeAndCloud.Infrastructure.VerticalSlicePhase1
 {
     [CreateAssetMenu(
         menuName =
-            "Cartridge & Cloud/Sprint 16 Phase 1/Presentation Catalog",
+            "Cartridge & Cloud/Runtime/Presentation Catalog",
         fileName =
-            "CC_S16_P1_PresentationCatalog")]
+            "PresentationCatalog")]
     public sealed class Phase1PresentationCatalogAsset :
         ScriptableObject
     {
         private const string AnimationRoot =
-            "Sprint16Phase1/Animations/";
+            "Animations/";
 
         [Serializable]
         public sealed class CharacterEntry
@@ -133,17 +133,17 @@ namespace VRMGames.CartridgeAndCloud.Infrastructure.VerticalSlicePhase1
                 _animations =
                     new[]
                     {
-                        Animation("idle", "CC_S16_P1_Anim_Idle", true),
-                        Animation("walk", "CC_S16_P1_Anim_Walk", true),
-                        Animation("observe", "CC_S16_P1_Anim_Observe", false),
-                        Animation("pick-product", "CC_S16_P1_Anim_PickProduct", false),
-                        Animation("queue-wait", "CC_S16_P1_Anim_QueueWait", true),
-                        Animation("checkout", "CC_S16_P1_Anim_Checkout", false),
-                        Animation("satisfied", "CC_S16_P1_Anim_Satisfied", false),
-                        Animation("frustrated", "CC_S16_P1_Anim_Frustrated", false),
-                        Animation("move-crate", "CC_S16_P1_Anim_MoveCrate", true),
-                        Animation("player-place", "CC_S16_P1_Anim_PlayerPlace", false),
-                        Animation("player-remove", "CC_S16_P1_Anim_PlayerRemove", false)
+                        Animation("idle", "Idle", true),
+                        Animation("walk", "Walk", true),
+                        Animation("observe", "Observe", false),
+                        Animation("pick-product", "PickProduct", false),
+                        Animation("queue-wait", "QueueWait", true),
+                        Animation("checkout", "Checkout", false),
+                        Animation("satisfied", "Satisfied", false),
+                        Animation("frustrated", "Frustrated", false),
+                        Animation("move-crate", "MoveCrate", true),
+                        Animation("player-place", "PlayerPlace", false),
+                        Animation("player-remove", "PlayerRemove", false)
                     };
             }
 
@@ -167,7 +167,7 @@ namespace VRMGames.CartridgeAndCloud.Infrastructure.VerticalSlicePhase1
                 id = id,
                 role = role,
                 prefabResourcePath =
-                    "Sprint16Phase1/Prefabs/Characters/" +
+                    "Characters/" +
                     prefabName,
                 materialVariantId =
                     materialVariantId,
@@ -245,7 +245,7 @@ namespace VRMGames.CartridgeAndCloud.Infrastructure.VerticalSlicePhase1
             string id =
                 ids[index % ids.Length];
 
-            return "Sprint16Phase1/Icons/" +
+            return "Products/Icons/" +
                 id +
                 "_icon";
         }

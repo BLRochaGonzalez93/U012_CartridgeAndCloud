@@ -34,32 +34,46 @@ namespace VRMGames.CartridgeAndCloud.Tests.PlayMode.VerticalSlicePhase1
         }
 
         [UnityTest]
-        public IEnumerator RequiredResources_Load()
+        public IEnumerator RequiredProjectAssets_Load()
         {
             yield return null;
 
+            Phase1RuntimeAssetRegistryAsset registry =
+                RequireRegistry();
+
             Assert.That(
-                Resources.Load<
-                    Phase1SettingsAsset>(
-                        "Sprint16Phase1/" +
-                        "CC_S16_P1_Settings"),
+                registry.Settings,
                 Is.Not.Null);
             Assert.That(
-                Resources.Load<
-                    Phase1ContentCatalogAsset>(
-                        "Sprint16Phase1/" +
-                        "CC_S16_P1_ContentCatalog"),
+                registry.ContentCatalog,
+                Is.Not.Null);
+            Assert.That(
+                registry.StoreShell,
+                Is.Not.Null);
+            Assert.That(
+                registry.MaterialPalette,
+                Is.Not.Null);
+            Assert.That(
+                registry.PresentationCatalog,
+                Is.Not.Null);
+            Assert.That(
+                registry.AudioCatalog,
                 Is.Not.Null);
         }
 
         [UnityTest]
         public IEnumerator FurniturePrefab_BuildsBlockout()
         {
+            Phase1RuntimeAssetRegistryAsset registry =
+                RequireRegistry();
+
+            Assert.That(
+                registry,
+                Is.Not.Null);
+
             GameObject prefab =
-                Resources.Load<GameObject>(
-                    "Sprint16Phase1/" +
-                    "Prefabs/Furniture/" +
-                    "CheckoutCounter");
+                LoadEditorAsset<GameObject>(
+                    "Assets/_Project/Prefabs/Furniture/CheckoutCounter.prefab");
 
             GameObject instance =
                 Object.Instantiate(prefab);
@@ -76,11 +90,16 @@ namespace VRMGames.CartridgeAndCloud.Tests.PlayMode.VerticalSlicePhase1
         [UnityTest]
         public IEnumerator ProductPrefab_BuildsMarker()
         {
+            Phase1RuntimeAssetRegistryAsset registry =
+                RequireRegistry();
+
+            Assert.That(
+                registry,
+                Is.Not.Null);
+
             GameObject prefab =
-                Resources.Load<GameObject>(
-                    "Sprint16Phase1/" +
-                    "Prefabs/Products/" +
-                    "NeonDrift");
+                LoadEditorAsset<GameObject>(
+                    "Assets/_Project/Prefabs/Products/NeonDrift.prefab");
 
             GameObject instance =
                 Object.Instantiate(prefab);
@@ -99,10 +118,8 @@ namespace VRMGames.CartridgeAndCloud.Tests.PlayMode.VerticalSlicePhase1
         public IEnumerator CharacterPrefab_BuildsPresence()
         {
             GameObject prefab =
-                Resources.Load<GameObject>(
-                    "Sprint16Phase1/" +
-                    "Prefabs/Characters/" +
-                    "Customer");
+                LoadEditorAsset<GameObject>(
+                    "Assets/_Project/Prefabs/Characters/Customer.prefab");
 
             GameObject instance =
                 Object.Instantiate(prefab);
@@ -133,10 +150,7 @@ namespace VRMGames.CartridgeAndCloud.Tests.PlayMode.VerticalSlicePhase1
                     Phase1AudioRouter>();
 
             Phase1AudioCatalogAsset catalog =
-                Resources.Load<
-                    Phase1AudioCatalogAsset>(
-                        "Sprint16Phase1/" +
-                        "CC_S16_P1_AudioCatalog");
+                RequireRegistry().AudioCatalog;
 
             router.Configure(catalog);
             router.SetChannelVolume(
@@ -165,10 +179,7 @@ namespace VRMGames.CartridgeAndCloud.Tests.PlayMode.VerticalSlicePhase1
                     Phase1AudioRouter>();
 
             router.Configure(
-                Resources.Load<
-                    Phase1AudioCatalogAsset>(
-                        "Sprint16Phase1/" +
-                        "CC_S16_P1_AudioCatalog"));
+                RequireRegistry().AudioCatalog);
 
             Assert.DoesNotThrow(
                 () => router.Play(
@@ -342,10 +353,7 @@ namespace VRMGames.CartridgeAndCloud.Tests.PlayMode.VerticalSlicePhase1
                 new GameObject("FurnitureVisual");
 
             var catalog =
-                Resources.Load<
-                    Phase1ContentCatalogAsset>(
-                        "Sprint16Phase1/" +
-                        "CC_S16_P1_ContentCatalog")
+                RequireRegistry().ContentCatalog
                     .BuildCatalog();
 
             catalog.TryGetFurniture(
@@ -375,10 +383,7 @@ namespace VRMGames.CartridgeAndCloud.Tests.PlayMode.VerticalSlicePhase1
                 new GameObject("FurnitureVisual");
 
             var catalog =
-                Resources.Load<
-                    Phase1ContentCatalogAsset>(
-                        "Sprint16Phase1/" +
-                        "CC_S16_P1_ContentCatalog")
+                RequireRegistry().ContentCatalog
                     .BuildCatalog();
 
             catalog.TryGetFurniture(
@@ -414,10 +419,7 @@ namespace VRMGames.CartridgeAndCloud.Tests.PlayMode.VerticalSlicePhase1
                         Sprint16Phase1TechnicalScenarioRunner>();
 
             runner.Configure(
-                Resources.Load<
-                    Phase1ContentCatalogAsset>(
-                        "Sprint16Phase1/" +
-                        "CC_S16_P1_ContentCatalog"),
+                RequireRegistry().ContentCatalog,
                 false);
 
             runner.RunScenario();
@@ -1075,6 +1077,93 @@ namespace VRMGames.CartridgeAndCloud.Tests.PlayMode.VerticalSlicePhase1
             {
                 yield return null;
             }
+        }
+
+        private static
+            Phase1RuntimeAssetRegistryAsset
+            RequireRegistry()
+        {
+            Phase1RuntimeAssetRegistryAsset registry =
+                Phase1RuntimeAssetRegistryAsset
+                    .FindLoaded();
+
+            if (registry == null)
+            {
+                registry =
+                    LoadEditorAsset<
+                        Phase1RuntimeAssetRegistryAsset>(
+                            "Assets/_Project/Settings/" +
+                            "Runtime/" +
+                            "RuntimeAssetRegistry.asset");
+            }
+
+            Assert.That(
+                registry,
+                Is.Not.Null,
+                "RuntimeAssetRegistry could not be resolved.");
+
+            return registry;
+        }
+
+        private static T LoadEditorAsset<T>(
+            string assetPath)
+            where T : UnityEngine.Object
+        {
+            System.Type assetDatabaseType = null;
+
+            foreach (Assembly assembly
+                     in System.AppDomain.CurrentDomain
+                         .GetAssemblies())
+            {
+                assetDatabaseType =
+                    assembly.GetType(
+                        "UnityEditor.AssetDatabase");
+
+                if (assetDatabaseType != null)
+                {
+                    break;
+                }
+            }
+
+            Assert.That(
+                assetDatabaseType,
+                Is.Not.Null,
+                "UnityEditor.AssetDatabase is unavailable.");
+
+            MethodInfo loadMethod =
+                assetDatabaseType.GetMethod(
+                    "LoadAssetAtPath",
+                    BindingFlags.Public |
+                    BindingFlags.Static,
+                    null,
+                    new[]
+                    {
+                        typeof(string),
+                        typeof(System.Type)
+                    },
+                    null);
+
+            Assert.That(
+                loadMethod,
+                Is.Not.Null,
+                "AssetDatabase.LoadAssetAtPath was not found.");
+
+            T asset =
+                loadMethod.Invoke(
+                    null,
+                    new object[]
+                    {
+                        assetPath,
+                        typeof(T)
+                    }) as T;
+
+            Assert.That(
+                asset,
+                Is.Not.Null,
+                "Asset not found: " +
+                assetPath);
+
+            return asset;
         }
 
         private static IntegratedGameStateSnapshot

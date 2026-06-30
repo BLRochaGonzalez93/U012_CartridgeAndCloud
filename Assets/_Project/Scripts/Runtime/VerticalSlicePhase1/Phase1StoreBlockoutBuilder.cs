@@ -130,6 +130,16 @@ namespace VRMGames.CartridgeAndCloud.Runtime.VerticalSlicePhase1
                 center,
                 width,
                 depth);
+            RepresentativeStoreVisualBuilder
+                .TryApply(
+                    _builtRoot,
+                    _surface,
+                    _shell,
+                    EntranceAnchor,
+                    CheckoutAnchor,
+                    ReceivingAnchor,
+                    BackroomAnchor,
+                    Door);
             RegisterPlayer();
             ConfigureWallOcclusion(center);
         }

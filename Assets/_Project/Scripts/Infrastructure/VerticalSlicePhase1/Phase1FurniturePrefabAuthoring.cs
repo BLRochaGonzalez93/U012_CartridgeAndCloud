@@ -24,26 +24,25 @@ namespace VRMGames.CartridgeAndCloud.Infrastructure.VerticalSlicePhase1
         [ContextMenu("Build Blockout")]
         public void BuildBlockout()
         {
-            Phase1ContentCatalogAsset content =
-                Resources.Load<
-                    Phase1ContentCatalogAsset>(
-                        "Sprint16Phase1/" +
-                        "CC_S16_P1_ContentCatalog");
+            if (transform.childCount > 0)
+            {
+                return;
+            }
 
-            Phase1MaterialPaletteAsset palette =
-                Resources.Load<
-                    Phase1MaterialPaletteAsset>(
-                        "Sprint16Phase1/" +
-                        "CC_S16_P1_MaterialPalette");
+            Phase1RuntimeAssetRegistryAsset registry =
+                Phase1RuntimeAssetRegistryAsset
+                    .FindLoaded();
 
-            if (content == null ||
-                palette == null)
+            if (registry == null ||
+                registry.ContentCatalog == null ||
+                registry.MaterialPalette == null)
             {
                 return;
             }
 
             Phase1Catalog catalog =
-                content.BuildCatalog();
+                registry.ContentCatalog
+                    .BuildCatalog();
 
             if (!catalog.TryGetFurniture(
                     _definitionId,
@@ -57,7 +56,7 @@ namespace VRMGames.CartridgeAndCloud.Infrastructure.VerticalSlicePhase1
                 .BuildFurniture(
                     gameObject,
                     definition,
-                    palette.Find(
+                    registry.MaterialPalette.Find(
                         definition
                             .MaterialVariantId),
                     _cellSize);

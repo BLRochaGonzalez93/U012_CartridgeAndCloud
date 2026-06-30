@@ -1,0 +1,140 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b8b6d883222c3cc498d8b9f523807dbd, type: 3}
+  m_Name: RepresentativePrefabCatalog
+  m_EditorClassIdentifier: VRMGames.CartridgeAndCloud.Infrastructure::VRMGames.CartridgeAndCloud.Infrastructure.VerticalSlicePhase1.RepresentativePrefabCatalogAsset
+  _architecture:
+  - id: architecture.automatic-door
+    prefab: {fileID: 8769497173653723215, guid: 902fae9f30573af4fb83f30c0eb15af6, type: 3}
+  - id: architecture.backroom-partition
+    prefab: {fileID: 1550405412189279281, guid: 6afaabca3fc84ce43bce0d5a571f2141, type: 3}
+  - id: architecture.corner-inner
+    prefab: {fileID: 774586833939203239, guid: 8326de81cbe6b6c488aff3e01eab441a, type: 3}
+  - id: architecture.corner-outer
+    prefab: {fileID: 2762638870326372724, guid: 86630f8bb9a3dd44eadcc3cb99d1c653, type: 3}
+  - id: architecture.end-cap
+    prefab: {fileID: 7605924836310181632, guid: 922447690a287bb40b0e0637e09b8d1c, type: 3}
+  - id: architecture.entrance-threshold
+    prefab: {fileID: 2193888844549216536, guid: b6fdade53717521498b183f5bae96305, type: 3}
+  - id: architecture.floor-edge.100
+    prefab: {fileID: 7579204622545130470, guid: a1632d5e73519f4448f13ec11c146a6e, type: 3}
+  - id: architecture.floor-transition.100
+    prefab: {fileID: 6261149350859926611, guid: e41ce63b6c5c01e4b9673778fd7f2336, type: 3}
+  - id: architecture.floor.100
+    prefab: {fileID: 7171192946882893386, guid: 94410c856fcbe9a44a4e0565b59a4810, type: 3}
+  - id: architecture.floor.200
+    prefab: {fileID: 1915775565858920383, guid: 07c25de10de27694080275bb6f53c0c5, type: 3}
+  - id: architecture.light-rail.100
+    prefab: {fileID: 5958740402966150658, guid: 071a65526166691439a82555489f480b, type: 3}
+  - id: architecture.light-rail.200
+    prefab: {fileID: 2515306469099885724, guid: 7166ef018508128479d9430b93d9f5fb, type: 3}
+  - id: architecture.linear-panel
+    prefab: {fileID: 1507833507561173569, guid: aa18e2f0d783d234c9e36dc461a8d40b, type: 3}
+  - id: architecture.spot-light
+    prefab: {fileID: 8039587013612534559, guid: caf5768b2fea32a43917881247aac1bb, type: 3}
+  - id: architecture.store-glass-left
+    prefab: {fileID: 8580162885873658976, guid: 337b1f690a30fa94c8695ded302f762c, type: 3}
+  - id: architecture.store-glass-right
+    prefab: {fileID: 8779750498127644364, guid: 7ff16f46388b8294db98ef11934e85df, type: 3}
+  - id: architecture.store-sign
+    prefab: {fileID: 4247828207018104839, guid: 42a748f39d94c6944a776252ad5609d9, type: 3}
+  - id: architecture.storefront-facade
+    prefab: {fileID: 1572897214991414912, guid: 73650c15b9c87b74aadb4120a3ea7cb1, type: 3}
+  - id: architecture.wall.100
+    prefab: {fileID: 8045858685958413850, guid: 7b005cd40ae5fc64fbaed6ea5b1c53c6, type: 3}
+  - id: architecture.wall.200
+    prefab: {fileID: 1671825068961143275, guid: 219f7c28a70241e45939b64cb1acf65e, type: 3}
+  - id: architecture.wall.400
+    prefab: {fileID: 2617848859051641342, guid: 663f1a1d303a53e4eb6308dfc89a0bbf, type: 3}
+  - id: architecture.zone-backroom
+    prefab: {fileID: 4624230526329153798, guid: cdb9e17a4b7c43a4492d0ac23ae81da2, type: 3}
+  - id: architecture.zone-checkout
+    prefab: {fileID: 2456526387895131141, guid: c974ec151bb118a408c386f9e8bbb4dd, type: 3}
+  - id: architecture.zone-receiving
+    prefab: {fileID: 7990776463866137802, guid: c6b702ea4697f7244bb3c227e8531b22, type: 3}
+  _furniture:
+  - id: backroom-storage
+    prefab: {fileID: 100000, guid: 6a32d46b756131d355af34feb5ec815a, type: 3}
+  - id: central-shelf
+    prefab: {fileID: 100000, guid: ee68430315c3ff624c8cb39e759e3362, type: 3}
+  - id: checkout-counter
+    prefab: {fileID: 100000, guid: 50cf0cf3c5cf40b6b6cb2622a64001d4, type: 3}
+  - id: decoration-plant
+    prefab: {fileID: 100000, guid: f75e2d3953fef002ae67aa64f5d7b9a5, type: 3}
+  - id: featured-display
+    prefab: {fileID: 100000, guid: a220b490e14b7507c07ed1d5ebb45162, type: 3}
+  - id: low-display
+    prefab: {fileID: 100000, guid: a50740f86803ca60444851be2b42c02e, type: 3}
+  - id: receiving-crate
+    prefab: {fileID: 100000, guid: 61dde0e295b6d720919f8fb896444331, type: 3}
+  - id: wall-shelf
+    prefab: {fileID: 100000, guid: d85a9e733850c34695b6e866472e96ed, type: 3}
+  _products:
+  - id: accessory-memory-core
+    prefab: {fileID: 100000, guid: 5ede70c331046392f8d66c885ebe2a1e, type: 3}
+  - id: case-cloud-runner
+    prefab: {fileID: 100000, guid: a61666dd7120c6ca962105fa1a44ad89, type: 3}
+  - id: console-vertex-one
+    prefab: {fileID: 100000, guid: a13d977b9b4144699385c65def0e446a, type: 3}
+  - id: controller-orbit-pad
+    prefab: {fileID: 100000, guid: 284a9c89ea04890133aedc074bfb9780, type: 3}
+  - id: game-neon-drift
+    prefab: {fileID: 100000, guid: 5ff5d278aad9e48c26952b67e72c9405, type: 3}
+  - id: headset-signal-pro
+    prefab: {fileID: 100000, guid: 2ef0238a34274b9d294281346ee99c23, type: 3}
+  - id: product-packaging.memory-core-box
+    prefab: {fileID: 7850397169077019460, guid: a811816a660cd244c8e7cdc35b3a6a29, type: 3}
+  - id: product-packaging.orbit-pad-box
+    prefab: {fileID: 828347030531176629, guid: deca8db8279a11b4c893b6e1db0b7d75, type: 3}
+  - id: product-packaging.signal-pro-box
+    prefab: {fileID: 4856417611778761560, guid: 9cbf9396578b87a4083154ce4c5c83b4, type: 3}
+  - id: product-packaging.vertex-one-box
+    prefab: {fileID: 2859970607911149377, guid: 0be192659d3ef1d4cb8748114dfd2307, type: 3}
+  _expansions:
+  - id: expansion.digital.code-card-rack
+    prefab: {fileID: 5289517498341446258, guid: ad136dd934173d54ca638b8d1feaf4b5, type: 3}
+  - id: expansion.digital.kiosk
+    prefab: {fileID: 5792934661519110087, guid: 27b991dc477438f4b89bfdcc0592b050, type: 3}
+  - id: expansion.ecommerce.order-desk
+    prefab: {fileID: 4172686435003980614, guid: 5a8a91561c8b8a440a5443f0eb8444c2, type: 3}
+  - id: expansion.ecommerce.sort-bins
+    prefab: {fileID: 3391289120308505446, guid: 4377692523ad661419e4bd1c2bbe7a66, type: 3}
+  - id: expansion.logistics.conveyor
+    prefab: {fileID: 4665331808070183449, guid: 3454415fb9851404a9c41a8b3b6aed6f, type: 3}
+  - id: expansion.logistics.packing-station
+    prefab: {fileID: 6548705103622981773, guid: 1f4581ac17447f64da5511d4de941fd0, type: 3}
+  - id: expansion.logistics.rolling-cart
+    prefab: {fileID: 8453593027293151570, guid: 52697d70fc4c75e4b82e2cc8ebcf6142, type: 3}
+  - id: expansion.market.analysis-wall
+    prefab: {fileID: 5385921175108715788, guid: 2b6f8ccb4558f7947bf8aec7c1631ac2, type: 3}
+  - id: expansion.market.planning-table
+    prefab: {fileID: 3321275589968154847, guid: d4fdbaeff51091b4585abadf721f9428, type: 3}
+  - id: expansion.publishing.lineup-wall
+    prefab: {fileID: 8796420735826900556, guid: 814075406f2697a449f45fa440b0d7f1, type: 3}
+  - id: expansion.publishing.meeting-table
+    prefab: {fileID: 8499597501608274629, guid: b15b659113d6ac347acd6eb0b047c494, type: 3}
+  - id: expansion.server.operations-desk
+    prefab: {fileID: 2040845543491311528, guid: 5a6467f26df307d4ea9ac26a83565e70, type: 3}
+  - id: expansion.server.rack
+    prefab: {fileID: 1654868873842332818, guid: b875fa3bb7b65054e8805c6259510992, type: 3}
+  - id: expansion.server.ups
+    prefab: {fileID: 1440222986318165964, guid: 16870f8bbfc794e4c894f4fbe9c7765b, type: 3}
+  - id: expansion.staff.locker
+    prefab: {fileID: 5403751990595409976, guid: 1d815b53a5f31e245b538fac05b952d7, type: 3}
+  - id: expansion.staff.task-board
+    prefab: {fileID: 526185761875546582, guid: 9dbed83b857d07842bf8a63bfa8ba026, type: 3}
+  - id: expansion.studio.art-desk
+    prefab: {fileID: 7253664400186857813, guid: ac08309937540d74792dac40dda8b45d, type: 3}
+  - id: expansion.studio.audio-station
+    prefab: {fileID: 3251987851546156897, guid: ec73e52504e46b447a8b28a511e31672, type: 3}
+  - id: expansion.studio.dev-desk
+    prefab: {fileID: 7525117168395116036, guid: 1f86cd44878a80a49bd1336bb2a8febf, type: 3}

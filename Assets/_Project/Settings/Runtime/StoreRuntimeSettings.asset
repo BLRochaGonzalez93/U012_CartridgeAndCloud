@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b80baaefcace8df4e600c83b4bff7e2d, type: 3}
+  m_Name: StoreRuntimeSettings
+  m_EditorClassIdentifier: 
+  _storeSceneName: Store
+  _buildBlockoutOnLoad: 1
+  _hideOccludingWalls: 1
+  _showProcedurePanel: 1
+  _vfxPoolSize: 24
+  _maximumBlockoutCustomers: 4

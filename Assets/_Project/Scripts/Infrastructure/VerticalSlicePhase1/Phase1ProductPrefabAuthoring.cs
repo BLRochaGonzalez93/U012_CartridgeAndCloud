@@ -21,26 +21,40 @@ namespace VRMGames.CartridgeAndCloud.Infrastructure.VerticalSlicePhase1
         [ContextMenu("Build Blockout")]
         public void BuildBlockout()
         {
-            Phase1ContentCatalogAsset content =
-                Resources.Load<
-                    Phase1ContentCatalogAsset>(
-                        "Sprint16Phase1/" +
-                        "CC_S16_P1_ContentCatalog");
+            Phase1ProductVisualMarker existing =
+                GetComponentInChildren<
+                    Phase1ProductVisualMarker>(true);
 
-            Phase1MaterialPaletteAsset palette =
-                Resources.Load<
-                    Phase1MaterialPaletteAsset>(
-                        "Sprint16Phase1/" +
-                        "CC_S16_P1_MaterialPalette");
+            if (existing != null)
+            {
+                existing.Configure(_productId);
+                return;
+            }
 
-            if (content == null ||
-                palette == null)
+            if (transform.childCount > 0)
+            {
+                Phase1ProductVisualMarker marker =
+                    gameObject.AddComponent<
+                        Phase1ProductVisualMarker>();
+
+                marker.Configure(_productId);
+                return;
+            }
+
+            Phase1RuntimeAssetRegistryAsset registry =
+                Phase1RuntimeAssetRegistryAsset
+                    .FindLoaded();
+
+            if (registry == null ||
+                registry.ContentCatalog == null ||
+                registry.MaterialPalette == null)
             {
                 return;
             }
 
             Phase1Catalog catalog =
-                content.BuildCatalog();
+                registry.ContentCatalog
+                    .BuildCatalog();
 
             if (!catalog.TryGetProduct(
                     _productId,
@@ -54,7 +68,7 @@ namespace VRMGames.CartridgeAndCloud.Infrastructure.VerticalSlicePhase1
                 .BuildProduct(
                     transform,
                     definition,
-                    palette.Find(
+                    registry.MaterialPalette.Find(
                         definition
                             .MaterialVariantId),
                     Vector3.zero,

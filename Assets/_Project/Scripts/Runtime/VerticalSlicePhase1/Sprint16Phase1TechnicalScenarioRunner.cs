@@ -92,11 +92,15 @@ namespace VRMGames.CartridgeAndCloud.Runtime.VerticalSlicePhase1
         {
             if (_catalogAsset == null)
             {
+                Phase1RuntimeAssetRegistryAsset
+                    registry =
+                        Phase1RuntimeAssetRegistryAsset
+                            .FindLoaded();
+
                 _catalogAsset =
-                    Resources.Load<
-                        Phase1ContentCatalogAsset>(
-                            "Sprint16Phase1/" +
-                            "CC_S16_P1_ContentCatalog");
+                    registry == null
+                        ? null
+                        : registry.ContentCatalog;
             }
 
             if (_catalogAsset == null)

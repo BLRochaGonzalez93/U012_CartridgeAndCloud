@@ -5,14 +5,14 @@ namespace VRMGames.CartridgeAndCloud.Infrastructure.VerticalSlicePhase1
 {
     [CreateAssetMenu(
         menuName =
-            "Cartridge & Cloud/Sprint 16 Phase 1/Material Palette",
+            "Cartridge & Cloud/Runtime/Material Palette",
         fileName =
-            "CC_S16_P1_MaterialPalette")]
+            "MaterialPalette")]
     public sealed class Phase1MaterialPaletteAsset :
         ScriptableObject
     {
         private const string ResourceRoot =
-            "Sprint16Phase1/Materials/";
+            "Materials/";
 
         [Serializable]
         public sealed class Entry
@@ -66,33 +66,33 @@ namespace VRMGames.CartridgeAndCloud.Infrastructure.VerticalSlicePhase1
             _entries =
                 new[]
                 {
-                    EntryFor("shell-wall", "CC_S16_P1_ShellWall"),
-                    EntryFor("shell-glass", "CC_S16_P1_ShellGlass"),
-                    EntryFor("shell-floor", "CC_S16_P1_ShellFloor"),
-                    EntryFor("zone-marker", "CC_S16_P1_ZoneMarker"),
-                    EntryFor("zone-checkout", "CC_S16_P1_ZoneCheckout"),
-                    EntryFor("zone-receiving", "CC_S16_P1_ZoneReceiving"),
-                    EntryFor("zone-backroom", "CC_S16_P1_ZoneBackroom"),
-                    EntryFor("furniture-checkout", "CC_S16_P1_FurnitureCheckout"),
-                    EntryFor("furniture-wall-shelf", "CC_S16_P1_FurnitureWallShelf"),
-                    EntryFor("furniture-central-shelf", "CC_S16_P1_FurnitureCentralShelf"),
-                    EntryFor("furniture-low-display", "CC_S16_P1_FurnitureLowDisplay"),
-                    EntryFor("furniture-featured", "CC_S16_P1_FurnitureFeatured"),
-                    EntryFor("furniture-storage", "CC_S16_P1_FurnitureStorage"),
-                    EntryFor("furniture-crate", "CC_S16_P1_FurnitureCrate"),
-                    EntryFor("decoration", "CC_S16_P1_Decoration"),
-                    EntryFor("product-game", "CC_S16_P1_ProductGame"),
-                    EntryFor("product-case", "CC_S16_P1_ProductCase"),
-                    EntryFor("product-console", "CC_S16_P1_ProductConsole"),
-                    EntryFor("product-controller", "CC_S16_P1_ProductController"),
-                    EntryFor("product-headset", "CC_S16_P1_ProductHeadset"),
-                    EntryFor("product-accessory", "CC_S16_P1_ProductAccessory"),
-                    EntryFor("character-employee", "CC_S16_P1_CharacterEmployee"),
-                    EntryFor("character-customer", "CC_S16_P1_CharacterCustomer"),
-                    EntryFor("character-supplier", "CC_S16_P1_CharacterSupplier"),
-                    EntryFor("feedback-valid", "CC_S16_P1_FeedbackValid"),
-                    EntryFor("feedback-invalid", "CC_S16_P1_FeedbackInvalid"),
-                    EntryFor("feedback-warning", "CC_S16_P1_FeedbackWarning")
+                    EntryFor("shell-wall", "ShellWall"),
+                    EntryFor("shell-glass", "ShellGlass"),
+                    EntryFor("shell-floor", "ShellFloor"),
+                    EntryFor("zone-marker", "ZoneMarker"),
+                    EntryFor("zone-checkout", "ZoneCheckout"),
+                    EntryFor("zone-receiving", "ZoneReceiving"),
+                    EntryFor("zone-backroom", "ZoneBackroom"),
+                    EntryFor("furniture-checkout", "FurnitureCheckout"),
+                    EntryFor("furniture-wall-shelf", "FurnitureWallShelf"),
+                    EntryFor("furniture-central-shelf", "FurnitureCentralShelf"),
+                    EntryFor("furniture-low-display", "FurnitureLowDisplay"),
+                    EntryFor("furniture-featured", "FurnitureFeatured"),
+                    EntryFor("furniture-storage", "FurnitureStorage"),
+                    EntryFor("furniture-crate", "FurnitureCrate"),
+                    EntryFor("decoration", "Decoration"),
+                    EntryFor("product-game", "ProductGame"),
+                    EntryFor("product-case", "ProductCase"),
+                    EntryFor("product-console", "ProductConsole"),
+                    EntryFor("product-controller", "ProductController"),
+                    EntryFor("product-headset", "ProductHeadset"),
+                    EntryFor("product-accessory", "ProductAccessory"),
+                    EntryFor("character-employee", "CharacterEmployee"),
+                    EntryFor("character-customer", "CharacterCustomer"),
+                    EntryFor("character-supplier", "CharacterSupplier"),
+                    EntryFor("feedback-valid", "FeedbackValid"),
+                    EntryFor("feedback-invalid", "FeedbackInvalid"),
+                    EntryFor("feedback-warning", "FeedbackWarning")
                 };
         }
 

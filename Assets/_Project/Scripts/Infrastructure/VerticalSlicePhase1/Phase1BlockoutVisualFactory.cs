@@ -24,6 +24,14 @@ namespace VRMGames.CartridgeAndCloud.Infrastructure.VerticalSlicePhase1
                     nameof(definition));
             }
 
+            if (RepresentativePrefabFactory
+                .TryBuildFurniture(
+                    root,
+                    definition.DefinitionId))
+            {
+                return;
+            }
+
             ClearGeneratedChildren(root.transform);
 
             Renderer rootRenderer =
@@ -227,6 +235,16 @@ namespace VRMGames.CartridgeAndCloud.Infrastructure.VerticalSlicePhase1
             {
                 throw new ArgumentNullException(
                     nameof(definition));
+            }
+
+            if (RepresentativePrefabFactory
+                .TryBuildProduct(
+                    parent,
+                    definition.ProductId,
+                    localPosition,
+                    out GameObject representative))
+            {
+                return representative;
             }
 
             PrimitiveType primitive =

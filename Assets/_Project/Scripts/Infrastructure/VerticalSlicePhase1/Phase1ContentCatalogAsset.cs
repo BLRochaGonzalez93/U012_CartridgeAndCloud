@@ -8,9 +8,9 @@ namespace VRMGames.CartridgeAndCloud.Infrastructure.VerticalSlicePhase1
 {
     [CreateAssetMenu(
         menuName =
-            "Cartridge & Cloud/Sprint 16 Phase 1/Content Catalog",
+            "Cartridge & Cloud/Runtime/Content Catalog",
         fileName =
-            "CC_S16_P1_ContentCatalog")]
+            "ContentCatalog")]
     public sealed class Phase1ContentCatalogAsset :
         ScriptableObject
     {
@@ -195,7 +195,7 @@ namespace VRMGames.CartridgeAndCloud.Infrastructure.VerticalSlicePhase1
                     true,
                     false,
                     "furniture-checkout",
-                    "Sprint16Phase1/Prefabs/Furniture/CheckoutCounter"),
+                    "Furniture/CheckoutCounter"),
                 CreateFurnitureEntry(
                     "wall-shelf",
                     "Wall Shelf",
@@ -209,7 +209,7 @@ namespace VRMGames.CartridgeAndCloud.Infrastructure.VerticalSlicePhase1
                     true,
                     true,
                     "furniture-wall-shelf",
-                    "Sprint16Phase1/Prefabs/Furniture/WallShelf"),
+                    "Furniture/WallShelf"),
                 CreateFurnitureEntry(
                     "central-shelf",
                     "Central Shelf",
@@ -223,7 +223,7 @@ namespace VRMGames.CartridgeAndCloud.Infrastructure.VerticalSlicePhase1
                     true,
                     true,
                     "furniture-central-shelf",
-                    "Sprint16Phase1/Prefabs/Furniture/CentralShelf"),
+                    "Furniture/CentralShelf"),
                 CreateFurnitureEntry(
                     "low-display",
                     "Low Display",
@@ -237,7 +237,7 @@ namespace VRMGames.CartridgeAndCloud.Infrastructure.VerticalSlicePhase1
                     true,
                     true,
                     "furniture-low-display",
-                    "Sprint16Phase1/Prefabs/Furniture/LowDisplay"),
+                    "Furniture/LowDisplay"),
                 CreateFurnitureEntry(
                     "featured-display",
                     "Featured Display",
@@ -251,7 +251,7 @@ namespace VRMGames.CartridgeAndCloud.Infrastructure.VerticalSlicePhase1
                     true,
                     true,
                     "furniture-featured",
-                    "Sprint16Phase1/Prefabs/Furniture/FeaturedDisplay"),
+                    "Furniture/FeaturedDisplay"),
                 CreateFurnitureEntry(
                     "backroom-storage",
                     "Backroom Storage",
@@ -265,7 +265,7 @@ namespace VRMGames.CartridgeAndCloud.Infrastructure.VerticalSlicePhase1
                     false,
                     false,
                     "furniture-storage",
-                    "Sprint16Phase1/Prefabs/Furniture/BackroomStorage"),
+                    "Furniture/BackroomStorage"),
                 CreateFurnitureEntry(
                     "receiving-crate",
                     "Receiving Crate",
@@ -279,7 +279,7 @@ namespace VRMGames.CartridgeAndCloud.Infrastructure.VerticalSlicePhase1
                     false,
                     false,
                     "furniture-crate",
-                    "Sprint16Phase1/Prefabs/Furniture/ReceivingCrate"),
+                    "Furniture/ReceivingCrate"),
                 CreateFurnitureEntry(
                     "decoration-plant",
                     "Decorative Plant",
@@ -293,7 +293,7 @@ namespace VRMGames.CartridgeAndCloud.Infrastructure.VerticalSlicePhase1
                     false,
                     false,
                     "decoration",
-                    "Sprint16Phase1/Prefabs/Furniture/DecorationPlant")
+                    "Furniture/DecorationPlant")
             };
         }
 
@@ -425,11 +425,11 @@ namespace VRMGames.CartridgeAndCloud.Infrastructure.VerticalSlicePhase1
                     materialVariantId,
                 labelId = labelId,
                 iconResourcePath =
-                    "Sprint16Phase1/Icons/" +
+                    "Products/Icons/" +
                     resourceId +
                     "_icon",
                 coverResourcePath =
-                    "Sprint16Phase1/Covers/" +
+                    "Products/Covers/" +
                     resourceId +
                     "_cover",
                 prefabResourcePath =
@@ -444,17 +444,17 @@ namespace VRMGames.CartridgeAndCloud.Infrastructure.VerticalSlicePhase1
             switch (productId)
             {
                 case "game-neon-drift":
-                    return "Sprint16Phase1/Prefabs/Products/NeonDrift";
+                    return "Products/NeonDrift";
                 case "case-cloud-runner":
-                    return "Sprint16Phase1/Prefabs/Products/CloudRunnerCase";
+                    return "Products/CloudRunnerCase";
                 case "console-vertex-one":
-                    return "Sprint16Phase1/Prefabs/Products/VertexOneConsole";
+                    return "Products/VertexOneConsole";
                 case "controller-orbit-pad":
-                    return "Sprint16Phase1/Prefabs/Products/OrbitPadController";
+                    return "Products/OrbitPadController";
                 case "headset-signal-pro":
-                    return "Sprint16Phase1/Prefabs/Products/SignalProHeadset";
+                    return "Products/SignalProHeadset";
                 default:
-                    return "Sprint16Phase1/Prefabs/Products/MemoryCoreAccessory";
+                    return "Products/MemoryCoreAccessory";
             }
         }
     }

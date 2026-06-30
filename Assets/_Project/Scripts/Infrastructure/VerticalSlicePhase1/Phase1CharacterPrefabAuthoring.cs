@@ -29,18 +29,19 @@ namespace VRMGames.CartridgeAndCloud.Infrastructure.VerticalSlicePhase1
         [ContextMenu("Build Blockout")]
         public void BuildBlockout()
         {
+            EnsurePresence();
+
             if (transform.childCount > 0)
             {
                 return;
             }
 
-            Phase1MaterialPaletteAsset palette =
-                Resources.Load<
-                    Phase1MaterialPaletteAsset>(
-                        "Sprint16Phase1/" +
-                        "CC_S16_P1_MaterialPalette");
+            Phase1RuntimeAssetRegistryAsset registry =
+                Phase1RuntimeAssetRegistryAsset
+                    .FindLoaded();
 
-            if (palette == null)
+            if (registry == null ||
+                registry.MaterialPalette == null)
             {
                 return;
             }
@@ -66,10 +67,31 @@ namespace VRMGames.CartridgeAndCloud.Infrastructure.VerticalSlicePhase1
             if (renderer != null)
             {
                 renderer.sharedMaterial =
-                    palette.Find(
+                    registry.MaterialPalette.Find(
                         _materialVariantId);
             }
+        }
 
+        public void Configure(
+            string characterId,
+            Phase1CharacterRole role,
+            string materialVariantId)
+        {
+            _characterId =
+                characterId ?? string.Empty;
+            _role = role;
+            _materialVariantId =
+                materialVariantId ??
+                string.Empty;
+
+            if (UnityEngine.Application.isPlaying)
+            {
+                EnsurePresence();
+            }
+        }
+
+        private void EnsurePresence()
+        {
             Phase1CharacterPresence presence =
                 GetComponent<
                     Phase1CharacterPresence>();
@@ -84,19 +106,6 @@ namespace VRMGames.CartridgeAndCloud.Infrastructure.VerticalSlicePhase1
             presence.Configure(
                 _characterId,
                 _role);
-        }
-
-        public void Configure(
-            string characterId,
-            Phase1CharacterRole role,
-            string materialVariantId)
-        {
-            _characterId =
-                characterId ?? string.Empty;
-            _role = role;
-            _materialVariantId =
-                materialVariantId ??
-                string.Empty;
         }
     }
 }

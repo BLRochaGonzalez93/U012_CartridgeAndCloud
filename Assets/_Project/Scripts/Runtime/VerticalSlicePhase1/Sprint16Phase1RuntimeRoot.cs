@@ -16,20 +16,7 @@ namespace VRMGames.CartridgeAndCloud.Runtime.VerticalSlicePhase1
     public sealed class Sprint16Phase1RuntimeRoot :
         MonoBehaviour
     {
-        private const string SettingsPath =
-            "Sprint16Phase1/CC_S16_P1_Settings";
-        private const string ContentPath =
-            "Sprint16Phase1/CC_S16_P1_ContentCatalog";
-        private const string ShellPath =
-            "Sprint16Phase1/CC_S16_P1_StoreShell";
-        private const string PalettePath =
-            "Sprint16Phase1/CC_S16_P1_MaterialPalette";
-        private const string PresentationPath =
-            "Sprint16Phase1/CC_S16_P1_PresentationCatalog";
-        private const string AudioPath =
-            "Sprint16Phase1/CC_S16_P1_AudioCatalog";
-
-        public static Sprint16Phase1RuntimeRoot
+public static Sprint16Phase1RuntimeRoot
             Instance { get; private set; }
 
         private Phase1SettingsAsset _settings;
@@ -115,30 +102,27 @@ namespace VRMGames.CartridgeAndCloud.Runtime.VerticalSlicePhase1
 
         private void LoadAssets()
         {
-            _settings =
-                Resources.Load<
-                    Phase1SettingsAsset>(
-                        SettingsPath);
+            Phase1RuntimeAssetRegistryAsset
+                registry =
+                    Phase1RuntimeAssetRegistryAsset
+                        .FindLoaded();
+
+            if (registry == null)
+            {
+                Debug.LogError(
+                    "[Runtime] Preloaded asset registry is missing.");
+                return;
+            }
+
+            _settings = registry.Settings;
             _contentAsset =
-                Resources.Load<
-                    Phase1ContentCatalogAsset>(
-                        ContentPath);
-            _shellAsset =
-                Resources.Load<
-                    Phase1StoreShellAsset>(
-                        ShellPath);
+                registry.ContentCatalog;
+            _shellAsset = registry.StoreShell;
             _paletteAsset =
-                Resources.Load<
-                    Phase1MaterialPaletteAsset>(
-                        PalettePath);
+                registry.MaterialPalette;
             _presentationAsset =
-                Resources.Load<
-                    Phase1PresentationCatalogAsset>(
-                        PresentationPath);
-            _audioAsset =
-                Resources.Load<
-                    Phase1AudioCatalogAsset>(
-                        AudioPath);
+                registry.PresentationCatalog;
+            _audioAsset = registry.AudioCatalog;
         }
 
         private void HandleSceneLoaded(
@@ -320,7 +304,7 @@ namespace VRMGames.CartridgeAndCloud.Runtime.VerticalSlicePhase1
             }
 
             Debug.LogError(
-                "[Sprint16 Phase1] Required Resources assets are missing.");
+                "[Runtime] Required project assets are missing.");
             return false;
         }
 
