@@ -12,8 +12,8 @@ EditorBuildSettings:
     path: Assets/_Project/Scenes/MainMenu.unity
     guid: b00786c6952a55d418cf16503030c766
   - enabled: 1
-    path: Assets/_Project/Scenes/Store.unity
-    guid: 45adcce906944f74bad3a0fb7d62f8e5
+    path: Assets/_Project/Scenes/StoreInitial.unity
+    guid: 32a95e5e16aaf15449a6f81392cf5dcf
   - enabled: 1
     path: Assets/_Project/Scenes/TestLab.unity
     guid: 002b2ad62af3c614b91e32722c9452be

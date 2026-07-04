@@ -38,9 +38,9 @@ namespace VRMGames.CartridgeAndCloud.Tests.PlayMode
             ApplicationRoot root = ApplicationRoot.Instance;
             StableId sessionId = root.GameSessionService.Current.SessionId;
 
-            root.RequestLoad(SceneId.Store);
+            root.RequestLoad(SceneId.StoreInitial);
 
-            while (SceneManager.GetActiveScene().name != "Store")
+            while (SceneManager.GetActiveScene().name != "StoreInitial")
             {
                 yield return null;
             }

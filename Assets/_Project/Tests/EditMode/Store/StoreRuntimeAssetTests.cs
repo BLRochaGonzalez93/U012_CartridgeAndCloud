@@ -233,7 +233,7 @@ namespace VRMGames.CartridgeAndCloud.Tests.EditMode.Store
         }
 
         [Test]
-        public void Settings_EnableBlockout()
+        public void Settings_UseAuthoredStoreInitial()
         {
             StoreRuntimeSettingsAsset settings =
                 Load<StoreRuntimeSettingsAsset>(
@@ -241,8 +241,11 @@ namespace VRMGames.CartridgeAndCloud.Tests.EditMode.Store
                     "StoreRuntimeSettings.asset");
 
             Assert.That(
+                settings.StoreSceneName,
+                Is.EqualTo("StoreInitial"));
+            Assert.That(
                 settings.BuildBlockoutOnLoad,
-                Is.True);
+                Is.False);
             Assert.That(
                 settings.HideOccludingWalls,
                 Is.True);

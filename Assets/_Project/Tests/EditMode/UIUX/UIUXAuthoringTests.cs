@@ -21,7 +21,7 @@ namespace VRMGames.CartridgeAndCloud.Tests.EditMode.UIUX
                     Is.EqualTo("MainMenu"));
                 Assert.That(
                     asset.StoreSceneName,
-                    Is.EqualTo("Store"));
+                    Is.EqualTo("StoreInitial"));
                 Assert.That(
                     asset.CurrencyCode,
                     Is.EqualTo("EUR"));

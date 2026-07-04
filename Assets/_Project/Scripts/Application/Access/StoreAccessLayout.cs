@@ -160,16 +160,36 @@ namespace VRMGames.CartridgeAndCloud.Application.Access
             {
                 new AccessAnchor(
                     new AccessAnchorId(
-                        "rear-service"),
-                    new GridCoordinate(10, 27)),
+                        "warehouse-entry-front-01"),
+                    new GridCoordinate(8, 23)),
                 new AccessAnchor(
                     new AccessAnchorId(
-                        "left-display"),
-                    new GridCoordinate(3, 15)),
+                        "warehouse-entry-front-02"),
+                    new GridCoordinate(9, 23)),
                 new AccessAnchor(
                     new AccessAnchorId(
-                        "right-display"),
-                    new GridCoordinate(16, 15))
+                        "warehouse-entry-front-03"),
+                    new GridCoordinate(10, 23)),
+                new AccessAnchor(
+                    new AccessAnchorId(
+                        "warehouse-entry-front-04"),
+                    new GridCoordinate(11, 23)),
+                new AccessAnchor(
+                    new AccessAnchorId(
+                        "warehouse-entry-rear-01"),
+                    new GridCoordinate(8, 24)),
+                new AccessAnchor(
+                    new AccessAnchorId(
+                        "warehouse-entry-rear-02"),
+                    new GridCoordinate(9, 24)),
+                new AccessAnchor(
+                    new AccessAnchorId(
+                        "warehouse-entry-rear-03"),
+                    new GridCoordinate(10, 24)),
+                new AccessAnchor(
+                    new AccessAnchorId(
+                        "warehouse-entry-rear-04"),
+                    new GridCoordinate(11, 24))
             };
 
             return new StoreAccessLayout(

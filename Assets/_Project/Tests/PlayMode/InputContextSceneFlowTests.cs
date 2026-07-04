@@ -71,13 +71,13 @@ namespace VRMGames.CartridgeAndCloud.Tests.PlayMode
             IInputContextService service = root.InputContextService;
 
             SceneTransitionRequestResult request =
-                root.RequestLoad(SceneId.Store);
+                root.RequestLoad(SceneId.StoreInitial);
 
             Assert.That(
                 request,
                 Is.EqualTo(SceneTransitionRequestResult.Accepted));
 
-            while (SceneManager.GetActiveScene().name != "Store")
+            while (SceneManager.GetActiveScene().name != "StoreInitial")
             {
                 yield return null;
             }

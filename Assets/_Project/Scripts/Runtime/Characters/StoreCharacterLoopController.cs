@@ -24,6 +24,7 @@ namespace VRMGames.CartridgeAndCloud.Runtime.Characters
         private int _maximumCustomers;
         private int _activeCustomers;
         private Transform _characterRoot;
+        private Transform _employee;
 
         public bool IsCustomerSequenceRunning =>
             _activeCustomers > 0;
@@ -210,9 +211,19 @@ namespace VRMGames.CartridgeAndCloud.Runtime.Characters
                         "Product reserved for customer cart.",
                         display.name));
 
+                Transform checkout =
+                    FindCheckoutTransform();
+
+                if (_employee != null)
+                {
+                    _employee.position =
+                        checkout.position +
+                        Vector3.forward * 0.65f;
+                }
+
                 yield return MoveTo(
                     customer.transform,
-                    _checkout.position +
+                    checkout.position +
                     Vector3.back * 0.8f,
                     2f);
 
@@ -337,15 +348,18 @@ namespace VRMGames.CartridgeAndCloud.Runtime.Characters
 
         private void SpawnEmployee()
         {
-            StoreBlockoutVisualFactory
-                .BuildCharacter(
-                    _characterRoot,
-                    "employee-main",
-                    CharacterRole.Employee,
-                    _palette.Find(
-                        "character-employee"),
-                    _checkout.position +
-                    Vector3.forward * 0.65f);
+            GameObject employee =
+                StoreBlockoutVisualFactory
+                    .BuildCharacter(
+                        _characterRoot,
+                        "employee-main",
+                        CharacterRole.Employee,
+                        _palette.Find(
+                            "character-employee"),
+                        _checkout.position +
+                        Vector3.forward * 0.65f);
+
+            _employee = employee.transform;
         }
 
         private void SpawnSupplierPlaceholder()
@@ -362,6 +376,42 @@ namespace VRMGames.CartridgeAndCloud.Runtime.Characters
                         Vector3.right * 1.1f);
 
             supplier.SetActive(false);
+        }
+
+        private Transform FindCheckoutTransform()
+        {
+            PlacedFixtureVisual[] visuals =
+                UnityEngine.Object
+                    .FindObjectsByType<
+                        PlacedFixtureVisual>(
+                            FindObjectsInactive.Exclude,
+                            FindObjectsSortMode.None);
+
+            foreach (PlacedStoreFixtureRecord fixture
+                     in _service.State.Fixtures)
+            {
+                if (!_catalog.TryGetFurniture(
+                        fixture.DefinitionId,
+                        out StoreFixtureDefinition definition) ||
+                    definition.Kind !=
+                    StoreFixtureKind.CheckoutCounter)
+                {
+                    continue;
+                }
+
+                foreach (PlacedFixtureVisual visual in visuals)
+                {
+                    if (string.Equals(
+                            visual.InstanceId,
+                            fixture.InstanceId,
+                            StringComparison.Ordinal))
+                    {
+                        return visual.transform;
+                    }
+                }
+            }
+
+            return _checkout;
         }
 
         private Transform

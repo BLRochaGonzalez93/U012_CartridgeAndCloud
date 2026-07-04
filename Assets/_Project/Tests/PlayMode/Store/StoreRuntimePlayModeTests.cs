@@ -455,7 +455,7 @@ namespace VRMGames.CartridgeAndCloud.Tests.PlayMode.Store
         }
 
         [UnityTest]
-        public IEnumerator StoreScene_BuildsPhaseOneBlockout()
+        public IEnumerator StoreInitial_BindsAuthoredEnvironmentAndRuntime()
         {
             while (UIRuntimeCompositionRoot
                        .Instance == null)
@@ -485,7 +485,7 @@ namespace VRMGames.CartridgeAndCloud.Tests.PlayMode.Store
 
             AsyncOperation operation =
                 SceneManager.LoadSceneAsync(
-                    "Store",
+                    "StoreInitial",
                     LoadSceneMode.Single);
 
             while (!operation.isDone)
@@ -497,8 +497,7 @@ namespace VRMGames.CartridgeAndCloud.Tests.PlayMode.Store
                 Time.realtimeSinceStartup + 8f;
 
             while (GameObject.Find(
-                       StoreBlockoutBuilder
-                           .RootName) == null &&
+                       "S16_P1_OperationsCanvas") == null &&
                    Time.realtimeSinceStartup <
                        timeout)
             {
@@ -506,10 +505,14 @@ namespace VRMGames.CartridgeAndCloud.Tests.PlayMode.Store
             }
 
             Assert.That(
-                GameObject.Find(
-                    StoreBlockoutBuilder
-                        .RootName),
+                Object.FindFirstObjectByType<
+                    VRMGames.CartridgeAndCloud.Presentation.Store.Authoring.StoreInitialSceneContext>(),
                 Is.Not.Null);
+            Assert.That(
+                GameObject.Find(
+                    StoreBlockoutBuilder.RootName),
+                Is.Null,
+                "StoreInitial must use authored architecture, not the procedural blockout.");
             Assert.That(
                 Object.FindFirstObjectByType<
                     AutomaticSlidingDoorController>(),
@@ -948,13 +951,17 @@ namespace VRMGames.CartridgeAndCloud.Tests.PlayMode.Store
                 storeRuntime,
                 Is.Not.Null);
 
-            GameObject backWall =
-                GameObject.Find(
-                    "Wall_Back");
+            OccludableWall authoredWall =
+                Object.FindFirstObjectByType<
+                    OccludableWall>(
+                        FindObjectsInactive.Include);
 
             Assert.That(
-                backWall,
+                authoredWall,
                 Is.Not.Null);
+
+            GameObject backWall =
+                authoredWall.gameObject;
 
             PlacedFixtureVisual[]
                 fixtureVisuals =
@@ -1224,7 +1231,7 @@ namespace VRMGames.CartridgeAndCloud.Tests.PlayMode.Store
         }
 
         [UnityTest]
-        public IEnumerator StoreScene_HasWarmLightingRig()
+        public IEnumerator StoreInitial_HasWarmLightingRig()
         {
             while (UIRuntimeCompositionRoot
                        .Instance == null)
@@ -1253,7 +1260,7 @@ namespace VRMGames.CartridgeAndCloud.Tests.PlayMode.Store
             }
 
             yield return SceneManager.LoadSceneAsync(
-                "Store",
+                "StoreInitial",
                 LoadSceneMode.Single);
 
             float timeout =

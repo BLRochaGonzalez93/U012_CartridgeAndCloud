@@ -25,7 +25,7 @@ MonoBehaviour:
   - m_enabled: 1
     m_path: Assets/_Project/Scenes/MainMenu.unity
   - m_enabled: 1
-    m_path: Assets/_Project/Scenes/Store.unity
+    m_path: Assets/_Project/Scenes/StoreInitial.unity
   - m_enabled: 1
     m_path: Assets/_Project/Scenes/TestLab.unity
   m_HasScriptingDefines: 0

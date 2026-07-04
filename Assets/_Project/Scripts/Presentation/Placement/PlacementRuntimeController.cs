@@ -334,6 +334,49 @@ namespace VRMGames.CartridgeAndCloud.Presentation.Placement
             return true;
         }
 
+        public bool TryRegisterExistingView(
+            PlacedObjectRecord record,
+            PlacedObjectView view)
+        {
+            if (record == null)
+            {
+                throw new ArgumentNullException(nameof(record));
+            }
+
+            if (view == null)
+            {
+                throw new ArgumentNullException(nameof(view));
+            }
+
+            EnsureRegistry();
+
+            if (_registry == null)
+            {
+                return false;
+            }
+
+            if (_registry.TryGetRecord(record.Id, out _))
+            {
+                return false;
+            }
+
+            PlacementValidationResult result =
+                _registry.TryPlace(record);
+
+            if (!result.IsValid)
+            {
+                CurrentFailureReason = result.FailureReason;
+                return false;
+            }
+
+            view.Configure(record.Id);
+            _viewsById[record.Id] = view;
+            CurrentFailureReason = PlacementFailureReason.None;
+            CurrentAccessFailureReason =
+                AccessValidationFailureReason.None;
+            return true;
+        }
+
         public bool TryRemoveAtScreenPosition(
             Vector2 screenPosition)
         {

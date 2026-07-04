@@ -12,11 +12,11 @@ namespace VRMGames.CartridgeAndCloud.Infrastructure.Store
     {
         [SerializeField]
         private string _storeSceneName =
-            "Store";
+            "StoreInitial";
 
         [SerializeField]
         private bool _buildBlockoutOnLoad =
-            true;
+            false;
 
         [SerializeField]
         private bool _hideOccludingWalls =

@@ -140,26 +140,6 @@ namespace VRMGames.CartridgeAndCloud.Runtime.Inventory
                 }
             }
 
-            if (visualIndex == 0)
-            {
-                GameObject emptyCrate =
-                    StoreBlockoutVisualFactory
-                        .AddCube(
-                            _backroomVisualRoot,
-                            "EmptyMerchandiseCrate",
-                            new Vector3(
-                                0.9f,
-                                0.55f,
-                                0.65f),
-                            new Vector3(
-                                0f,
-                                0.275f,
-                                0f),
-                            _palette.Find(
-                                "furniture-crate"));
-
-                DisableColliders(emptyCrate);
-            }
         }
 
         private void RefreshDisplays()

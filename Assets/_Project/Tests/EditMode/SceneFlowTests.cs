@@ -12,7 +12,7 @@ namespace VRMGames.CartridgeAndCloud.Tests.EditMode
         {
             "Assets/_Project/Scenes/Bootstrap.unity",
             "Assets/_Project/Scenes/MainMenu.unity",
-            "Assets/_Project/Scenes/Store.unity",
+            "Assets/_Project/Scenes/StoreInitial.unity",
             "Assets/_Project/Scenes/TestLab.unity"
         };
 

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using VRMGames.CartridgeAndCloud.Presentation.Placement;
 using VRMGames.CartridgeAndCloud.Presentation.Store;
+using VRMGames.CartridgeAndCloud.Presentation.Store.Authoring;
 
 using VRMGames.CartridgeAndCloud.Domain.Characters;
 using VRMGames.CartridgeAndCloud.Infrastructure.Store;
@@ -75,6 +76,54 @@ namespace VRMGames.CartridgeAndCloud.Runtime.Development.Blockout
             _settings = settings ??
                 throw new ArgumentNullException(
                     nameof(settings));
+        }
+
+        public void BindAuthoredScene(
+            StoreInitialSceneContext context)
+        {
+            if (context == null)
+            {
+                throw new ArgumentNullException(nameof(context));
+            }
+
+            if (_shell == null ||
+                _palette == null ||
+                _settings == null)
+            {
+                throw new InvalidOperationException(
+                    "Blockout builder must be configured before binding an authored scene.");
+            }
+
+            context.ValidateOrThrow();
+
+            _surface = context.PlacementSurface;
+            EntranceAnchor = context.EntranceAnchor;
+            CheckoutAnchor = context.CheckoutAnchor;
+            ReceivingAnchor = context.ReceivingAnchor;
+            BackroomAnchor = context.BackroomAnchor;
+            Door = context.Door;
+            WallOcclusion = context.WallOcclusion;
+
+            float entranceWidth =
+                _shell.EntranceWidthCells *
+                _shell.CellSize;
+
+            Door.Configure(
+                context.DoorParts.LeftPanel,
+                context.DoorParts.RightPanel,
+                entranceWidth * 0.48f,
+                _shell.DoorOpenDistance,
+                _shell.DoorSpeed);
+
+            RegisterPlayer();
+
+            if (WallOcclusion != null)
+            {
+                WallOcclusion.Configure(
+                    context.GameplayCamera,
+                    context.TechnicalPlayer,
+                    _settings.HideOccludingWalls);
+            }
         }
 
         public void Build()

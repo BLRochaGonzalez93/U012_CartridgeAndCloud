@@ -15,14 +15,14 @@ namespace VRMGames.CartridgeAndCloud.Application.SceneFlow
     }
 
     /// <summary>
-    /// Stable identifiers for the approved Sprint 1 scene list.
+    /// Stable identifiers for the approved scene list.
     /// Values intentionally match the validated build indexes.
     /// </summary>
     public enum SceneId
     {
         Bootstrap = 0,
         MainMenu = 1,
-        Store = 2,
+        StoreInitial = 2,
         TestLab = 3
     }
 

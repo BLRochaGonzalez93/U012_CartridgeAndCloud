@@ -57,30 +57,33 @@ namespace VRMGames.CartridgeAndCloud.Tests.PlayMode
                 Object.FindFirstObjectByType<MainMenuController>(),
                 Is.Not.Null);
         }
-
         [UnityTest]
-        public IEnumerator Store_LoadsWithExpectedTechnicalObjects()
+        public IEnumerator StoreInitial_LoadsWithAuthoredSceneContract()
         {
-            yield return LoadScene("Store");
+            yield return LoadScene("StoreInitial");
 
             AssertActiveSceneRootNames(
-                "Main Camera",
-                "Directional Light",
-                "StoreSceneController",
-                "Canvas",
-                "EventSystem",
-                "S5_StoreShell",
+                "Systems",
+                "Cameras",
+                "UI",
+                "StoreInitialEnvironment",
+                "DynamicFurniture",
+                "DynamicProducts",
+                "Customers",
+                "Debug",
                 "Sprint15StoreUI");
+
+            Assert.That(
+                Object.FindFirstObjectByType<
+                    VRMGames.CartridgeAndCloud.Presentation.Store.Authoring.StoreInitialSceneContext>(),
+                Is.Not.Null);
 
             StoreSceneController controller =
                 Object.FindFirstObjectByType<StoreSceneController>();
 
-            Assert.That(
-                controller,
-                Is.Not.Null);
+            Assert.That(controller, Is.Not.Null);
 
             controller.ReturnToMainMenu();
-
             yield return WaitForActiveScene("MainMenu");
         }
 
@@ -95,7 +98,7 @@ namespace VRMGames.CartridgeAndCloud.Tests.PlayMode
         }
 
         [UnityTest]
-        public IEnumerator MainMenuController_WhenEnterStoreInvoked_LoadsStore()
+        public IEnumerator MainMenuController_WhenEnterStoreInvoked_LoadsStoreInitial()
         {
             yield return LoadBootstrapAndWaitForMainMenu();
 
@@ -105,7 +108,7 @@ namespace VRMGames.CartridgeAndCloud.Tests.PlayMode
             Assert.That(controller, Is.Not.Null);
 
             controller.EnterStore();
-            yield return WaitForActiveScene("Store");
+            yield return WaitForActiveScene("StoreInitial");
         }
 
         [UnityTest]
@@ -113,8 +116,8 @@ namespace VRMGames.CartridgeAndCloud.Tests.PlayMode
         {
             yield return LoadBootstrapAndWaitForMainMenu();
 
-            ApplicationRoot.Instance.RequestLoad(SceneId.Store);
-            yield return WaitForActiveScene("Store");
+            ApplicationRoot.Instance.RequestLoad(SceneId.StoreInitial);
+            yield return WaitForActiveScene("StoreInitial");
 
             StoreSceneController controller =
                 Object.FindFirstObjectByType<StoreSceneController>();
@@ -130,8 +133,8 @@ namespace VRMGames.CartridgeAndCloud.Tests.PlayMode
         {
             yield return LoadBootstrapAndWaitForMainMenu();
 
-            ApplicationRoot.Instance.RequestLoad(SceneId.Store);
-            yield return WaitForActiveScene("Store");
+            ApplicationRoot.Instance.RequestLoad(SceneId.StoreInitial);
+            yield return WaitForActiveScene("StoreInitial");
 
             ApplicationRoot.Instance.RequestLoad(SceneId.MainMenu);
             yield return WaitForActiveScene("MainMenu");
@@ -145,7 +148,7 @@ namespace VRMGames.CartridgeAndCloud.Tests.PlayMode
             yield return LoadBootstrapAndWaitForMainMenu();
 
             SceneTransitionRequestResult firstResult =
-                ApplicationRoot.Instance.RequestLoad(SceneId.Store);
+                ApplicationRoot.Instance.RequestLoad(SceneId.StoreInitial);
 
             SceneTransitionRequestResult concurrentResult =
                 ApplicationRoot.Instance.RequestLoad(SceneId.TestLab);
@@ -155,7 +158,7 @@ namespace VRMGames.CartridgeAndCloud.Tests.PlayMode
                 concurrentResult,
                 Is.EqualTo(SceneTransitionRequestResult.TransitionInProgress));
 
-            yield return WaitForActiveScene("Store");
+            yield return WaitForActiveScene("StoreInitial");
         }
 
         private static IEnumerator LoadBootstrapAndWaitForMainMenu()

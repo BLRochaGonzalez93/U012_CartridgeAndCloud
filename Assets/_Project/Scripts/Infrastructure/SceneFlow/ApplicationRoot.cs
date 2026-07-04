@@ -186,7 +186,7 @@ namespace VRMGames.CartridgeAndCloud.Infrastructure.SceneFlow
             {
                 case "MainMenu":
                     return InputContextId.UI;
-                case "Store":
+                case "StoreInitial":
                 case "TestLab":
                     return InputContextId.Gameplay;
                 default:
@@ -202,8 +202,8 @@ namespace VRMGames.CartridgeAndCloud.Infrastructure.SceneFlow
                     return "Bootstrap";
                 case SceneId.MainMenu:
                     return "MainMenu";
-                case SceneId.Store:
-                    return "Store";
+                case SceneId.StoreInitial:
+                    return "StoreInitial";
                 case SceneId.TestLab:
                     return "TestLab";
                 default:
@@ -217,8 +217,8 @@ namespace VRMGames.CartridgeAndCloud.Infrastructure.SceneFlow
             {
                 case "MainMenu":
                     return SceneId.MainMenu;
-                case "Store":
-                    return SceneId.Store;
+                case "StoreInitial":
+                    return SceneId.StoreInitial;
                 case "TestLab":
                     return SceneId.TestLab;
                 default:

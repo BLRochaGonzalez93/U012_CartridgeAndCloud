@@ -49,26 +49,39 @@ namespace VRMGames.CartridgeAndCloud.Tests.EditMode
         }
 
         [Test]
-        public void InitialTier_ContainsThreeRequiredAnchors()
+        public void InitialTier_ReservesWarehouseThreshold()
         {
             StoreAccessLayout layout =
                 StoreAccessLayout.InitialTier();
 
             Assert.That(
                 layout.RequiredAnchors.Count,
-                Is.EqualTo(3));
+                Is.EqualTo(8));
 
-            Assert.That(
-                layout.RequiredAnchors[0].Id.Value,
-                Is.EqualTo("rear-service"));
+            for (int index = 0;
+                 index < 4;
+                 index++)
+            {
+                Assert.That(
+                    layout.RequiredAnchors[index].Id.Value,
+                    Is.EqualTo(
+                        $"warehouse-entry-front-{index + 1:00}"));
 
-            Assert.That(
-                layout.RequiredAnchors[1].Id.Value,
-                Is.EqualTo("left-display"));
+                Assert.That(
+                    layout.RequiredAnchors[index].Cell,
+                    Is.EqualTo(
+                        new GridCoordinate(8 + index, 23)));
 
-            Assert.That(
-                layout.RequiredAnchors[2].Id.Value,
-                Is.EqualTo("right-display"));
+                Assert.That(
+                    layout.RequiredAnchors[index + 4].Id.Value,
+                    Is.EqualTo(
+                        $"warehouse-entry-rear-{index + 1:00}"));
+
+                Assert.That(
+                    layout.RequiredAnchors[index + 4].Cell,
+                    Is.EqualTo(
+                        new GridCoordinate(8 + index, 24)));
+            }
         }
 
         [Test]

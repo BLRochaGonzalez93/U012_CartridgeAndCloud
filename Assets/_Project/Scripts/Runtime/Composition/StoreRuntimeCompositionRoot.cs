@@ -18,6 +18,7 @@ using VRMGames.CartridgeAndCloud.Runtime.Inventory;
 using VRMGames.CartridgeAndCloud.Runtime.Placement;
 using VRMGames.CartridgeAndCloud.Runtime.UIUX;
 using VRMGames.CartridgeAndCloud.Domain.GameSession;
+using VRMGames.CartridgeAndCloud.Presentation.Store.Authoring;
 namespace VRMGames.CartridgeAndCloud.Runtime.Composition
 {
     [DefaultExecutionOrder(-9900)]
@@ -140,8 +141,7 @@ public static StoreRuntimeCompositionRoot
             CleanupStoreRuntime();
 
             if (_settings == null ||
-                scene.name !=
-                    _settings.StoreSceneName)
+                scene.name != _settings.StoreSceneName)
             {
                 return;
             }
@@ -221,9 +221,32 @@ public static StoreRuntimeCompositionRoot
                 _paletteAsset,
                 _settings);
 
-            if (_settings.BuildBlockoutOnLoad)
+            StoreInitialSceneContext sceneContext =
+                UnityEngine.Object.FindFirstObjectByType<
+                    StoreInitialSceneContext>(
+                        FindObjectsInactive.Include);
+
+            if (sceneContext != null)
             {
-                _blockout.Build();
+                try
+                {
+                    _blockout.BindAuthoredScene(
+                        sceneContext);
+                }
+                catch (Exception exception)
+                {
+                    Debug.LogError(
+                        "[Runtime] StoreInitial scene contract failed: " +
+                        exception.Message);
+                    yield break;
+                }
+            }
+            else
+            {
+                Debug.LogError(
+                    "[Runtime] StoreInitial has no StoreInitialSceneContext. " +
+                    "The authored scene contract is required.");
+                yield break;
             }
 
             _placement =
@@ -232,7 +255,8 @@ public static StoreRuntimeCompositionRoot
             _placement.Configure(
                 _service,
                 catalog,
-                _paletteAsset);
+                _paletteAsset,
+                sceneContext);
 
             _characters =
                 _storeRuntime.AddComponent<
@@ -295,7 +319,7 @@ public static StoreRuntimeCompositionRoot
                 new GameplayFeedbackEvent(
                     GameplayFeedbackType
                         .ObjectSelected,
-                    "Playable blockout ready.",
+                    "Authored StoreInitial ready.",
                     "store-center"));
         }
 

@@ -17,7 +17,7 @@ namespace VRMGames.CartridgeAndCloud.Presentation.SceneFlow
 
         public void EnterStore()
         {
-            RequestScene(SceneId.Store);
+            RequestScene(SceneId.StoreInitial);
         }
 
         public void Quit()

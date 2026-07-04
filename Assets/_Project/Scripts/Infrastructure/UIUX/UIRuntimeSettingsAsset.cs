@@ -16,7 +16,7 @@ namespace VRMGames.CartridgeAndCloud.Infrastructure.UIUX
 
         [SerializeField]
         private string _storeSceneName =
-            "Store";
+            "StoreInitial";
 
         [SerializeField]
         private string _currencyCode =

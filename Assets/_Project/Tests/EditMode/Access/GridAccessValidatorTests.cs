@@ -167,6 +167,27 @@ namespace VRMGames.CartridgeAndCloud.Tests.EditMode
         }
 
         [Test]
+        public void ValidateWithCandidate_WarehouseEntryCell_IsInvalid()
+        {
+            StoreAccessLayout layout =
+                StoreAccessLayout.InitialTier();
+
+            AccessValidationResult result =
+                _validator.ValidateWithCandidate(
+                    layout,
+                    EmptyCells(),
+                    new[]
+                    {
+                        layout.RequiredAnchors[0].Cell
+                    });
+
+            AssertInvalid(
+                result,
+                AccessValidationFailureReason
+                    .RequiredAnchorBlocked);
+        }
+
+        [Test]
         public void Validate_RequiredAnchorBlocked_ReturnsAnchorId()
         {
             StoreAccessLayout layout =

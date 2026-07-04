@@ -30,6 +30,11 @@ namespace VRMGames.CartridgeAndCloud.Application.Store
             private set;
         }
 
+        public bool CanSeedInitialFixtures {
+            get;
+            private set;
+        }
+
         public event Action<StoreOperationsState>
             StateChanged;
 
@@ -68,16 +73,22 @@ namespace VRMGames.CartridgeAndCloud.Application.Store
                 _activeSession.Snapshot
                     .SessionId.Value;
 
-            State =
+            bool loadedMatchesSession =
                 loaded != null &&
                 string.Equals(
                     loaded.SessionId,
                     sessionId,
-                    StringComparison.Ordinal)
-                    ? loaded
-                    : StoreOperationsState.Empty(
-                        _activeSession.ActiveSlotId,
-                        sessionId);
+                    StringComparison.Ordinal);
+
+            State = loadedMatchesSession
+                ? loaded
+                : StoreOperationsState.Empty(
+                    _activeSession.ActiveSlotId,
+                    sessionId);
+
+            CanSeedInitialFixtures =
+                !loadedMatchesSession ||
+                IsPristineState(State);
 
             StateChanged?.Invoke(State);
         }
@@ -92,6 +103,7 @@ namespace VRMGames.CartridgeAndCloud.Application.Store
         {
             EnsureActiveSession();
             State = null;
+            CanSeedInitialFixtures = false;
 
             return _repository.Delete(
                 _activeSession.ActiveSlotId);
@@ -302,6 +314,154 @@ namespace VRMGames.CartridgeAndCloud.Application.Store
 
             return StoreOperationResult.Success(
                 "Order received and paid.");
+        }
+
+        public StoreOperationResult SeedInitialFixtures(
+            IEnumerable<PlacedStoreFixtureRecord> fixtures)
+        {
+            EnsureInitialized();
+
+            if (fixtures == null)
+            {
+                throw new ArgumentNullException(
+                    nameof(fixtures));
+            }
+
+            if (!CanSeedInitialFixtures)
+            {
+                return StoreOperationResult.Success(
+                    "Initial fixtures were already resolved for this save.");
+            }
+
+            List<PlacedStoreFixtureRecord> seed =
+                new List<PlacedStoreFixtureRecord>();
+            HashSet<string> instanceIds =
+                new HashSet<string>(StringComparer.Ordinal);
+
+            foreach (PlacedStoreFixtureRecord fixture in fixtures)
+            {
+                if (fixture == null)
+                {
+                    return Failure(
+                        StoreOperationStatus.InvalidState,
+                        "Initial fixture collection contains null.");
+                }
+
+                if (!instanceIds.Add(fixture.InstanceId))
+                {
+                    return Failure(
+                        StoreOperationStatus.Duplicate,
+                        "Initial fixture IDs must be unique.");
+                }
+
+                if (!_catalog.TryGetFurniture(
+                        fixture.DefinitionId,
+                        out StoreFixtureDefinition definition))
+                {
+                    return Failure(
+                        StoreOperationStatus.NotFound,
+                        $"Initial furniture definition '{fixture.DefinitionId}' was not found.");
+                }
+
+                if (fixture.ProductQuantity > definition.Capacity)
+                {
+                    return Failure(
+                        StoreOperationStatus.InvalidState,
+                        $"Initial stock exceeds {definition.DisplayName} capacity.");
+                }
+
+                if (fixture.ProductQuantity > 0 &&
+                    !_catalog.TryGetProduct(
+                        fixture.AssignedProductId,
+                        out _))
+                {
+                    return Failure(
+                        StoreOperationStatus.NotFound,
+                        $"Initial product '{fixture.AssignedProductId}' was not found.");
+                }
+
+                seed.Add(fixture);
+            }
+
+            if (seed.Count == 0)
+            {
+                CanSeedInitialFixtures = false;
+                return StoreOperationResult.Success(
+                    "No initial fixtures were supplied.");
+            }
+
+            StoreOperationsStateBuilder builder =
+                new StoreOperationsStateBuilder(State);
+
+            IntegratedGameStateSnapshot workingSnapshot =
+                _activeSession.Snapshot;
+
+            foreach (PlacedStoreFixtureRecord fixture in seed)
+            {
+                builder.Fixtures.Add(fixture);
+
+                _catalog.TryGetFurniture(
+                    fixture.DefinitionId,
+                    out StoreFixtureDefinition definition);
+
+                if (!definition.SupportsProducts)
+                {
+                    continue;
+                }
+
+                string containerId =
+                    DisplayContainerId(fixture.InstanceId);
+
+                IEnumerable<InventoryContainerSaveRecord> inventories =
+                    IntegratedSnapshotStoreOperationsMutator
+                        .AddProductToContainer(
+                            workingSnapshot,
+                            containerId,
+                            definition.Capacity,
+                            fixture.ProductQuantity > 0
+                                ? fixture.AssignedProductId
+                                : "phase1-empty",
+                            fixture.ProductQuantity);
+
+                workingSnapshot =
+                    IntegratedSnapshotStoreOperationsMutator.Clone(
+                        workingSnapshot,
+                        workingSnapshot.UpdatedUtc,
+                        inventories: inventories);
+
+                IEnumerable<DisplaySaveRecord> displays =
+                    IntegratedSnapshotStoreOperationsMutator
+                        .UpsertDisplay(
+                            workingSnapshot,
+                            fixture.InstanceId,
+                            fixture.DefinitionId,
+                            fixture.ProductQuantity > 0
+                                ? fixture.AssignedProductId
+                                : string.Empty,
+                            containerId);
+
+                workingSnapshot =
+                    IntegratedSnapshotStoreOperationsMutator.Clone(
+                        workingSnapshot,
+                        workingSnapshot.UpdatedUtc,
+                        displays: displays);
+            }
+
+            builder.NextFixtureSequence =
+                checked(
+                    builder.NextFixtureSequence +
+                    seed.Count);
+
+            Commit(
+                builder.Build(),
+                IntegratedSnapshotStoreOperationsMutator.Clone(
+                    workingSnapshot,
+                    _clock.UtcNow));
+
+            CanSeedInitialFixtures = false;
+
+            return StoreOperationResult.Success(
+                $"Seeded {seed.Count} authored fixtures.");
         }
 
         public StoreOperationResult ConfirmFurniturePlacement(
@@ -1185,6 +1345,20 @@ namespace VRMGames.CartridgeAndCloud.Application.Store
                 order.OrderedUnits,
                 order.ReceivedUnits,
                 order.UnitCostCents);
+        }
+
+        private static bool IsPristineState(
+            StoreOperationsState state)
+        {
+            return state != null &&
+                   state.Generation == 0 &&
+                   state.Orders.Count == 0 &&
+                   state.Fixtures.Count == 0 &&
+                   state.FurnitureWarehouse.Count == 0 &&
+                   state.ProductWarehouse.Count == 0 &&
+                   state.CompletedSales == 0 &&
+                   state.LifetimeRevenueCents == 0 &&
+                   state.LifetimeExpenseCents == 0;
         }
 
         private void Commit(

@@ -1,9 +1,12 @@
 using System;
+using System.Collections.Generic;
 using System.Reflection;
 using UnityEngine;
+using VRMGames.CartridgeAndCloud.Application.Placement;
 using VRMGames.CartridgeAndCloud.Domain.Grid;
 using VRMGames.CartridgeAndCloud.Domain.Placement;
 using VRMGames.CartridgeAndCloud.Presentation.Placement;
+using VRMGames.CartridgeAndCloud.Presentation.Store.Authoring;
 
 using VRMGames.CartridgeAndCloud.Application.Store;
 using VRMGames.CartridgeAndCloud.Application.UIUX;
@@ -64,6 +67,19 @@ namespace VRMGames.CartridgeAndCloud.Runtime.Placement
             IStoreContentCatalog catalog,
             StoreMaterialPaletteAsset palette)
         {
+            Configure(
+                service,
+                catalog,
+                palette,
+                null);
+        }
+
+        public void Configure(
+            StoreOperationsFacade service,
+            IStoreContentCatalog catalog,
+            StoreMaterialPaletteAsset palette,
+            StoreInitialSceneContext sceneContext)
+        {
             _service = service ??
                 throw new ArgumentNullException(
                     nameof(service));
@@ -75,6 +91,13 @@ namespace VRMGames.CartridgeAndCloud.Runtime.Placement
                     nameof(palette));
 
             ResolveReferences();
+
+            if (sceneContext != null)
+            {
+                SeedAuthoredFixtures(sceneContext);
+                RegisterAuthoredFixtures(sceneContext);
+            }
+
             RestorePersistedFixtures();
         }
 
@@ -418,6 +441,176 @@ namespace VRMGames.CartridgeAndCloud.Runtime.Placement
                         : "Placement blocked: " +
                           current,
                     "placement-preview"));
+        }
+
+        private void SeedAuthoredFixtures(
+            StoreInitialSceneContext sceneContext)
+        {
+            AuthoredStoreFixture[] authored =
+                sceneContext.GetAuthoredFixtures();
+
+            List<PlacedStoreFixtureRecord> records =
+                new List<PlacedStoreFixtureRecord>(
+                    authored.Length);
+
+            foreach (AuthoredStoreFixture fixture in authored)
+            {
+                records.Add(
+                    new PlacedStoreFixtureRecord(
+                        fixture.InstanceId,
+                        fixture.DefinitionId,
+                        fixture.AnchorX,
+                        fixture.AnchorZ,
+                        fixture.RotationQuarterTurns,
+                        fixture.InitialProductId,
+                        fixture.InitialProductQuantity));
+            }
+
+            StoreOperationResult result =
+                _service.SeedInitialFixtures(records);
+
+            if (!result.Succeeded)
+            {
+                throw new InvalidOperationException(
+                    "StoreInitial fixtures could not be seeded: " +
+                    result.Detail);
+            }
+        }
+
+        private void RegisterAuthoredFixtures(
+            StoreInitialSceneContext sceneContext)
+        {
+            if (_runtime == null ||
+                _surface == null ||
+                _service.State == null)
+            {
+                throw new InvalidOperationException(
+                    "Placement runtime must exist before authored fixtures are registered.");
+            }
+
+            foreach (AuthoredStoreFixture authored
+                     in sceneContext.GetAuthoredFixtures())
+            {
+                PlacedStoreFixtureRecord fixture =
+                    FindFixture(authored.InstanceId);
+
+                if (fixture == null)
+                {
+                    authored.gameObject.SetActive(false);
+                    continue;
+                }
+
+                if (!string.Equals(
+                        fixture.DefinitionId,
+                        authored.DefinitionId,
+                        StringComparison.Ordinal))
+                {
+                    throw new InvalidOperationException(
+                        $"Authored fixture '{authored.InstanceId}' definition does not match its save record.");
+                }
+
+                if (!_catalog.TryGetFurniture(
+                        fixture.DefinitionId,
+                        out StoreFixtureDefinition definition))
+                {
+                    Debug.LogError(
+                        $"[StoreInitial] Missing furniture definition '{fixture.DefinitionId}'.",
+                        authored);
+                    authored.gameObject.SetActive(false);
+                    continue;
+                }
+
+                PlacementInstanceId id =
+                    new PlacementInstanceId(fixture.InstanceId);
+
+                PlacedObjectRecord record =
+                    new PlacedObjectRecord(
+                        id,
+                        fixture.DefinitionId,
+                        new GridCoordinate(
+                            fixture.AnchorX,
+                            fixture.AnchorZ),
+                        (GridRotation)fixture.RotationQuarterTurns,
+                        new GridSize(
+                            definition.WidthCells,
+                            definition.DepthCells));
+
+                PlacementPreviewState state =
+                    PlacementPreviewCalculator.Calculate(
+                        record.Anchor,
+                        record.BaseSize,
+                        record.Rotation,
+                        _surface.Bounds);
+
+                Vector3 center =
+                    _surface.GetFootprintWorldCenter(
+                        state,
+                        0f);
+
+                authored.transform.position =
+                    new Vector3(
+                        center.x,
+                        _surface.GridOrigin.y,
+                        center.z);
+                authored.transform.rotation =
+                    Quaternion.Euler(
+                        0f,
+                        record.Rotation.ToDegrees(),
+                        0f);
+
+                PlacedObjectView view =
+                    authored.GetComponent<PlacedObjectView>();
+
+                if (view == null)
+                {
+                    view =
+                        authored.gameObject.AddComponent<PlacedObjectView>();
+                }
+
+                if (!_runtime.TryRegisterExistingView(
+                        record,
+                        view))
+                {
+                    Debug.LogError(
+                        $"[StoreInitial] Authored fixture '{fixture.InstanceId}' overlaps or is outside the placement grid.",
+                        authored);
+                    authored.gameObject.SetActive(false);
+                    continue;
+                }
+
+                PlacedFixtureVisual marker =
+                    authored.GetComponent<PlacedFixtureVisual>();
+
+                if (marker == null)
+                {
+                    marker =
+                        authored.gameObject.AddComponent<PlacedFixtureVisual>();
+                }
+
+                marker.Configure(
+                    fixture.DefinitionId,
+                    fixture.InstanceId);
+            }
+
+            _lastPlacedCount = _runtime.PlacedCount;
+        }
+
+        private PlacedStoreFixtureRecord FindFixture(
+            string instanceId)
+        {
+            foreach (PlacedStoreFixtureRecord fixture
+                     in _service.State.Fixtures)
+            {
+                if (string.Equals(
+                        fixture.InstanceId,
+                        instanceId,
+                        StringComparison.Ordinal))
+                {
+                    return fixture;
+                }
+            }
+
+            return null;
         }
 
         private void RestorePersistedFixtures()
