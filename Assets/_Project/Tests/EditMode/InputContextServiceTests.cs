@@ -1,5 +1,6 @@
 using NUnit.Framework;
 using VRMGames.CartridgeAndCloud.Application.InputContexts;
+using VRMGames.CartridgeAndCloud.Application.Placement;
 
 namespace VRMGames.CartridgeAndCloud.Tests.EditMode
 {
@@ -73,6 +74,28 @@ namespace VRMGames.CartridgeAndCloud.Tests.EditMode
             Assert.That(
                 service.CurrentContext,
                 Is.EqualTo(InputContextId.None));
+        }
+
+        [Test]
+        public void ShouldSetDestination_NormalGameplayClick_ReturnsTrue()
+        {
+            Assert.That(
+                GameplayDestinationInputPolicy
+                    .ShouldSetDestination(
+                        destinationPressed: true,
+                        placementModeActive: false),
+                Is.True);
+        }
+
+        [Test]
+        public void ShouldSetDestination_PlacementMode_ReturnsFalse()
+        {
+            Assert.That(
+                GameplayDestinationInputPolicy
+                    .ShouldSetDestination(
+                        destinationPressed: true,
+                        placementModeActive: true),
+                Is.False);
         }
     }
 }

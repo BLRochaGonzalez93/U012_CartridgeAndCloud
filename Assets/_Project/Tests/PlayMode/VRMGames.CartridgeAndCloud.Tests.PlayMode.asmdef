@@ -6,7 +6,7 @@
         "VRMGames.CartridgeAndCloud.Application",
         "VRMGames.CartridgeAndCloud.Infrastructure",
         "VRMGames.CartridgeAndCloud.Presentation",
-        "VRMGames.CartridgeAndCloud.Runtime.VerticalSlicePhase1",
+        "VRMGames.CartridgeAndCloud.Runtime",
         "UnityEngine.TestRunner"
     ],
     "includePlatforms": [],

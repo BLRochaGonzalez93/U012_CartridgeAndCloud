@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using VRMGames.CartridgeAndCloud.Domain.Displays;
 using VRMGames.CartridgeAndCloud.Domain.Shopping;
 
+using VRMGames.CartridgeAndCloud.Domain.Inventory;
 namespace VRMGames.CartridgeAndCloud.Application.Shopping
 {
     public sealed class ShoppingCartService

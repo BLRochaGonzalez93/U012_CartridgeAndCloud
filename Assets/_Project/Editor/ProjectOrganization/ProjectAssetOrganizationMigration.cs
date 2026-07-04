@@ -5,10 +5,16 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using UnityEditor;
 using UnityEngine;
-using VRMGames.CartridgeAndCloud.Domain.VerticalSlicePhase1;
-using VRMGames.CartridgeAndCloud.Infrastructure.VerticalSlicePhase1;
 using VRMGames.CartridgeAndCloud.Presentation.Placement;
 
+using VRMGames.CartridgeAndCloud.Application.Audio;
+using VRMGames.CartridgeAndCloud.Application.UIUX;
+using VRMGames.CartridgeAndCloud.Domain.Characters;
+using VRMGames.CartridgeAndCloud.Domain.Products;
+using VRMGames.CartridgeAndCloud.Domain.Store;
+using VRMGames.CartridgeAndCloud.Infrastructure.Audio;
+using VRMGames.CartridgeAndCloud.Infrastructure.Products;
+using VRMGames.CartridgeAndCloud.Infrastructure.Store;
 namespace VRMGames.CartridgeAndCloud.Editor.ProjectOrganization
 {
     public static class ProjectAssetOrganizationMigration
@@ -27,28 +33,28 @@ namespace VRMGames.CartridgeAndCloud.Editor.ProjectOrganization
 
         private const string RuntimeRootScript =
             "Assets/_Project/Scripts/Runtime/" +
-            "VerticalSlicePhase1/" +
-            "Sprint16Phase1RuntimeRoot.cs";
+            "Composition/" +
+            "StoreRuntimeCompositionRoot.cs";
 
         private const string ContentCatalogScript =
             "Assets/_Project/Scripts/Infrastructure/" +
-            "VerticalSlicePhase1/" +
-            "Phase1ContentCatalogAsset.cs";
+            "Store/" +
+            "StoreContentCatalogAsset.cs";
 
         private const string MaterialPaletteScript =
             "Assets/_Project/Scripts/Infrastructure/" +
-            "VerticalSlicePhase1/" +
-            "Phase1MaterialPaletteAsset.cs";
+            "Store/" +
+            "StoreMaterialPaletteAsset.cs";
 
         private const string PresentationCatalogScript =
             "Assets/_Project/Scripts/Infrastructure/" +
-            "VerticalSlicePhase1/" +
-            "Phase1PresentationCatalogAsset.cs";
+            "Store/" +
+            "StorePresentationCatalogAsset.cs";
 
         private const string AudioCatalogScript =
             "Assets/_Project/Scripts/Infrastructure/" +
-            "VerticalSlicePhase1/" +
-            "Phase1AudioCatalogAsset.cs";
+            "Audio/" +
+            "AudioEventCatalogAsset.cs";
 
         [MenuItem(
             "Tools/Cartridge & Cloud/" +
@@ -157,9 +163,9 @@ namespace VRMGames.CartridgeAndCloud.Editor.ProjectOrganization
                 }
             }
 
-            Phase1RuntimeAssetRegistryAsset registry =
+            StoreRuntimeAssetRegistry registry =
                 AssetDatabase.LoadAssetAtPath<
-                    Phase1RuntimeAssetRegistryAsset>(
+                    StoreRuntimeAssetRegistry>(
                         SettingsRoot +
                         "/RuntimeAssetRegistry.asset");
 
@@ -403,19 +409,19 @@ namespace VRMGames.CartridgeAndCloud.Editor.ProjectOrganization
 
         private static void ConfigureContentCatalog()
         {
-            Phase1ContentCatalogAsset asset =
+            StoreContentCatalogAsset asset =
                 LoadRequired<
-                    Phase1ContentCatalogAsset>(
+                    StoreContentCatalogAsset>(
                         CatalogRoot +
                         "/ContentCatalog.asset");
 
-            Phase1ContentCatalogAsset.FurnitureEntry[]
+            StoreFixtureCatalogAsset.StoreFixtureEntry[]
                 furniture =
                 {
                     Furniture(
                         "checkout-counter",
                         "Checkout Counter",
-                        Phase1FurnitureKind.CheckoutCounter,
+                        StoreFixtureKind.CheckoutCounter,
                         4, 2, 1.1f, 0, 45000,
                         true, true, false,
                         "furniture-checkout",
@@ -423,7 +429,7 @@ namespace VRMGames.CartridgeAndCloud.Editor.ProjectOrganization
                     Furniture(
                         "wall-shelf",
                         "Wall Shelf",
-                        Phase1FurnitureKind.WallShelf,
+                        StoreFixtureKind.WallShelf,
                         4, 1, 2.2f, 24, 18000,
                         true, true, true,
                         "furniture-wall-shelf",
@@ -431,7 +437,7 @@ namespace VRMGames.CartridgeAndCloud.Editor.ProjectOrganization
                     Furniture(
                         "central-shelf",
                         "Central Shelf",
-                        Phase1FurnitureKind.CentralShelf,
+                        StoreFixtureKind.CentralShelf,
                         4, 2, 1.6f, 32, 26000,
                         true, true, true,
                         "furniture-central-shelf",
@@ -439,7 +445,7 @@ namespace VRMGames.CartridgeAndCloud.Editor.ProjectOrganization
                     Furniture(
                         "low-display",
                         "Low Display",
-                        Phase1FurnitureKind.LowDisplay,
+                        StoreFixtureKind.LowDisplay,
                         3, 2, 0.9f, 12, 16000,
                         true, true, true,
                         "furniture-low-display",
@@ -447,7 +453,7 @@ namespace VRMGames.CartridgeAndCloud.Editor.ProjectOrganization
                     Furniture(
                         "featured-display",
                         "Featured Display",
-                        Phase1FurnitureKind.FeaturedDisplay,
+                        StoreFixtureKind.FeaturedDisplay,
                         2, 2, 1.1f, 8, 24000,
                         true, true, true,
                         "furniture-featured",
@@ -455,7 +461,7 @@ namespace VRMGames.CartridgeAndCloud.Editor.ProjectOrganization
                     Furniture(
                         "backroom-storage",
                         "Backroom Storage",
-                        Phase1FurnitureKind.BackroomStorage,
+                        StoreFixtureKind.BackroomStorage,
                         5, 2, 2.4f, 80, 22000,
                         true, false, false,
                         "furniture-storage",
@@ -463,7 +469,7 @@ namespace VRMGames.CartridgeAndCloud.Editor.ProjectOrganization
                     Furniture(
                         "receiving-crate",
                         "Receiving Crate",
-                        Phase1FurnitureKind.ReceivingCrate,
+                        StoreFixtureKind.ReceivingCrate,
                         2, 2, 0.8f, 24, 3500,
                         true, false, false,
                         "furniture-crate",
@@ -471,20 +477,20 @@ namespace VRMGames.CartridgeAndCloud.Editor.ProjectOrganization
                     Furniture(
                         "decoration-plant",
                         "Decorative Plant",
-                        Phase1FurnitureKind.Decoration,
+                        StoreFixtureKind.Decoration,
                         1, 1, 1.2f, 0, 2500,
                         false, false, false,
                         "decoration",
                         "Furniture/DecorationPlant")
                 };
 
-            Phase1ContentCatalogAsset.ProductEntry[]
+            RetailProductCatalogAsset.RetailProductEntry[]
                 products =
                 {
                     Product(
                         "game-neon-drift",
                         "Neon Drift",
-                        Phase1ProductKind.PhysicalGame,
+                        RetailProductKind.PhysicalGame,
                         1500, 2999, 12,
                         "product-game",
                         "label-neon-drift",
@@ -492,7 +498,7 @@ namespace VRMGames.CartridgeAndCloud.Editor.ProjectOrganization
                     Product(
                         "case-cloud-runner",
                         "Cloud Runner Case",
-                        Phase1ProductKind.GameCase,
+                        RetailProductKind.GameCase,
                         800, 1499, 16,
                         "product-case",
                         "label-cloud-runner",
@@ -500,7 +506,7 @@ namespace VRMGames.CartridgeAndCloud.Editor.ProjectOrganization
                     Product(
                         "console-vertex-one",
                         "Vertex One Console",
-                        Phase1ProductKind.Console,
+                        RetailProductKind.Console,
                         18000, 24999, 2,
                         "product-console",
                         "label-vertex-one",
@@ -508,7 +514,7 @@ namespace VRMGames.CartridgeAndCloud.Editor.ProjectOrganization
                     Product(
                         "controller-orbit-pad",
                         "Orbit Pad Controller",
-                        Phase1ProductKind.Controller,
+                        RetailProductKind.Controller,
                         3000, 4999, 6,
                         "product-controller",
                         "label-orbit-pad",
@@ -516,7 +522,7 @@ namespace VRMGames.CartridgeAndCloud.Editor.ProjectOrganization
                     Product(
                         "headset-signal-pro",
                         "Signal Pro Headset",
-                        Phase1ProductKind.Headset,
+                        RetailProductKind.Headset,
                         4500, 6999, 4,
                         "product-headset",
                         "label-signal-pro",
@@ -524,7 +530,7 @@ namespace VRMGames.CartridgeAndCloud.Editor.ProjectOrganization
                     Product(
                         "accessory-memory-core",
                         "Memory Core Accessory",
-                        Phase1ProductKind.Accessory,
+                        RetailProductKind.Accessory,
                         900, 1999, 10,
                         "product-accessory",
                         "label-memory-core",
@@ -538,11 +544,10 @@ namespace VRMGames.CartridgeAndCloud.Editor.ProjectOrganization
             EditorUtility.SetDirty(asset);
         }
 
-        private static Phase1ContentCatalogAsset
-            .FurnitureEntry Furniture(
+        private static StoreFixtureCatalogAsset.StoreFixtureEntry Furniture(
                 string definitionId,
                 string displayName,
-                Phase1FurnitureKind kind,
+                StoreFixtureKind kind,
                 int widthCells,
                 int depthCells,
                 float heightMeters,
@@ -554,8 +559,7 @@ namespace VRMGames.CartridgeAndCloud.Editor.ProjectOrganization
                 string materialVariantId,
                 string prefabPath)
         {
-            return new Phase1ContentCatalogAsset
-                .FurnitureEntry
+            return new StoreFixtureCatalogAsset.StoreFixtureEntry
                 {
                     definitionId = definitionId,
                     displayName = displayName,
@@ -576,11 +580,10 @@ namespace VRMGames.CartridgeAndCloud.Editor.ProjectOrganization
                 };
         }
 
-        private static Phase1ContentCatalogAsset
-            .ProductEntry Product(
+        private static RetailProductCatalogAsset.RetailProductEntry Product(
                 string productId,
                 string displayName,
-                Phase1ProductKind kind,
+                RetailProductKind kind,
                 long wholesalePriceCents,
                 long salePriceCents,
                 int unitsPerCase,
@@ -591,8 +594,7 @@ namespace VRMGames.CartridgeAndCloud.Editor.ProjectOrganization
             string resourceId =
                 ProductResourceId(productId);
 
-            return new Phase1ContentCatalogAsset
-                .ProductEntry
+            return new RetailProductCatalogAsset.RetailProductEntry
                 {
                     productId = productId,
                     displayName = displayName,
@@ -627,13 +629,13 @@ namespace VRMGames.CartridgeAndCloud.Editor.ProjectOrganization
 
         private static void ConfigureMaterialPalette()
         {
-            Phase1MaterialPaletteAsset asset =
+            StoreMaterialPaletteAsset asset =
                 LoadRequired<
-                    Phase1MaterialPaletteAsset>(
+                    StoreMaterialPaletteAsset>(
                         CatalogRoot +
                         "/MaterialPalette.asset");
 
-            Phase1MaterialPaletteAsset.Entry[]
+            StoreMaterialPaletteAsset.Entry[]
                 entries =
                 {
                     MaterialEntry("shell-wall", "Architecture/ShellWall.mat"),
@@ -669,12 +671,12 @@ namespace VRMGames.CartridgeAndCloud.Editor.ProjectOrganization
             EditorUtility.SetDirty(asset);
         }
 
-        private static Phase1MaterialPaletteAsset
+        private static StoreMaterialPaletteAsset
             .Entry MaterialEntry(
                 string id,
                 string relativePath)
         {
-            return new Phase1MaterialPaletteAsset
+            return new StoreMaterialPaletteAsset
                 .Entry
                 {
                     id = id,
@@ -687,9 +689,9 @@ namespace VRMGames.CartridgeAndCloud.Editor.ProjectOrganization
 
         private static void ConfigureAudioCatalog()
         {
-            Phase1AudioCatalogAsset asset =
+            AudioEventCatalogAsset asset =
                 LoadRequired<
-                    Phase1AudioCatalogAsset>(
+                    AudioEventCatalogAsset>(
                         CatalogRoot +
                         "/AudioCatalog.asset");
 
@@ -743,13 +745,13 @@ namespace VRMGames.CartridgeAndCloud.Editor.ProjectOrganization
                 {
                     new AudioData(
                         "music.store",
-                        Phase1AudioChannel.Music,
+                        AudioChannel.Music,
                         "Assets/_Project/Audio/Music/StoreMusic.wav",
                         0.45f,
                         true),
                     new AudioData(
                         "ambience.store",
-                        Phase1AudioChannel.Ambience,
+                        AudioChannel.Ambience,
                         "Assets/_Project/Audio/Ambience/StoreAmbience.wav",
                         0.45f,
                         true)
@@ -757,92 +759,92 @@ namespace VRMGames.CartridgeAndCloud.Editor.ProjectOrganization
 
             AddFeedback(
                 entries,
-                Phase1FeedbackKind.PlacementValid,
+                GameplayFeedbackType.PlacementValid,
                 "Assets/_Project/Audio/SFX/PlacementValid.wav");
             AddFeedback(
                 entries,
-                Phase1FeedbackKind.PlacementInvalid,
+                GameplayFeedbackType.PlacementInvalid,
                 "Assets/_Project/Audio/SFX/PlacementInvalid.wav");
             AddFeedback(
                 entries,
-                Phase1FeedbackKind.ObjectSelected,
+                GameplayFeedbackType.ObjectSelected,
                 "Assets/_Project/Audio/UI/UiConfirm.wav",
-                Phase1AudioChannel.Ui);
+                AudioChannel.Ui);
             AddFeedback(
                 entries,
-                Phase1FeedbackKind.ObjectHovered,
+                GameplayFeedbackType.ObjectHovered,
                 "Assets/_Project/Audio/UI/UiConfirm.wav",
-                Phase1AudioChannel.Ui);
+                AudioChannel.Ui);
             AddFeedback(
                 entries,
-                Phase1FeedbackKind.ProductAssigned,
+                GameplayFeedbackType.ProductAssigned,
                 "Assets/_Project/Audio/UI/UiConfirm.wav",
-                Phase1AudioChannel.Ui);
+                AudioChannel.Ui);
             AddFeedback(
                 entries,
-                Phase1FeedbackKind.OutOfStock,
+                GameplayFeedbackType.OutOfStock,
                 "Assets/_Project/Audio/UI/UiError.wav");
             AddFeedback(
                 entries,
-                Phase1FeedbackKind.Reserved,
+                GameplayFeedbackType.Reserved,
                 "Assets/_Project/Audio/UI/UiConfirm.wav");
             AddFeedback(
                 entries,
-                Phase1FeedbackKind.Restocked,
+                GameplayFeedbackType.Restocked,
                 "Assets/_Project/Audio/SFX/OrderReceived.wav");
             AddFeedback(
                 entries,
-                Phase1FeedbackKind.OrderReceived,
+                GameplayFeedbackType.OrderReceived,
                 "Assets/_Project/Audio/SFX/OrderReceived.wav");
             AddFeedback(
                 entries,
-                Phase1FeedbackKind.CustomerSatisfied,
+                GameplayFeedbackType.CustomerSatisfied,
                 "Assets/_Project/Audio/SFX/Checkout.wav");
             AddFeedback(
                 entries,
-                Phase1FeedbackKind.CustomerFrustrated,
+                GameplayFeedbackType.CustomerFrustrated,
                 "Assets/_Project/Audio/UI/UiError.wav");
             AddFeedback(
                 entries,
-                Phase1FeedbackKind.QueueEntered,
+                GameplayFeedbackType.QueueEntered,
                 "Assets/_Project/Audio/SFX/Checkout.wav");
             AddFeedback(
                 entries,
-                Phase1FeedbackKind.CheckoutCompleted,
+                GameplayFeedbackType.CheckoutCompleted,
                 "Assets/_Project/Audio/SFX/Checkout.wav");
             AddFeedback(
                 entries,
-                Phase1FeedbackKind.Revenue,
+                GameplayFeedbackType.Revenue,
                 "Assets/_Project/Audio/SFX/Checkout.wav");
             AddFeedback(
                 entries,
-                Phase1FeedbackKind.Expense,
+                GameplayFeedbackType.Expense,
                 "Assets/_Project/Audio/UI/UiConfirm.wav");
             AddFeedback(
                 entries,
-                Phase1FeedbackKind.ClosingWarning,
+                GameplayFeedbackType.ClosingWarning,
                 "Assets/_Project/Audio/SFX/DayClosed.wav");
             AddFeedback(
                 entries,
-                Phase1FeedbackKind.DayClosed,
+                GameplayFeedbackType.DayClosed,
                 "Assets/_Project/Audio/SFX/DayClosed.wav");
             AddFeedback(
                 entries,
-                Phase1FeedbackKind.AutosaveSucceeded,
+                GameplayFeedbackType.AutosaveSucceeded,
                 "Assets/_Project/Audio/UI/UiConfirm.wav",
-                Phase1AudioChannel.Ui);
+                AudioChannel.Ui);
             AddFeedback(
                 entries,
-                Phase1FeedbackKind.AutosaveFailed,
+                GameplayFeedbackType.AutosaveFailed,
                 "Assets/_Project/Audio/UI/UiError.wav",
-                Phase1AudioChannel.Ui);
+                AudioChannel.Ui);
             AddFeedback(
                 entries,
-                Phase1FeedbackKind.DoorOpened,
+                GameplayFeedbackType.DoorOpened,
                 "Assets/_Project/Audio/SFX/Door.wav");
             AddFeedback(
                 entries,
-                Phase1FeedbackKind.DoorClosed,
+                GameplayFeedbackType.DoorClosed,
                 "Assets/_Project/Audio/SFX/Door.wav");
 
             return entries;
@@ -850,10 +852,10 @@ namespace VRMGames.CartridgeAndCloud.Editor.ProjectOrganization
 
         private static void AddFeedback(
             ICollection<AudioData> entries,
-            Phase1FeedbackKind kind,
+            GameplayFeedbackType kind,
             string assetPath,
-            Phase1AudioChannel channel =
-                Phase1AudioChannel.Effects)
+            AudioChannel channel =
+                AudioChannel.Effects)
         {
             entries.Add(
                 new AudioData(
@@ -868,9 +870,9 @@ namespace VRMGames.CartridgeAndCloud.Editor.ProjectOrganization
 
         private static void ConfigurePresentationCatalog()
         {
-            Phase1PresentationCatalogAsset asset =
+            StorePresentationCatalogAsset asset =
                 LoadRequired<
-                    Phase1PresentationCatalogAsset>(
+                    StorePresentationCatalogAsset>(
                         CatalogRoot +
                         "/PresentationCatalog.asset");
 
@@ -898,19 +900,19 @@ namespace VRMGames.CartridgeAndCloud.Editor.ProjectOrganization
                 {
                     new CharacterData(
                         "employee-main",
-                        Phase1CharacterRole.Employee,
+                        CharacterRole.Employee,
                         "Characters/Employee",
                         "character-employee",
                         2f),
                     new CharacterData(
                         "customer-base",
-                        Phase1CharacterRole.Customer,
+                        CharacterRole.Customer,
                         "Characters/Customer",
                         "character-customer",
                         2f),
                     new CharacterData(
                         "supplier-base",
-                        Phase1CharacterRole.Supplier,
+                        CharacterRole.Supplier,
                         "Characters/Supplier",
                         "character-supplier",
                         1.8f)
@@ -996,10 +998,10 @@ namespace VRMGames.CartridgeAndCloud.Editor.ProjectOrganization
         private static void ConfigureFeedback(
             SerializedProperty feedback)
         {
-            Phase1FeedbackKind[] kinds =
-                (Phase1FeedbackKind[])
+            GameplayFeedbackType[] kinds =
+                (GameplayFeedbackType[])
                     Enum.GetValues(
-                        typeof(Phase1FeedbackKind));
+                        typeof(GameplayFeedbackType));
 
             feedback.arraySize = kinds.Length;
 
@@ -1017,7 +1019,7 @@ namespace VRMGames.CartridgeAndCloud.Editor.ProjectOrganization
                  index < kinds.Length;
                  index++)
             {
-                Phase1FeedbackKind kind =
+                GameplayFeedbackType kind =
                     kinds[index];
                 SerializedProperty element =
                     feedback.GetArrayElementAtIndex(
@@ -1055,18 +1057,18 @@ namespace VRMGames.CartridgeAndCloud.Editor.ProjectOrganization
         }
 
         private static string FeedbackMaterial(
-            Phase1FeedbackKind kind)
+            GameplayFeedbackType kind)
         {
             switch (kind)
             {
-                case Phase1FeedbackKind.PlacementInvalid:
-                case Phase1FeedbackKind.OutOfStock:
-                case Phase1FeedbackKind.CustomerFrustrated:
-                case Phase1FeedbackKind.AutosaveFailed:
+                case GameplayFeedbackType.PlacementInvalid:
+                case GameplayFeedbackType.OutOfStock:
+                case GameplayFeedbackType.CustomerFrustrated:
+                case GameplayFeedbackType.AutosaveFailed:
                     return "feedback-invalid";
 
-                case Phase1FeedbackKind.Expense:
-                case Phase1FeedbackKind.ClosingWarning:
+                case GameplayFeedbackType.Expense:
+                case GameplayFeedbackType.ClosingWarning:
                     return "feedback-warning";
 
                 default:
@@ -1075,14 +1077,14 @@ namespace VRMGames.CartridgeAndCloud.Editor.ProjectOrganization
         }
 
         private static bool StrongFeedback(
-            Phase1FeedbackKind kind)
+            GameplayFeedbackType kind)
         {
             switch (kind)
             {
-                case Phase1FeedbackKind.OrderReceived:
-                case Phase1FeedbackKind.CustomerSatisfied:
-                case Phase1FeedbackKind.CheckoutCompleted:
-                case Phase1FeedbackKind.AutosaveSucceeded:
+                case GameplayFeedbackType.OrderReceived:
+                case GameplayFeedbackType.CustomerSatisfied:
+                case GameplayFeedbackType.CheckoutCompleted:
+                case GameplayFeedbackType.AutosaveSucceeded:
                     return true;
 
                 default:
@@ -1092,9 +1094,9 @@ namespace VRMGames.CartridgeAndCloud.Editor.ProjectOrganization
 
         private static void ConfigureRuntimeRegistry()
         {
-            Phase1RuntimeAssetRegistryAsset registry =
+            StoreRuntimeAssetRegistry registry =
                 AssetDatabase.LoadAssetAtPath<
-                    Phase1RuntimeAssetRegistryAsset>(
+                    StoreRuntimeAssetRegistry>(
                         SettingsRoot +
                         "/RuntimeAssetRegistry.asset");
 
@@ -1102,7 +1104,7 @@ namespace VRMGames.CartridgeAndCloud.Editor.ProjectOrganization
             {
                 registry =
                     ScriptableObject.CreateInstance<
-                        Phase1RuntimeAssetRegistryAsset>();
+                        StoreRuntimeAssetRegistry>();
 
                 AssetDatabase.CreateAsset(
                     registry,
@@ -1111,22 +1113,22 @@ namespace VRMGames.CartridgeAndCloud.Editor.ProjectOrganization
             }
 
             registry.Configure(
-                LoadRequired<Phase1SettingsAsset>(
+                LoadRequired<StoreRuntimeSettingsAsset>(
                     SettingsRoot +
                     "/StoreRuntimeSettings.asset"),
-                LoadRequired<Phase1ContentCatalogAsset>(
+                LoadRequired<StoreContentCatalogAsset>(
                     CatalogRoot +
                     "/ContentCatalog.asset"),
-                LoadRequired<Phase1StoreShellAsset>(
+                LoadRequired<StoreLayoutAsset>(
                     StoreRoot +
                     "/StoreShell.asset"),
-                LoadRequired<Phase1MaterialPaletteAsset>(
+                LoadRequired<StoreMaterialPaletteAsset>(
                     CatalogRoot +
                     "/MaterialPalette.asset"),
-                LoadRequired<Phase1PresentationCatalogAsset>(
+                LoadRequired<StorePresentationCatalogAsset>(
                     CatalogRoot +
                     "/PresentationCatalog.asset"),
-                LoadRequired<Phase1AudioCatalogAsset>(
+                LoadRequired<AudioEventCatalogAsset>(
                     CatalogRoot +
                     "/AudioCatalog.asset"));
 
@@ -1138,7 +1140,7 @@ namespace VRMGames.CartridgeAndCloud.Editor.ProjectOrganization
                         asset =>
                             asset != null &&
                             !(asset is
-                                Phase1RuntimeAssetRegistryAsset))
+                                StoreRuntimeAssetRegistry))
                     .ToList();
 
             preloaded.Add(registry);
@@ -1174,9 +1176,9 @@ namespace VRMGames.CartridgeAndCloud.Editor.ProjectOrganization
             string replacement =
                 @"        private void LoadAssets()" + "\n" +
                 @"        {" + "\n" +
-                @"            Phase1RuntimeAssetRegistryAsset" + "\n" +
+                @"            StoreRuntimeAssetRegistry" + "\n" +
                 @"                registry =" + "\n" +
-                @"                    Phase1RuntimeAssetRegistryAsset" + "\n" +
+                @"                    StoreRuntimeAssetRegistry" + "\n" +
                 @"                        .FindLoaded();" + "\n\n" +
                 @"            if (registry == null)" + "\n" +
                 @"            {" + "\n" +
@@ -1209,7 +1211,7 @@ namespace VRMGames.CartridgeAndCloud.Editor.ProjectOrganization
                     StringComparison.Ordinal))
             {
                 if (!content.Contains(
-                        "Phase1RuntimeAssetRegistryAsset"))
+                        "StoreRuntimeAssetRegistry"))
                 {
                     throw new InvalidOperationException(
                         "Runtime root patch did not match the current source.");
@@ -1380,7 +1382,7 @@ namespace VRMGames.CartridgeAndCloud.Editor.ProjectOrganization
         {
             string projectRoot =
                 Directory.GetParent(
-                    Application.dataPath)
+                    global::UnityEngine.Application.dataPath)
                     ?.FullName;
 
             if (string.IsNullOrWhiteSpace(
@@ -1887,7 +1889,7 @@ namespace VRMGames.CartridgeAndCloud.Editor.ProjectOrganization
         {
             public AudioData(
                 string eventId,
-                Phase1AudioChannel channel,
+                AudioChannel channel,
                 string assetPath,
                 float volume,
                 bool loop)
@@ -1900,7 +1902,7 @@ namespace VRMGames.CartridgeAndCloud.Editor.ProjectOrganization
             }
 
             public string EventId { get; }
-            public Phase1AudioChannel Channel { get; }
+            public AudioChannel Channel { get; }
             public string AssetPath { get; }
             public float Volume { get; }
             public bool Loop { get; }
@@ -1910,7 +1912,7 @@ namespace VRMGames.CartridgeAndCloud.Editor.ProjectOrganization
         {
             public CharacterData(
                 string id,
-                Phase1CharacterRole role,
+                CharacterRole role,
                 string prefabPath,
                 string materialId,
                 float moveSpeed)
@@ -1923,7 +1925,7 @@ namespace VRMGames.CartridgeAndCloud.Editor.ProjectOrganization
             }
 
             public string Id { get; }
-            public Phase1CharacterRole Role { get; }
+            public CharacterRole Role { get; }
             public string PrefabPath { get; }
             public string MaterialId { get; }
             public float MoveSpeed { get; }

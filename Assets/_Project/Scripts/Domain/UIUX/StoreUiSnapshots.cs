@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 
+using VRMGames.CartridgeAndCloud.Domain.Economy;
 namespace VRMGames.CartridgeAndCloud.Domain.UIUX
 {
     public sealed class StoreHudSnapshot

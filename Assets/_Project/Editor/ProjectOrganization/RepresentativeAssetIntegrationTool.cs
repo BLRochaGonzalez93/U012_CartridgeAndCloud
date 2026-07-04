@@ -8,8 +8,13 @@ using UnityEditor;
 using UnityEditor.SceneManagement;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using VRMGames.CartridgeAndCloud.Infrastructure.VerticalSlicePhase1;
-
+using VRMGames.CartridgeAndCloud.Infrastructure.Products;
+using VRMGames.CartridgeAndCloud.Infrastructure.Store;
+using VRMGames.CartridgeAndCloud.Presentation.Products;
+using VRMGames.CartridgeAndCloud.Presentation.Store;
+using VRMGames.CartridgeAndCloud.Presentation.Store.Doors;
+using VRMGames.CartridgeAndCloud.Runtime.Development.Authoring.Products;
+using VRMGames.CartridgeAndCloud.Runtime.Development.Authoring.Store;
 namespace VRMGames.CartridgeAndCloud.Editor.ProjectOrganization
 {
     public static class RepresentativeAssetIntegrationTool
@@ -39,14 +44,14 @@ namespace VRMGames.CartridgeAndCloud.Editor.ProjectOrganization
             "RepresentativeAssetIntegrationReport.json";
 
         private const string FactorySourcePath =
-            "Assets/_Project/Scripts/Infrastructure/" +
-            "VerticalSlicePhase1/" +
-            "Phase1BlockoutVisualFactory.cs";
+            "Assets/_Project/Scripts/Runtime/" +
+            "Development/Blockout/" +
+            "StoreBlockoutVisualFactory.cs";
 
         private const string StoreBuilderSourcePath =
             "Assets/_Project/Scripts/Runtime/" +
-            "VerticalSlicePhase1/" +
-            "Phase1StoreBlockoutBuilder.cs";
+            "Development/Blockout/" +
+            "StoreBlockoutBuilder.cs";
 
         private static readonly Dictionary<
             string,
@@ -178,7 +183,7 @@ namespace VRMGames.CartridgeAndCloud.Editor.ProjectOrganization
                     built.Add(record);
                 }
 
-                RepresentativePrefabCatalogAsset
+                StoreVisualPrefabCatalogAsset
                     catalog =
                         CreateOrUpdateCatalog(
                             built);
@@ -259,9 +264,9 @@ namespace VRMGames.CartridgeAndCloud.Editor.ProjectOrganization
             List<string> errors =
                 new List<string>();
 
-            RepresentativePrefabCatalogAsset catalog =
+            StoreVisualPrefabCatalogAsset catalog =
                 AssetDatabase.LoadAssetAtPath<
-                    RepresentativePrefabCatalogAsset>(
+                    StoreVisualPrefabCatalogAsset>(
                         CatalogPath);
 
             if (catalog == null)
@@ -311,11 +316,11 @@ namespace VRMGames.CartridgeAndCloud.Editor.ProjectOrganization
 
             ValidateSourcePatch(
                 FactorySourcePath,
-                "RepresentativePrefabFactory",
+                "StoreVisualPrefabFactory",
                 errors);
             ValidateSourcePatch(
                 StoreBuilderSourcePath,
-                "RepresentativeStoreVisualBuilder",
+                "StoreVisualBuilder",
                 errors);
 
             if (errors.Count == 0)
@@ -855,15 +860,15 @@ namespace VRMGames.CartridgeAndCloud.Editor.ProjectOrganization
                     nodes,
                     root.transform);
 
-                RepresentativePrefabInstance marker =
+                StoreVisualInstance marker =
                     root.GetComponent<
-                        RepresentativePrefabInstance>();
+                        StoreVisualInstance>();
 
                 if (marker == null)
                 {
                     marker =
                         root.AddComponent<
-                            RepresentativePrefabInstance>();
+                            StoreVisualInstance>();
                 }
 
                 marker.Configure(
@@ -1467,16 +1472,16 @@ namespace VRMGames.CartridgeAndCloud.Editor.ProjectOrganization
                 !string.IsNullOrWhiteSpace(
                     spec.DomainId))
             {
-                Phase1FurniturePrefabAuthoring
+                StoreFixturePrefabAuthoring
                     authoring =
                         root.GetComponent<
-                            Phase1FurniturePrefabAuthoring>();
+                            StoreFixturePrefabAuthoring>();
 
                 if (authoring == null)
                 {
                     authoring =
                         root.AddComponent<
-                            Phase1FurniturePrefabAuthoring>();
+                            StoreFixturePrefabAuthoring>();
                 }
 
                 authoring.Configure(
@@ -1489,31 +1494,31 @@ namespace VRMGames.CartridgeAndCloud.Editor.ProjectOrganization
                 !string.IsNullOrWhiteSpace(
                     spec.DomainId))
             {
-                Phase1ProductPrefabAuthoring
+                ProductPrefabAuthoring
                     authoring =
                         root.GetComponent<
-                            Phase1ProductPrefabAuthoring>();
+                            ProductPrefabAuthoring>();
 
                 if (authoring == null)
                 {
                     authoring =
                         root.AddComponent<
-                            Phase1ProductPrefabAuthoring>();
+                            ProductPrefabAuthoring>();
                 }
 
                 authoring.Configure(
                     spec.DomainId);
 
-                Phase1ProductVisualMarker
+                ProductVisualMarker
                     productMarker =
                         root.GetComponent<
-                            Phase1ProductVisualMarker>();
+                            ProductVisualMarker>();
 
                 if (productMarker == null)
                 {
                     productMarker =
                         root.AddComponent<
-                            Phase1ProductVisualMarker>();
+                            ProductVisualMarker>();
                 }
 
                 productMarker.Configure(
@@ -1549,16 +1554,16 @@ namespace VRMGames.CartridgeAndCloud.Editor.ProjectOrganization
                     "Automatic door panel transforms were not found.");
             }
 
-            RepresentativeAutomaticDoorParts
+            AutomaticDoorParts
                 parts =
                     root.GetComponent<
-                        RepresentativeAutomaticDoorParts>();
+                        AutomaticDoorParts>();
 
             if (parts == null)
             {
                 parts =
                     root.AddComponent<
-                        RepresentativeAutomaticDoorParts>();
+                        AutomaticDoorParts>();
             }
 
             parts.Configure(
@@ -1567,20 +1572,20 @@ namespace VRMGames.CartridgeAndCloud.Editor.ProjectOrganization
         }
 
         private static
-            RepresentativePrefabCatalogAsset
+            StoreVisualPrefabCatalogAsset
             CreateOrUpdateCatalog(
                 IEnumerable<BuiltRecord> built)
         {
-            RepresentativePrefabCatalogAsset catalog =
+            StoreVisualPrefabCatalogAsset catalog =
                 AssetDatabase.LoadAssetAtPath<
-                    RepresentativePrefabCatalogAsset>(
+                    StoreVisualPrefabCatalogAsset>(
                         CatalogPath);
 
             if (catalog == null)
             {
                 catalog =
                     ScriptableObject.CreateInstance<
-                        RepresentativePrefabCatalogAsset>();
+                        StoreVisualPrefabCatalogAsset>();
 
                 AssetDatabase.CreateAsset(
                     catalog,
@@ -1609,7 +1614,7 @@ namespace VRMGames.CartridgeAndCloud.Editor.ProjectOrganization
         }
 
         private static
-            RepresentativePrefabCatalogAsset.Entry[]
+            StoreVisualPrefabCatalogAsset.Entry[]
             Entries(
                 IEnumerable<BuiltRecord> records,
                 AssetFamily family)
@@ -1625,7 +1630,7 @@ namespace VRMGames.CartridgeAndCloud.Editor.ProjectOrganization
                     StringComparer.Ordinal)
                 .Select(
                     record =>
-                        new RepresentativePrefabCatalogAsset
+                        new StoreVisualPrefabCatalogAsset
                             .Entry
                         {
                             id =
@@ -1641,7 +1646,7 @@ namespace VRMGames.CartridgeAndCloud.Editor.ProjectOrganization
         }
 
         private static void AddPreloadedAsset(
-            RepresentativePrefabCatalogAsset catalog)
+            StoreVisualPrefabCatalogAsset catalog)
         {
             List<UnityEngine.Object> preloaded =
                 PlayerSettings
@@ -1650,7 +1655,7 @@ namespace VRMGames.CartridgeAndCloud.Editor.ProjectOrganization
                         asset =>
                             asset != null &&
                             !(asset is
-                                RepresentativePrefabCatalogAsset))
+                                StoreVisualPrefabCatalogAsset))
                     .ToList();
 
             preloaded.Add(catalog);
@@ -1674,7 +1679,7 @@ namespace VRMGames.CartridgeAndCloud.Editor.ProjectOrganization
                 File.ReadAllText(path);
 
             if (!source.Contains(
-                    "RepresentativePrefabFactory" +
+                    "StoreVisualPrefabFactory" +
                     ".TryBuildFurniture",
                     StringComparison.Ordinal))
             {
@@ -1682,7 +1687,7 @@ namespace VRMGames.CartridgeAndCloud.Editor.ProjectOrganization
                     "            ClearGeneratedChildren(root.transform);";
 
                 const string insertion =
-                    "            if (RepresentativePrefabFactory\n" +
+                    "            if (StoreVisualPrefabFactory\n" +
                     "                .TryBuildFurniture(\n" +
                     "                    root,\n" +
                     "                    definition.DefinitionId))\n" +
@@ -1700,7 +1705,7 @@ namespace VRMGames.CartridgeAndCloud.Editor.ProjectOrganization
             }
 
             if (!source.Contains(
-                    "RepresentativePrefabFactory" +
+                    "StoreVisualPrefabFactory" +
                     ".TryBuildProduct",
                     StringComparison.Ordinal))
             {
@@ -1708,7 +1713,7 @@ namespace VRMGames.CartridgeAndCloud.Editor.ProjectOrganization
                     "            PrimitiveType primitive =";
 
                 const string insertion =
-                    "            if (RepresentativePrefabFactory\n" +
+                    "            if (StoreVisualPrefabFactory\n" +
                     "                .TryBuildProduct(\n" +
                     "                    parent,\n" +
                     "                    definition.ProductId,\n" +
@@ -1741,7 +1746,7 @@ namespace VRMGames.CartridgeAndCloud.Editor.ProjectOrganization
                 File.ReadAllText(path);
 
             if (source.Contains(
-                    "RepresentativeStoreVisualBuilder" +
+                    "StoreVisualBuilder" +
                     ".TryApply",
                     StringComparison.Ordinal))
             {
@@ -1760,7 +1765,7 @@ namespace VRMGames.CartridgeAndCloud.Editor.ProjectOrganization
                 "                center,\n" +
                 "                width,\n" +
                 "                depth);\n" +
-                "            RepresentativeStoreVisualBuilder\n" +
+                "            StoreVisualBuilder\n" +
                 "                .TryApply(\n" +
                 "                    _builtRoot,\n" +
                 "                    _surface,\n" +
@@ -2490,7 +2495,7 @@ namespace VRMGames.CartridgeAndCloud.Editor.ProjectOrganization
             string sourceRoot,
             IReadOnlyCollection<string> imported,
             IReadOnlyCollection<BuiltRecord> built,
-            RepresentativePrefabCatalogAsset catalog)
+            StoreVisualPrefabCatalogAsset catalog)
         {
             StringBuilder json =
                 new StringBuilder();
@@ -2605,9 +2610,9 @@ namespace VRMGames.CartridgeAndCloud.Editor.ProjectOrganization
                 return;
             }
 
-            RepresentativePrefabInstance marker =
+            StoreVisualInstance marker =
                 prefab.GetComponent<
-                    RepresentativePrefabInstance>();
+                    StoreVisualInstance>();
 
             if (marker == null)
             {

@@ -140,4 +140,176 @@ namespace VRMGames.CartridgeAndCloud.Domain.Displays
             return DisplayClearAssignmentResult.Success(previous);
         }
     }
+
+    public readonly struct DisplayInstanceId : IEquatable<DisplayInstanceId>
+    {
+        public string Value { get; }
+
+        public DisplayInstanceId(string value)
+        {
+            if (string.IsNullOrWhiteSpace(value))
+            {
+                throw new ArgumentException(
+                    "Display instance ID cannot be empty.",
+                    nameof(value));
+            }
+
+            Value = value;
+        }
+
+        public bool Equals(DisplayInstanceId other)
+        {
+            return string.Equals(Value, other.Value, StringComparison.Ordinal);
+        }
+
+        public override bool Equals(object obj)
+        {
+            return obj is DisplayInstanceId other && Equals(other);
+        }
+
+        public override int GetHashCode()
+        {
+            return Value == null
+                ? 0
+                : StringComparer.Ordinal.GetHashCode(Value);
+        }
+
+        public override string ToString()
+        {
+            return Value ?? string.Empty;
+        }
+
+        public static bool operator ==(
+            DisplayInstanceId left,
+            DisplayInstanceId right)
+        {
+            return left.Equals(right);
+        }
+
+        public static bool operator !=(
+            DisplayInstanceId left,
+            DisplayInstanceId right)
+        {
+            return !left.Equals(right);
+        }
+    }
+
+    public enum DisplayAssignmentFailureReason
+    {
+        None = 0,
+        ProductDefinitionMissing = 1,
+        CategoryNotAllowed = 2,
+        ProductAlreadyAssigned = 3,
+        DifferentProductAlreadyAssigned = 4,
+        DisplayContainsStock = 5
+    }
+
+    public sealed class DisplayAssignmentResult
+    {
+        public bool Succeeded { get; }
+
+        public DisplayAssignmentFailureReason FailureReason { get; }
+
+        public bool HadAssignmentBefore { get; }
+
+        public bool HasAssignmentAfter { get; }
+
+        public ProductDefinitionId PreviousProductId { get; }
+
+        public ProductDefinitionId CurrentProductId { get; }
+
+        private DisplayAssignmentResult(
+            bool succeeded,
+            DisplayAssignmentFailureReason failureReason,
+            bool hadAssignmentBefore,
+            bool hasAssignmentAfter,
+            ProductDefinitionId previousProductId,
+            ProductDefinitionId currentProductId)
+        {
+            Succeeded = succeeded;
+            FailureReason = failureReason;
+            HadAssignmentBefore = hadAssignmentBefore;
+            HasAssignmentAfter = hasAssignmentAfter;
+            PreviousProductId = previousProductId;
+            CurrentProductId = currentProductId;
+        }
+
+        public static DisplayAssignmentResult Success(
+            ProductDefinitionId productId)
+        {
+            return new DisplayAssignmentResult(
+                true,
+                DisplayAssignmentFailureReason.None,
+                false,
+                true,
+                default(ProductDefinitionId),
+                productId);
+        }
+
+        public static DisplayAssignmentResult Failure(
+            DisplayAssignmentFailureReason failureReason,
+            bool hasAssignment,
+            ProductDefinitionId productId)
+        {
+            return new DisplayAssignmentResult(
+                false,
+                failureReason,
+                hasAssignment,
+                hasAssignment,
+                productId,
+                productId);
+        }
+    }
+
+    public enum DisplayClearAssignmentFailureReason
+    {
+        None = 0,
+        NoAssignedProduct = 1,
+        StockRemaining = 2
+    }
+
+    public sealed class DisplayClearAssignmentResult
+    {
+        public bool Succeeded { get; }
+
+        public DisplayClearAssignmentFailureReason FailureReason { get; }
+
+        public ProductDefinitionId PreviousProductId { get; }
+
+        public bool HasAssignmentAfter { get; }
+
+        private DisplayClearAssignmentResult(
+            bool succeeded,
+            DisplayClearAssignmentFailureReason failureReason,
+            ProductDefinitionId previousProductId,
+            bool hasAssignmentAfter)
+        {
+            Succeeded = succeeded;
+            FailureReason = failureReason;
+            PreviousProductId = previousProductId;
+            HasAssignmentAfter = hasAssignmentAfter;
+        }
+
+        public static DisplayClearAssignmentResult Success(
+            ProductDefinitionId previousProductId)
+        {
+            return new DisplayClearAssignmentResult(
+                true,
+                DisplayClearAssignmentFailureReason.None,
+                previousProductId,
+                false);
+        }
+
+        public static DisplayClearAssignmentResult Failure(
+            DisplayClearAssignmentFailureReason failureReason,
+            ProductDefinitionId productId,
+            bool hasAssignment)
+        {
+            return new DisplayClearAssignmentResult(
+                false,
+                failureReason,
+                productId,
+                hasAssignment);
+        }
+    }
 }

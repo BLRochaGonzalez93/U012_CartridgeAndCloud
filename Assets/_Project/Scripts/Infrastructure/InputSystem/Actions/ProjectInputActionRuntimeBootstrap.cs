@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using VRMGames.CartridgeAndCloud.Infrastructure.SceneFlow;
 
+using VRMGames.CartridgeAndCloud.Application.InputContexts;
 namespace VRMGames.CartridgeAndCloud.Infrastructure.InputSystem.Actions
 {
     public static class ProjectInputActionRuntimeBootstrap

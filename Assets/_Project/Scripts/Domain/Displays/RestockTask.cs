@@ -128,4 +128,121 @@ namespace VRMGames.CartridgeAndCloud.Domain.Displays
                 CompletedQuantity);
         }
     }
+
+    public readonly struct RestockTaskId : IEquatable<RestockTaskId>
+    {
+        public string Value { get; }
+
+        public RestockTaskId(string value)
+        {
+            if (string.IsNullOrWhiteSpace(value))
+            {
+                throw new ArgumentException(
+                    "Restock task ID cannot be empty.",
+                    nameof(value));
+            }
+
+            Value = value;
+        }
+
+        public bool Equals(RestockTaskId other)
+        {
+            return string.Equals(Value, other.Value, StringComparison.Ordinal);
+        }
+
+        public override bool Equals(object obj)
+        {
+            return obj is RestockTaskId other && Equals(other);
+        }
+
+        public override int GetHashCode()
+        {
+            return Value == null
+                ? 0
+                : StringComparer.Ordinal.GetHashCode(Value);
+        }
+
+        public override string ToString()
+        {
+            return Value ?? string.Empty;
+        }
+
+        public static bool operator ==(RestockTaskId left, RestockTaskId right)
+        {
+            return left.Equals(right);
+        }
+
+        public static bool operator !=(RestockTaskId left, RestockTaskId right)
+        {
+            return !left.Equals(right);
+        }
+    }
+
+    public enum RestockTaskStatus
+    {
+        Pending = 0,
+        Completed = 1,
+        Cancelled = 2
+    }
+
+    public enum RestockTaskTransitionFailureReason
+    {
+        None = 0,
+        TaskNotPending = 1,
+        InvalidCompletedQuantity = 2,
+        CompletedQuantityExceedsRequested = 3
+    }
+
+    public sealed class RestockTaskTransitionResult
+    {
+        public bool Succeeded { get; }
+
+        public RestockTaskTransitionFailureReason FailureReason { get; }
+
+        public RestockTaskStatus PreviousStatus { get; }
+
+        public RestockTaskStatus CurrentStatus { get; }
+
+        public Quantity CompletedQuantity { get; }
+
+        private RestockTaskTransitionResult(
+            bool succeeded,
+            RestockTaskTransitionFailureReason failureReason,
+            RestockTaskStatus previousStatus,
+            RestockTaskStatus currentStatus,
+            Quantity completedQuantity)
+        {
+            Succeeded = succeeded;
+            FailureReason = failureReason;
+            PreviousStatus = previousStatus;
+            CurrentStatus = currentStatus;
+            CompletedQuantity = completedQuantity;
+        }
+
+        public static RestockTaskTransitionResult Success(
+            RestockTaskStatus previousStatus,
+            RestockTaskStatus currentStatus,
+            Quantity completedQuantity)
+        {
+            return new RestockTaskTransitionResult(
+                true,
+                RestockTaskTransitionFailureReason.None,
+                previousStatus,
+                currentStatus,
+                completedQuantity);
+        }
+
+        public static RestockTaskTransitionResult Failure(
+            RestockTaskTransitionFailureReason failureReason,
+            RestockTaskStatus status,
+            Quantity completedQuantity)
+        {
+            return new RestockTaskTransitionResult(
+                false,
+                failureReason,
+                status,
+                status,
+                completedQuantity);
+        }
+    }
 }

@@ -3,6 +3,7 @@ using VRMGames.CartridgeAndCloud.Domain.Checkout;
 using VRMGames.CartridgeAndCloud.Domain.Customers;
 using VRMGames.CartridgeAndCloud.Domain.Shopping;
 
+using VRMGames.CartridgeAndCloud.Application.Checkout;
 namespace VRMGames.CartridgeAndCloud.Tests.EditMode.DayCycle
 {
     public sealed class CheckoutQueueSealTests

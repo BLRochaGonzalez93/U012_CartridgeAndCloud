@@ -2,7 +2,7 @@ using System;
 using NUnit.Framework;
 using VRMGames.CartridgeAndCloud.Application.Store;
 
-namespace VRMGames.CartridgeAndCloud.Tests.EditMode
+namespace VRMGames.CartridgeAndCloud.Tests.EditMode.Store
 {
     public sealed class StoreShellSpecificationTests
     {

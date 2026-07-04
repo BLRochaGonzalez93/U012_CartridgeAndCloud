@@ -2,6 +2,7 @@ using NUnit.Framework;
 using UnityEngine;
 using VRMGames.CartridgeAndCloud.Infrastructure.Shopping;
 
+using VRMGames.CartridgeAndCloud.Runtime.Development.Scenarios;
 namespace VRMGames.CartridgeAndCloud.Tests.EditMode.Shopping
 {
     public sealed class ShoppingAuthoringTests
@@ -44,7 +45,7 @@ namespace VRMGames.CartridgeAndCloud.Tests.EditMode.Shopping
             try
             {
                 var runner =
-                    gameObject.AddComponent<ShoppingTechnicalScenarioRunner>();
+                    gameObject.AddComponent<ShoppingScenarioRunner>();
                 Assert.Throws<System.InvalidOperationException>(
                     () => runner.RunScenario());
             }
@@ -63,7 +64,7 @@ namespace VRMGames.CartridgeAndCloud.Tests.EditMode.Shopping
             {
                 asset.Configure(3, 1, true);
                 var runner =
-                    gameObject.AddComponent<ShoppingTechnicalScenarioRunner>();
+                    gameObject.AddComponent<ShoppingScenarioRunner>();
                 runner.Configure(asset, false);
                 runner.RunScenario();
                 Assert.That(runner.LastScenarioPassed, Is.True);

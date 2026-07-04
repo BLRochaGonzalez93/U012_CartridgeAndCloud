@@ -1,6 +1,7 @@
 using NUnit.Framework;
 using VRMGames.CartridgeAndCloud.Domain.Shopping;
 
+using VRMGames.CartridgeAndCloud.Domain.Inventory;
 namespace VRMGames.CartridgeAndCloud.Tests.EditMode.DayCycle
 {
     public sealed class ShoppingReservationRegistryDayCycleTests

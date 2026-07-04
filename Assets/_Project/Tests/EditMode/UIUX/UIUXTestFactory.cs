@@ -5,6 +5,7 @@ using VRMGames.CartridgeAndCloud.Application.UIUX;
 using VRMGames.CartridgeAndCloud.Domain.Identifiers;
 using VRMGames.CartridgeAndCloud.Domain.Persistence;
 
+using VRMGames.CartridgeAndCloud.Domain.GameSession;
 namespace VRMGames.CartridgeAndCloud.Tests.EditMode.UIUX
 {
     internal static class UIUXTestFactory

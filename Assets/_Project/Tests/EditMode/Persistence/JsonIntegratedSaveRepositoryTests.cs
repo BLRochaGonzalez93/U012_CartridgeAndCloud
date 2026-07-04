@@ -6,6 +6,7 @@ using VRMGames.CartridgeAndCloud.Domain.Identifiers;
 using VRMGames.CartridgeAndCloud.Domain.Persistence;
 using VRMGames.CartridgeAndCloud.Infrastructure.Persistence;
 
+using VRMGames.CartridgeAndCloud.Domain.Checkout;
 namespace VRMGames.CartridgeAndCloud.Tests.EditMode.Persistence
 {
     public sealed class JsonIntegratedSaveRepositoryTests

@@ -4,6 +4,9 @@ using System.Globalization;
 using VRMGames.CartridgeAndCloud.Domain.Persistence;
 using VRMGames.CartridgeAndCloud.Domain.UIUX;
 
+using VRMGames.CartridgeAndCloud.Domain.Checkout;
+using VRMGames.CartridgeAndCloud.Domain.Economy;
+using VRMGames.CartridgeAndCloud.Domain.Inventory;
 namespace VRMGames.CartridgeAndCloud.Application.UIUX
 {
     public sealed class StoreUiProjectionService

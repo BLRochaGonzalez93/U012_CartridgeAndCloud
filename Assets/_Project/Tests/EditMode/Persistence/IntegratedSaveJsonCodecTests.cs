@@ -5,6 +5,8 @@ using VRMGames.CartridgeAndCloud.Application.Persistence;
 using VRMGames.CartridgeAndCloud.Domain.Persistence;
 using VRMGames.CartridgeAndCloud.Infrastructure.Persistence;
 
+using VRMGames.CartridgeAndCloud.Domain.Checkout;
+using VRMGames.CartridgeAndCloud.Domain.Economy;
 namespace VRMGames.CartridgeAndCloud.Tests.EditMode.Persistence
 {
     public sealed class IntegratedSaveJsonCodecTests

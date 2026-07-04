@@ -1,6 +1,7 @@
 using NUnit.Framework;
 using VRMGames.CartridgeAndCloud.Domain.Persistence;
 
+using VRMGames.CartridgeAndCloud.Domain.Economy;
 namespace VRMGames.CartridgeAndCloud.Tests.EditMode.Persistence
 {
     public sealed class SaveRecordTests

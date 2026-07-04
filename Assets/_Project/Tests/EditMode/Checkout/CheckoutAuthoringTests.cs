@@ -3,6 +3,7 @@ using UnityEngine;
 using VRMGames.CartridgeAndCloud.Domain.Checkout;
 using VRMGames.CartridgeAndCloud.Infrastructure.Checkout;
 
+using VRMGames.CartridgeAndCloud.Runtime.Development.Scenarios;
 namespace VRMGames.CartridgeAndCloud.Tests.EditMode.Checkout
 {
     public sealed class CheckoutAuthoringTests
@@ -104,9 +105,9 @@ namespace VRMGames.CartridgeAndCloud.Tests.EditMode.Checkout
                 new GameObject("CheckoutRunnerTest");
             try
             {
-                CheckoutTechnicalScenarioRunner runner =
+                CheckoutScenarioRunner runner =
                     gameObject.AddComponent<
-                        CheckoutTechnicalScenarioRunner>();
+                        CheckoutScenarioRunner>();
                 Assert.Throws<
                     System.InvalidOperationException>(
                     () => runner.RunScenario());
@@ -130,9 +131,9 @@ namespace VRMGames.CartridgeAndCloud.Tests.EditMode.Checkout
                     6,
                     "technical-station",
                     true);
-                CheckoutTechnicalScenarioRunner runner =
+                CheckoutScenarioRunner runner =
                     gameObject.AddComponent<
-                        CheckoutTechnicalScenarioRunner>();
+                        CheckoutScenarioRunner>();
                 runner.Configure(asset, false);
                 runner.RunScenario();
 

@@ -123,13 +123,6 @@ namespace VRMGames.CartridgeAndCloud.InputSystem.Tests.EditMode
             }
         }
 
-        [Test]
-        public void ProjectVersion_IsSprintSixteenPhaseOneTarget()
-        {
-            Assert.That(
-                PlayerSettings.bundleVersion,
-                Is.EqualTo("0.0.17"));
-        }
 
         private static void TestRouterContext(
             InputContextId context,

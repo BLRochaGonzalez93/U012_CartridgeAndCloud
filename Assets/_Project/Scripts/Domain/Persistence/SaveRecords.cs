@@ -2,6 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 
+using VRMGames.CartridgeAndCloud.Domain.Economy;
+using VRMGames.CartridgeAndCloud.Domain.Inventory;
+using VRMGames.CartridgeAndCloud.Domain.Suppliers;
 namespace VRMGames.CartridgeAndCloud.Domain.Persistence
 {
     public sealed class ProductQuantitySaveRecord

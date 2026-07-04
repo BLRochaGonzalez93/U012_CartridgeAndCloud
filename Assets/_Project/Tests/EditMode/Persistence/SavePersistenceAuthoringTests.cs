@@ -2,6 +2,7 @@ using NUnit.Framework;
 using UnityEngine;
 using VRMGames.CartridgeAndCloud.Infrastructure.Persistence;
 
+using VRMGames.CartridgeAndCloud.Runtime.Development.Scenarios;
 namespace VRMGames.CartridgeAndCloud.Tests.EditMode.Persistence
 {
     public sealed class SavePersistenceAuthoringTests
@@ -86,10 +87,10 @@ namespace VRMGames.CartridgeAndCloud.Tests.EditMode.Persistence
 
             try
             {
-                SaveRecoveryTechnicalScenarioRunner
+                SaveRecoveryScenarioRunner
                     runner =
                         gameObject.AddComponent<
-                            SaveRecoveryTechnicalScenarioRunner>();
+                            SaveRecoveryScenarioRunner>();
 
                 Assert.Throws<
                     System.InvalidOperationException>(
@@ -115,10 +116,10 @@ namespace VRMGames.CartridgeAndCloud.Tests.EditMode.Persistence
                 asset.Configure(
                     "CC_S14_AuthoringTest",
                     0);
-                SaveRecoveryTechnicalScenarioRunner
+                SaveRecoveryScenarioRunner
                     runner =
                         gameObject.AddComponent<
-                            SaveRecoveryTechnicalScenarioRunner>();
+                            SaveRecoveryScenarioRunner>();
                 runner.Configure(asset, false);
                 runner.RunScenario();
 

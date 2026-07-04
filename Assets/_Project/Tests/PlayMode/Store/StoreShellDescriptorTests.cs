@@ -3,7 +3,7 @@ using UnityEngine;
 using VRMGames.CartridgeAndCloud.Application.Store;
 using VRMGames.CartridgeAndCloud.Presentation.Store;
 
-namespace VRMGames.CartridgeAndCloud.Tests.PlayMode
+namespace VRMGames.CartridgeAndCloud.Tests.PlayMode.Store
 {
     public sealed class StoreShellDescriptorTests
     {

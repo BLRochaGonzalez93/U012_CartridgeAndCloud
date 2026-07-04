@@ -11,8 +11,8 @@ namespace VRMGames.CartridgeAndCloud.Editor.ProjectOrganization
     {
         private const string TestAssetPath =
             "Assets/_Project/Tests/PlayMode/" +
-            "VerticalSlicePhase1/" +
-            "Sprint16Phase1RuntimePlayModeTests.cs";
+            "Store/" +
+            "StoreRuntimePlayModeTests.cs";
 
         [MenuItem(
             "Tools/Cartridge & Cloud/" +
@@ -94,7 +94,7 @@ namespace VRMGames.CartridgeAndCloud.Editor.ProjectOrganization
             ref int changes)
         {
             string setup =
-                "            Phase1RuntimeAssetRegistryAsset " +
+                "            StoreRuntimeAssetRegistry " +
                 "registry =\n" +
                 "                RequireRegistry();\n\n" +
                 "            Assert.That(\n" +
@@ -105,7 +105,7 @@ namespace VRMGames.CartridgeAndCloud.Editor.ProjectOrganization
                 @"public IEnumerator " +
                 Regex.Escape(methodName) +
                 @"\(\)\s*\{\s*" +
-                @"Phase1RuntimeAssetRegistryAsset\s+" +
+                @"StoreRuntimeAssetRegistry\s+" +
                 @"registry\s*=\s*RequireRegistry\(\);";
 
             if (Regex.IsMatch(
@@ -181,7 +181,7 @@ namespace VRMGames.CartridgeAndCloud.Editor.ProjectOrganization
                 @"public IEnumerator " +
                 Regex.Escape(methodName) +
                 @"\(\)\s*\{.*?" +
-                @"Phase1RuntimeAssetRegistryAsset\s+" +
+                @"StoreRuntimeAssetRegistry\s+" +
                 @"registry\s*=\s*RequireRegistry\(\);.*?" +
                 @"Object\.Instantiate\(prefab\)";
 

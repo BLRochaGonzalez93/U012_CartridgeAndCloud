@@ -6,6 +6,8 @@ using VRMGames.CartridgeAndCloud.Application.SceneFlow;
 using VRMGames.CartridgeAndCloud.Domain.Identifiers;
 using VRMGames.CartridgeAndCloud.Infrastructure.SceneFlow;
 
+using VRMGames.CartridgeAndCloud.Application.GameSession;
+using VRMGames.CartridgeAndCloud.Domain.GameSession;
 namespace VRMGames.CartridgeAndCloud.Tests.PlayMode
 {
     public sealed class GameSessionBootstrapTests

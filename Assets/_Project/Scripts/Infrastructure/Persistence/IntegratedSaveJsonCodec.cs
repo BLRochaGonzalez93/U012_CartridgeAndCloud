@@ -7,6 +7,10 @@ using VRMGames.CartridgeAndCloud.Application.Persistence;
 using VRMGames.CartridgeAndCloud.Domain.Identifiers;
 using VRMGames.CartridgeAndCloud.Domain.Persistence;
 
+using VRMGames.CartridgeAndCloud.Domain.Checkout;
+using VRMGames.CartridgeAndCloud.Domain.Economy;
+using VRMGames.CartridgeAndCloud.Domain.Inventory;
+using VRMGames.CartridgeAndCloud.Domain.Suppliers;
 namespace VRMGames.CartridgeAndCloud.Infrastructure.Persistence
 {
     public sealed class IntegratedSaveFormatException :

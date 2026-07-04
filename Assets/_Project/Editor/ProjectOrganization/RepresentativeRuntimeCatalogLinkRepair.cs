@@ -3,8 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEditor;
 using UnityEngine;
-using VRMGames.CartridgeAndCloud.Infrastructure.VerticalSlicePhase1;
-
+using VRMGames.CartridgeAndCloud.Infrastructure.Store;
 namespace VRMGames.CartridgeAndCloud.Editor.ProjectOrganization
 {
     public static class
@@ -36,14 +35,14 @@ namespace VRMGames.CartridgeAndCloud.Editor.ProjectOrganization
 
             try
             {
-                Phase1RuntimeAssetRegistryAsset registry =
+                StoreRuntimeAssetRegistry registry =
                     AssetDatabase.LoadAssetAtPath<
-                        Phase1RuntimeAssetRegistryAsset>(
+                        StoreRuntimeAssetRegistry>(
                             RegistryPath);
 
-                RepresentativePrefabCatalogAsset catalog =
+                StoreVisualPrefabCatalogAsset catalog =
                     AssetDatabase.LoadAssetAtPath<
-                        RepresentativePrefabCatalogAsset>(
+                        StoreVisualPrefabCatalogAsset>(
                             CatalogPath);
 
                 if (registry == null)
@@ -74,10 +73,10 @@ namespace VRMGames.CartridgeAndCloud.Editor.ProjectOrganization
                     ImportAssetOptions
                         .ForceSynchronousImport);
 
-                Phase1RuntimeAssetRegistryAsset
+                StoreRuntimeAssetRegistry
                     reloadedRegistry =
                         AssetDatabase.LoadAssetAtPath<
-                            Phase1RuntimeAssetRegistryAsset>(
+                            StoreRuntimeAssetRegistry>(
                                 RegistryPath);
 
                 if (reloadedRegistry == null ||
@@ -125,14 +124,14 @@ namespace VRMGames.CartridgeAndCloud.Editor.ProjectOrganization
             List<string> errors =
                 new List<string>();
 
-            Phase1RuntimeAssetRegistryAsset registry =
+            StoreRuntimeAssetRegistry registry =
                 AssetDatabase.LoadAssetAtPath<
-                    Phase1RuntimeAssetRegistryAsset>(
+                    StoreRuntimeAssetRegistry>(
                         RegistryPath);
 
-            RepresentativePrefabCatalogAsset catalog =
+            StoreVisualPrefabCatalogAsset catalog =
                 AssetDatabase.LoadAssetAtPath<
-                    RepresentativePrefabCatalogAsset>(
+                    StoreVisualPrefabCatalogAsset>(
                         CatalogPath);
 
             if (registry == null)
@@ -210,8 +209,8 @@ namespace VRMGames.CartridgeAndCloud.Editor.ProjectOrganization
         }
 
         private static void ConfigurePreloadedAssets(
-            Phase1RuntimeAssetRegistryAsset registry,
-            RepresentativePrefabCatalogAsset catalog)
+            StoreRuntimeAssetRegistry registry,
+            StoreVisualPrefabCatalogAsset catalog)
         {
             List<UnityEngine.Object> preloaded =
                 PlayerSettings
@@ -230,7 +229,7 @@ namespace VRMGames.CartridgeAndCloud.Editor.ProjectOrganization
         }
 
         private static void ValidateCatalog(
-            RepresentativePrefabCatalogAsset catalog)
+            StoreVisualPrefabCatalogAsset catalog)
         {
             if (catalog.FindArchitecture(
                     "architecture.floor.200") ==

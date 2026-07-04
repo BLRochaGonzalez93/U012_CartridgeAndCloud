@@ -2,15 +2,17 @@ using NUnit.Framework;
 using UnityEngine;
 using VRMGames.CartridgeAndCloud.Infrastructure.UIUX;
 
+using VRMGames.CartridgeAndCloud.Domain.Economy;
+using VRMGames.CartridgeAndCloud.Runtime.Development.Scenarios;
 namespace VRMGames.CartridgeAndCloud.Tests.EditMode.UIUX
 {
     public sealed class UIUXAuthoringTests
     {
         [Test] public void SettingsAsset_HasValidDefaults()
         {
-            Sprint15SettingsAsset asset =
+            UIRuntimeSettingsAsset asset =
                 ScriptableObject.CreateInstance<
-                    Sprint15SettingsAsset>();
+                    UIRuntimeSettingsAsset>();
 
             try
             {
@@ -35,9 +37,9 @@ namespace VRMGames.CartridgeAndCloud.Tests.EditMode.UIUX
 
         [Test] public void SettingsAsset_StoresConfiguration()
         {
-            Sprint15SettingsAsset asset =
+            UIRuntimeSettingsAsset asset =
                 ScriptableObject.CreateInstance<
-                    Sprint15SettingsAsset>();
+                    UIRuntimeSettingsAsset>();
 
             try
             {
@@ -82,10 +84,10 @@ namespace VRMGames.CartridgeAndCloud.Tests.EditMode.UIUX
 
             try
             {
-                Sprint15TechnicalScenarioRunner
+                UIUXScenarioRunner
                     runner =
                         gameObject.AddComponent<
-                            Sprint15TechnicalScenarioRunner>();
+                            UIUXScenarioRunner>();
 
                 Assert.Throws<
                     System.InvalidOperationException>(
@@ -102,16 +104,16 @@ namespace VRMGames.CartridgeAndCloud.Tests.EditMode.UIUX
             GameObject gameObject =
                 new GameObject(
                     "Sprint15RunnerTest");
-            Sprint15SettingsAsset asset =
+            UIRuntimeSettingsAsset asset =
                 ScriptableObject.CreateInstance<
-                    Sprint15SettingsAsset>();
+                    UIRuntimeSettingsAsset>();
 
             try
             {
-                Sprint15TechnicalScenarioRunner
+                UIUXScenarioRunner
                     runner =
                         gameObject.AddComponent<
-                            Sprint15TechnicalScenarioRunner>();
+                            UIUXScenarioRunner>();
                 runner.Configure(asset, false);
                 runner.RunScenario();
 

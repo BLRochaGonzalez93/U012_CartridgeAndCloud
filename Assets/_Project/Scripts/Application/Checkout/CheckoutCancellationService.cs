@@ -4,6 +4,7 @@ using VRMGames.CartridgeAndCloud.Domain.Checkout;
 using VRMGames.CartridgeAndCloud.Domain.Displays;
 using VRMGames.CartridgeAndCloud.Domain.Shopping;
 
+using VRMGames.CartridgeAndCloud.Domain.Inventory;
 namespace VRMGames.CartridgeAndCloud.Application.Checkout
 {
     public enum CheckoutCancellationFailureReason

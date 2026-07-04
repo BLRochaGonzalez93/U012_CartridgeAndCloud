@@ -37,4 +37,11 @@ namespace VRMGames.CartridgeAndCloud.Application.Receiving
                 null);
         }
     }
+
+    public enum DeliveryCreationFailureReason
+    {
+        None = 0,
+        OrderNotSubmitted = 1,
+        OrderTransitionRejected = 2
+    }
 }

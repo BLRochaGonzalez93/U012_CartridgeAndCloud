@@ -3,6 +3,7 @@ using GameSessionSnapshot = VRMGames.CartridgeAndCloud.Domain.GameSession.GameSe
 using DomainGameSession = VRMGames.CartridgeAndCloud.Domain.GameSession.GameSession;
 using VRMGames.CartridgeAndCloud.Domain.Identifiers;
 
+using VRMGames.CartridgeAndCloud.Domain.GameSession;
 namespace VRMGames.CartridgeAndCloud.Application.GameSession
 {
     public sealed class GameSessionService : IGameSessionService

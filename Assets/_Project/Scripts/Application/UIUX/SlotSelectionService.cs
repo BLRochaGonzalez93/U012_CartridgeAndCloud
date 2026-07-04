@@ -6,6 +6,7 @@ using VRMGames.CartridgeAndCloud.Domain.Identifiers;
 using VRMGames.CartridgeAndCloud.Domain.Persistence;
 using VRMGames.CartridgeAndCloud.Domain.UIUX;
 
+using VRMGames.CartridgeAndCloud.Domain.GameSession;
 namespace VRMGames.CartridgeAndCloud.Application.UIUX
 {
     public enum SlotOperationStatus

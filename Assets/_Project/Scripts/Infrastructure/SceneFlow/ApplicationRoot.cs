@@ -7,6 +7,7 @@ using VRMGames.CartridgeAndCloud.Application.SceneFlow;
 using VRMGames.CartridgeAndCloud.Domain.Identifiers;
 using VRMGames.CartridgeAndCloud.Infrastructure.GameSession;
 
+using VRMGames.CartridgeAndCloud.Domain.GameSession;
 namespace VRMGames.CartridgeAndCloud.Infrastructure.SceneFlow
 {
     /// <summary>

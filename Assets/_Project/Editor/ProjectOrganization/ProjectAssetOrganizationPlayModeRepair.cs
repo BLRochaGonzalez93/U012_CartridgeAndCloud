@@ -12,13 +12,13 @@ namespace VRMGames.CartridgeAndCloud.Editor.ProjectOrganization
     {
         private const string TestAssetPath =
             "Assets/_Project/Tests/PlayMode/" +
-            "VerticalSlicePhase1/" +
-            "Sprint16Phase1RuntimePlayModeTests.cs";
+            "Store/" +
+            "StoreRuntimePlayModeTests.cs";
 
         private const string ScenarioAssetPath =
             "Assets/_Project/Scripts/Runtime/" +
-            "VerticalSlicePhase1/" +
-            "Sprint16Phase1TechnicalScenarioRunner.cs";
+            "Development/Scenarios/" +
+            "StoreOperationsGoldenPathRunner.cs";
 
         [MenuItem(
             "Tools/Cartridge & Cloud/" +
@@ -183,7 +183,7 @@ namespace VRMGames.CartridgeAndCloud.Editor.ProjectOrganization
         {
             yield return null;
 
-            Phase1RuntimeAssetRegistryAsset registry =
+            StoreRuntimeAssetRegistry registry =
                 RequireRegistry();
 
             Assert.That(
@@ -238,7 +238,7 @@ namespace VRMGames.CartridgeAndCloud.Editor.ProjectOrganization
         {
             return
                 @"Resources\.Load<\s*" +
-                @"Phase1AudioCatalogAsset>\(\s*" +
+                @"AudioEventCatalogAsset>\(\s*" +
                 @"""Sprint16Phase1/""\s*\+\s*" +
                 @"""CC_S16_P1_AudioCatalog""\s*\)";
         }
@@ -248,7 +248,7 @@ namespace VRMGames.CartridgeAndCloud.Editor.ProjectOrganization
         {
             return
                 @"Resources\.Load<\s*" +
-                @"Phase1ContentCatalogAsset>\(\s*" +
+                @"StoreContentCatalogAsset>\(\s*" +
                 @"""Sprint16Phase1/""\s*\+\s*" +
                 @"""CC_S16_P1_ContentCatalog""\s*\)";
         }
@@ -283,18 +283,18 @@ namespace VRMGames.CartridgeAndCloud.Editor.ProjectOrganization
 
             const string helpers =
                 @"        private static
-            Phase1RuntimeAssetRegistryAsset
+            StoreRuntimeAssetRegistry
             RequireRegistry()
         {
-            Phase1RuntimeAssetRegistryAsset registry =
-                Phase1RuntimeAssetRegistryAsset
+            StoreRuntimeAssetRegistry registry =
+                StoreRuntimeAssetRegistry
                     .FindLoaded();
 
             if (registry == null)
             {
                 registry =
                     LoadEditorAsset<
-                        Phase1RuntimeAssetRegistryAsset>(
+                        StoreRuntimeAssetRegistry>(
                             ""Assets/_Project/Settings/"" +
                             ""Runtime/"" +
                             ""RuntimeAssetRegistry.asset"");
@@ -387,7 +387,7 @@ namespace VRMGames.CartridgeAndCloud.Editor.ProjectOrganization
                 @"\{\s*" +
                 @"_catalogAsset =\s*" +
                 @"Resources\.Load<\s*" +
-                @"Phase1ContentCatalogAsset>\(\s*" +
+                @"StoreContentCatalogAsset>\(\s*" +
                 @"""Sprint16Phase1/""\s*\+\s*" +
                 @"""CC_S16_P1_ContentCatalog""\s*\);\s*" +
                 @"\}";
@@ -395,9 +395,9 @@ namespace VRMGames.CartridgeAndCloud.Editor.ProjectOrganization
             const string replacement =
                 @"            if (_catalogAsset == null)
             {
-                Phase1RuntimeAssetRegistryAsset
+                StoreRuntimeAssetRegistry
                     registry =
-                        Phase1RuntimeAssetRegistryAsset
+                        StoreRuntimeAssetRegistry
                             .FindLoaded();
 
                 _catalogAsset =
@@ -582,7 +582,7 @@ namespace VRMGames.CartridgeAndCloud.Editor.ProjectOrganization
         {
             string projectRoot =
                 Directory.GetParent(
-                    Application.dataPath)
+                    global::UnityEngine.Application.dataPath)
                     ?.FullName;
 
             if (string.IsNullOrWhiteSpace(

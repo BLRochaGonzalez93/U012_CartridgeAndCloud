@@ -279,4 +279,192 @@ namespace VRMGames.CartridgeAndCloud.Domain.Inventory
             }
         }
     }
+
+    public readonly struct InventoryContainerId :
+        IEquatable<InventoryContainerId>
+    {
+        public string Value { get; }
+
+        public InventoryContainerId(string value)
+        {
+            if (string.IsNullOrWhiteSpace(value))
+            {
+                throw new ArgumentException(
+                    "Inventory container ID cannot be empty.",
+                    nameof(value));
+            }
+
+            Value = value;
+        }
+
+        public bool Equals(InventoryContainerId other)
+        {
+            return string.Equals(
+                Value,
+                other.Value,
+                StringComparison.Ordinal);
+        }
+
+        public override bool Equals(object obj)
+        {
+            return obj is InventoryContainerId other &&
+                   Equals(other);
+        }
+
+        public override int GetHashCode()
+        {
+            return Value == null
+                ? 0
+                : StringComparer.Ordinal.GetHashCode(Value);
+        }
+
+        public override string ToString()
+        {
+            return Value ?? string.Empty;
+        }
+
+        public static bool operator ==(
+            InventoryContainerId left,
+            InventoryContainerId right)
+        {
+            return left.Equals(right);
+        }
+
+        public static bool operator !=(
+            InventoryContainerId left,
+            InventoryContainerId right)
+        {
+            return !left.Equals(right);
+        }
+    }
+
+    public enum InventoryContainerType
+    {
+        Unspecified = 0,
+        Generic = 1,
+        Storage = 2,
+        Display = 3,
+        Transit = 4
+    }
+
+    public readonly struct InventoryCapacity :
+        IEquatable<InventoryCapacity>
+    {
+        public int Units { get; }
+
+        public InventoryCapacity(int units)
+        {
+            if (units < 0)
+            {
+                throw new ArgumentOutOfRangeException(
+                    nameof(units),
+                    "Inventory capacity cannot be negative.");
+            }
+
+            Units = units;
+        }
+
+        public bool Equals(InventoryCapacity other)
+        {
+            return Units == other.Units;
+        }
+
+        public override bool Equals(object obj)
+        {
+            return obj is InventoryCapacity other &&
+                   Equals(other);
+        }
+
+        public override int GetHashCode()
+        {
+            return Units;
+        }
+
+        public override string ToString()
+        {
+            return Units.ToString();
+        }
+
+        public static bool operator ==(
+            InventoryCapacity left,
+            InventoryCapacity right)
+        {
+            return left.Equals(right);
+        }
+
+        public static bool operator !=(
+            InventoryCapacity left,
+            InventoryCapacity right)
+        {
+            return !left.Equals(right);
+        }
+    }
+
+    public enum InventoryMutationFailureReason
+    {
+        None = 0,
+        InvalidQuantity = 1,
+        InsufficientQuantity = 2,
+        CapacityExceeded = 3
+    }
+
+    public sealed class InventoryMutationResult
+    {
+        public bool Succeeded { get; }
+
+        public InventoryMutationFailureReason FailureReason { get; }
+
+        public Quantity PreviousProductQuantity { get; }
+
+        public Quantity CurrentProductQuantity { get; }
+
+        public int PreviousUsedCapacity { get; }
+
+        public int CurrentUsedCapacity { get; }
+
+        private InventoryMutationResult(
+            bool succeeded,
+            InventoryMutationFailureReason failureReason,
+            Quantity previousProductQuantity,
+            Quantity currentProductQuantity,
+            int previousUsedCapacity,
+            int currentUsedCapacity)
+        {
+            Succeeded = succeeded;
+            FailureReason = failureReason;
+            PreviousProductQuantity = previousProductQuantity;
+            CurrentProductQuantity = currentProductQuantity;
+            PreviousUsedCapacity = previousUsedCapacity;
+            CurrentUsedCapacity = currentUsedCapacity;
+        }
+
+        public static InventoryMutationResult Success(
+            Quantity previousProductQuantity,
+            Quantity currentProductQuantity,
+            int previousUsedCapacity,
+            int currentUsedCapacity)
+        {
+            return new InventoryMutationResult(
+                true,
+                InventoryMutationFailureReason.None,
+                previousProductQuantity,
+                currentProductQuantity,
+                previousUsedCapacity,
+                currentUsedCapacity);
+        }
+
+        public static InventoryMutationResult Failure(
+            InventoryMutationFailureReason failureReason,
+            Quantity productQuantity,
+            int usedCapacity)
+        {
+            return new InventoryMutationResult(
+                false,
+                failureReason,
+                productQuantity,
+                productQuantity,
+                usedCapacity,
+                usedCapacity);
+        }
+    }
 }

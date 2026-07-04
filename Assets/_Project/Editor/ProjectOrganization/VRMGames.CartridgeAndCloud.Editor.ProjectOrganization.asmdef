@@ -4,7 +4,9 @@
     "references": [
         "VRMGames.CartridgeAndCloud.Domain",
         "VRMGames.CartridgeAndCloud.Infrastructure",
-        "VRMGames.CartridgeAndCloud.Presentation"
+        "VRMGames.CartridgeAndCloud.Presentation",
+        "VRMGames.CartridgeAndCloud.Application",
+        "VRMGames.CartridgeAndCloud.Runtime"
     ],
     "includePlatforms": [
         "Editor"

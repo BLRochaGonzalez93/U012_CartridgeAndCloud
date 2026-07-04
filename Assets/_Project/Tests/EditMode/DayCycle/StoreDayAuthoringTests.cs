@@ -4,6 +4,7 @@ using VRMGames.CartridgeAndCloud.Domain.DayCycle;
 using VRMGames.CartridgeAndCloud.Infrastructure.Customers;
 using VRMGames.CartridgeAndCloud.Infrastructure.DayCycle;
 
+using VRMGames.CartridgeAndCloud.Runtime.Development.Scenarios;
 namespace VRMGames.CartridgeAndCloud.Tests.EditMode.DayCycle
 {
     public sealed class StoreDayAuthoringTests
@@ -312,9 +313,9 @@ namespace VRMGames.CartridgeAndCloud.Tests.EditMode.DayCycle
 
             try
             {
-                StoreDayTechnicalScenarioRunner runner =
+                StoreDayScenarioRunner runner =
                     gameObject.AddComponent<
-                        StoreDayTechnicalScenarioRunner>();
+                        StoreDayScenarioRunner>();
 
                 Assert.Throws<
                     System.InvalidOperationException>(
@@ -341,9 +342,9 @@ namespace VRMGames.CartridgeAndCloud.Tests.EditMode.DayCycle
                     300,
                     true,
                     true);
-                StoreDayTechnicalScenarioRunner runner =
+                StoreDayScenarioRunner runner =
                     gameObject.AddComponent<
-                        StoreDayTechnicalScenarioRunner>();
+                        StoreDayScenarioRunner>();
                 runner.Configure(asset, false);
                 runner.RunScenario();
 

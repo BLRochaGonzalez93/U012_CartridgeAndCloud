@@ -163,4 +163,120 @@ namespace VRMGames.CartridgeAndCloud.Domain.Receiving
                 Status);
         }
     }
+
+    public readonly struct DeliveryId :
+        IEquatable<DeliveryId>
+    {
+        public string Value { get; }
+
+        public DeliveryId(string value)
+        {
+            if (string.IsNullOrWhiteSpace(value))
+            {
+                throw new ArgumentException(
+                    "Delivery ID cannot be empty.",
+                    nameof(value));
+            }
+
+            Value = value;
+        }
+
+        public bool Equals(DeliveryId other)
+        {
+            return string.Equals(
+                Value,
+                other.Value,
+                StringComparison.Ordinal);
+        }
+
+        public override bool Equals(object obj)
+        {
+            return obj is DeliveryId other &&
+                   Equals(other);
+        }
+
+        public override int GetHashCode()
+        {
+            return StringComparer.Ordinal.GetHashCode(
+                Value);
+        }
+
+        public override string ToString()
+        {
+            return Value;
+        }
+
+        public static bool operator ==(
+            DeliveryId left,
+            DeliveryId right)
+        {
+            return left.Equals(right);
+        }
+
+        public static bool operator !=(
+            DeliveryId left,
+            DeliveryId right)
+        {
+            return !left.Equals(right);
+        }
+    }
+
+    public enum DeliveryStatus
+    {
+        AwaitingReceipt = 0,
+        PartiallyReceived = 1,
+        Received = 2
+    }
+
+    public enum DeliveryMutationFailureReason
+    {
+        None = 0,
+        BoxNotFound = 1,
+        BoxAlreadyReceived = 2
+    }
+
+    public readonly struct DeliveryMutationResult
+    {
+        public bool Succeeded { get; }
+
+        public DeliveryMutationFailureReason FailureReason { get; }
+
+        public DeliveryStatus PreviousStatus { get; }
+
+        public DeliveryStatus CurrentStatus { get; }
+
+        private DeliveryMutationResult(
+            bool succeeded,
+            DeliveryMutationFailureReason failureReason,
+            DeliveryStatus previousStatus,
+            DeliveryStatus currentStatus)
+        {
+            Succeeded = succeeded;
+            FailureReason = failureReason;
+            PreviousStatus = previousStatus;
+            CurrentStatus = currentStatus;
+        }
+
+        public static DeliveryMutationResult Success(
+            DeliveryStatus previousStatus,
+            DeliveryStatus currentStatus)
+        {
+            return new DeliveryMutationResult(
+                true,
+                DeliveryMutationFailureReason.None,
+                previousStatus,
+                currentStatus);
+        }
+
+        public static DeliveryMutationResult Failure(
+            DeliveryMutationFailureReason failureReason,
+            DeliveryStatus currentStatus)
+        {
+            return new DeliveryMutationResult(
+                false,
+                failureReason,
+                currentStatus,
+                currentStatus);
+        }
+    }
 }
