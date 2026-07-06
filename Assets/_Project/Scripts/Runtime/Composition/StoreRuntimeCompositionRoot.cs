@@ -13,8 +13,9 @@ using VRMGames.CartridgeAndCloud.Infrastructure.Persistence;
 using VRMGames.CartridgeAndCloud.Infrastructure.Store;
 using VRMGames.CartridgeAndCloud.Runtime.Audio;
 using VRMGames.CartridgeAndCloud.Runtime.Characters;
-using VRMGames.CartridgeAndCloud.Runtime.Development.Blockout;
+using VRMGames.CartridgeAndCloud.Runtime.Store;
 using VRMGames.CartridgeAndCloud.Runtime.Inventory;
+using VRMGames.CartridgeAndCloud.Runtime.Navigation;
 using VRMGames.CartridgeAndCloud.Runtime.Placement;
 using VRMGames.CartridgeAndCloud.Runtime.UIUX;
 using VRMGames.CartridgeAndCloud.Domain.GameSession;
@@ -32,8 +33,6 @@ public static StoreRuntimeCompositionRoot
         private StoreContentCatalogAsset
             _contentAsset;
         private StoreLayoutAsset _shellAsset;
-        private StoreMaterialPaletteAsset
-            _paletteAsset;
         private StorePresentationCatalogAsset
             _presentationAsset;
         private AudioEventCatalogAsset
@@ -47,12 +46,16 @@ public static StoreRuntimeCompositionRoot
             _placement;
         private StoreCharacterLoopController
             _characters;
-        private StoreBlockoutBuilder
-            _blockout;
+        private AuthoredStoreRuntimeBinder
+            _binder;
         private StoreOperationsScreen _operations;
         private StoreAudioRouter _audio;
         private InventoryVisualSynchronizer
             _inventoryVisuals;
+        private DynamicStoreNavMeshController
+            _navMesh;
+        private SupplierDeliveryPresenter
+            _supplierDeliveries;
 
         [RuntimeInitializeOnLoadMethod(
             RuntimeInitializeLoadType.BeforeSceneLoad)]
@@ -127,8 +130,6 @@ public static StoreRuntimeCompositionRoot
             _contentAsset =
                 registry.ContentCatalog;
             _shellAsset = registry.StoreShell;
-            _paletteAsset =
-                registry.MaterialPalette;
             _presentationAsset =
                 registry.PresentationCatalog;
             _audioAsset = registry.AudioCatalog;
@@ -213,12 +214,11 @@ public static StoreRuntimeCompositionRoot
                 _audio,
                 _settings.VfxPoolSize);
 
-            _blockout =
+            _binder =
                 _storeRuntime.AddComponent<
-                    StoreBlockoutBuilder>();
-            _blockout.Configure(
+                    AuthoredStoreRuntimeBinder>();
+            _binder.Configure(
                 _shellAsset,
-                _paletteAsset,
                 _settings);
 
             StoreInitialSceneContext sceneContext =
@@ -230,7 +230,7 @@ public static StoreRuntimeCompositionRoot
             {
                 try
                 {
-                    _blockout.BindAuthoredScene(
+                    _binder.Bind(
                         sceneContext);
                 }
                 catch (Exception exception)
@@ -255,8 +255,13 @@ public static StoreRuntimeCompositionRoot
             _placement.Configure(
                 _service,
                 catalog,
-                _paletteAsset,
                 sceneContext);
+
+            _navMesh =
+                _storeRuntime.AddComponent<
+                    DynamicStoreNavMeshController>();
+            _navMesh.Configure(
+                sceneContext.Navigation);
 
             _characters =
                 _storeRuntime.AddComponent<
@@ -264,12 +269,13 @@ public static StoreRuntimeCompositionRoot
             _characters.Configure(
                 _service,
                 catalog,
-                _paletteAsset,
-                _blockout.EntranceAnchor,
-                _blockout.CheckoutAnchor,
-                _blockout.ReceivingAnchor,
+                _presentationAsset,
+                _binder.EntranceAnchor,
+                _binder.CheckoutAnchor,
+                _binder.ReceivingAnchor,
                 _settings
-                    .MaximumBlockoutCustomers);
+                    .MaximumCustomers,
+                sceneContext.CustomerSpawnAnchors);
 
             _inventoryVisuals =
                 _storeRuntime.AddComponent<
@@ -277,12 +283,18 @@ public static StoreRuntimeCompositionRoot
             _inventoryVisuals.Configure(
                 _service,
                 catalog,
-                _paletteAsset,
-                _blockout.BackroomAnchor);
+                _binder.BackroomAnchor);
 
             _operations =
                 _storeRuntime.AddComponent<
                     StoreOperationsScreen>();
+            _supplierDeliveries =
+                _storeRuntime.AddComponent<SupplierDeliveryPresenter>();
+            _supplierDeliveries.Configure(
+                _presentationAsset,
+                _binder.EntranceAnchor,
+                _binder.ReceivingAnchor);
+
             _operations.Configure(
                 _service,
                 catalog,
@@ -290,7 +302,7 @@ public static StoreRuntimeCompositionRoot
                     catalog),
                 _placement,
                 _characters,
-                _blockout,
+                _binder,
                 _audio);
 
             RegisterFeedbackAnchors();
@@ -300,9 +312,9 @@ public static StoreRuntimeCompositionRoot
             _placement.FeedbackRaised +=
                 HandleFeedback;
 
-            if (_blockout.Door != null)
+            if (_binder.Door != null)
             {
-                _blockout.Door
+                _binder.Door
                     .OpenStateChanged +=
                         HandleDoorStateChanged;
             }
@@ -328,7 +340,6 @@ public static StoreRuntimeCompositionRoot
             if (_settings != null &&
                 _contentAsset != null &&
                 _shellAsset != null &&
-                _paletteAsset != null &&
                 _presentationAsset != null &&
                 _audioAsset != null)
             {
@@ -344,13 +355,13 @@ public static StoreRuntimeCompositionRoot
         {
             _feedback.RegisterAnchor(
                 "store-entrance",
-                _blockout.EntranceAnchor);
+                _binder.EntranceAnchor);
             _feedback.RegisterAnchor(
                 "receiving-zone",
-                _blockout.ReceivingAnchor);
+                _binder.ReceivingAnchor);
             _feedback.RegisterAnchor(
                 "checkout-zone",
-                _blockout.CheckoutAnchor);
+                _binder.CheckoutAnchor);
             _feedback.RegisterAnchor(
                 "store-center",
                 _storeRuntime.transform);
@@ -362,7 +373,7 @@ public static StoreRuntimeCompositionRoot
                 _storeRuntime.transform);
             _feedback.RegisterAnchor(
                 "customer",
-                _blockout.EntranceAnchor);
+                _binder.EntranceAnchor);
         }
 
         private void HandleFeedback(
@@ -372,10 +383,10 @@ public static StoreRuntimeCompositionRoot
             _inventoryVisuals?.Refresh();
 
             if (feedback.Kind ==
-                GameplayFeedbackType.OrderReceived)
+                GameplayFeedbackType.OrderReceived &&
+                !string.IsNullOrWhiteSpace(feedback.CorrelationId))
             {
-                _characters
-                    ?.PresentSupplierDelivery();
+                _supplierDeliveries?.Present(feedback.CorrelationId);
             }
         }
 
@@ -527,10 +538,10 @@ public static StoreRuntimeCompositionRoot
                     HandleFeedback;
             }
 
-            if (_blockout != null &&
-                _blockout.Door != null)
+            if (_binder != null &&
+                _binder.Door != null)
             {
-                _blockout.Door
+                _binder.Door
                     .OpenStateChanged -=
                         HandleDoorStateChanged;
             }
@@ -545,10 +556,12 @@ public static StoreRuntimeCompositionRoot
             _feedback = null;
             _placement = null;
             _characters = null;
-            _blockout = null;
+            _binder = null;
             _operations = null;
             _audio = null;
             _inventoryVisuals = null;
+            _navMesh = null;
+            _supplierDeliveries = null;
         }
     }
 }

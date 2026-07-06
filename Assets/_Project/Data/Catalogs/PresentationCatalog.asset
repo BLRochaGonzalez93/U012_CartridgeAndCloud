@@ -11,23 +11,32 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 896512b05cc00e3d31899a4fce25d37e, type: 3}
   m_Name: PresentationCatalog
-  m_EditorClassIdentifier: 
-  _characters:
-  - id: employee-main
+  m_EditorClassIdentifier:
+  _actorCatalog: {fileID: 0}
+  _feedbackCatalog: {fileID: 0}
+  _supplierDeliveryViewPrefab: {fileID: 1000000000000000001, guid: f3d1fda2bade47b9a51a2c29c510c0a6, type: 3}
+  _actors:
+  - id: player-clerk-male-01
+    role: 3
+    prefab: {fileID: 5071378388273981354, guid: e20cc15fec020a4409102ce72e63045c, type: 3}
+  - id: employee-female-01
     role: 0
-    prefabResourcePath: Characters/Employee
-    materialVariantId: character-employee
-    moveSpeed: 2
-  - id: customer-base
-    role: 1
-    prefabResourcePath: Characters/Customer
-    materialVariantId: character-customer
-    moveSpeed: 2
-  - id: supplier-base
+    prefab: {fileID: 1887807586058611113, guid: 1afe3b71b4abb214594548c8c5ca015b, type: 3}
+  - id: employee-male-01
+    role: 0
+    prefab: {fileID: 2772703475725894826, guid: 7ade2defa7feb9940b695ceef67bdf32, type: 3}
+  - id: supplier-female-01
     role: 2
-    prefabResourcePath: Characters/Supplier
-    materialVariantId: character-supplier
-    moveSpeed: 1.8
+    prefab: {fileID: 1557245792252668527, guid: 35e651f1b985134419eb6f7c9155326d, type: 3}
+  - id: supplier-male-01
+    role: 2
+    prefab: {fileID: 3883613678230295547, guid: e283266eb5ddafa4fa130d4044bb1809, type: 3}
+  - id: customer-female-01
+    role: 1
+    prefab: {fileID: 3039054266591393197, guid: 0e0c8282121d589498700743df76b633, type: 3}
+  - id: customer-male-01
+    role: 1
+    prefab: {fileID: 4777035455208513169, guid: 408b774d22d78584ab2185f40e53be06, type: 3}
   _animations:
   - stateId: idle
     placeholderClip: {fileID: 7400000, guid: 00b8a0a5b29b4bd340b6c524f0a1137a, type: 2}

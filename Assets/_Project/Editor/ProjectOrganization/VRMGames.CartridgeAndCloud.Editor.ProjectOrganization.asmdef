@@ -6,7 +6,8 @@
         "VRMGames.CartridgeAndCloud.Infrastructure",
         "VRMGames.CartridgeAndCloud.Presentation",
         "VRMGames.CartridgeAndCloud.Application",
-        "VRMGames.CartridgeAndCloud.Runtime"
+        "VRMGames.CartridgeAndCloud.Runtime",
+        "Unity.AI.Navigation"
     ],
     "includePlatforms": [
         "Editor"

@@ -11,7 +11,7 @@ using VRMGames.CartridgeAndCloud.Domain.Store;
 using VRMGames.CartridgeAndCloud.Runtime.Audio;
 using VRMGames.CartridgeAndCloud.Runtime.Characters;
 using VRMGames.CartridgeAndCloud.Runtime.Composition;
-using VRMGames.CartridgeAndCloud.Runtime.Development.Blockout;
+using VRMGames.CartridgeAndCloud.Runtime.Store;
 using VRMGames.CartridgeAndCloud.Runtime.Placement;
 namespace VRMGames.CartridgeAndCloud.Runtime.UIUX
 {
@@ -38,8 +38,8 @@ namespace VRMGames.CartridgeAndCloud.Runtime.UIUX
             _placement;
         private StoreCharacterLoopController
             _characters;
-        private StoreBlockoutBuilder
-            _blockout;
+        private AuthoredStoreRuntimeBinder
+            _binder;
         private StoreAudioRouter _audio;
 
         private Canvas _canvas;
@@ -55,7 +55,7 @@ namespace VRMGames.CartridgeAndCloud.Runtime.UIUX
             StoreOpeningProcedure procedure,
             StorePlacementCoordinator placement,
             StoreCharacterLoopController characters,
-            StoreBlockoutBuilder blockout,
+            AuthoredStoreRuntimeBinder binder,
             StoreAudioRouter audio)
         {
             _service = service ??
@@ -73,9 +73,9 @@ namespace VRMGames.CartridgeAndCloud.Runtime.UIUX
             _characters = characters ??
                 throw new ArgumentNullException(
                     nameof(characters));
-            _blockout = blockout ??
+            _binder = binder ??
                 throw new ArgumentNullException(
-                    nameof(blockout));
+                    nameof(binder));
             _audio = audio ??
                 throw new ArgumentNullException(
                     nameof(audio));
@@ -456,12 +456,6 @@ namespace VRMGames.CartridgeAndCloud.Runtime.UIUX
                             _service.ReceiveOrder(
                                 order.OrderId);
 
-                        if (result.Succeeded)
-                        {
-                            _characters
-                                .PresentSupplierDelivery();
-                        }
-
                         Execute(result);
                     });
             }
@@ -636,7 +630,7 @@ namespace VRMGames.CartridgeAndCloud.Runtime.UIUX
                 "Playable customer loop");
 
             AddParagraph(
-                "A blockout customer walks through entrance, evaluates a stocked product, picks it, queues, completes checkout and exits.");
+                "A customer walks through entrance, evaluates a stocked product, picks it, queues, completes checkout and exits.");
 
             Button button =
                 AddAction(
@@ -657,8 +651,8 @@ namespace VRMGames.CartridgeAndCloud.Runtime.UIUX
                 "Visibility");
 
             bool hideWalls =
-                _blockout.WallOcclusion != null &&
-                _blockout.WallOcclusion
+                _binder.WallOcclusion != null &&
+                _binder.WallOcclusion
                     .HideOccludingWalls;
 
             AddAction(
@@ -668,7 +662,7 @@ namespace VRMGames.CartridgeAndCloud.Runtime.UIUX
                     : "Hide: OFF",
                 () =>
                 {
-                    _blockout.WallOcclusion
+                    _binder.WallOcclusion
                         ?.SetEnabled(
                             !hideWalls);
                     RebuildContent();

@@ -11,7 +11,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 77c397b2709f4b8d8152fd6f2d95dfa0, type: 3}
   m_Name: CC_CustomerProfile_ImpatientVisitor
-  m_EditorClassIdentifier:
+  m_EditorClassIdentifier: 
   _customerProfileId: customer-impatient-visitor
   _displayNameKey: customer.impatient_visitor.name
   _preferredCategoryIds:
@@ -21,4 +21,4 @@ MonoBehaviour:
   _patienceSeconds: 15
   _browseStopCount: 1
   _walkSpeed: 2.4
-  _technicalPrefab: {fileID: 0}
+  _technicalPrefab: {fileID: 3039054266591393197, guid: 0e0c8282121d589498700743df76b633, type: 3}

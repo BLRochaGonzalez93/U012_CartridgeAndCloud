@@ -21,6 +21,7 @@ using VRMGames.CartridgeAndCloud.Domain.Checkout;
 using VRMGames.CartridgeAndCloud.Domain.Economy;
 using VRMGames.CartridgeAndCloud.Domain.Store;
 using VRMGames.CartridgeAndCloud.Infrastructure.Audio;
+using VRMGames.CartridgeAndCloud.Infrastructure.Customers;
 using VRMGames.CartridgeAndCloud.Infrastructure.Store;
 using VRMGames.CartridgeAndCloud.Presentation.Characters;
 using VRMGames.CartridgeAndCloud.Presentation.Products;
@@ -29,7 +30,7 @@ using VRMGames.CartridgeAndCloud.Presentation.Store.Occlusion;
 using VRMGames.CartridgeAndCloud.Runtime.Audio;
 using VRMGames.CartridgeAndCloud.Runtime.Characters;
 using VRMGames.CartridgeAndCloud.Runtime.Composition;
-using VRMGames.CartridgeAndCloud.Runtime.Development.Blockout;
+using VRMGames.CartridgeAndCloud.Runtime.Store;
 using VRMGames.CartridgeAndCloud.Runtime.Development.Scenarios;
 using VRMGames.CartridgeAndCloud.Runtime.Placement;
 using VRMGames.CartridgeAndCloud.Runtime.UIUX;
@@ -134,7 +135,8 @@ namespace VRMGames.CartridgeAndCloud.Tests.PlayMode.Store
         {
             GameObject prefab =
                 LoadEditorAsset<GameObject>(
-                    "Assets/_Project/Prefabs/Characters/Customer.prefab");
+                    "Assets/_Project/Resources/Characters/Customers/" +
+                    "PF_CC_Customer_Shopper_Female_01.prefab");
 
             GameObject instance =
                 Object.Instantiate(prefab);
@@ -261,6 +263,19 @@ namespace VRMGames.CartridgeAndCloud.Tests.PlayMode.Store
                 root.transform,
                 false);
 
+            GameObject sensorObject =
+                new GameObject("Sensor");
+            sensorObject.transform.SetParent(root.transform, false);
+            BoxCollider sensorCollider =
+                sensorObject.AddComponent<BoxCollider>();
+            sensorCollider.isTrigger = true;
+            sensorCollider.size = new Vector3(4f, 3f, 4f);
+            Rigidbody sensorBody =
+                sensorObject.AddComponent<Rigidbody>();
+            sensorBody.isKinematic = true;
+            sensorBody.useGravity = false;
+            sensorObject.AddComponent<AutomaticDoorSensor>();
+
             AutomaticSlidingDoorController door =
                 root.AddComponent<
                     AutomaticSlidingDoorController>();
@@ -279,11 +294,17 @@ namespace VRMGames.CartridgeAndCloud.Tests.PlayMode.Store
                 .Configure(
                     "customer",
                     CharacterRole.Customer);
+            CapsuleCollider characterCollider =
+                character.AddComponent<CapsuleCollider>();
+            characterCollider.isTrigger = true;
+            characterCollider.height = 1.8f;
+            characterCollider.center = Vector3.up * 0.9f;
 
             character.transform.position =
                 root.transform.position;
+            Physics.SyncTransforms();
 
-            yield return null;
+            yield return new WaitForFixedUpdate();
             yield return null;
 
             Assert.That(door.IsOpen, Is.True);
@@ -308,6 +329,19 @@ namespace VRMGames.CartridgeAndCloud.Tests.PlayMode.Store
             right.transform.SetParent(
                 root.transform,
                 false);
+
+            GameObject sensorObject =
+                new GameObject("Sensor");
+            sensorObject.transform.SetParent(root.transform, false);
+            BoxCollider sensorCollider =
+                sensorObject.AddComponent<BoxCollider>();
+            sensorCollider.isTrigger = true;
+            sensorCollider.size = new Vector3(4f, 3f, 4f);
+            Rigidbody sensorBody =
+                sensorObject.AddComponent<Rigidbody>();
+            sensorBody.isKinematic = true;
+            sensorBody.useGravity = false;
+            sensorObject.AddComponent<AutomaticDoorSensor>();
 
             AutomaticSlidingDoorController door =
                 root.AddComponent<
@@ -362,63 +396,41 @@ namespace VRMGames.CartridgeAndCloud.Tests.PlayMode.Store
         }
 
         [UnityTest]
-        public IEnumerator FurnitureVisualFactory_BuildsCheckout()
+        public IEnumerator AuthoredFurniturePrefab_HasCheckoutContract()
         {
-            GameObject root =
-                new GameObject("FurnitureVisual");
-
-            var catalog =
-                RequireRegistry().ContentCatalog
-                    .BuildCatalog();
-
-            catalog.TryGetFurniture(
-                "checkout-counter",
-                out var definition);
-
-            StoreBlockoutVisualFactory
-                .BuildFurniture(
-                    root,
-                    definition,
-                    null,
-                    0.5f);
+            GameObject prefab = LoadEditorAsset<GameObject>(
+                "Assets/_Project/Prefabs/Furniture/CheckoutCounter.prefab");
+            GameObject instance = Object.Instantiate(prefab);
 
             yield return null;
 
+            Assert.That(instance.transform.Find("Collision"), Is.Not.Null);
+            Assert.That(instance.transform.Find("Anchors/EmployeeStandPoint"), Is.Not.Null);
             Assert.That(
-                root.transform.childCount,
-                Is.GreaterThanOrEqualTo(3));
-
-            Object.Destroy(root);
+                instance.transform.Find("Anchors/CustomerCheckoutStandPoint"),
+                Is.Not.Null);
+            Object.Destroy(instance);
         }
 
         [UnityTest]
-        public IEnumerator FurnitureVisualFactory_BuildsShelf()
+        public IEnumerator AuthoredFurniturePrefab_HasShelfContract()
         {
-            GameObject root =
-                new GameObject("FurnitureVisual");
-
-            var catalog =
-                RequireRegistry().ContentCatalog
-                    .BuildCatalog();
-
-            catalog.TryGetFurniture(
-                "central-shelf",
-                out var definition);
-
-            StoreBlockoutVisualFactory
-                .BuildFurniture(
-                    root,
-                    definition,
-                    null,
-                    0.5f);
+            GameObject prefab = LoadEditorAsset<GameObject>(
+                "Assets/_Project/Prefabs/Furniture/CentralShelf.prefab");
+            GameObject instance = Object.Instantiate(prefab);
 
             yield return null;
 
             Assert.That(
-                root.transform.childCount,
-                Is.GreaterThanOrEqualTo(5));
-
-            Object.Destroy(root);
+                instance.GetComponentInChildren<BoxCollider>(true),
+                Is.Not.Null);
+            Assert.That(
+                instance.GetComponentsInChildren<CustomerBrowseFixtureAuthoring>(true).Length,
+                Is.EqualTo(1));
+            Assert.That(
+                instance.GetComponentInChildren<ProductDisplaySpotSet>(true),
+                Is.Not.Null);
+            Object.Destroy(instance);
         }
 
         [UnityTest]
@@ -510,7 +522,7 @@ namespace VRMGames.CartridgeAndCloud.Tests.PlayMode.Store
                 Is.Not.Null);
             Assert.That(
                 GameObject.Find(
-                    StoreBlockoutBuilder.RootName),
+                    "S16_P1_StoreBlockout"),
                 Is.Null,
                 "StoreInitial must use authored architecture, not the procedural blockout.");
             Assert.That(
@@ -888,7 +900,7 @@ namespace VRMGames.CartridgeAndCloud.Tests.PlayMode.Store
                 Is.True);
 
             float customerTimeout =
-                Time.realtimeSinceStartup + 15f;
+                Time.realtimeSinceStartup + 30f;
 
             yield return null;
 

@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 9138528627220596559}
   - component: {fileID: 7962568503131029885}
   - component: {fileID: 5977681169614068468}
+  - component: {fileID: 6766163761489444912}
   m_Layer: 0
   m_Name: SignalProHeadset
   m_TagString: Untagged
@@ -48,8 +49,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c2e99925c75b1c82d09342c159b5ab76, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  m_Name:
+  m_EditorClassIdentifier:
   _productId: headset-signal-pro
 --- !u!205 &9138528627220596559
 LODGroup:
@@ -65,7 +66,7 @@ LODGroup:
   m_AnimateCrossFading: 0
   m_LastLODIsBillboard: 0
   m_LODs:
-  - screenRelativeHeight: 0.6
+  - screenRelativeHeight: 0.05
     fadeTransitionWidth: 0
     renderers:
     - renderer: {fileID: 1249894268520391824}
@@ -74,7 +75,7 @@ LODGroup:
     - renderer: {fileID: 8714688528947718824}
     - renderer: {fileID: 3115984055821344885}
     - renderer: {fileID: 6303393108097195812}
-  - screenRelativeHeight: 0.3
+  - screenRelativeHeight: 0.03
     fadeTransitionWidth: 0
     renderers:
     - renderer: {fileID: 7719051970072734305}
@@ -83,7 +84,7 @@ LODGroup:
     - renderer: {fileID: 8814163064612425906}
     - renderer: {fileID: 4392628533875077777}
     - renderer: {fileID: 4404353847941944753}
-  - screenRelativeHeight: 0.1
+  - screenRelativeHeight: 0.01
     fadeTransitionWidth: 0
     renderers:
     - renderer: {fileID: 5105577317453868112}
@@ -103,7 +104,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 79b5fa238462f0849ba223921c764bef, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: VRMGames.CartridgeAndCloud.Presentation::VRMGames.CartridgeAndCloud.Presentation.Store.StoreVisualInstance
   _id: headset-signal-pro
   _family: Product
@@ -118,7 +119,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 37d12b45b4d8eb05d3c80927a3e30d3f, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: VRMGames.CartridgeAndCloud.Presentation::VRMGames.CartridgeAndCloud.Presentation.Products.ProductVisualMarker
 --- !u!1 &75395770034580200
 GameObject:
@@ -1851,3 +1852,18 @@ MeshRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &6766163761489444912
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 100000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c81a0fd5d1834d429c998b2d7fd8dbca, type: 3}
+  m_Name:
+  m_EditorClassIdentifier:
+  _role: 4
+  _pivotAtBaseCentre: 1
+  _positiveZIsFront: 1

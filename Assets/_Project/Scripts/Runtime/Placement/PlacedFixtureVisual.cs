@@ -15,6 +15,20 @@ namespace VRMGames.CartridgeAndCloud.Runtime.Placement
             private set;
         }
 
+        public string AssignedProductId {
+            get;
+            private set;
+        }
+
+        public int ProductQuantity {
+            get;
+            private set;
+        }
+
+        public bool HasStock =>
+            ProductQuantity > 0 &&
+            !string.IsNullOrWhiteSpace(AssignedProductId);
+
         public void Configure(
             string definitionId,
             string instanceId)
@@ -23,6 +37,16 @@ namespace VRMGames.CartridgeAndCloud.Runtime.Placement
                 definitionId ?? string.Empty;
             InstanceId =
                 instanceId ?? string.Empty;
+        }
+
+        public void ConfigureStock(
+            string assignedProductId,
+            int productQuantity)
+        {
+            AssignedProductId =
+                assignedProductId ?? string.Empty;
+            ProductQuantity =
+                Mathf.Max(0, productQuantity);
         }
     }
 }

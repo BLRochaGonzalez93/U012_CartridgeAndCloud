@@ -105,6 +105,10 @@ namespace VRMGames.CartridgeAndCloud.Presentation.Store.Authoring
         public Transform DynamicProductsRoot => _dynamicProductsRoot;
         public Transform CustomersRoot => _customersRoot;
         public Transform LightingRoot => _lightingRoot;
+        public StoreNavigationAuthoring Navigation =>
+            _environmentRoot == null
+                ? null
+                : _environmentRoot.GetComponentInChildren<StoreNavigationAuthoring>(true);
 
         public AuthoredStoreFixture[] GetAuthoredFixtures()
         {
@@ -176,11 +180,18 @@ namespace VRMGames.CartridgeAndCloud.Presentation.Store.Authoring
             Require(_doorParts, "AutomaticDoorParts", errors);
             Require(_gameplayCamera, "GameplayCamera", errors);
             Require(_environmentRoot, "EnvironmentRoot", errors);
+            Require(Navigation, "StoreNavigationAuthoring", errors);
             Require(_initialFurnitureRoot, "InitialFurnitureRoot", errors);
             Require(_dynamicFurnitureRoot, "DynamicFurnitureRoot", errors);
             Require(_dynamicProductsRoot, "DynamicProductsRoot", errors);
             Require(_customersRoot, "CustomersRoot", errors);
             Require(_lightingRoot, "LightingRoot", errors);
+
+            if (Navigation != null &&
+                !Navigation.TryValidate(out string navigationReport))
+            {
+                errors.AppendLine("- " + navigationReport.Replace("\n", "\n- "));
+            }
 
             if (_placementSurface != null)
             {

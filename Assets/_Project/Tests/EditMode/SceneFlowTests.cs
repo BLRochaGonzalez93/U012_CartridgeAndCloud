@@ -10,10 +10,10 @@ namespace VRMGames.CartridgeAndCloud.Tests.EditMode
     {
         private static readonly string[] ExpectedScenePaths =
         {
-            "Assets/_Project/Scenes/Bootstrap.unity",
-            "Assets/_Project/Scenes/MainMenu.unity",
-            "Assets/_Project/Scenes/StoreInitial.unity",
-            "Assets/_Project/Scenes/TestLab.unity"
+            "Assets/_Project/Scenes/Production/Bootstrap.unity",
+            "Assets/_Project/Scenes/Production/MainMenu.unity",
+            "Assets/_Project/Scenes/Production/StoreInitial.unity",
+            "Assets/_Project/Scenes/Test/TestLab.unity"
         };
 
         [Test]

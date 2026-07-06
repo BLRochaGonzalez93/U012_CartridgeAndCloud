@@ -3429,6 +3429,7 @@ GameObject:
   - component: {fileID: 2353556921710504925}
   - component: {fileID: 1627897558859433340}
   - component: {fileID: 167652168486384854}
+  - component: {fileID: 2273241936206837949}
   m_Layer: 0
   m_Name: LineupWall
   m_TagString: Untagged
@@ -3527,7 +3528,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 79b5fa238462f0849ba223921c764bef, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: VRMGames.CartridgeAndCloud.Presentation::VRMGames.CartridgeAndCloud.Presentation.Store.StoreVisualInstance
   _id: expansion.publishing.lineup-wall
   _family: Expansion
@@ -3756,3 +3757,18 @@ MeshRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &2273241936206837949
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8796420735826900556}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c81a0fd5d1834d429c998b2d7fd8dbca, type: 3}
+  m_Name:
+  m_EditorClassIdentifier:
+  _role: 5
+  _pivotAtBaseCentre: 1
+  _positiveZIsFront: 1

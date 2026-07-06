@@ -1,0 +1,73 @@
+﻿Prefab,Root,RootPosition,RootScale,GameObjects,Colliders,RootScripts,FunctionalPoints,NestedPrefabs
+Assets/_Project/Prefabs/Architecture/Modular/AutomaticDoor.prefab,AutomaticDoor,"{x: 0, y: 0, z: 0}","{x: 1, y: 1, z: 1}",10,0,"StoreVisualInstance, AutomaticDoorParts",,0
+Assets/_Project/Prefabs/Architecture/Modular/BackroomPartition.prefab,BackroomPartition,"{x: 0, y: 0, z: 0}","{x: 1, y: 1, z: 1}",19,0,StoreVisualInstance,,0
+Assets/_Project/Prefabs/Architecture/Modular/CornerInner.prefab,CornerInner,"{x: 0, y: 0, z: 0}","{x: 1, y: 1, z: 1}",3,0,StoreVisualInstance,,0
+Assets/_Project/Prefabs/Architecture/Modular/CornerOuter.prefab,CornerOuter,"{x: 0, y: 0, z: 0}","{x: 1, y: 1, z: 1}",3,0,StoreVisualInstance,,0
+Assets/_Project/Prefabs/Architecture/Modular/EndCap.prefab,EndCap,"{x: 0, y: 0, z: 0}","{x: 1, y: 1, z: 1}",3,0,StoreVisualInstance,,0
+Assets/_Project/Prefabs/Architecture/Modular/EntranceThreshold.prefab,EntranceThreshold,"{x: 0, y: 0, z: 0}","{x: 1, y: 1, z: 1}",13,0,StoreVisualInstance,,0
+Assets/_Project/Prefabs/Architecture/Modular/Floor100.prefab,Floor100,"{x: 0, y: 0, z: 0}","{x: 1, y: 1, z: 1}",3,0,StoreVisualInstance,,0
+Assets/_Project/Prefabs/Architecture/Modular/Floor200.prefab,Floor200,"{x: 0, y: 0, z: 0}","{x: 1, y: 1, z: 1}",3,0,StoreVisualInstance,,0
+Assets/_Project/Prefabs/Architecture/Modular/FloorEdge100.prefab,FloorEdge100,"{x: 0, y: 0, z: 0}","{x: 1, y: 1, z: 1}",3,0,StoreVisualInstance,,0
+Assets/_Project/Prefabs/Architecture/Modular/FloorTransition100.prefab,FloorTransition100,"{x: 0, y: 0, z: 0}","{x: 1, y: 1, z: 1}",3,0,StoreVisualInstance,,0
+Assets/_Project/Prefabs/Architecture/Modular/LightRail100.prefab,LightRail100,"{x: 0, y: 0, z: 0}","{x: 1, y: 1, z: 1}",3,0,StoreVisualInstance,,0
+Assets/_Project/Prefabs/Architecture/Modular/LightRail200.prefab,LightRail200,"{x: 0, y: 0, z: 0}","{x: 1, y: 1, z: 1}",3,0,StoreVisualInstance,,0
+Assets/_Project/Prefabs/Architecture/Modular/LinearPanel.prefab,LinearPanel,"{x: 0, y: 0, z: 0}","{x: 1, y: 1, z: 1}",3,0,StoreVisualInstance,,0
+Assets/_Project/Prefabs/Architecture/Modular/SpotLight.prefab,SpotLight,"{x: 0, y: 0, z: 0}","{x: 1, y: 1, z: 1}",13,0,StoreVisualInstance,,0
+Assets/_Project/Prefabs/Architecture/Modular/StoreGlassLeft.prefab,StoreGlassLeft,"{x: 0, y: 0, z: 0}","{x: 1, y: 1, z: 1}",3,0,StoreVisualInstance,,0
+Assets/_Project/Prefabs/Architecture/Modular/StoreGlassRight.prefab,StoreGlassRight,"{x: 0, y: 0, z: 0}","{x: 1, y: 1, z: 1}",3,0,StoreVisualInstance,,0
+Assets/_Project/Prefabs/Architecture/Modular/StoreSign.prefab,StoreSign,"{x: 0, y: 0, z: 0}","{x: 1, y: 1, z: 1}",10,0,StoreVisualInstance,,0
+Assets/_Project/Prefabs/Architecture/Modular/StorefrontFacade.prefab,StorefrontFacade,"{x: 0, y: 0, z: 0}","{x: 1, y: 1, z: 1}",19,0,StoreVisualInstance,,0
+Assets/_Project/Prefabs/Architecture/Modular/Wall100.prefab,Wall100,"{x: 0, y: 0, z: 0}","{x: 1, y: 1, z: 1}",13,0,StoreVisualInstance,,0
+Assets/_Project/Prefabs/Architecture/Modular/Wall200.prefab,Wall200,"{x: 0, y: 0, z: 0}","{x: 1, y: 1, z: 1}",13,0,StoreVisualInstance,,0
+Assets/_Project/Prefabs/Architecture/Modular/Wall400.prefab,Wall400,"{x: 0, y: 0, z: 0}","{x: 1, y: 1, z: 1}",13,0,StoreVisualInstance,,0
+Assets/_Project/Prefabs/Architecture/Modular/ZoneBackroom.prefab,ZoneBackroom,"{x: 0, y: 0, z: 0}","{x: 1, y: 1, z: 1}",16,0,StoreVisualInstance,,0
+Assets/_Project/Prefabs/Architecture/Modular/ZoneCheckout.prefab,ZoneCheckout,"{x: 0, y: 0, z: 0}","{x: 1, y: 1, z: 1}",16,0,StoreVisualInstance,,0
+Assets/_Project/Prefabs/Architecture/Modular/ZoneReceiving.prefab,ZoneReceiving,"{x: 0, y: 0, z: 0}","{x: 1, y: 1, z: 1}",16,0,StoreVisualInstance,,0
+Assets/_Project/Prefabs/Characters/Customers/Customer.prefab,Customer,"{x: 0, y: 0, z: 0}","{x: 1, y: 1, z: 1}",1,0,CharacterPrefabAuthoring,,0
+Assets/_Project/Prefabs/Characters/Employees/Employee.prefab,Employee,"{x: 0, y: 0, z: 0}","{x: 1, y: 1, z: 1}",1,0,CharacterPrefabAuthoring,,0
+Assets/_Project/Prefabs/Characters/Suppliers/Supplier.prefab,Supplier,"{x: 0, y: 0, z: 0}","{x: 1, y: 1, z: 1}",1,0,CharacterPrefabAuthoring,,0
+Assets/_Project/Prefabs/Expansions/Digital/CodeCardRack.prefab,CodeCardRack,"{x: 0, y: 0, z: 0}","{x: 1, y: 1, z: 1}",55,0,StoreVisualInstance,,0
+Assets/_Project/Prefabs/Expansions/Digital/Kiosk.prefab,Kiosk,"{x: 0, y: 0, z: 0}","{x: 1, y: 1, z: 1}",10,0,StoreVisualInstance,,0
+Assets/_Project/Prefabs/Expansions/Ecommerce/OrderDesk.prefab,OrderDesk,"{x: 0, y: 0, z: 0}","{x: 1, y: 1, z: 1}",19,0,StoreVisualInstance,,0
+Assets/_Project/Prefabs/Expansions/Ecommerce/SortBins.prefab,SortBins,"{x: 0, y: 0, z: 0}","{x: 1, y: 1, z: 1}",43,0,StoreVisualInstance,,0
+Assets/_Project/Prefabs/Expansions/Logistics/Conveyor.prefab,Conveyor,"{x: 0, y: 0, z: 0}","{x: 1, y: 1, z: 1}",43,0,StoreVisualInstance,,0
+Assets/_Project/Prefabs/Expansions/Logistics/PackingStation.prefab,PackingStation,"{x: 0, y: 0, z: 0}","{x: 1, y: 1, z: 1}",13,0,StoreVisualInstance,,0
+Assets/_Project/Prefabs/Expansions/Logistics/RollingCart.prefab,RollingCart,"{x: 0, y: 0, z: 0}","{x: 1, y: 1, z: 1}",22,0,StoreVisualInstance,,0
+Assets/_Project/Prefabs/Expansions/Market/AnalysisWall.prefab,AnalysisWall,"{x: 0, y: 0, z: 0}","{x: 1, y: 1, z: 1}",22,0,StoreVisualInstance,,0
+Assets/_Project/Prefabs/Expansions/Market/PlanningTable.prefab,PlanningTable,"{x: 0, y: 0, z: 0}","{x: 1, y: 1, z: 1}",13,0,StoreVisualInstance,,0
+Assets/_Project/Prefabs/Expansions/Publishing/LineupWall.prefab,LineupWall,"{x: 0, y: 0, z: 0}","{x: 1, y: 1, z: 1}",43,0,StoreVisualInstance,,0
+Assets/_Project/Prefabs/Expansions/Publishing/MeetingTable.prefab,MeetingTable,"{x: 0, y: 0, z: 0}","{x: 1, y: 1, z: 1}",13,0,StoreVisualInstance,,0
+Assets/_Project/Prefabs/Expansions/Server/OperationsDesk.prefab,OperationsDesk,"{x: 0, y: 0, z: 0}","{x: 1, y: 1, z: 1}",25,0,StoreVisualInstance,,0
+Assets/_Project/Prefabs/Expansions/Server/Rack.prefab,Rack,"{x: 0, y: 0, z: 0}","{x: 1, y: 1, z: 1}",79,0,StoreVisualInstance,,0
+Assets/_Project/Prefabs/Expansions/Server/UPS.prefab,UPS,"{x: 0, y: 0, z: 0}","{x: 1, y: 1, z: 1}",22,0,StoreVisualInstance,,0
+Assets/_Project/Prefabs/Expansions/Staff/Locker.prefab,Locker,"{x: 0, y: 0, z: 0}","{x: 1, y: 1, z: 1}",13,0,StoreVisualInstance,,0
+Assets/_Project/Prefabs/Expansions/Staff/TaskBoard.prefab,TaskBoard,"{x: 0, y: 0, z: 0}","{x: 1, y: 1, z: 1}",43,0,StoreVisualInstance,,0
+Assets/_Project/Prefabs/Expansions/Studio/ArtDesk.prefab,ArtDesk,"{x: 0, y: 0, z: 0}","{x: 1, y: 1, z: 1}",16,0,StoreVisualInstance,,0
+Assets/_Project/Prefabs/Expansions/Studio/AudioStation.prefab,AudioStation,"{x: 0, y: 0, z: 0}","{x: 1, y: 1, z: 1}",16,0,StoreVisualInstance,,0
+Assets/_Project/Prefabs/Expansions/Studio/DevDesk.prefab,DevDesk,"{x: 0, y: 0, z: 0}","{x: 1, y: 1, z: 1}",25,0,StoreVisualInstance,,0
+Assets/_Project/Prefabs/Furniture/BackroomStorage.prefab,BackroomStorage,"{x: 0, y: 0, z: 0}","{x: 1, y: 1, z: 1}",34,0,"StoreFixturePrefabAuthoring, StoreVisualInstance",,0
+Assets/_Project/Prefabs/Furniture/CentralShelf.prefab,CentralShelf,"{x: 0, y: 0, z: 0}","{x: 1, y: 1, z: 1}",28,0,"StoreFixturePrefabAuthoring, StoreVisualInstance",,0
+Assets/_Project/Prefabs/Furniture/CheckoutCounter.prefab,CheckoutCounter,"{x: 0, y: 0, z: 0}","{x: 1, y: 1, z: 1}",22,0,"StoreFixturePrefabAuthoring, StoreVisualInstance",,0
+Assets/_Project/Prefabs/Furniture/DecorationPlant.prefab,DecorationPlant,"{x: 0, y: 0, z: 0}","{x: 1, y: 1, z: 1}",25,0,"StoreFixturePrefabAuthoring, StoreVisualInstance",,0
+Assets/_Project/Prefabs/Furniture/FeaturedDisplay.prefab,FeaturedDisplay,"{x: 0, y: 0, z: 0}","{x: 1, y: 1, z: 1}",13,0,"StoreFixturePrefabAuthoring, StoreVisualInstance",,0
+Assets/_Project/Prefabs/Furniture/LowDisplay.prefab,LowDisplay,"{x: 0, y: 0, z: 0}","{x: 1, y: 1, z: 1}",13,0,"StoreFixturePrefabAuthoring, StoreVisualInstance",,0
+Assets/_Project/Prefabs/Furniture/ReceivingCrate.prefab,ReceivingCrate,"{x: 0, y: 0, z: 0}","{x: 1, y: 1, z: 1}",16,0,"StoreFixturePrefabAuthoring, StoreVisualInstance",,0
+Assets/_Project/Prefabs/Furniture/WallShelf.prefab,WallShelf,"{x: 0, y: 0, z: 0}","{x: 1, y: 1, z: 1}",25,0,"StoreFixturePrefabAuthoring, StoreVisualInstance",,0
+Assets/_Project/Prefabs/Products/CloudRunnerCase.prefab,CloudRunnerCase,"{x: 0, y: 0, z: 0}","{x: 1, y: 1, z: 1}",13,0,"ProductPrefabAuthoring, StoreVisualInstance, ProductVisualMarker",,0
+Assets/_Project/Prefabs/Products/MemoryCoreAccessory.prefab,MemoryCoreAccessory,"{x: 0, y: 0, z: 0}","{x: 1, y: 1, z: 1}",13,0,"ProductPrefabAuthoring, StoreVisualInstance, ProductVisualMarker",,0
+Assets/_Project/Prefabs/Products/NeonDrift.prefab,NeonDrift,"{x: 0, y: 0, z: 0}","{x: 1, y: 1, z: 1}",13,0,"ProductPrefabAuthoring, StoreVisualInstance, ProductVisualMarker",,0
+Assets/_Project/Prefabs/Products/OrbitPadController.prefab,OrbitPadController,"{x: 0, y: 0, z: 0}","{x: 1, y: 1, z: 1}",22,0,"ProductPrefabAuthoring, StoreVisualInstance, ProductVisualMarker",,0
+Assets/_Project/Prefabs/Products/Packaging/MemoryCoreBox.prefab,MemoryCoreBox,"{x: 0, y: 0, z: 0}","{x: 1, y: 1, z: 1}",10,0,StoreVisualInstance,,0
+Assets/_Project/Prefabs/Products/Packaging/OrbitPadBox.prefab,OrbitPadBox,"{x: 0, y: 0, z: 0}","{x: 1, y: 1, z: 1}",10,0,StoreVisualInstance,,0
+Assets/_Project/Prefabs/Products/Packaging/SignalProBox.prefab,SignalProBox,"{x: 0, y: 0, z: 0}","{x: 1, y: 1, z: 1}",10,0,StoreVisualInstance,,0
+Assets/_Project/Prefabs/Products/Packaging/VertexOneBox.prefab,VertexOneBox,"{x: 0, y: 0, z: 0}","{x: 1, y: 1, z: 1}",10,0,StoreVisualInstance,,0
+Assets/_Project/Prefabs/Products/SignalProHeadset.prefab,SignalProHeadset,"{x: 0, y: 0, z: 0}","{x: 1, y: 1, z: 1}",22,0,"ProductPrefabAuthoring, StoreVisualInstance, ProductVisualMarker",,0
+Assets/_Project/Prefabs/Products/VertexOneConsole.prefab,VertexOneConsole,"{x: 0, y: 0, z: 0}","{x: 1, y: 1, z: 1}",13,0,"ProductPrefabAuthoring, StoreVisualInstance, ProductVisualMarker",,0
+Assets/_Project/Prefabs/Store/StoreInitialEnvironment.prefab,StoreInitialEnvironment,"{x: 0, y: 0, z: 0}","{x: 1, y: 1, z: 1}",43,15,,"EntranceAnchor, BackroomAnchor, ReceivingAnchor, CheckoutAnchor",72
+Assets/_Project/Resources/Characters/Customers/PF_CC_Customer_Shopper_Female_01.prefab,PF_CC_Customer_Shopper_Female_01,"{x: 0, y: 0, z: 0}","{x: 1, y: 1, z: 1}",2,0,"CharacterPresence, CharacterLocomotionAnimator",,1
+Assets/_Project/Resources/Characters/Customers/PF_CC_Customer_Shopper_Male_01.prefab,PF_CC_Customer_Shopper_Male_01,"{x: 0, y: 0, z: 0}","{x: 1, y: 1, z: 1}",2,0,"CharacterPresence, CharacterLocomotionAnimator",,1
+Assets/_Project/Resources/Characters/Employees/PF_CC_Employee_Attendant_Female_01.prefab,PF_CC_Employee_Attendant_Female_01,"{x: 0, y: 0, z: 0}","{x: 1, y: 1, z: 1}",2,0,"CharacterPresence, CharacterLocomotionAnimator",,1
+Assets/_Project/Resources/Characters/Employees/PF_CC_Employee_Attendant_Male_01.prefab,PF_CC_Employee_Attendant_Male_01,"{x: 0, y: 0, z: 0}","{x: 1, y: 1, z: 1}",2,0,"CharacterPresence, CharacterLocomotionAnimator",,1
+Assets/_Project/Resources/Characters/Player/PF_CC_Player_Clerk_Male_01.prefab,PF_CC_Player_Clerk_Male_01,"{x: 0, y: 0, z: 0}","{x: 1, y: 1, z: 1}",2,0,"CharacterPresence, CharacterLocomotionAnimator",,1
+Assets/_Project/Resources/Characters/Suppliers/PF_CC_Supplier_Worker_Female_01.prefab,PF_CC_Supplier_Worker_Female_01,"{x: 0, y: 0, z: 0}","{x: 1, y: 1, z: 1}",4,0,"CharacterPresence, CharacterLocomotionAnimator",CarrySocket,1
+Assets/_Project/Resources/Characters/Suppliers/PF_CC_Supplier_Worker_Male_01.prefab,PF_CC_Supplier_Worker_Male_01,"{x: 0, y: 0, z: 0}","{x: 1, y: 1, z: 1}",4,0,"CharacterPresence, CharacterLocomotionAnimator",CarrySocket,1

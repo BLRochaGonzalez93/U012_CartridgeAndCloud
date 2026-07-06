@@ -1721,6 +1721,7 @@ GameObject:
   - component: {fileID: 8115029478402673471}
   - component: {fileID: 1615550405711859027}
   - component: {fileID: 5957958590383823004}
+  - component: {fileID: 2982984678098072117}
   m_Layer: 0
   m_Name: Rack
   m_TagString: Untagged
@@ -1855,7 +1856,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 79b5fa238462f0849ba223921c764bef, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: VRMGames.CartridgeAndCloud.Presentation::VRMGames.CartridgeAndCloud.Presentation.Store.StoreVisualInstance
   _id: expansion.server.rack
   _family: Expansion
@@ -7068,3 +7069,18 @@ MeshRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &2982984678098072117
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1654868873842332818}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c81a0fd5d1834d429c998b2d7fd8dbca, type: 3}
+  m_Name:
+  m_EditorClassIdentifier:
+  _role: 5
+  _pivotAtBaseCentre: 1
+  _positiveZIsFront: 1

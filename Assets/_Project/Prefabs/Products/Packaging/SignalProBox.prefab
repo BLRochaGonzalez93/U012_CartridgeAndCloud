@@ -314,6 +314,7 @@ GameObject:
   - component: {fileID: 2228690413585340009}
   - component: {fileID: 7543412534463002389}
   - component: {fileID: 5749306480238843270}
+  - component: {fileID: 1000224673216547797}
   m_Layer: 0
   m_Name: SignalProBox
   m_TagString: Untagged
@@ -353,17 +354,17 @@ LODGroup:
   m_AnimateCrossFading: 0
   m_LastLODIsBillboard: 0
   m_LODs:
-  - screenRelativeHeight: 0.6
+  - screenRelativeHeight: 0.05
     fadeTransitionWidth: 0
     renderers:
     - renderer: {fileID: 431020613633485458}
     - renderer: {fileID: 8102665760462037296}
-  - screenRelativeHeight: 0.3
+  - screenRelativeHeight: 0.03
     fadeTransitionWidth: 0
     renderers:
     - renderer: {fileID: 1563309502280269661}
     - renderer: {fileID: 717192402762045379}
-  - screenRelativeHeight: 0.1
+  - screenRelativeHeight: 0.01
     fadeTransitionWidth: 0
     renderers:
     - renderer: {fileID: 7222592581773955976}
@@ -379,7 +380,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 79b5fa238462f0849ba223921c764bef, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: VRMGames.CartridgeAndCloud.Presentation::VRMGames.CartridgeAndCloud.Presentation.Store.StoreVisualInstance
   _id: product-packaging.signal-pro-box
   _family: Product
@@ -720,3 +721,18 @@ MeshRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &1000224673216547797
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4856417611778761560}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c81a0fd5d1834d429c998b2d7fd8dbca, type: 3}
+  m_Name:
+  m_EditorClassIdentifier:
+  _role: 4
+  _pivotAtBaseCentre: 1
+  _positiveZIsFront: 1

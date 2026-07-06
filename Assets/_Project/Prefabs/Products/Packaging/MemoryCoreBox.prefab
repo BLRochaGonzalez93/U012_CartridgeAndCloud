@@ -650,6 +650,7 @@ GameObject:
   - component: {fileID: 7299454236897315979}
   - component: {fileID: 3586691162336305828}
   - component: {fileID: 7615158625364487046}
+  - component: {fileID: 4344870492895878435}
   m_Layer: 0
   m_Name: MemoryCoreBox
   m_TagString: Untagged
@@ -689,17 +690,17 @@ LODGroup:
   m_AnimateCrossFading: 0
   m_LastLODIsBillboard: 0
   m_LODs:
-  - screenRelativeHeight: 0.6
+  - screenRelativeHeight: 0.05
     fadeTransitionWidth: 0
     renderers:
     - renderer: {fileID: 6386187900860438498}
     - renderer: {fileID: 5831312307252728040}
-  - screenRelativeHeight: 0.3
+  - screenRelativeHeight: 0.03
     fadeTransitionWidth: 0
     renderers:
     - renderer: {fileID: 6606328781864887381}
     - renderer: {fileID: 4792822699764292313}
-  - screenRelativeHeight: 0.1
+  - screenRelativeHeight: 0.01
     fadeTransitionWidth: 0
     renderers:
     - renderer: {fileID: 5300348281066132650}
@@ -715,8 +716,23 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 79b5fa238462f0849ba223921c764bef, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: VRMGames.CartridgeAndCloud.Presentation::VRMGames.CartridgeAndCloud.Presentation.Store.StoreVisualInstance
   _id: product-packaging.memory-core-box
   _family: Product
   _conceptual: 0
+--- !u!114 &4344870492895878435
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7850397169077019460}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c81a0fd5d1834d429c998b2d7fd8dbca, type: 3}
+  m_Name:
+  m_EditorClassIdentifier:
+  _role: 4
+  _pivotAtBaseCentre: 1
+  _positiveZIsFront: 1

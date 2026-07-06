@@ -709,6 +709,7 @@ GameObject:
   - component: {fileID: 4218469080712795633}
   - component: {fileID: 7952359474667261732}
   - component: {fileID: 8048676767962665402}
+  - component: {fileID: 3527017366189008897}
   m_Layer: 0
   m_Name: Locker
   m_TagString: Untagged
@@ -777,7 +778,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 79b5fa238462f0849ba223921c764bef, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: VRMGames.CartridgeAndCloud.Presentation::VRMGames.CartridgeAndCloud.Presentation.Store.StoreVisualInstance
   _id: expansion.staff.locker
   _family: Expansion
@@ -996,3 +997,18 @@ Transform:
   - {fileID: 4488638383937880466}
   m_Father: {fileID: 4218469080712795633}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3527017366189008897
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5403751990595409976}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c81a0fd5d1834d429c998b2d7fd8dbca, type: 3}
+  m_Name:
+  m_EditorClassIdentifier:
+  _role: 5
+  _pivotAtBaseCentre: 1
+  _positiveZIsFront: 1

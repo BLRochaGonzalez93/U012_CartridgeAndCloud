@@ -8,9 +8,9 @@ using VRMGames.CartridgeAndCloud.Infrastructure.Audio;
 using VRMGames.CartridgeAndCloud.Infrastructure.Characters;
 using VRMGames.CartridgeAndCloud.Infrastructure.Products;
 using VRMGames.CartridgeAndCloud.Infrastructure.Store;
-using VRMGames.CartridgeAndCloud.Runtime.Development.Authoring.Characters;
-using VRMGames.CartridgeAndCloud.Runtime.Development.Authoring.Products;
-using VRMGames.CartridgeAndCloud.Runtime.Development.Authoring.Store;
+using VRMGames.CartridgeAndCloud.Runtime.Characters;
+using VRMGames.CartridgeAndCloud.Presentation.Products;
+using VRMGames.CartridgeAndCloud.Presentation.Store.Authoring;
 namespace VRMGames.CartridgeAndCloud.Tests.EditMode.Store
 {
     public sealed class StoreRuntimeAssetTests
@@ -177,8 +177,8 @@ namespace VRMGames.CartridgeAndCloud.Tests.EditMode.Store
                     "PresentationCatalog.asset");
 
             Assert.That(
-                asset.Characters.Length,
-                Is.EqualTo(3));
+                asset.Actors.Length,
+                Is.EqualTo(7));
         }
 
         [Test]
@@ -193,7 +193,7 @@ namespace VRMGames.CartridgeAndCloud.Tests.EditMode.Store
                 asset.Animations.Length,
                 Is.EqualTo(11));
 
-            foreach (CharacterPresentationCatalogAsset.AnimationEntry animation
+            foreach (ActorPrefabCatalogAsset.AnimationEntry animation
                      in asset.Animations)
             {
                 Assert.That(
@@ -243,9 +243,6 @@ namespace VRMGames.CartridgeAndCloud.Tests.EditMode.Store
             Assert.That(
                 settings.StoreSceneName,
                 Is.EqualTo("StoreInitial"));
-            Assert.That(
-                settings.BuildBlockoutOnLoad,
-                Is.False);
             Assert.That(
                 settings.HideOccludingWalls,
                 Is.True);
@@ -300,13 +297,13 @@ namespace VRMGames.CartridgeAndCloud.Tests.EditMode.Store
         {
             GameObject prefab =
                 Load<GameObject>(
-                    PrefabRoot +
-                    "Characters/Customer.prefab");
+                    "Assets/_Project/Resources/Characters/Customers/" +
+                    "PF_CC_Customer_Shopper_Female_01.prefab");
 
             Assert.That(prefab, Is.Not.Null);
             Assert.That(
                 prefab.GetComponent<
-                    CharacterPrefabAuthoring>(),
+                    ActorPrefabAuthoring>(),
                 Is.Not.Null);
         }
 

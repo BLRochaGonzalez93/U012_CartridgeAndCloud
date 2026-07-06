@@ -1,0 +1,184 @@
+ M Assets/_Project/Data/Catalogs/PresentationCatalog.asset
+ M Assets/_Project/Data/Catalogs/RepresentativePrefabCatalog.asset
+ M Assets/_Project/Editor/ProjectOrganization/AssetPipeline/SyntyCharacterIntegrationInstaller.cs
+ D Assets/_Project/Editor/ProjectOrganization/ProjectAssetOrganizationMigration.cs
+ D Assets/_Project/Editor/ProjectOrganization/ProjectAssetOrganizationMigration.cs.meta
+ D Assets/_Project/Editor/ProjectOrganization/ProjectAssetOrganizationPlayModeRepair.cs
+ D Assets/_Project/Editor/ProjectOrganization/ProjectAssetOrganizationPlayModeRepair.cs.meta
+ D Assets/_Project/Editor/ProjectOrganization/ProjectAssetOrganizationPrefabFixtureRepair.cs
+ D Assets/_Project/Editor/ProjectOrganization/ProjectAssetOrganizationPrefabFixtureRepair.cs.meta
+ D Assets/_Project/Editor/ProjectOrganization/RepresentativeAssetIntegrationTool.cs
+ D Assets/_Project/Editor/ProjectOrganization/RepresentativeAssetIntegrationTool.cs.meta
+ D Assets/_Project/Editor/ProjectOrganization/RepresentativeRuntimeCatalogLinkRepair.cs
+ D Assets/_Project/Editor/ProjectOrganization/RepresentativeRuntimeCatalogLinkRepair.cs.meta
+ D Assets/_Project/Editor/ProjectOrganization/StoreInitial/StoreInitialSceneAuthoringTool.cs
+ D Assets/_Project/Editor/ProjectOrganization/StoreInitial/StoreInitialSceneAuthoringTool.cs.meta
+ M Assets/_Project/Editor/ProjectOrganization/VRMGames.CartridgeAndCloud.Editor.ProjectOrganization.asmdef
+ M Assets/_Project/Prefabs/Architecture/Modular/AutomaticDoor.prefab
+ M Assets/_Project/Prefabs/Architecture/Modular/BackroomPartition.prefab
+ M Assets/_Project/Prefabs/Architecture/Modular/CornerInner.prefab
+ M Assets/_Project/Prefabs/Architecture/Modular/CornerOuter.prefab
+ M Assets/_Project/Prefabs/Architecture/Modular/EndCap.prefab
+ M Assets/_Project/Prefabs/Architecture/Modular/EntranceThreshold.prefab
+ M Assets/_Project/Prefabs/Architecture/Modular/Floor100.prefab
+ M Assets/_Project/Prefabs/Architecture/Modular/Floor200.prefab
+ M Assets/_Project/Prefabs/Architecture/Modular/FloorEdge100.prefab
+ M Assets/_Project/Prefabs/Architecture/Modular/FloorTransition100.prefab
+ M Assets/_Project/Prefabs/Architecture/Modular/LightRail100.prefab
+ M Assets/_Project/Prefabs/Architecture/Modular/LightRail200.prefab
+ M Assets/_Project/Prefabs/Architecture/Modular/LinearPanel.prefab
+ M Assets/_Project/Prefabs/Architecture/Modular/SpotLight.prefab
+ M Assets/_Project/Prefabs/Architecture/Modular/StoreGlassLeft.prefab
+ M Assets/_Project/Prefabs/Architecture/Modular/StoreGlassRight.prefab
+ M Assets/_Project/Prefabs/Architecture/Modular/StoreSign.prefab
+ M Assets/_Project/Prefabs/Architecture/Modular/StorefrontFacade.prefab
+ M Assets/_Project/Prefabs/Architecture/Modular/Wall100.prefab
+ M Assets/_Project/Prefabs/Architecture/Modular/Wall200.prefab
+ M Assets/_Project/Prefabs/Architecture/Modular/Wall400.prefab
+ M Assets/_Project/Prefabs/Architecture/Modular/ZoneBackroom.prefab
+ M Assets/_Project/Prefabs/Architecture/Modular/ZoneCheckout.prefab
+ M Assets/_Project/Prefabs/Architecture/Modular/ZoneReceiving.prefab
+ D Assets/_Project/Prefabs/Characters/Customers/Customer.prefab
+ D Assets/_Project/Prefabs/Characters/Customers/Customer.prefab.meta
+ D Assets/_Project/Prefabs/Characters/Employees/Employee.prefab
+ D Assets/_Project/Prefabs/Characters/Employees/Employee.prefab.meta
+ D Assets/_Project/Prefabs/Characters/Suppliers/Supplier.prefab
+ D Assets/_Project/Prefabs/Characters/Suppliers/Supplier.prefab.meta
+ M Assets/_Project/Prefabs/Expansions/Digital/CodeCardRack.prefab
+ M Assets/_Project/Prefabs/Expansions/Digital/Kiosk.prefab
+ M Assets/_Project/Prefabs/Expansions/Ecommerce/OrderDesk.prefab
+ M Assets/_Project/Prefabs/Expansions/Ecommerce/SortBins.prefab
+ M Assets/_Project/Prefabs/Expansions/Logistics/Conveyor.prefab
+ M Assets/_Project/Prefabs/Expansions/Logistics/PackingStation.prefab
+ M Assets/_Project/Prefabs/Expansions/Logistics/RollingCart.prefab
+ M Assets/_Project/Prefabs/Expansions/Market/AnalysisWall.prefab
+ M Assets/_Project/Prefabs/Expansions/Market/PlanningTable.prefab
+ M Assets/_Project/Prefabs/Expansions/Publishing/LineupWall.prefab
+ M Assets/_Project/Prefabs/Expansions/Publishing/MeetingTable.prefab
+ M Assets/_Project/Prefabs/Expansions/Server/OperationsDesk.prefab
+ M Assets/_Project/Prefabs/Expansions/Server/Rack.prefab
+ M Assets/_Project/Prefabs/Expansions/Server/UPS.prefab
+ M Assets/_Project/Prefabs/Expansions/Staff/Locker.prefab
+ M Assets/_Project/Prefabs/Expansions/Staff/TaskBoard.prefab
+ M Assets/_Project/Prefabs/Expansions/Studio/ArtDesk.prefab
+ M Assets/_Project/Prefabs/Expansions/Studio/AudioStation.prefab
+ M Assets/_Project/Prefabs/Expansions/Studio/DevDesk.prefab
+ M Assets/_Project/Prefabs/Furniture/BackroomStorage.prefab
+ M Assets/_Project/Prefabs/Furniture/CentralShelf.prefab
+ M Assets/_Project/Prefabs/Furniture/CheckoutCounter.prefab
+ M Assets/_Project/Prefabs/Furniture/DecorationPlant.prefab
+ M Assets/_Project/Prefabs/Furniture/FeaturedDisplay.prefab
+ M Assets/_Project/Prefabs/Furniture/LowDisplay.prefab
+ M Assets/_Project/Prefabs/Furniture/ReceivingCrate.prefab
+ M Assets/_Project/Prefabs/Furniture/WallShelf.prefab
+ M Assets/_Project/Prefabs/Products/CloudRunnerCase.prefab
+ M Assets/_Project/Prefabs/Products/MemoryCoreAccessory.prefab
+ M Assets/_Project/Prefabs/Products/NeonDrift.prefab
+ M Assets/_Project/Prefabs/Products/OrbitPadController.prefab
+ M Assets/_Project/Prefabs/Products/Packaging/MemoryCoreBox.prefab
+ M Assets/_Project/Prefabs/Products/Packaging/OrbitPadBox.prefab
+ M Assets/_Project/Prefabs/Products/Packaging/SignalProBox.prefab
+ M Assets/_Project/Prefabs/Products/Packaging/VertexOneBox.prefab
+ M Assets/_Project/Prefabs/Products/SignalProHeadset.prefab
+ M Assets/_Project/Prefabs/Products/VertexOneConsole.prefab
+ M Assets/_Project/Prefabs/Store/StoreInitialEnvironment.prefab
+ M Assets/_Project/Resources/Characters/Customers/PF_CC_Customer_Shopper_Female_01.prefab
+ M Assets/_Project/Resources/Characters/Customers/PF_CC_Customer_Shopper_Male_01.prefab
+ M Assets/_Project/Resources/Characters/Employees/PF_CC_Employee_Attendant_Female_01.prefab
+ M Assets/_Project/Resources/Characters/Employees/PF_CC_Employee_Attendant_Male_01.prefab
+ M Assets/_Project/Resources/Characters/Player/PF_CC_Player_Clerk_Male_01.prefab
+ M Assets/_Project/Resources/Characters/Suppliers/PF_CC_Supplier_Worker_Female_01.prefab
+ M Assets/_Project/Resources/Characters/Suppliers/PF_CC_Supplier_Worker_Male_01.prefab
+ M Assets/_Project/Scenes/Production/StoreInitial.unity
+ M Assets/_Project/Scripts/Application/Store/StoreOperationsFacade.cs
+ M Assets/_Project/Scripts/Application/UIUX/GameplayFeedbackEvent.cs
+ D Assets/_Project/Scripts/Infrastructure/Characters/CharacterPresentationCatalogAsset.cs
+ D Assets/_Project/Scripts/Infrastructure/Characters/CharacterPresentationCatalogAsset.cs.meta
+ M Assets/_Project/Scripts/Infrastructure/Customers/CustomerTechnicalSpawner.cs
+ M Assets/_Project/Scripts/Infrastructure/Store/StorePresentationCatalogAsset.cs
+ M Assets/_Project/Scripts/Infrastructure/Store/StoreRuntimeSettingsAsset.cs
+ M Assets/_Project/Scripts/Presentation/Placement/PlacementRuntimeController.cs
+ M Assets/_Project/Scripts/Presentation/Store/Authoring/StoreInitialSceneContext.cs
+ M Assets/_Project/Scripts/Presentation/Store/Doors/AutomaticSlidingDoorController.cs
+ D Assets/_Project/Scripts/Runtime/Characters/CharacterPrefabLoader.cs
+ D Assets/_Project/Scripts/Runtime/Characters/CharacterPrefabLoader.cs.meta
+ M Assets/_Project/Scripts/Runtime/Characters/PlayerCharacterVisualBootstrap.cs
+ M Assets/_Project/Scripts/Runtime/Characters/StoreCharacterLoopController.cs
+ M Assets/_Project/Scripts/Runtime/Composition/StoreRuntimeCompositionRoot.cs
+ D Assets/_Project/Scripts/Runtime/Development/Authoring/Characters/CharacterPrefabAuthoring.cs
+ D Assets/_Project/Scripts/Runtime/Development/Authoring/Characters/CharacterPrefabAuthoring.cs.meta
+ D Assets/_Project/Scripts/Runtime/Development/Authoring/Products/ProductPrefabAuthoring.cs
+ D Assets/_Project/Scripts/Runtime/Development/Authoring/Products/ProductPrefabAuthoring.cs.meta
+ D Assets/_Project/Scripts/Runtime/Development/Authoring/Store/StoreFixturePrefabAuthoring.cs
+ D Assets/_Project/Scripts/Runtime/Development/Authoring/Store/StoreFixturePrefabAuthoring.cs.meta
+ D Assets/_Project/Scripts/Runtime/Development/Blockout/StoreBlockoutBuilder.cs
+ D Assets/_Project/Scripts/Runtime/Development/Blockout/StoreBlockoutBuilder.cs.meta
+ D Assets/_Project/Scripts/Runtime/Development/Blockout/StoreBlockoutVisualFactory.cs
+ D Assets/_Project/Scripts/Runtime/Development/Blockout/StoreBlockoutVisualFactory.cs.meta
+ D Assets/_Project/Scripts/Runtime/Development/Scenarios.meta
+ D Assets/_Project/Scripts/Runtime/Development/Scenarios/CheckoutScenarioRunner.cs
+ D Assets/_Project/Scripts/Runtime/Development/Scenarios/CheckoutScenarioRunner.cs.meta
+ D Assets/_Project/Scripts/Runtime/Development/Scenarios/EconomyScenarioRunner.cs
+ D Assets/_Project/Scripts/Runtime/Development/Scenarios/EconomyScenarioRunner.cs.meta
+ D Assets/_Project/Scripts/Runtime/Development/Scenarios/SaveRecoveryScenarioRunner.cs
+ D Assets/_Project/Scripts/Runtime/Development/Scenarios/SaveRecoveryScenarioRunner.cs.meta
+ D Assets/_Project/Scripts/Runtime/Development/Scenarios/ShoppingScenarioRunner.cs
+ D Assets/_Project/Scripts/Runtime/Development/Scenarios/ShoppingScenarioRunner.cs.meta
+ D Assets/_Project/Scripts/Runtime/Development/Scenarios/StoreDayScenarioRunner.cs
+ D Assets/_Project/Scripts/Runtime/Development/Scenarios/StoreDayScenarioRunner.cs.meta
+ D Assets/_Project/Scripts/Runtime/Development/Scenarios/StoreOperationsGoldenPathRunner.cs
+ D Assets/_Project/Scripts/Runtime/Development/Scenarios/StoreOperationsGoldenPathRunner.cs.meta
+ D Assets/_Project/Scripts/Runtime/Development/Scenarios/UIUXScenarioRunner.cs
+ D Assets/_Project/Scripts/Runtime/Development/Scenarios/UIUXScenarioRunner.cs.meta
+ M Assets/_Project/Scripts/Runtime/Inventory/InventoryVisualSynchronizer.cs
+ M Assets/_Project/Scripts/Runtime/Navigation/DynamicStoreNavMeshController.cs
+ M Assets/_Project/Scripts/Runtime/Placement/StorePlacementCoordinator.cs
+ D Assets/_Project/Scripts/Runtime/Store/StoreVisualBuilder.cs
+ D Assets/_Project/Scripts/Runtime/Store/StoreVisualBuilder.cs.meta
+ D Assets/_Project/Scripts/Runtime/Store/StoreVisualPrefabFactory.cs
+ D Assets/_Project/Scripts/Runtime/Store/StoreVisualPrefabFactory.cs.meta
+ M Assets/_Project/Scripts/Runtime/UIUX/StoreOperationsScreen.cs
+ M Assets/_Project/Settings/Runtime/StoreRuntimeSettings.asset
+ M Assets/_Project/Tests/EditMode/Store/StoreRuntimeAssetTests.cs
+ M Assets/_Project/Tests/EditMode/VRMGames.CartridgeAndCloud.Tests.EditMode.asmdef
+ M Assets/_Project/Tests/PlayMode/Store/StoreRuntimePlayModeTests.cs
+ M Assets/_Project/Tests/PlayMode/VRMGames.CartridgeAndCloud.Tests.PlayMode.asmdef
+ M ProjectSettings/EditorBuildSettings.asset
+?? Assets/_Project/Editor/ProjectOrganization/Validation.meta
+?? Assets/_Project/Editor/ProjectOrganization/Validation/
+?? Assets/_Project/Prefabs/Characters/Suppliers/SupplierDeliveryView.prefab
+?? Assets/_Project/Prefabs/Characters/Suppliers/SupplierDeliveryView.prefab.meta
+?? Assets/_Project/Scripts/Infrastructure/Characters/ActorPrefabCatalogAsset.cs
+?? Assets/_Project/Scripts/Infrastructure/Characters/ActorPrefabCatalogAsset.cs.meta
+?? Assets/_Project/Scripts/Presentation/Products/ProductPrefabAuthoring.cs
+?? Assets/_Project/Scripts/Presentation/Products/ProductPrefabAuthoring.cs.meta
+?? Assets/_Project/Scripts/Presentation/Store/Authoring/PrefabPhysicalContractAuthoring.cs
+?? Assets/_Project/Scripts/Presentation/Store/Authoring/PrefabPhysicalContractAuthoring.cs.meta
+?? Assets/_Project/Scripts/Presentation/Store/Authoring/StoreFixturePrefabAuthoring.cs
+?? Assets/_Project/Scripts/Presentation/Store/Authoring/StoreFixturePrefabAuthoring.cs.meta
+?? Assets/_Project/Scripts/Presentation/Store/Authoring/StoreNavigationAuthoring.cs
+?? Assets/_Project/Scripts/Presentation/Store/Authoring/StoreNavigationAuthoring.cs.meta
+?? Assets/_Project/Scripts/Presentation/Store/Doors/AutomaticDoorSensor.cs
+?? Assets/_Project/Scripts/Presentation/Store/Doors/AutomaticDoorSensor.cs.meta
+?? Assets/_Project/Scripts/Runtime/Characters/ActorPrefabAuthoring.cs
+?? Assets/_Project/Scripts/Runtime/Characters/ActorPrefabAuthoring.cs.meta
+?? Assets/_Project/Scripts/Runtime/Characters/CharacterPrefabFactory.cs
+?? Assets/_Project/Scripts/Runtime/Characters/CharacterPrefabFactory.cs.meta
+?? Assets/_Project/Scripts/Runtime/Characters/DeliveryPresentationRegistry.cs
+?? Assets/_Project/Scripts/Runtime/Characters/DeliveryPresentationRegistry.cs.meta
+?? Assets/_Project/Scripts/Runtime/Characters/SupplierDeliveryPresenter.cs
+?? Assets/_Project/Scripts/Runtime/Characters/SupplierDeliveryPresenter.cs.meta
+?? Assets/_Project/Scripts/Runtime/Characters/SupplierDeliveryView.cs
+?? Assets/_Project/Scripts/Runtime/Characters/SupplierDeliveryView.cs.meta
+?? Assets/_Project/Scripts/Runtime/Navigation/StoreFixtureNavigationObstacle.cs
+?? Assets/_Project/Scripts/Runtime/Navigation/StoreFixtureNavigationObstacle.cs.meta
+?? Assets/_Project/Scripts/Runtime/Store/AuthoredStoreRuntimeBinder.cs
+?? Assets/_Project/Scripts/Runtime/Store/AuthoredStoreRuntimeBinder.cs.meta
+?? Assets/_Project/Scripts/Runtime/Store/StorePrefabFactory.cs
+?? Assets/_Project/Scripts/Runtime/Store/StorePrefabFactory.cs.meta
+?? Assets/_Project/Tests/EditMode/Store/StoreStructuralContractTests.cs
+?? Assets/_Project/Tests/EditMode/Store/StoreStructuralContractTests.cs.meta
+?? Assets/_Project/Tests/TestSupport/
+?? Documentation/04_Production_QA_and_Traceability/U012_Reconstruction/
+?? Tools/ArchivedUnityEditorMigrations/
+?? Tools/Validation/

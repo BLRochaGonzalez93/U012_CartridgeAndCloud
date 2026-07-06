@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityCamera = UnityEngine.Camera;
 using VRMGames.CartridgeAndCloud.Application.InputContexts;
 
@@ -44,7 +45,7 @@ namespace VRMGames.CartridgeAndCloud.Presentation.PlayerMovement
 
         public bool TrySetDestinationFromScreenPosition(Vector2 screenPosition)
         {
-            if (!IsInputEnabled) return false;
+            if (!IsInputEnabled || IsPointerOverUi()) return false;
 
             EnsureAgent();
 
@@ -69,6 +70,15 @@ namespace VRMGames.CartridgeAndCloud.Presentation.PlayerMovement
 
             _agent.SetDestination(hit.point);
             return true;
+        }
+
+        private static bool IsPointerOverUi()
+        {
+            EventSystem eventSystem =
+                EventSystem.current;
+
+            return eventSystem != null &&
+                   eventSystem.IsPointerOverGameObject();
         }
 
         private void EnsureAgent()

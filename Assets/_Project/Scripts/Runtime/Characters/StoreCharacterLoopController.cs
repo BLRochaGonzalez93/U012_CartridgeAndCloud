@@ -1,13 +1,19 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 using VRMGames.CartridgeAndCloud.Application.Store;
 using VRMGames.CartridgeAndCloud.Application.UIUX;
 using VRMGames.CartridgeAndCloud.Domain.Characters;
+using VRMGames.CartridgeAndCloud.Domain.Placement;
 using VRMGames.CartridgeAndCloud.Domain.Store;
 using VRMGames.CartridgeAndCloud.Infrastructure.Store;
+using VRMGames.CartridgeAndCloud.Infrastructure.Customers;
 using VRMGames.CartridgeAndCloud.Runtime.Placement;
-using VRMGames.CartridgeAndCloud.Runtime.Development.Blockout;
+using VRMGames.CartridgeAndCloud.Presentation.Placement;
+using VRMGames.CartridgeAndCloud.Presentation.Characters;
+using VRMGames.CartridgeAndCloud.Presentation.Grounding;
 namespace VRMGames.CartridgeAndCloud.Runtime.Characters
 {
     public sealed class StoreCharacterLoopController :
@@ -16,8 +22,8 @@ namespace VRMGames.CartridgeAndCloud.Runtime.Characters
         private StoreOperationsFacade
             _service;
         private IStoreContentCatalog _catalog;
-        private StoreMaterialPaletteAsset
-            _palette;
+        private StorePresentationCatalogAsset
+            _presentationCatalog;
         private Transform _entrance;
         private Transform _checkout;
         private Transform _receiving;
@@ -25,6 +31,7 @@ namespace VRMGames.CartridgeAndCloud.Runtime.Characters
         private int _activeCustomers;
         private Transform _characterRoot;
         private Transform _employee;
+        private IReadOnlyList<Transform> _exteriorSpawnAnchors = Array.Empty<Transform>();
 
         public bool IsCustomerSequenceRunning =>
             _activeCustomers > 0;
@@ -38,11 +45,32 @@ namespace VRMGames.CartridgeAndCloud.Runtime.Characters
         public void Configure(
             StoreOperationsFacade service,
             IStoreContentCatalog catalog,
-            StoreMaterialPaletteAsset palette,
+            StorePresentationCatalogAsset presentationCatalog,
             Transform entrance,
             Transform checkout,
             Transform receiving,
             int maximumCustomers)
+        {
+            Configure(
+                service,
+                catalog,
+                presentationCatalog,
+                entrance,
+                checkout,
+                receiving,
+                maximumCustomers,
+                Array.Empty<Transform>());
+        }
+
+        public void Configure(
+            StoreOperationsFacade service,
+            IStoreContentCatalog catalog,
+            StorePresentationCatalogAsset presentationCatalog,
+            Transform entrance,
+            Transform checkout,
+            Transform receiving,
+            int maximumCustomers,
+            IReadOnlyList<Transform> exteriorSpawnAnchors)
         {
             _service = service ??
                 throw new ArgumentNullException(
@@ -50,9 +78,9 @@ namespace VRMGames.CartridgeAndCloud.Runtime.Characters
             _catalog = catalog ??
                 throw new ArgumentNullException(
                     nameof(catalog));
-            _palette = palette ??
+            _presentationCatalog = presentationCatalog ??
                 throw new ArgumentNullException(
-                    nameof(palette));
+                    nameof(presentationCatalog));
             _entrance = entrance ??
                 throw new ArgumentNullException(
                     nameof(entrance));
@@ -64,6 +92,8 @@ namespace VRMGames.CartridgeAndCloud.Runtime.Characters
                     nameof(receiving));
             _maximumCustomers =
                 Mathf.Max(1, maximumCustomers);
+            _exteriorSpawnAnchors =
+                exteriorSpawnAnchors ?? Array.Empty<Transform>();
 
             GameObject root =
                 new GameObject(
@@ -74,7 +104,10 @@ namespace VRMGames.CartridgeAndCloud.Runtime.Characters
             _characterRoot = root.transform;
 
             SpawnEmployee();
-            SpawnSupplierPlaceholder();
+
+            _service.StateChanged +=
+                HandleStateChanged;
+            SynchronizeEmployeePosition();
         }
 
         public StoreOperationResult
@@ -87,7 +120,7 @@ namespace VRMGames.CartridgeAndCloud.Runtime.Characters
                     .Failure(
                         StoreOperationStatus
                             .InvalidState,
-                        "Maximum blockout customers reached.");
+                        "Maximum authored customers reached.");
             }
 
             StoreOperationResult validation =
@@ -118,10 +151,57 @@ namespace VRMGames.CartridgeAndCloud.Runtime.Characters
                 "Customer sequence started.");
         }
 
-        public void PresentSupplierDelivery()
+        private void OnDestroy()
         {
-            StartCoroutine(
-                SupplierDeliverySequence());
+            if (_service != null)
+            {
+                _service.StateChanged -=
+                    HandleStateChanged;
+            }
+        }
+
+        private void HandleStateChanged(
+            StoreOperationsState state)
+        {
+            SynchronizeEmployeePosition();
+        }
+
+        private void SynchronizeEmployeePosition()
+        {
+            if (_employee == null ||
+                _service == null ||
+                _service.State == null)
+            {
+                return;
+            }
+
+            Transform checkoutRoot =
+                FindCheckoutRootTransform();
+            Transform checkout =
+                ResolveEmployeeStandPoint(checkoutRoot);
+
+            if (checkout == null)
+            {
+                return;
+            }
+
+            NavMeshAgent employeeAgent =
+                _employee.GetComponent<NavMeshAgent>();
+
+            if (employeeAgent != null &&
+                NavMesh.SamplePosition(
+                    checkout.position,
+                    out NavMeshHit employeeHit,
+                    2f,
+                    NavMesh.AllAreas))
+            {
+                employeeAgent.Warp(employeeHit.position);
+            }
+            else
+            {
+                _employee.position = checkout.position;
+                GroundingUtility.TrySnapRootToGround(_employee);
+            }
         }
 
         private IEnumerator CustomerSequence()
@@ -134,22 +214,26 @@ namespace VRMGames.CartridgeAndCloud.Runtime.Characters
                     .NextCustomerSequence
                     .ToString("0000");
 
+            string customerActorId =
+                _service.State.NextCustomerSequence % 2 == 0
+                    ? "customer-female-01"
+                    : "customer-male-01";
+
+            Vector3 spawnPosition = ResolveExteriorSpawnPosition();
             GameObject customer =
-                StoreBlockoutVisualFactory
-                    .BuildCharacter(
-                        _characterRoot,
-                        customerId,
-                        CharacterRole.Customer,
-                        _palette.Find(
-                            "character-customer"),
-                        _entrance.position +
-                        _entrance.forward *
-                        -1.4f);
+                CharacterPrefabFactory.Instantiate(
+                    _presentationCatalog,
+                    customerActorId,
+                    _characterRoot,
+                    customerId,
+                    CharacterRole.Customer,
+                    spawnPosition);
 
             try
             {
                 Transform display =
-                    FindStockedDisplayTransform();
+                    FindStockedDisplayTransform(
+                        customer.transform.position);
 
                 if (display == null)
                 {
@@ -173,20 +257,34 @@ namespace VRMGames.CartridgeAndCloud.Runtime.Characters
                         "frustrated",
                         0.9f);
 
-                    yield return MoveTo(
+                    NavMeshActorMovement.Result rejectedExit =
+                        new NavMeshActorMovement.Result();
+                    yield return NavMeshActorMovement.MoveTo(
                         customer.transform,
                         _entrance.position +
                         _entrance.forward *
                         -1.8f,
-                        2f);
+                        2f,
+                        rejectedExit);
                     yield break;
                 }
 
-                yield return MoveTo(
+                NavMeshActorMovement.Result browseMovement =
+                    new NavMeshActorMovement.Result();
+                yield return NavMeshActorMovement.MoveTo(
                     customer.transform,
-                    display.position +
-                    Vector3.forward * 0.8f,
-                    2f);
+                    display.position,
+                    2f,
+                    browseMovement);
+
+                if (!browseMovement.Succeeded)
+                {
+                    PublishNavigationFailure(
+                        customer,
+                        "the selected display",
+                        browseMovement.FailureReason);
+                    yield break;
+                }
 
                 _service.PublishFeedback(
                     new GameplayFeedbackEvent(
@@ -211,21 +309,31 @@ namespace VRMGames.CartridgeAndCloud.Runtime.Characters
                         "Product reserved for customer cart.",
                         display.name));
 
-                Transform checkout =
-                    FindCheckoutTransform();
+                Transform checkoutRoot =
+                    FindCheckoutRootTransform();
+                Vector3 checkoutDestination =
+                    ResolveCustomerCheckoutPosition(
+                        checkoutRoot,
+                        customer.transform.position);
 
-                if (_employee != null)
-                {
-                    _employee.position =
-                        checkout.position +
-                        Vector3.forward * 0.65f;
-                }
+                SynchronizeEmployeePosition();
 
-                yield return MoveTo(
+                NavMeshActorMovement.Result checkoutMovement =
+                    new NavMeshActorMovement.Result();
+                yield return NavMeshActorMovement.MoveTo(
                     customer.transform,
-                    checkout.position +
-                    Vector3.back * 0.8f,
-                    2f);
+                    checkoutDestination,
+                    2f,
+                    checkoutMovement);
+
+                if (!checkoutMovement.Succeeded)
+                {
+                    PublishNavigationFailure(
+                        customer,
+                        "the checkout point",
+                        checkoutMovement.FailureReason);
+                    yield break;
+                }
 
                 yield return AnimateState(
                     customer.transform,
@@ -256,12 +364,15 @@ namespace VRMGames.CartridgeAndCloud.Runtime.Characters
                         : "frustrated",
                     0.85f);
 
-                yield return MoveTo(
+                NavMeshActorMovement.Result completedExit =
+                    new NavMeshActorMovement.Result();
+                yield return NavMeshActorMovement.MoveTo(
                     customer.transform,
                     _entrance.position +
                     _entrance.forward *
                     -1.8f,
-                    2f);
+                    2f,
+                    completedExit);
             }
             finally
             {
@@ -274,118 +385,34 @@ namespace VRMGames.CartridgeAndCloud.Runtime.Characters
             }
         }
 
-        private IEnumerator
-            SupplierDeliverySequence()
-        {
-            GameObject supplier =
-                StoreBlockoutVisualFactory
-                    .BuildCharacter(
-                        _characterRoot,
-                        "supplier-delivery",
-                        CharacterRole.Supplier,
-                        _palette.Find(
-                            "character-supplier"),
-                        _entrance.position +
-                        _entrance.forward *
-                        -1.6f);
-
-            GameObject crate =
-                GameObject.CreatePrimitive(
-                    PrimitiveType.Cube);
-            crate.name =
-                "SupplierDeliveryCrate";
-            crate.transform.SetParent(
-                supplier.transform,
-                false);
-            crate.transform.localPosition =
-                new Vector3(
-                    0f,
-                    0.7f,
-                    0.55f);
-            crate.transform.localScale =
-                new Vector3(
-                    0.55f,
-                    0.45f,
-                    0.45f);
-
-            Renderer crateRenderer =
-                crate.GetComponent<Renderer>();
-
-            if (crateRenderer != null)
-            {
-                crateRenderer.sharedMaterial =
-                    _palette.Find(
-                        "furniture-crate");
-            }
-
-            yield return MoveTo(
-                supplier.transform,
-                _receiving.position,
-                1.8f);
-
-            yield return AnimateState(
-                supplier.transform,
-                "move-crate",
-                0.8f);
-
-            crate.transform.SetParent(
-                _characterRoot,
-                true);
-            crate.transform.position =
-                _receiving.position +
-                Vector3.up * 0.4f;
-
-            yield return MoveTo(
-                supplier.transform,
-                _entrance.position +
-                _entrance.forward *
-                -1.8f,
-                1.8f);
-
-            Destroy(supplier);
-            Destroy(crate, 2f);
-        }
-
         private void SpawnEmployee()
         {
             GameObject employee =
-                StoreBlockoutVisualFactory
-                    .BuildCharacter(
-                        _characterRoot,
-                        "employee-main",
-                        CharacterRole.Employee,
-                        _palette.Find(
-                            "character-employee"),
-                        _checkout.position +
-                        Vector3.forward * 0.65f);
+                CharacterPrefabFactory.Instantiate(
+                    _presentationCatalog,
+                    "employee-female-01",
+                    _characterRoot,
+                    "employee-main",
+                    CharacterRole.Employee,
+                    _checkout.position +
+                    _checkout.forward * 0.65f);
 
             _employee = employee.transform;
         }
 
-        private void SpawnSupplierPlaceholder()
+        private Transform FindCheckoutRootTransform()
         {
-            GameObject supplier =
-                StoreBlockoutVisualFactory
-                    .BuildCharacter(
-                        _characterRoot,
-                        "supplier-placeholder",
-                        CharacterRole.Supplier,
-                        _palette.Find(
-                            "character-supplier"),
-                        _receiving.position +
-                        Vector3.right * 1.1f);
+            PlacedObjectView[] placedViews =
+                UnityEngine.Object
+                    .FindObjectsByType<PlacedObjectView>(
+                        FindObjectsInactive.Exclude,
+                        FindObjectsSortMode.None);
 
-            supplier.SetActive(false);
-        }
-
-        private Transform FindCheckoutTransform()
-        {
             PlacedFixtureVisual[] visuals =
                 UnityEngine.Object
-                    .FindObjectsByType<
-                        PlacedFixtureVisual>(
-                            FindObjectsInactive.Exclude,
-                            FindObjectsSortMode.None);
+                    .FindObjectsByType<PlacedFixtureVisual>(
+                        FindObjectsInactive.Exclude,
+                        FindObjectsSortMode.None);
 
             foreach (PlacedStoreFixtureRecord fixture
                      in _service.State.Fixtures)
@@ -397,6 +424,17 @@ namespace VRMGames.CartridgeAndCloud.Runtime.Characters
                     StoreFixtureKind.CheckoutCounter)
                 {
                     continue;
+                }
+
+                PlacementInstanceId targetId =
+                    new PlacementInstanceId(fixture.InstanceId);
+
+                foreach (PlacedObjectView placedView in placedViews)
+                {
+                    if (placedView.Id == targetId)
+                    {
+                        return placedView.transform;
+                    }
                 }
 
                 foreach (PlacedFixtureVisual visual in visuals)
@@ -414,94 +452,245 @@ namespace VRMGames.CartridgeAndCloud.Runtime.Characters
             return _checkout;
         }
 
-        private Transform
-            FindStockedDisplayTransform()
+        private static Transform ResolveEmployeeStandPoint(
+            Transform checkoutRoot)
         {
-            foreach (PlacedStoreFixtureRecord
-                     fixture in _service.State.Fixtures)
+            return FindNamedChild(
+                       checkoutRoot,
+                       "EmployeeStandPoint")
+                   ?? checkoutRoot;
+        }
+
+        private static Vector3 ResolveCustomerCheckoutPosition(
+            Transform checkoutRoot,
+            Vector3 customerPosition)
+        {
+            if (checkoutRoot == null)
+            {
+                return customerPosition;
+            }
+
+            Transform explicitPoint =
+                FindNamedChild(
+                    checkoutRoot,
+                    "CustomerCheckoutStandPoint")
+                ?? FindNamedChild(
+                    checkoutRoot,
+                    "CustomerStandPoint");
+
+            if (explicitPoint != null)
+            {
+                Vector3 explicitPosition = explicitPoint.position;
+                explicitPosition.y = customerPosition.y;
+                return explicitPosition;
+            }
+
+            Vector3 destination =
+                checkoutRoot.position -
+                checkoutRoot.forward * 0.8f;
+            destination.y = customerPosition.y;
+            return destination;
+        }
+
+        private Transform FindStockedDisplayTransform(
+            Vector3 customerPosition)
+        {
+            PlacedFixtureVisual[] visuals =
+                UnityEngine.Object.FindObjectsByType<PlacedFixtureVisual>(
+                    FindObjectsInactive.Exclude,
+                    FindObjectsSortMode.None);
+
+            foreach (PlacedStoreFixtureRecord fixture
+                     in _service.State.Fixtures)
             {
                 if (fixture.ProductQuantity < 1)
                 {
                     continue;
                 }
 
-                PlacedFixtureVisual[] visuals =
-                    UnityEngine.Object
-                        .FindObjectsByType<
-                            PlacedFixtureVisual>(
-                                FindObjectsInactive
-                                    .Exclude,
-                                FindObjectsSortMode.None);
-
-                foreach (PlacedFixtureVisual
-                         visual in visuals)
+                foreach (PlacedFixtureVisual visual in visuals)
                 {
-                    if (string.Equals(
+                    if (!string.Equals(
                             visual.InstanceId,
                             fixture.InstanceId,
                             StringComparison.Ordinal))
                     {
-                        return visual.transform;
+                        continue;
                     }
+
+                    CustomerBrowseFixtureAuthoring browse =
+                        visual.GetComponentInChildren<CustomerBrowseFixtureAuthoring>(true);
+
+                    Transform nearest = null;
+                    float nearestDistance = float.PositiveInfinity;
+
+                    if (browse != null)
+                    {
+                        foreach (Transform point in browse.Points)
+                        {
+                            if (point == null)
+                            {
+                                continue;
+                            }
+
+                            Vector3 flatPoint = point.position;
+                            flatPoint.y = customerPosition.y;
+                            float distance =
+                                (flatPoint - customerPosition).sqrMagnitude;
+
+                            if (distance < nearestDistance)
+                            {
+                                nearestDistance = distance;
+                                nearest = point;
+                            }
+                        }
+                    }
+
+                    return nearest ?? visual.transform;
                 }
             }
 
             return null;
         }
 
-        private static IEnumerator MoveTo(
-            Transform target,
-            Vector3 destination,
-            float speed)
+        private static Transform FindNamedChild(Transform root, string childName)
         {
-            while (target != null &&
-                   (target.position - destination)
-                       .sqrMagnitude > 0.02f)
+            if (root == null)
             {
-                Vector3 direction =
-                    destination -
-                    target.position;
-                direction.y = 0f;
+                return null;
+            }
 
-                if (direction.sqrMagnitude >
-                    0.001f)
+            foreach (Transform child in root.GetComponentsInChildren<Transform>(true))
+            {
+                if (string.Equals(child.name, childName, StringComparison.Ordinal))
                 {
-                    target.rotation =
-                        Quaternion.Slerp(
-                            target.rotation,
-                            Quaternion.LookRotation(
-                                direction.normalized,
-                                Vector3.up),
-                            10f *
-                            Time.unscaledDeltaTime);
+                    return child;
+                }
+            }
+
+            return null;
+        }
+
+        private Vector3 ResolveExteriorSpawnPosition()
+        {
+            Vector3 fallback =
+                _entrance.position -
+                _entrance.forward * 2.2f;
+
+            float minX = fallback.x - 5f;
+            float maxX = fallback.x + 5f;
+            float minZ = fallback.z - 2f;
+            float maxZ = fallback.z + 2f;
+            bool hasAnchor = false;
+
+            foreach (Transform anchor in _exteriorSpawnAnchors)
+            {
+                if (anchor == null)
+                {
+                    continue;
                 }
 
-                target.position =
-                    Vector3.MoveTowards(
-                        target.position,
-                        destination,
-                        speed *
-                        Time.unscaledDeltaTime);
-
-                float bob =
-                    Mathf.Sin(
-                        Time.unscaledTime *
-                        12f) *
-                    0.025f;
-                target.localScale =
-                    new Vector3(
-                        1f,
-                        1f + bob,
-                        1f);
-
-                yield return null;
+                if (!hasAnchor)
+                {
+                    minX = maxX = anchor.position.x;
+                    minZ = maxZ = anchor.position.z;
+                    hasAnchor = true;
+                }
+                else
+                {
+                    minX = Mathf.Min(minX, anchor.position.x);
+                    maxX = Mathf.Max(maxX, anchor.position.x);
+                    minZ = Mathf.Min(minZ, anchor.position.z);
+                    maxZ = Mathf.Max(maxZ, anchor.position.z);
+                }
             }
 
-            if (target != null)
+            if (!hasAnchor ||
+                maxX - minX < 2f ||
+                maxZ - minZ < 2f)
             {
-                target.localScale =
-                    Vector3.one;
+                minX = fallback.x - 5f;
+                maxX = fallback.x + 5f;
+                minZ = fallback.z - 2f;
+                maxZ = fallback.z + 2f;
             }
+
+            const float margin = 0.45f;
+            for (int attempt = 0; attempt < 16; attempt++)
+            {
+                Vector3 candidate = new Vector3(
+                    UnityEngine.Random.Range(minX + margin, maxX - margin),
+                    _entrance.position.y,
+                    UnityEngine.Random.Range(minZ + margin, maxZ - margin));
+
+                if (NavMesh.SamplePosition(
+                        candidate,
+                        out NavMeshHit hit,
+                        1.5f,
+                        NavMesh.AllAreas) &&
+                    IsSpawnPositionClear(hit.position))
+                {
+                    return hit.position;
+                }
+            }
+
+            if (NavMesh.SamplePosition(
+                    fallback,
+                    out NavMeshHit fallbackHit,
+                    2f,
+                    NavMesh.AllAreas))
+            {
+                return fallbackHit.position;
+            }
+
+            return fallback;
+        }
+
+        private static bool IsSpawnPositionClear(Vector3 position)
+        {
+            CharacterPresence[] characters =
+                UnityEngine.Object.FindObjectsByType<CharacterPresence>(
+                    FindObjectsInactive.Exclude,
+                    FindObjectsSortMode.None);
+
+            foreach (CharacterPresence character in characters)
+            {
+                if (character == null)
+                {
+                    continue;
+                }
+
+                Vector3 delta = character.transform.position - position;
+                delta.y = 0f;
+                if (delta.sqrMagnitude < 1.44f)
+                {
+                    return false;
+                }
+            }
+
+            return true;
+        }
+
+        private void PublishNavigationFailure(
+            GameObject customer,
+            string destinationLabel,
+            string failureReason)
+        {
+            string detail =
+                $"Customer could not reach {destinationLabel}: {failureReason}";
+
+            LastCustomerPurchaseResult =
+                StoreOperationResult.Failure(
+                    StoreOperationStatus.InvalidState,
+                    detail);
+
+            _service.PublishFeedback(
+                new GameplayFeedbackEvent(
+                    GameplayFeedbackType.CustomerFrustrated,
+                    detail,
+                    customer != null
+                        ? customer.name
+                        : "store-entrance"));
         }
 
         private static IEnumerator AnimateState(
@@ -509,48 +698,19 @@ namespace VRMGames.CartridgeAndCloud.Runtime.Characters
             string state,
             float duration)
         {
-            if (target == null)
+            if (target == null || duration <= 0f)
             {
                 yield break;
             }
 
-            Vector3 original =
-                target.localScale;
+            // Capsules used scale pulses as temporary feedback. Humanoid
+            // characters must keep a stable transform, so state feedback now
+            // preserves the timing without deforming the character hierarchy.
             float elapsed = 0f;
-
-            while (elapsed < duration)
+            while (target != null && elapsed < duration)
             {
-                elapsed +=
-                    Time.unscaledDeltaTime;
-                float normalized =
-                    Mathf.Clamp01(
-                        elapsed / duration);
-
-                float pulse =
-                    Mathf.Sin(
-                        normalized *
-                        Mathf.PI *
-                        (state == "frustrated"
-                            ? 4f
-                            : 2f));
-
-                float amplitude =
-                    state == "satisfied"
-                        ? 0.12f
-                        : state == "frustrated"
-                            ? 0.08f
-                            : 0.04f;
-
-                target.localScale =
-                    original *
-                    (1f + pulse * amplitude);
-
+                elapsed += Time.unscaledDeltaTime;
                 yield return null;
-            }
-
-            if (target != null)
-            {
-                target.localScale = original;
             }
         }
     }

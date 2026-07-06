@@ -527,6 +527,7 @@ GameObject:
   - component: {fileID: 2629140546780969063}
   - component: {fileID: 3962733107087490828}
   - component: {fileID: 3690220098832263713}
+  - component: {fileID: 8878316233711333756}
   m_Layer: 0
   m_Name: Kiosk
   m_TagString: Untagged
@@ -592,7 +593,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 79b5fa238462f0849ba223921c764bef, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: VRMGames.CartridgeAndCloud.Presentation::VRMGames.CartridgeAndCloud.Presentation.Store.StoreVisualInstance
   _id: expansion.digital.kiosk
   _family: Expansion
@@ -720,3 +721,18 @@ Transform:
   - {fileID: 7947342514474984532}
   m_Father: {fileID: 2629140546780969063}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8878316233711333756
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5792934661519110087}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c81a0fd5d1834d429c998b2d7fd8dbca, type: 3}
+  m_Name:
+  m_EditorClassIdentifier:
+  _role: 5
+  _pivotAtBaseCentre: 1
+  _positiveZIsFront: 1

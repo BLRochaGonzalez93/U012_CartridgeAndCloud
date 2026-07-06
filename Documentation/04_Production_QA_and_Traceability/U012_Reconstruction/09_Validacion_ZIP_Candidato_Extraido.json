@@ -1,0 +1,274 @@
+{
+  "root": "/mnt/data/U012_candidate_reaudit/U012_CartridgeAndCloud_Reconstruido_Validado",
+  "status": "PASS",
+  "summary": {
+    "pass": 42,
+    "fail": 0,
+    "info": 1
+  },
+  "metrics": {
+    "project_scripts": 361,
+    "project_prefabs": 70,
+    "project_scenes": 4
+  },
+  "results": [
+    {
+      "category": "baseline",
+      "check": "Unity project roots",
+      "status": "PASS",
+      "detail": "Assets, Packages, ProjectSettings"
+    },
+    {
+      "category": "baseline",
+      "check": "Unity version",
+      "status": "PASS",
+      "detail": "m_EditorVersion: 6000.3.18f1\nm_EditorVersionWithRevision: 6000.3.18f1 (5ebeb53e4c07)"
+    },
+    {
+      "category": "baseline",
+      "check": "AI Navigation package",
+      "status": "PASS",
+      "detail": "2.0.13"
+    },
+    {
+      "category": "inventory",
+      "check": "Project script inventory",
+      "status": "PASS",
+      "detail": "361 scripts"
+    },
+    {
+      "category": "inventory",
+      "check": "Project prefab inventory",
+      "status": "PASS",
+      "detail": "70 prefabs"
+    },
+    {
+      "category": "inventory",
+      "check": "Project scene inventory",
+      "status": "PASS",
+      "detail": "4 scenes"
+    },
+    {
+      "category": "integrity",
+      "check": "Unity file/meta pairs",
+      "status": "PASS",
+      "detail": "complete"
+    },
+    {
+      "category": "integrity",
+      "check": "Unique Unity GUIDs inside Assets",
+      "status": "PASS",
+      "detail": "unique"
+    },
+    {
+      "category": "integrity",
+      "check": "No references to archived migration scripts",
+      "status": "PASS",
+      "detail": "none"
+    },
+    {
+      "category": "integrity",
+      "check": "External/package script references",
+      "status": "INFO",
+      "detail": "17 unresolved through Assets metadata; package references are expected"
+    },
+    {
+      "category": "integrity",
+      "check": "Serialized local fileID references",
+      "status": "PASS",
+      "detail": "resolved"
+    },
+    {
+      "category": "prefabs",
+      "check": "Identity root transforms",
+      "status": "PASS",
+      "detail": "all project prefabs"
+    },
+    {
+      "category": "prefabs",
+      "check": "Architecture physical contracts",
+      "status": "PASS",
+      "detail": "count=24, roles={0: 7, 1: 5, 2: 11, 3: 1}"
+    },
+    {
+      "category": "prefabs",
+      "check": "Products physical contracts",
+      "status": "PASS",
+      "detail": "count=10, roles={4: 10}"
+    },
+    {
+      "category": "prefabs",
+      "check": "Expansions physical contracts",
+      "status": "PASS",
+      "detail": "count=19, roles={5: 19}"
+    },
+    {
+      "category": "prefabs",
+      "check": "Furniture physical contracts",
+      "status": "PASS",
+      "detail": "count=8, roles={3: 8}"
+    },
+    {
+      "category": "prefabs",
+      "check": "Architecture role classification",
+      "status": "PASS",
+      "detail": "{0: 7, 1: 5, 2: 11, 3: 1}"
+    },
+    {
+      "category": "furniture",
+      "check": "Collision, obstacle and functional anchors",
+      "status": "PASS",
+      "detail": "8 complete prefabs"
+    },
+    {
+      "category": "navigation",
+      "check": "Environment navigation authority",
+      "status": "PASS",
+      "detail": "required hierarchy=True; three collider-backed walkable sources=True; one NavMeshSurface=True; authored navigation component=True; CollectObjects.Children=True; PhysicsColliders geometry=True; no legacy TechnicalColliders=True"
+    },
+    {
+      "category": "navigation",
+      "check": "Scene navigation cleanup",
+      "status": "PASS",
+      "detail": "PlacementSurfaceGrid retained; duplicate entry/walkable objects absent"
+    },
+    {
+      "category": "navigation",
+      "check": "Single runtime navigation source",
+      "status": "PASS",
+      "detail": "authored Navigation subtree only; no global scans or economy subscriptions"
+    },
+    {
+      "category": "door",
+      "check": "Self-contained automatic door prefab",
+      "status": "PASS",
+      "detail": "colliders=3, names complete=True"
+    },
+    {
+      "category": "door",
+      "check": "No global sensor fallback",
+      "status": "PASS",
+      "detail": "trigger-owned sensor is mandatory"
+    },
+    {
+      "category": "actors",
+      "check": "Seven complete actor wrapper prefabs",
+      "status": "PASS",
+      "detail": "count=7, roles={0: 2, 1: 2, 2: 2, 3: 1}"
+    },
+    {
+      "category": "actors",
+      "check": "Technical player presence is authored",
+      "status": "PASS",
+      "detail": "scene-owned CharacterPresence; no runtime registration required"
+    },
+    {
+      "category": "actors",
+      "check": "Player visual physical components are disabled",
+      "status": "PASS",
+      "detail": "visual collider and NavMeshAgent cannot duplicate TechnicalPlayer physics"
+    },
+    {
+      "category": "actors",
+      "check": "Legacy generic character prefabs removed",
+      "status": "PASS",
+      "detail": "removed"
+    },
+    {
+      "category": "catalogs",
+      "check": "Direct actor and delivery references",
+      "status": "PASS",
+      "detail": "actors=['player-clerk-male-01', 'employee-female-01', 'employee-male-01', 'supplier-female-01', 'supplier-male-01', 'customer-female-01', 'customer-male-01'], deliveryPrefab=True"
+    },
+    {
+      "category": "catalogs",
+      "check": "Future expansions excluded from StoreInitial runtime",
+      "status": "PASS",
+      "detail": "assets retained under Prefabs/Expansions; runtime list empty"
+    },
+    {
+      "category": "delivery",
+      "check": "Idempotent delivery presentation",
+      "status": "PASS",
+      "detail": "registry=True; presenter=True; correlation=True; authoredView=True"
+    },
+    {
+      "category": "cleanup",
+      "check": "Experimental builders/loaders removed",
+      "status": "PASS",
+      "detail": "removed"
+    },
+    {
+      "category": "cleanup",
+      "check": "No primitive fallback in production",
+      "status": "PASS",
+      "detail": "none"
+    },
+    {
+      "category": "cleanup",
+      "check": "Authored binder and strict prefab factory",
+      "status": "PASS",
+      "detail": "binder=True; factory=True"
+    },
+    {
+      "category": "cleanup",
+      "check": "Legacy blockout settings removed",
+      "status": "PASS",
+      "detail": "StoreRuntimeSettings uses authored-store terminology"
+    },
+    {
+      "category": "cleanup",
+      "check": "One-shot editor migrations archived",
+      "status": "PASS",
+      "detail": "archived=['ProjectAssetOrganizationMigration.cs', 'ProjectAssetOrganizationPlayModeRepair.cs', 'ProjectAssetOrganizationPrefabFixtureRepair.cs', 'RepresentativeAssetIntegrationTool.cs', 'RepresentativeRuntimeCatalogLinkRepair.cs', 'StoreInitialSceneAuthoringTool.cs']"
+    },
+    {
+      "category": "cleanup",
+      "check": "Synty installer is explicit and contract-safe",
+      "status": "PASS",
+      "detail": "manual execution only; regenerated wrappers keep collider, agent and authoring profile"
+    },
+    {
+      "category": "tests",
+      "check": "Scenario runners isolated to TestSupport",
+      "status": "PASS",
+      "detail": "runtime=0, testSupport=7"
+    },
+    {
+      "category": "tests",
+      "check": "Read-only structural validation assets",
+      "status": "PASS",
+      "detail": "editor validator and EditMode contract suite present"
+    },
+    {
+      "category": "build",
+      "check": "Production scene list",
+      "status": "PASS",
+      "detail": "production enabled=True; TestLab enabled=0"
+    },
+    {
+      "category": "compile-static",
+      "check": "Assembly definition JSON",
+      "status": "PASS",
+      "detail": "12 assemblies"
+    },
+    {
+      "category": "compile-static",
+      "check": "Required assembly references",
+      "status": "PASS",
+      "detail": "present"
+    },
+    {
+      "category": "compile-static",
+      "check": "C# lexical balance",
+      "status": "PASS",
+      "detail": "balanced"
+    },
+    {
+      "category": "compile-static",
+      "check": "Unique declared type names",
+      "status": "PASS",
+      "detail": "unique"
+    }
+  ]
+}

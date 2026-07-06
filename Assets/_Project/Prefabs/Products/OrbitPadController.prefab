@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 3899178480867868672}
   - component: {fileID: 870266745794755028}
   - component: {fileID: 4751531048996779630}
+  - component: {fileID: 8903915083081174974}
   m_Layer: 0
   m_Name: OrbitPadController
   m_TagString: Untagged
@@ -48,8 +49,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c2e99925c75b1c82d09342c159b5ab76, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  m_Name:
+  m_EditorClassIdentifier:
   _productId: controller-orbit-pad
 --- !u!205 &3899178480867868672
 LODGroup:
@@ -65,7 +66,7 @@ LODGroup:
   m_AnimateCrossFading: 0
   m_LastLODIsBillboard: 0
   m_LODs:
-  - screenRelativeHeight: 0.6
+  - screenRelativeHeight: 0.05
     fadeTransitionWidth: 0
     renderers:
     - renderer: {fileID: 7304501026612347959}
@@ -74,7 +75,7 @@ LODGroup:
     - renderer: {fileID: 949379036888423581}
     - renderer: {fileID: 748965527556664447}
     - renderer: {fileID: 2373557383653719456}
-  - screenRelativeHeight: 0.3
+  - screenRelativeHeight: 0.03
     fadeTransitionWidth: 0
     renderers:
     - renderer: {fileID: 109920109210247130}
@@ -83,7 +84,7 @@ LODGroup:
     - renderer: {fileID: 3003867097112638949}
     - renderer: {fileID: 9019033797192511345}
     - renderer: {fileID: 5955346617705440700}
-  - screenRelativeHeight: 0.1
+  - screenRelativeHeight: 0.01
     fadeTransitionWidth: 0
     renderers:
     - renderer: {fileID: 5335323371774461122}
@@ -103,7 +104,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 79b5fa238462f0849ba223921c764bef, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: VRMGames.CartridgeAndCloud.Presentation::VRMGames.CartridgeAndCloud.Presentation.Store.StoreVisualInstance
   _id: controller-orbit-pad
   _family: Product
@@ -118,7 +119,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 37d12b45b4d8eb05d3c80927a3e30d3f, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: VRMGames.CartridgeAndCloud.Presentation::VRMGames.CartridgeAndCloud.Presentation.Products.ProductVisualMarker
 --- !u!1 &789487857787584900
 GameObject:
@@ -1851,3 +1852,18 @@ MeshRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &8903915083081174974
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 100000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c81a0fd5d1834d429c998b2d7fd8dbca, type: 3}
+  m_Name:
+  m_EditorClassIdentifier:
+  _role: 4
+  _pivotAtBaseCentre: 1
+  _positiveZIsFront: 1

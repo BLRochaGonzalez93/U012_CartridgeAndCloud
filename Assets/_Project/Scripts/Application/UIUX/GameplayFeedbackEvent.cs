@@ -10,6 +10,7 @@ namespace VRMGames.CartridgeAndCloud.Application.UIUX
         public string AnchorId { get; }
         public long MinorUnits { get; }
         public string CurrencyCode { get; }
+        public string CorrelationId { get; }
 
         public bool HasMoney =>
             MinorUnits != 0 &&
@@ -21,7 +22,8 @@ namespace VRMGames.CartridgeAndCloud.Application.UIUX
             string message,
             string anchorId = "",
             long minorUnits = 0,
-            string currencyCode = "")
+            string currencyCode = "",
+            string correlationId = "")
         {
             if (!Enum.IsDefined(
                     typeof(GameplayFeedbackType),
@@ -56,6 +58,7 @@ namespace VRMGames.CartridgeAndCloud.Application.UIUX
                 currencyCode == null
                     ? string.Empty
                     : currencyCode.ToUpperInvariant();
+            CorrelationId = correlationId?.Trim() ?? string.Empty;
         }
     }
 

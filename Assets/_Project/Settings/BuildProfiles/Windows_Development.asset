@@ -21,13 +21,13 @@ MonoBehaviour:
   m_OverrideGlobalSceneList: 1
   m_Scenes:
   - m_enabled: 1
-    m_path: Assets/_Project/Scenes/Bootstrap.unity
+    m_path: Assets/_Project/Scenes/Production/Bootstrap.unity
   - m_enabled: 1
-    m_path: Assets/_Project/Scenes/MainMenu.unity
+    m_path: Assets/_Project/Scenes/Production/MainMenu.unity
   - m_enabled: 1
-    m_path: Assets/_Project/Scenes/StoreInitial.unity
+    m_path: Assets/_Project/Scenes/Production/StoreInitial.unity
   - m_enabled: 1
-    m_path: Assets/_Project/Scenes/TestLab.unity
+    m_path: Assets/_Project/Scenes/Test/TestLab.unity
   m_HasScriptingDefines: 0
   m_ScriptingDefines: []
   m_PlayerSettingsYaml:

@@ -1,25 +1,56 @@
 using System;
 using UnityEngine;
-
-using VRMGames.CartridgeAndCloud.Presentation.Characters;
 namespace VRMGames.CartridgeAndCloud.Presentation.Store.Doors
 {
     public sealed class AutomaticSlidingDoorController :
         MonoBehaviour
     {
+        [SerializeField]
+        private AutomaticDoorParts _parts;
+
+        [SerializeField]
+        private AutomaticDoorSensor _sensor;
+
         private Transform _leftPanel;
         private Transform _rightPanel;
         private Vector3 _leftClosed;
         private Vector3 _rightClosed;
         private Vector3 _leftOpen;
         private Vector3 _rightOpen;
-        private float _sensorDistance;
-        private float _speed;
+        [SerializeField]
+        private float _panelTravelDistance = 1f;
+
+        [SerializeField]
+        private float _sensorDistance = 2f;
+
+        [SerializeField]
+        private float _speed = 2.5f;
         private bool _isOpen;
+        private Collider[] _panelColliders = Array.Empty<Collider>();
 
         public bool IsOpen => _isOpen;
 
         public event Action<bool> OpenStateChanged;
+
+        private void Awake()
+        {
+            _parts = _parts != null ? _parts : GetComponent<AutomaticDoorParts>();
+            _sensor = _sensor != null
+                ? _sensor
+                : GetComponentInChildren<AutomaticDoorSensor>(true);
+
+            if (_parts != null &&
+                _parts.LeftPanel != null &&
+                _parts.RightPanel != null)
+            {
+                Configure(
+                    _parts.LeftPanel,
+                    _parts.RightPanel,
+                    _panelTravelDistance,
+                    _sensorDistance,
+                    _speed);
+            }
+        }
 
         public void Configure(
             Transform leftPanel,
@@ -58,6 +89,19 @@ namespace VRMGames.CartridgeAndCloud.Presentation.Store.Doors
                     nameof(speed));
             }
 
+            _parts = _parts != null ? _parts : GetComponent<AutomaticDoorParts>();
+            _sensor = _sensor != null
+                ? _sensor
+                : GetComponentInChildren<AutomaticDoorSensor>(true);
+            if (_sensor == null)
+            {
+                throw new InvalidOperationException(
+                    "AutomaticDoor.prefab requires its authored sensor.");
+            }
+
+            _sensor.Configure(sensorDistance);
+
+            _panelTravelDistance = panelTravelDistance;
             _leftPanel = leftPanel;
             _rightPanel = rightPanel;
             _leftClosed =
@@ -75,6 +119,18 @@ namespace VRMGames.CartridgeAndCloud.Presentation.Store.Doors
             _sensorDistance =
                 sensorDistance;
             _speed = speed;
+
+            Collider[] leftColliders =
+                leftPanel.GetComponentsInChildren<Collider>(true);
+            Collider[] rightColliders =
+                rightPanel.GetComponentsInChildren<Collider>(true);
+            _panelColliders = new Collider[
+                leftColliders.Length + rightColliders.Length];
+            leftColliders.CopyTo(_panelColliders, 0);
+            rightColliders.CopyTo(
+                _panelColliders,
+                leftColliders.Length);
+            SetPanelCollidersEnabled(true);
         }
 
         private void Update()
@@ -91,6 +147,7 @@ namespace VRMGames.CartridgeAndCloud.Presentation.Store.Doors
             if (shouldOpen != _isOpen)
             {
                 _isOpen = shouldOpen;
+                SetPanelCollidersEnabled(!_isOpen);
                 OpenStateChanged?.Invoke(
                     _isOpen);
             }
@@ -120,32 +177,21 @@ namespace VRMGames.CartridgeAndCloud.Presentation.Store.Doors
                     Time.unscaledDeltaTime);
         }
 
-        private bool HasCharacterNearby()
+
+        private void SetPanelCollidersEnabled(bool enabled)
         {
-            CharacterPresence[] characters =
-                UnityEngine.Object
-                    .FindObjectsByType<
-                        CharacterPresence>(
-                            FindObjectsInactive
-                                .Exclude,
-                            FindObjectsSortMode.None);
-
-            float squaredDistance =
-                _sensorDistance *
-                _sensorDistance;
-
-            foreach (CharacterPresence
-                     character in characters)
+            foreach (Collider panelCollider in _panelColliders)
             {
-                if ((character.transform.position -
-                     transform.position)
-                    .sqrMagnitude <= squaredDistance)
+                if (panelCollider != null)
                 {
-                    return true;
+                    panelCollider.enabled = enabled;
                 }
             }
+        }
 
-            return false;
+        private bool HasCharacterNearby()
+        {
+            return _sensor != null && _sensor.HasCharacter;
         }
     }
 }

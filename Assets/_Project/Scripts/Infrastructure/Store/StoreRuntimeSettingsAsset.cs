@@ -15,10 +15,6 @@ namespace VRMGames.CartridgeAndCloud.Infrastructure.Store
             "StoreInitial";
 
         [SerializeField]
-        private bool _buildBlockoutOnLoad =
-            false;
-
-        [SerializeField]
         private bool _hideOccludingWalls =
             true;
 
@@ -30,13 +26,10 @@ namespace VRMGames.CartridgeAndCloud.Infrastructure.Store
         private int _vfxPoolSize = 24;
 
         [SerializeField, Min(1)]
-        private int _maximumBlockoutCustomers = 4;
+        private int _maximumCustomers = 4;
 
         public string StoreSceneName =>
             _storeSceneName;
-
-        public bool BuildBlockoutOnLoad =>
-            _buildBlockoutOnLoad;
 
         public bool HideOccludingWalls =>
             _hideOccludingWalls;
@@ -47,7 +40,7 @@ namespace VRMGames.CartridgeAndCloud.Infrastructure.Store
         public int VfxPoolSize =>
             _vfxPoolSize;
 
-        public int MaximumBlockoutCustomers =>
-            _maximumBlockoutCustomers;
+        public int MaximumCustomers =>
+            _maximumCustomers;
     }
 }

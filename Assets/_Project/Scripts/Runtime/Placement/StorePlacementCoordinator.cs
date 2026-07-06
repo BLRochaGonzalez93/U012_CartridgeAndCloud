@@ -12,7 +12,7 @@ using VRMGames.CartridgeAndCloud.Application.Store;
 using VRMGames.CartridgeAndCloud.Application.UIUX;
 using VRMGames.CartridgeAndCloud.Domain.Store;
 using VRMGames.CartridgeAndCloud.Infrastructure.Store;
-using VRMGames.CartridgeAndCloud.Runtime.Development.Blockout;
+using VRMGames.CartridgeAndCloud.Runtime.Store;
 namespace VRMGames.CartridgeAndCloud.Runtime.Placement
 {
     public sealed class StorePlacementCoordinator :
@@ -42,8 +42,6 @@ namespace VRMGames.CartridgeAndCloud.Runtime.Placement
         private StoreOperationsFacade
             _service;
         private IStoreContentCatalog _catalog;
-        private StoreMaterialPaletteAsset
-            _palette;
 
         private TechnicalPlaceableDefinition
             _temporaryDefinition;
@@ -65,19 +63,14 @@ namespace VRMGames.CartridgeAndCloud.Runtime.Placement
         public void Configure(
             StoreOperationsFacade service,
             IStoreContentCatalog catalog,
-            StoreMaterialPaletteAsset palette)
+            StoreInitialSceneContext sceneContext = null)
         {
-            Configure(
-                service,
-                catalog,
-                palette,
-                null);
+            ConfigureInternal(service, catalog, sceneContext);
         }
 
-        public void Configure(
+        private void ConfigureInternal(
             StoreOperationsFacade service,
             IStoreContentCatalog catalog,
-            StoreMaterialPaletteAsset palette,
             StoreInitialSceneContext sceneContext)
         {
             _service = service ??
@@ -86,9 +79,6 @@ namespace VRMGames.CartridgeAndCloud.Runtime.Placement
             _catalog = catalog ??
                 throw new ArgumentNullException(
                     nameof(catalog));
-            _palette = palette ??
-                throw new ArgumentNullException(
-                    nameof(palette));
 
             ResolveReferences();
 
@@ -725,17 +715,9 @@ namespace VRMGames.CartridgeAndCloud.Runtime.Placement
                     continue;
                 }
 
-                Material material =
-                    _palette.Find(
-                        definition
-                            .MaterialVariantId);
-
-                StoreBlockoutVisualFactory
-                    .BuildFurniture(
-                        view.gameObject,
-                        definition,
-                        material,
-                        _surface.CellSize);
+                StorePrefabFactory.BuildFurniture(
+                    view.gameObject,
+                    definition.DefinitionId);
 
                 PlacedFixtureVisual marker =
                     view.GetComponent<

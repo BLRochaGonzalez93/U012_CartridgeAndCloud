@@ -1,12 +1,13 @@
 using System;
 using UnityEngine;
+using VRMGames.CartridgeAndCloud.Infrastructure.Customers;
 using VRMGames.CartridgeAndCloud.Application.Store;
 using VRMGames.CartridgeAndCloud.Domain.Inventory;
 using VRMGames.CartridgeAndCloud.Domain.Products;
 using VRMGames.CartridgeAndCloud.Domain.Store;
 using VRMGames.CartridgeAndCloud.Infrastructure.Store;
 using VRMGames.CartridgeAndCloud.Runtime.Placement;
-using VRMGames.CartridgeAndCloud.Runtime.Development.Blockout;
+using VRMGames.CartridgeAndCloud.Runtime.Store;
 namespace VRMGames.CartridgeAndCloud.Runtime.Inventory
 {
     public sealed class InventoryVisualSynchronizer :
@@ -15,15 +16,12 @@ namespace VRMGames.CartridgeAndCloud.Runtime.Inventory
         private StoreOperationsFacade
             _service;
         private IStoreContentCatalog _catalog;
-        private StoreMaterialPaletteAsset
-            _palette;
         private Transform _backroomAnchor;
         private Transform _backroomVisualRoot;
 
         public void Configure(
             StoreOperationsFacade service,
             IStoreContentCatalog catalog,
-            StoreMaterialPaletteAsset palette,
             Transform backroomAnchor)
         {
             _service = service ??
@@ -32,16 +30,13 @@ namespace VRMGames.CartridgeAndCloud.Runtime.Inventory
             _catalog = catalog ??
                 throw new ArgumentNullException(
                     nameof(catalog));
-            _palette = palette ??
-                throw new ArgumentNullException(
-                    nameof(palette));
             _backroomAnchor = backroomAnchor ??
                 throw new ArgumentNullException(
                     nameof(backroomAnchor));
 
             GameObject root =
                 new GameObject(
-                    "StoredMerchandiseBlockout");
+                    "StoredMerchandise");
             root.transform.SetParent(
                 _backroomAnchor,
                 false);
@@ -120,20 +115,13 @@ namespace VRMGames.CartridgeAndCloud.Runtime.Inventory
                         visualIndex / 6;
 
                     GameObject visual =
-                        StoreBlockoutVisualFactory
-                            .BuildProduct(
-                                _backroomVisualRoot,
-                                product,
-                                _palette.Find(
-                                    product
-                                        .MaterialVariantId),
-                                new Vector3(
-                                    column * 0.28f,
-                                    0.18f +
-                                    row * 0.34f,
-                                    0f),
-                                ProductScale(
-                                    product.Kind));
+                        StorePrefabFactory.BuildProduct(
+                            _backroomVisualRoot,
+                            product.ProductId,
+                            new Vector3(
+                                column * 0.28f,
+                                0.18f + row * 0.34f,
+                                0f));
 
                     DisableColliders(visual);
                     visualIndex++;
@@ -156,25 +144,39 @@ namespace VRMGames.CartridgeAndCloud.Runtime.Inventory
                      in visuals)
             {
                 Transform productRoot =
-                    visual.transform.Find(
-                        "ProductVisuals");
+                    GetOrCreateProductRoot(
+                        visual.transform);
 
-                if (productRoot == null)
-                {
-                    GameObject root =
-                        new GameObject(
-                            "ProductVisuals");
-                    root.transform.SetParent(
-                        visual.transform,
-                        false);
-                    productRoot = root.transform;
-                }
-
+                ConfigureWorldScaleNeutralRoot(
+                    productRoot,
+                    visual.transform);
                 ClearChildren(productRoot);
 
                 PlacedStoreFixtureRecord fixture =
                     FindFixture(
                         visual.InstanceId);
+
+                visual.ConfigureStock(
+                    fixture != null
+                        ? fixture.AssignedProductId
+                        : string.Empty,
+                    fixture != null
+                        ? fixture.ProductQuantity
+                        : 0);
+
+                CustomerBrowseFixtureAuthoring browseAuthoring =
+                    visual.GetComponentInChildren<
+                        CustomerBrowseFixtureAuthoring>(true);
+                if (browseAuthoring != null)
+                {
+                    browseAuthoring.ConfigureStock(
+                        fixture != null
+                            ? fixture.AssignedProductId
+                            : string.Empty,
+                        fixture != null
+                            ? fixture.ProductQuantity
+                            : 0);
+                }
 
                 if (fixture == null ||
                     fixture.ProductQuantity < 1 ||
@@ -183,80 +185,333 @@ namespace VRMGames.CartridgeAndCloud.Runtime.Inventory
                     !_catalog.TryGetProduct(
                         fixture.AssignedProductId,
                         out RetailProductDefinition
-                            product))
+                            product) ||
+                    !_catalog.TryGetFurniture(
+                        fixture.DefinitionId,
+                        out StoreFixtureDefinition
+                            furniture) ||
+                    !furniture.SupportsProducts)
                 {
                     continue;
                 }
 
-                if (!_catalog.TryGetFurniture(
-                        fixture.DefinitionId,
-                        out StoreFixtureDefinition
-                            furniture))
-                {
-                    continue;
-                }
+                ProductDisplaySlot[] slots =
+                    ResolveDisplaySlots(
+                        visual.transform,
+                        productRoot,
+                        furniture.Kind);
 
                 int visible =
                     Mathf.Min(
                         fixture.ProductQuantity,
-                        10);
-
-                float width =
-                    furniture.WidthCells *
-                    0.5f;
-                float depth =
-                    furniture.DepthCells *
-                    0.5f;
+                        slots.Length);
 
                 for (int index = 0;
                      index < visible;
                      index++)
                 {
-                    int columns =
-                        Mathf.Max(
-                            1,
-                            Mathf.CeilToInt(
-                                Mathf.Sqrt(
-                                    visible)));
-
-                    int column =
-                        index % columns;
-                    int row =
-                        index / columns;
-
-                    float x =
-                        -width * 0.35f +
-                        column *
-                        Mathf.Min(
-                            0.32f,
-                            width * 0.7f /
-                            Mathf.Max(
-                                1,
-                                columns - 1));
-
-                    float z =
-                        -depth * 0.2f +
-                        row * 0.22f;
+                    ProductDisplaySlot slot =
+                        slots[index];
 
                     GameObject productVisual =
-                        StoreBlockoutVisualFactory
-                            .BuildProduct(
-                                productRoot,
-                                product,
-                                _palette.Find(
-                                    product
-                                        .MaterialVariantId),
-                                new Vector3(
-                                    x,
-                                    furniture.HeightMeters *
-                                    0.78f,
-                                    z),
-                                ProductScale(
-                                    product.Kind));
+                        StorePrefabFactory.BuildProduct(
+                            productRoot,
+                            product.ProductId,
+                            slot.LocalPosition);
+
+                    productVisual.transform.localRotation =
+                        Quaternion.Euler(
+                            slot.LocalEulerAngles);
 
                     DisableColliders(
                         productVisual);
                 }
+            }
+        }
+
+        private static Transform
+            GetOrCreateProductRoot(
+                Transform owner)
+        {
+            Transform root =
+                owner.Find(
+                    "ProductVisuals");
+
+            if (root != null)
+            {
+                return root;
+            }
+
+            GameObject rootObject =
+                new GameObject(
+                    "ProductVisuals");
+            rootObject.transform.SetParent(
+                owner,
+                false);
+            return rootObject.transform;
+        }
+
+        private static ProductDisplaySlot[] ResolveDisplaySlots(
+            Transform fixtureRoot,
+            Transform productRoot,
+            StoreFixtureKind kind)
+        {
+            ProductDisplaySpotSet set =
+                fixtureRoot != null
+                    ? fixtureRoot.GetComponentInChildren<ProductDisplaySpotSet>(true)
+                    : null;
+
+            if (set != null && set.Spots.Count > 0)
+            {
+                ProductDisplaySlot[] authored =
+                    new ProductDisplaySlot[set.Spots.Count];
+
+                for (int index = 0; index < set.Spots.Count; index++)
+                {
+                    Transform spot = set.Spots[index];
+                    authored[index] = new ProductDisplaySlot(
+                        productRoot.InverseTransformPoint(spot.position),
+                        productRoot.InverseTransformDirection(spot.forward).sqrMagnitude > 0.0001f
+                            ? Quaternion.LookRotation(
+                                productRoot.InverseTransformDirection(spot.forward),
+                                Vector3.up).eulerAngles
+                            : Vector3.zero);
+                }
+
+                return authored;
+            }
+
+            return BuildDisplaySlots(kind);
+        }
+
+        private static ProductDisplaySlot[]
+            BuildDisplaySlots(
+                StoreFixtureKind kind)
+        {
+            switch (kind)
+            {
+                case StoreFixtureKind.WallShelf:
+                    return BuildWallShelfSlots();
+
+                case StoreFixtureKind.CentralShelf:
+                    return BuildCentralShelfSlots();
+
+                case StoreFixtureKind.LowDisplay:
+                    return BuildLowDisplaySlots();
+
+                case StoreFixtureKind.FeaturedDisplay:
+                    return BuildFeaturedDisplaySlots();
+
+                default:
+                    return Array.Empty<
+                        ProductDisplaySlot>();
+            }
+        }
+
+        private static ProductDisplaySlot[]
+            BuildWallShelfSlots()
+        {
+            float[] levels =
+            {
+                0.24f,
+                0.87f,
+                1.50f,
+                2.12f
+            };
+
+            return BuildShelfFaceSlots(
+                levels,
+                columns: 6,
+                width: 1.72f,
+                z: 0.08f,
+                yaw: 0f);
+        }
+
+        private static ProductDisplaySlot[]
+            BuildCentralShelfSlots()
+        {
+            float[] levels =
+            {
+                0.24f,
+                0.88f,
+                1.52f
+            };
+
+            ProductDisplaySlot[] front =
+                BuildShelfFaceSlots(
+                    levels,
+                    columns: 5,
+                    width: 1.60f,
+                    z: 0.22f,
+                    yaw: 0f);
+            ProductDisplaySlot[] back =
+                BuildShelfFaceSlots(
+                    levels,
+                    columns: 5,
+                    width: 1.60f,
+                    z: -0.22f,
+                    yaw: 180f);
+
+            return CombineSlots(
+                front,
+                back);
+        }
+
+        private static ProductDisplaySlot[]
+            BuildLowDisplaySlots()
+        {
+            float[] levels =
+            {
+                0.24f,
+                0.68f
+            };
+
+            ProductDisplaySlot[] front =
+                BuildShelfFaceSlots(
+                    levels,
+                    columns: 3,
+                    width: 1.05f,
+                    z: 0.22f,
+                    yaw: 0f);
+            ProductDisplaySlot[] back =
+                BuildShelfFaceSlots(
+                    levels,
+                    columns: 3,
+                    width: 1.05f,
+                    z: -0.22f,
+                    yaw: 180f);
+
+            return CombineSlots(
+                front,
+                back);
+        }
+
+        private static ProductDisplaySlot[]
+            BuildFeaturedDisplaySlots()
+        {
+            ProductDisplaySlot[] slots =
+                new ProductDisplaySlot[8];
+            int index = 0;
+
+            for (int row = 0;
+                 row < 2;
+                 row++)
+            {
+                for (int column = 0;
+                     column < 4;
+                     column++)
+                {
+                    slots[index++] =
+                        new ProductDisplaySlot(
+                            new Vector3(
+                                -0.36f +
+                                column * 0.24f,
+                                0.91f,
+                                -0.16f +
+                                row * 0.32f),
+                            new Vector3(
+                                0f,
+                                row == 0
+                                    ? 180f
+                                    : 0f,
+                                0f));
+                }
+            }
+
+            return slots;
+        }
+
+        private static ProductDisplaySlot[]
+            BuildShelfFaceSlots(
+                float[] levels,
+                int columns,
+                float width,
+                float z,
+                float yaw)
+        {
+            ProductDisplaySlot[] slots =
+                new ProductDisplaySlot[
+                    levels.Length * columns];
+            int index = 0;
+
+            for (int levelIndex = 0;
+                 levelIndex < levels.Length;
+                 levelIndex++)
+            {
+                for (int column = 0;
+                     column < columns;
+                     column++)
+                {
+                    float normalized =
+                        columns == 1
+                            ? 0.5f
+                            : column /
+                              (float)(columns - 1);
+                    float x =
+                        Mathf.Lerp(
+                            -width * 0.5f,
+                            width * 0.5f,
+                            normalized);
+
+                    slots[index++] =
+                        new ProductDisplaySlot(
+                            new Vector3(
+                                x,
+                                levels[levelIndex],
+                                z),
+                            new Vector3(
+                                0f,
+                                yaw,
+                                0f));
+                }
+            }
+
+            return slots;
+        }
+
+        private static ProductDisplaySlot[]
+            CombineSlots(
+                ProductDisplaySlot[] first,
+                ProductDisplaySlot[] second)
+        {
+            ProductDisplaySlot[] result =
+                new ProductDisplaySlot[
+                    first.Length + second.Length];
+
+            Array.Copy(
+                first,
+                0,
+                result,
+                0,
+                first.Length);
+            Array.Copy(
+                second,
+                0,
+                result,
+                first.Length,
+                second.Length);
+
+            return result;
+        }
+
+        private readonly struct
+            ProductDisplaySlot
+        {
+            public Vector3 LocalPosition {
+                get;
+            }
+
+            public Vector3 LocalEulerAngles {
+                get;
+            }
+
+            public ProductDisplaySlot(
+                Vector3 localPosition,
+                Vector3 localEulerAngles)
+            {
+                LocalPosition = localPosition;
+                LocalEulerAngles =
+                    localEulerAngles;
             }
         }
 
@@ -279,39 +534,6 @@ namespace VRMGames.CartridgeAndCloud.Runtime.Inventory
             return null;
         }
 
-        private static Vector3 ProductScale(
-            RetailProductKind kind)
-        {
-            switch (kind)
-            {
-                case RetailProductKind.Console:
-                    return new Vector3(
-                        0.34f,
-                        0.13f,
-                        0.26f);
-                case RetailProductKind.Controller:
-                    return new Vector3(
-                        0.22f,
-                        0.10f,
-                        0.16f);
-                case RetailProductKind.Headset:
-                    return new Vector3(
-                        0.16f,
-                        0.10f,
-                        0.16f);
-                case RetailProductKind.Accessory:
-                    return new Vector3(
-                        0.14f,
-                        0.18f,
-                        0.08f);
-                default:
-                    return new Vector3(
-                        0.16f,
-                        0.22f,
-                        0.04f);
-            }
-        }
-
         private static void DisableColliders(
             GameObject root)
         {
@@ -329,6 +551,32 @@ namespace VRMGames.CartridgeAndCloud.Runtime.Inventory
             {
                 collider.enabled = false;
             }
+        }
+
+        private static void ConfigureWorldScaleNeutralRoot(
+            Transform root,
+            Transform owner)
+        {
+            if (root == null || owner == null)
+            {
+                return;
+            }
+
+            root.localPosition = Vector3.zero;
+            root.localRotation = Quaternion.identity;
+
+            Vector3 scale = owner.lossyScale;
+            root.localScale = new Vector3(
+                SafeReciprocal(scale.x),
+                SafeReciprocal(scale.y),
+                SafeReciprocal(scale.z));
+        }
+
+        private static float SafeReciprocal(float value)
+        {
+            return Mathf.Abs(value) > 0.0001f
+                ? 1f / value
+                : 1f;
         }
 
         private static void ClearChildren(

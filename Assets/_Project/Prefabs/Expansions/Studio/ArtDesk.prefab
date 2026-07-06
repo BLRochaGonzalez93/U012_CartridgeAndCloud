@@ -1106,6 +1106,7 @@ GameObject:
   - component: {fileID: 5107798134243464995}
   - component: {fileID: 750334235097176939}
   - component: {fileID: 4297152261361549422}
+  - component: {fileID: 5341167766409051531}
   m_Layer: 0
   m_Name: ArtDesk
   m_TagString: Untagged
@@ -1177,7 +1178,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 79b5fa238462f0849ba223921c764bef, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: VRMGames.CartridgeAndCloud.Presentation::VRMGames.CartridgeAndCloud.Presentation.Store.StoreVisualInstance
   _id: expansion.studio.art-desk
   _family: Expansion
@@ -1272,3 +1273,18 @@ MeshRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &5341167766409051531
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7253664400186857813}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c81a0fd5d1834d429c998b2d7fd8dbca, type: 3}
+  m_Name:
+  m_EditorClassIdentifier:
+  _role: 5
+  _pivotAtBaseCentre: 1
+  _positiveZIsFront: 1

@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 using VRMGames.CartridgeAndCloud.Application.Customers;
 using VRMGames.CartridgeAndCloud.Domain.Customers;
@@ -35,6 +36,9 @@ namespace VRMGames.CartridgeAndCloud.Infrastructure.Customers
         private CustomerProfileSelector _selector;
         private float _secondAccumulator;
         private int _sequence;
+        private readonly Dictionary<string, Vector3[]>
+            _pendingWaypointPositions =
+                new Dictionary<string, Vector3[]>();
 
         public int ActiveCustomerCount =>
             _instances == null ? 0 : _instances.ActiveCount;
@@ -140,23 +144,101 @@ namespace VRMGames.CartridgeAndCloud.Infrastructure.Customers
                 _sequence % _profiles.TotalSpawnWeight;
             CustomerProfile profile =
                 _selector.SelectByRoll(roll);
+
+            List<Transform> browseTargets =
+                ResolveBrowseTargets(
+                    profile.BrowseStopCount);
+
             CustomerNavigationPlan plan =
                 _spawnArea.BuildNavigationPlan(
-                    profile.BrowseStopCount,
+                    browseTargets,
                     _browseDwellSeconds);
 
             string suffix = _sequence.ToString("D4");
+            string customerId =
+                "customer-" + suffix;
             CustomerSpawnRequest request =
                 new CustomerSpawnRequest(
                     new CustomerSpawnRequestId(
                         "spawn-request-" + suffix),
                     new CustomerInstanceId(
-                        "customer-" + suffix),
+                        customerId),
                     profile.Id,
                     plan);
 
+            _pendingWaypointPositions[customerId] =
+                _spawnArea.BuildWaypointPositions(
+                    browseTargets);
+
             _sequence++;
             _queue.TryEnqueue(request);
+        }
+
+        private List<Transform> ResolveBrowseTargets(
+            int requestedBrowseStops)
+        {
+            List<Transform> available =
+                new List<Transform>();
+
+            CustomerBrowseFixtureAuthoring[] fixtures =
+                UnityEngine.Object.FindObjectsByType<
+                    CustomerBrowseFixtureAuthoring>(
+                        FindObjectsInactive.Exclude,
+                        FindObjectsSortMode.None);
+
+            foreach (CustomerBrowseFixtureAuthoring fixture
+                     in fixtures)
+            {
+                if (fixture == null ||
+                    !fixture.HasStock)
+                {
+                    continue;
+                }
+
+                foreach (Transform point
+                         in fixture.Points)
+                {
+                    if (point != null)
+                    {
+                        available.Add(point);
+                    }
+                }
+            }
+
+            if (available.Count == 0)
+            {
+                return _spawnArea.GetFallbackBrowsePoints(
+                    requestedBrowseStops);
+            }
+
+            available.Sort(
+                (left, right) =>
+                    string.CompareOrdinal(
+                        left.name,
+                        right.name));
+
+            int count = Mathf.Min(
+                requestedBrowseStops,
+                available.Count);
+            List<Transform> selected =
+                new List<Transform>(count);
+
+            int startIndex =
+                available.Count > 0
+                    ? _sequence % available.Count
+                    : 0;
+
+            for (int index = 0;
+                 index < count;
+                 index++)
+            {
+                selected.Add(
+                    available[
+                        (startIndex + index) %
+                        available.Count]);
+            }
+
+            return selected;
         }
 
         private void SpawnQueuedCustomer()
@@ -177,7 +259,7 @@ namespace VRMGames.CartridgeAndCloud.Infrastructure.Customers
             GameObject instance =
                 CreateTechnicalView(authoringProfile);
             instance.transform.position =
-                _spawnArea.SpawnPoint.position;
+                _spawnArea.GetRandomSpawnPosition();
 
             CustomerTechnicalAgentView view =
                 instance.GetComponent<
@@ -189,10 +271,27 @@ namespace VRMGames.CartridgeAndCloud.Infrastructure.Customers
                     CustomerTechnicalAgentView>();
             }
 
+            Vector3[] waypoints;
+            if (!_pendingWaypointPositions.TryGetValue(
+                    result.Customer.Id.Value,
+                    out waypoints))
+            {
+                List<Transform> fallbackTargets =
+                    _spawnArea.GetFallbackBrowsePoints(
+                        Mathf.Max(
+                            0,
+                            result.Customer.NavigationPlan.Count - 2));
+                waypoints =
+                    _spawnArea.BuildWaypointPositions(
+                        fallbackTargets);
+            }
+
+            _pendingWaypointPositions.Remove(
+                result.Customer.Id.Value);
+
             view.Configure(
                 result.Customer,
-                _spawnArea.BuildWaypointPositions(
-                    profile.BrowseStopCount),
+                waypoints,
                 profile.WalkSpeed,
                 0.05f,
                 _spawnSettings
@@ -222,17 +321,13 @@ namespace VRMGames.CartridgeAndCloud.Infrastructure.Customers
         private static GameObject CreateTechnicalView(
             CustomerProfileAsset profile)
         {
-            if (profile.TechnicalPrefab != null)
-                return Instantiate(
-                    profile.TechnicalPrefab);
+            if (profile.TechnicalPrefab == null)
+            {
+                throw new InvalidOperationException(
+                    $"Customer profile '{profile.CustomerProfileId}' has no authored technical prefab.");
+            }
 
-            GameObject fallback =
-                GameObject.CreatePrimitive(
-                    PrimitiveType.Capsule);
-            fallback.name =
-                "TechnicalCustomer_" +
-                profile.CustomerProfileId;
-            return fallback;
+            return Instantiate(profile.TechnicalPrefab);
         }
 
         private void ClearRuntimeState()
@@ -246,6 +341,7 @@ namespace VRMGames.CartridgeAndCloud.Infrastructure.Customers
             _selector = null;
             _secondAccumulator = 0f;
             _sequence = 0;
+            _pendingWaypointPositions.Clear();
         }
     }
 }

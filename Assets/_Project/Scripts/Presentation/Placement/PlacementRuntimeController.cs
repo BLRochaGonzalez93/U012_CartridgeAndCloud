@@ -591,8 +591,7 @@ namespace VRMGames.CartridgeAndCloud.Presentation.Placement
             }
 
             GameObject placedObject =
-                GameObject.CreatePrimitive(
-                    PrimitiveType.Cube);
+                new GameObject("PlacedFixtureContainer");
 
             placedObject.transform.SetParent(
                 _placedObjectsRoot,
@@ -623,16 +622,6 @@ namespace VRMGames.CartridgeAndCloud.Presentation.Placement
                     _definition.PreviewHeight,
                     _definition.DepthCells *
                     _surface.CellSize);
-
-            Renderer renderer =
-                placedObject.GetComponent<Renderer>();
-
-            if (renderer != null &&
-                _placedMaterial != null)
-            {
-                renderer.sharedMaterial =
-                    _placedMaterial;
-            }
 
             PlacedObjectView view =
                 placedObject.AddComponent<

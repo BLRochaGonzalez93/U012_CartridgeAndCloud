@@ -5,7 +5,8 @@
         "VRMGames.CartridgeAndCloud.Domain",
         "VRMGames.CartridgeAndCloud.Application",
         "VRMGames.CartridgeAndCloud.Infrastructure",
-        "VRMGames.CartridgeAndCloud.Presentation"
+        "VRMGames.CartridgeAndCloud.Presentation",
+        "Unity.AI.Navigation"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

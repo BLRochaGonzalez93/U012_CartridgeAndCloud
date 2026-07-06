@@ -8,7 +8,9 @@
         "VRMGames.CartridgeAndCloud.Presentation",
         "VRMGames.CartridgeAndCloud.Runtime",
         "UnityEngine.TestRunner",
-        "UnityEditor.TestRunner"
+        "UnityEditor.TestRunner",
+        "VRMGames.CartridgeAndCloud.Tests.Support",
+        "Unity.AI.Navigation"
     ],
     "includePlatforms": [
         "Editor"

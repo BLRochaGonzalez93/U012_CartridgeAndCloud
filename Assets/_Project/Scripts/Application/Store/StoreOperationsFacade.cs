@@ -129,7 +129,7 @@ namespace VRMGames.CartridgeAndCloud.Application.Store
             {
                 return Failure(
                     StoreOperationStatus.InvalidState,
-                    "This blockout fixture is not sold in the shop catalog.");
+                    "This authored fixture is not sold in the shop catalog.");
             }
 
             return CreateOrder(
@@ -302,7 +302,8 @@ namespace VRMGames.CartridgeAndCloud.Application.Store
                     GameplayFeedbackType.OrderReceived,
                     $"Received {receivedStock} × " +
                     $"{order.ItemId}.",
-                    "receiving-zone"));
+                    "receiving-zone",
+                    correlationId: order.OrderId));
 
             Raise(
                 new GameplayFeedbackEvent(

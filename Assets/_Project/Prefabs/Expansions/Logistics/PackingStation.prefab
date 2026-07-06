@@ -675,6 +675,7 @@ GameObject:
   - component: {fileID: 1519488840023878768}
   - component: {fileID: 8257861455716779971}
   - component: {fileID: 6281071139175188181}
+  - component: {fileID: 5625672953260655452}
   m_Layer: 0
   m_Name: PackingStation
   m_TagString: Untagged
@@ -743,7 +744,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 79b5fa238462f0849ba223921c764bef, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: VRMGames.CartridgeAndCloud.Presentation::VRMGames.CartridgeAndCloud.Presentation.Store.StoreVisualInstance
   _id: expansion.logistics.packing-station
   _family: Expansion
@@ -996,3 +997,18 @@ Transform:
   - {fileID: 6195355845254645781}
   m_Father: {fileID: 1519488840023878768}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5625672953260655452
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6548705103622981773}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c81a0fd5d1834d429c998b2d7fd8dbca, type: 3}
+  m_Name:
+  m_EditorClassIdentifier:
+  _role: 5
+  _pivotAtBaseCentre: 1
+  _positiveZIsFront: 1
