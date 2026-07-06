@@ -2,11 +2,11 @@
 title: "Cartridge & Cloud — Marketing and Communication Plan"
 subtitle: "Plan consolidado de posicionamiento, validación de mercado, comunicación pública, comunidad, contenidos, prensa y coordinación de lanzamiento"
 author: "VRM Games / Blas Luis Rocha González"
-date: "2026-07-01"
+date: "2026-07-06"
 lang: "es-ES"
 document_number: "28"
 document_version: "1.0"
-project_version_reference: "0.0.17"
+project_version_reference: "0.0.21"
 platform: "PC / Steam"
 engine: "Unity 6.3 LTS 6000.3.18f1"
 render_pipeline: "URP 17.3.0"
@@ -18,7 +18,7 @@ status: "PLANNING / INTERNAL ONLY / PUBLIC CAMPAIGN BLOCKED"
 **Proyecto:** Cartridge & Cloud  
 **Desarrollador y publisher candidato:** VRM Games / Blas Luis Rocha González  
 **Plataforma inicial:** PC / Steam  
-**Estado técnico de referencia:** Sprints 0–15 `CLOSED / PASS`; Sprint 16 `IN PROGRESS`; Sprint 17 y H6 `PENDING`  
+**Estado técnico de referencia:** Sprints 0–15 `CLOSED / PASS`; Sprint 16 `COMPLETED / PASS`; Sprint 17 `PENDING / READY TO OPEN`; H6 `BLOCKED / NOT RUN`  
 **Estado comercial actual:** sin Steamworks, AppID, store page, precio, fecha, campaña pública, press kit, demo, Playtest ni build autorizada para distribución  
 **Estado legal actual:** título y nombre operativo provisionales; clearance de marcas, dominios, redes y plataforma pendiente  
 **Clasificación del documento:** interno; no constituye anuncio, promesa comercial, calendario público ni aprobación de gasto

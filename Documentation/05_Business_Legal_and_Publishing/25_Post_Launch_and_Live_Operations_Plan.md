@@ -2,10 +2,10 @@
 title: "Cartridge & Cloud — Post-Launch and Live Operations Plan"
 subtitle: "Plan consolidado de soporte, incidentes, parches, comunidad, métricas, mantenimiento y fin de vida"
 author: "VRM Games / Blas Luis Rocha González"
-date: "2026-07-01"
+date: "2026-07-06"
 lang: es-ES
 document_version: "1.0"
-project_version: "0.0.17"
+project_version: "0.0.21"
 status: "PLANNING / GAME NOT RELEASED / LIVE OPERATIONS NOT OPEN"
 ---
 
@@ -15,8 +15,8 @@ status: "PLANNING / GAME NOT RELEASED / LIVE OPERATIONS NOT OPEN"
 **Desarrollador:** VRM Games / Blas Luis Rocha González  
 **Plataforma prevista:** PC / Steam  
 **Motor:** Unity 6.3 LTS `6000.3.18f1` / URP `17.3.0`  
-**Versión observada:** `0.0.17`  
-**Estado:** Sprints 0–15 `CLOSED / PASS`; Sprint 16 `IN PROGRESS`; Sprint 17 y H6 `PENDING`  
+**Versión observada:** `0.0.21`  
+**Estado:** Sprints 0–15 `CLOSED / PASS`; Sprint 16 `COMPLETED / PASS`; Sprint 17 `PENDING / READY TO OPEN`; H6 `BLOCKED / NOT RUN`  
 **Estado postlanzamiento:** `NOT OPEN`  
 **Fecha de verificación de Steamworks:** 1 de julio de 2026
 
@@ -114,7 +114,7 @@ Este capítulo forma parte del bloque **gobernanza y canales** y define cómo se
 
 Este capítulo forma parte del bloque **gobernanza y canales** y define cómo se gobierna **estado actual del proyecto** después de una publicación. La regla se aplica tanto a incidencias reales como a ensayos internos, para que el primer lanzamiento no sea la primera vez que se ejecuta el procedimiento.
 
-**Estado actual.** La aplicación observada es `0.0.17`, Windows x64, Unity `6000.3.18f1`. Sprints 0–15 y `BLD-016-PRE` están en PASS; Sprint 16 post-integración, Sprint 17 y H6 están pendientes. El registro legal cuenta 0 builds elegibles para publicación, 9 riesgos High/Critical y 7 deudas S1.
+**Estado actual.** La aplicación observada es `0.0.21`, Windows x64, Unity `6000.3.18f1`. Sprints 0–16 y `BLD-016-POST` están en PASS; Sprint 17 está `PENDING / READY TO OPEN` y H6 permanece `BLOCKED / NOT RUN`. El registro legal cuenta 0 builds elegibles para publicación, 9 riesgos High/Critical y 7 deudas S1.
 
 **Regla operativa.** No se denomina postlanzamiento a una fase que todavía no tiene producto publicado, AppID, branch pública ni autorización legal.
 
@@ -3635,7 +3635,7 @@ Las siguientes páginas se verificaron el **1 de julio de 2026**. Se conservan c
 
 | Evidencia | Estado |
 |---|---|
-| Producto/versión | `Cartridge & Cloud` / `0.0.17` |
+| Producto/versión | `Cartridge & Cloud` / `0.0.21` |
 | Empresa configurada | `VRM Games` |
 | Resolución configurada | `1024×768`, resizable `0` |
 | Guardado integrado | JSON, primary + backup + temp + recovery, generación y validación |

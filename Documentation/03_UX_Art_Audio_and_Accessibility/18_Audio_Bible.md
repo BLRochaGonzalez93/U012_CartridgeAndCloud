@@ -2,7 +2,7 @@
 title: "Cartridge & Cloud — Audio Bible"
 subtitle: "Identidad sonora, eventos, mezcla, implementación y validación"
 author: "VRM Games / Blas Luis Rocha González"
-date: "2026-07-01"
+date: "2026-07-06"
 lang: es-ES
 document_id: "CC-DOC-18"
 document_version: "1.0"
@@ -11,7 +11,7 @@ project: "Cartridge & Cloud"
 platform: "PC / Steam"
 engine: "Unity 6.3 LTS 6000.3.18f1"
 render_pipeline: "URP 17.3.0"
-application_version: "0.0.17"
+application_version: "0.0.21"
 owner: "VRM Games"
 ---
 
@@ -19,10 +19,14 @@ owner: "VRM Games"
 
 **Archivo:** `18_Audio_Bible.md`  
 **Propósito:** establecer la autoridad sonora y el procedimiento de diseño, producción, integración, mezcla y validación de audio de Cartridge & Cloud.  
-**Estado del proyecto:** Sprints 0–15 `CLOSED / PASS`; Sprint 16 `IN PROGRESS`; Sprint 17 `PENDING`; H6 `PENDING`.  
+**Estado del proyecto:** Sprints 0–15 `CLOSED / PASS`; Sprint 16 `COMPLETED / PASS`; Sprint 17 `PENDING / READY TO OPEN`; H6 `BLOCKED / NOT RUN`.  
 **Implementación observada:** 10 clips WAV, 23 event IDs, cuatro canales (`Music`, `Ambience`, `Ui`, `Effects`) y un router representativo basado en AudioSource compartidos.  
-**Baseline automatizada observada:** `1215 EditMode + 70 PlayMode = 1285 PASS`, previa a la aprobación auditiva y a la build posterior a StoreInitial.  
+**Validación vigente:** compilación, EditMode, PlayMode, regresión manual y build externa `0.0.21` en PASS; el audio representativo de Sprint 16 no presenta regresiones bloqueantes.  
 **Regla de interpretación:** que un clip exista, que el catálogo lo encuentre o que un test de null-safety pase no equivale a mezcla aprobada, espacialización validada, licencia cerrada ni audio listo para lanzamiento.
+
+## Aceptación representativa de audio de Sprint 16 — 2026-07-06
+
+El conjunto de feedback sonoro incluido en el Golden Path se acepta para el cierre de Sprint 16 tras la regresión manual y la ejecución externa de la build `0.0.21`. La aceptación confirma ausencia de errores bloqueantes y coherencia funcional suficiente para el gate representativo; no equivale a mezcla final, cobertura completa, legal clearance ni signoff H6.
 
 > Esta Audio Bible consolida toda la genealogía disponible, incluidas las Audio Bible v0.3, v0.4 y v0.5; la reedición de v0.3 en las baselines v0.3 y v0.4; los catálogos de contenido v0.1–v0.3; las UI Style Guide y registros legales históricos; los planes, ADR, matrices y registros de Sprint 16; el código y los assets reales; y los documentos consolidados 00–17. Las decisiones históricas no se eliminan: se clasifican como vigentes, sustituidas, diferidas, objetivo o visión.
 # 0. Control documental
@@ -80,7 +84,7 @@ A fecha de consolidación, el audio se encuentra en estado **base representativa
 | Variación | No implementada | Riesgo de repetición |
 | Cooldown | No implementado | Riesgo de spam |
 | Tests | catálogo, volumen y missing event seguro | No validan mezcla ni escucha |
-| Build post-StoreInitial | Pendiente | No hay aprobación externa actual |
+| Build post-StoreInitial | PASS Sprint 16 | Validación externa `0.0.21`; mezcla final/H6 aún pendientes |
 
 # 5. Genealogía documental completa
 La dirección sonora atraviesa cuatro etapas. La baseline v0.3 definió una visión extensa de preproducción: tienda física, nostalgia tecnológica, baja fatiga, buses, spatial audio, variación, AudioMixer y prioridades. La baseline v0.4 republicó esa Audio Bible v0.3 con la fundación técnica de Sprint 0 ya validada. La baseline v0.5 produjo la Audio Bible v0.4, mucho más breve, que reconocía una dirección aprobada pero sin implementación y reservaba el pase para Sprint 16. La baseline v0.6 produjo la Audio Bible v0.5, que enumeró los diez eventos/clips de Fase 1 y dejó pendiente la validación de niveles, repetición, espacialización, transiciones, mute/volumen y build externa.
@@ -414,7 +418,7 @@ La evolución recomendada conserva `IPhase1AudioRouter` o introduce una interfaz
 | AUD-DEBT-009 | Sin stop/fade/pause API | A2 | Añadir lifecycle controlado |
 | AUD-DEBT-010 | Licencia/procedencia no registrada por clip | A1 documental | Completar registro legal |
 | AUD-DEBT-011 | Tests no escuchan mezcla ni duplicación | A1 | Añadir instrumentación/manual |
-| AUD-DEBT-012 | No build post-StoreInitial | A1 gate | Ejecutar Player externo |
+| AUD-DEBT-012 | Build post-StoreInitial | RESUELTA S16 | Player externo `0.0.21` ejecutado; repetir escucha formal para H6 |
 
 # 74. Fallbacks y ausencia de clips
 ADR-0071 establece que la ausencia de audio no invalida una operación de gameplay. Ese principio evita que un null clip bloquee una venta o guardado. No significa que missing audio sea aceptable para H6. El runtime puede no-op; QA registra el defecto. Los eventos críticos conservan texto, icono o estado. En desarrollo, el sistema debería emitir warning rate-limited con event ID y catálogo.

@@ -1,7 +1,7 @@
 ---
 title: "Cartridge & Cloud — Enfoque y Alcance"
 author: "VRM Games / Blas Luis Rocha González"
-date: "2026-07-01"
+date: "2026-07-06"
 lang: "es-ES"
 document_version: "1.0"
 status: "Fuente vigente de enfoque y alcance"
@@ -827,8 +827,8 @@ A fecha de consolidación:
 - existe reserva de entrada y validación de acceso;
 - la construcción está integrada en Store;
 - los Sprints 0–15 se consideran cerrados;
-- Sprint 16 continúa abierto por deuda visual;
-- Sprint 17 se plantea como gate de estabilización, balance, rendimiento, QA y build interna.
+- Sprint 16 está `COMPLETED / PASS` tras aprobar la integración visual y funcional de `StoreInitial`, la build externa `0.0.21`, el Golden Path, la persistencia y la revisión de `Player.log`;
+- Sprint 17 permanece `PENDING / READY TO OPEN` como gate de estabilización, balance, rendimiento, QA y build interna.
 
 Este estado deberá migrarse a un documento específico de producción o handoff. No debe obligar
 a modificar la visión cada vez que cambie un sprint.

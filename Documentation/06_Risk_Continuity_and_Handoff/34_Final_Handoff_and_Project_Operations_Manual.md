@@ -2,11 +2,11 @@
 title: "Cartridge & Cloud — Final Handoff and Project Operations Manual"
 subtitle: "Manual maestro de transferencia, retoma, incorporación, operación, cierre y continuidad del proyecto"
 author: "VRM Games / Blas Luis Rocha González"
-date: "2026-07-02"
+date: "2026-07-06"
 lang: "es-ES"
 document_number: "34"
 document_version: "1.1-RC1"
-project_version_reference: "0.0.17"
+project_version_reference: "0.0.21"
 platform: "PC / Steam"
 engine: "Unity 6.3 LTS 6000.3.18f1"
 render_pipeline: "URP 17.3.0"
@@ -20,10 +20,10 @@ status: "POST-RC1 DIRECTED UPDATE / OPERATIONAL CANDIDATE / FINAL PACKAGE, AUDIT
 **Repositorio histórico esperado:** `BLRochaGonzalez93/U012_CartridgeAndCloud`  
 **Rama estable esperada:** `main`  
 **Plataforma inicial:** PC / Steam, Windows x64  
-**Versión de aplicación observada:** `0.0.17`  
+**Versión de aplicación observada:** `0.0.21`  
 **Schema integrado de persistencia de referencia:** `2`  
 **Baseline técnica inspeccionada:** Unity `6000.3.18f1` (`5ebeb53e4c07`), URP `17.3.0`  
-**Estado de producción de referencia:** Sprints 0–15 `CLOSED / PASS`; Sprint 16 `IN PROGRESS`; Sprint 17 y H6 `PENDING`  
+**Estado de producción de referencia:** Sprints 0–15 `CLOSED / PASS`; Sprint 16 `COMPLETED / PASS`; Sprint 17 `PENDING / READY TO OPEN`; H6 `BLOCKED / NOT RUN`  
 **Pruebas automatizadas históricamente documentadas en la working copy validada:** `1215 EditMode + 70 PlayMode = 1285 PASS`  
 **Estado de publicación:** Steamworks no debe considerarse operativo; no existe autorización para distribución pública, campaña comercial o claim de release  
 **Clasificación:** documento interno de gobierno, incorporación, operación, continuidad y transferencia  
@@ -192,7 +192,7 @@ Cartridge & Cloud es un simulador de gestión y construcción de una tienda de v
 | Compañía | VRM Games |
 | Producto | Cartridge & Cloud |
 | Application Identifier | `com.vrmgames.cartridgeandcloud` |
-| Versión de aplicación | `0.0.17` |
+| Versión de aplicación | `0.0.21` |
 | Input | Input System `1.19.0` |
 | Localización | Unity Localization `1.5.12` |
 | AI Navigation | `2.0.13` |
@@ -232,21 +232,25 @@ El perfil `Windows_Development` contiene históricamente:
 3. Store;
 4. TestLab.
 
-`StoreInitial` está fuera del perfil observado. Añadirla o sustituir `Store` es una operación de gate, no un ajuste cosmético. Requiere validación de rutas de escena, ApplicationRoot, persistencia, UI, input, Golden Path y build externa.
+`StoreInitial` forma parte del flujo validado de Sprint 16 y sustituyó a `Store` como destino representativo. Cualquier cambio posterior de Scene List continúa siendo una operación de gate y debe revalidar rutas de escena, ApplicationRoot, persistencia, UI, input, Golden Path y build externa.
 
 ## 1.5. Estado de sprints y gates
 
 | Ámbito | Estado de referencia | Lectura correcta |
 |---|---|---|
 | Sprints 0–15 | `CLOSED / PASS` | capacidades funcionales heredadas; siguen sujetas a regresión |
-| Sprint 16 | `IN PROGRESS` | arte/audio representativo y StoreInitial no aceptados por completo |
-| Sprint 17 | `PENDING` | estabilización; no debe abrirse formalmente antes de cierre S16 |
+| Sprint 16 | `COMPLETED / PASS` | arte/audio representativo, StoreInitial, Golden Path y build externa aceptados |
+| Sprint 17 | `PENDING / READY TO OPEN` | estabilización; la condición de entrada de S16 está satisfecha, falta kickoff formal |
 | H6 | `PENDING / BLOCKED` | vertical slice no aprobado |
 | Steam onboarding | no demostrado | no asumir App ID, depots, permisos o página operativa |
 | Campaña pública | bloqueada | naming, legal, assets, build, claims y gates siguen abiertos |
 | Release Candidate | no existe | no etiquetar una build local como RC |
 
-## 1.6. Verdad Git histórica
+## 1.6. Registro operativo de cierre de Sprint 16
+
+El `2026-07-06` se registró el cierre `COMPLETED / PASS` sobre la build `0.0.21`. La evidencia declarada incluye compilación, EditMode, PlayMode, regresión manual, Golden Path externo, persistencia tras reinicio, revisión de Player.log y aprobación visual/funcional. El commit y push de los cambios técnicos se completaron; el SHA exacto debe leerse del repositorio activo y registrarse antes de congelar la baseline de Sprint 17.
+
+## 1.7. Verdad Git histórica
 
 El handoff v0.6 registró:
 
@@ -477,7 +481,7 @@ Objetivo: impedir una acción peligrosa antes de entender el estado.
 
 1. Leer la portada y secciones 1–3.
 2. Abrir dashboard de `31`, `32` y `33`.
-3. Confirmar que Sprint 16/H6 siguen abiertos salvo evidencia posterior.
+3. Confirmar que Sprint 16 está cerrado y que Sprint 17/H6 mantienen el estado registrado, salvo evidencia posterior.
 4. Identificar la rama, SHA y working copy reales.
 5. No editar escenas, Build Profiles, paquetes, versiones o documentos de gobierno todavía.
 6. Elegir el documento especializado del rol.

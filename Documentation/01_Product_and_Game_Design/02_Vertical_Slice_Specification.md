@@ -1,7 +1,7 @@
 ---
 title: "Cartridge & Cloud — Vertical Slice Specification"
 author: "VRM Games / Blas Luis Rocha González"
-date: "2026-07-01"
+date: "2026-07-06"
 lang: "es-ES"
 document_version: "1.0"
 status: "Contrato vigente de cierre del vertical slice"
@@ -9,7 +9,7 @@ project: "Cartridge & Cloud"
 platform: "PC / Steam"
 engine: "Unity 6.3 LTS 6000.3.18f1"
 render_pipeline: "URP 17.3.0"
-application_version_reference: "0.0.17"
+application_version_reference: "0.0.21"
 ---
 
 # Cartridge & Cloud — Vertical Slice Specification
@@ -157,6 +157,17 @@ A fecha de la fuente v0.4 de esta especificación:
 - el Golden Path manual, la suite completa, la build Windows x64 y el ejecutable externo forman parte del gate final.
 
 Esta fotografía no debe confundirse con el estado vivo del repositorio después de la fecha indicada. Cualquier avance posterior deberá actualizar el documento operativo correspondiente y aportar evidencia.
+
+### 2.1.1. Actualización operativa vigente — 2026-07-06
+
+- versión de aplicación y build de cierre de Sprint 16: `0.0.21`;
+- Sprint 16: `COMPLETED / PASS`;
+- aprobación visual y funcional de `StoreInitial`: `PASS`;
+- compilación, EditMode, PlayMode y regresión manual: `PASS`;
+- Golden Path, persistencia y `Player.log` en build Windows x64 externa: `PASS`;
+- Sprint 17: `PENDING / READY TO OPEN`;
+- H6: `BLOCKED / NOT RUN`;
+- la Vertical Slice todavía no se declara validada hasta cerrar Sprint 17 y ejecutar el gate H6.
 
 ## 2.2. Matriz consolidada de madurez
 
@@ -1086,7 +1097,24 @@ Sprint 16 solo puede cerrarse cuando:
 - registro de cambios;
 - decisión formal de PASS/FAIL.
 
-## 10.5. Causas de no cierre
+## 10.5. Decisión formal de cierre — 2026-07-06
+
+Sprint 16 queda `COMPLETED / PASS` para la build `0.0.21`. La decisión se apoya en:
+
+- StoreInitial autorada y conectada mediante referencias explícitas;
+- aprobación visual manual sin placeholders o contradicciones bloqueantes;
+- aprobación funcional del Golden Path;
+- compilación y suites EditMode/PlayMode en PASS;
+- regresión manual en PASS;
+- build Windows x64 externa iniciada desde Bootstrap;
+- guardado, cierre, reapertura y carga equivalente en PASS;
+- `Player.log` revisado sin errores bloqueantes;
+- ausencia de defectos S0/S1 conocidos dentro del alcance de cierre;
+- roadmap, producción, trazabilidad y signoff actualizados.
+
+Esta decisión satisface el gate representativo de Sprint 16, pero no equivale a H6 ni a la aprobación completa de la Vertical Slice.
+
+## 10.6. Causas de no cierre
 
 - arquitectura generada o deducida de forma frágil;
 - puerta visualmente correcta pero funcionalmente inválida;

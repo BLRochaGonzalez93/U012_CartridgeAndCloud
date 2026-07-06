@@ -1,7 +1,7 @@
 ---
 title: "Cartridge & Cloud — Game Design Document"
 author: "VRM Games / Blas Luis Rocha González"
-date: "2026-07-01"
+date: "2026-07-06"
 lang: "es-ES"
 document_version: "1.0"
 status: "Fuente vigente de diseño de juego"
@@ -9,7 +9,7 @@ project: "Cartridge & Cloud"
 platform: "PC / Steam"
 engine: "Unity 6.3 LTS 6000.3.18f1"
 render_pipeline: "URP 17.3.0"
-application_version_reference: "0.0.17"
+application_version_reference: "0.0.21"
 ---
 
 # Cartridge & Cloud — Game Design Document
@@ -179,6 +179,23 @@ Según la baseline GDD v0.6:
 Esta fotografía no convierte el GDD en un informe diario. Los cambios de estado
 posteriores deberán registrarse en un documento operativo específico.
 
+### 2.1.1. Actualización operativa de cierre de Sprint 16 — 2026-07-06
+
+Sin alterar la fotografía histórica de la baseline v0.6, el estado operativo vigente es:
+
+- versión de aplicación y build de cierre: `0.0.21`;
+- Sprint 16: `COMPLETED / PASS`;
+- aprobación visual de `StoreInitial`: `PASS`;
+- aprobación funcional y regresión manual: `PASS`;
+- EditMode y PlayMode: `PASS`;
+- Golden Path en build Windows x64 externa: `PASS`;
+- guardado, cierre del ejecutable, reapertura y carga equivalente: `PASS`;
+- `Player.log`: revisado sin errores bloqueantes;
+- Sprint 17: `PENDING / READY TO OPEN`;
+- H6 y la Vertical Slice completa: todavía no aprobados.
+
+La decisión de cierre confirma que la presentación representativa sustituye correctamente la capa provisional sin reabrir las reglas funcionales cerradas en Sprints 0–15.
+
 ## 2.2. Matriz de sistemas implementados
 
 | Sistema | Estado de referencia | Regla principal |
@@ -241,7 +258,7 @@ Permanecen fuera del cierre de Sprint 17:
 
 ## 1. Base de la dirección actual
 
-**Cartridge & Cloud** dispone ya de una fundación técnica y de un vertical slice funcional. Los Sprints 0–15 constan como cerrados; Sprint 16 está dedicado a sustituir la presentación provisional por una tienda inicial representativa y autorada, y Sprint 17 queda como gate de estabilización, balance, rendimiento, QA y build interna. El diseño detallado de este capítulo sigue siendo normativo cuando no contradice una decisión de mayor autoridad.
+**Cartridge & Cloud** dispone ya de una fundación técnica y de un vertical slice funcional. Los Sprints 0–15 constan como cerrados y Sprint 16 está `COMPLETED / PASS` tras sustituir la presentación provisional por una tienda inicial representativa, autorada y validada. Sprint 17 queda `PENDING / READY TO OPEN` como gate de estabilización, balance, rendimiento, QA y build interna. El diseño detallado de este capítulo sigue siendo normativo cuando no contradice una decisión de mayor autoridad.
 
 La dirección aprobada se apoya en:
 

@@ -2,10 +2,10 @@
 title: "Cartridge & Cloud — Privacy, Data and Telemetry Plan"
 subtitle: "Plan consolidado de privacidad, datos locales, soporte, plataforma y futura telemetría"
 author: "VRM Games / Blas Luis Rocha González"
-date: "2026-07-01"
+date: "2026-07-06"
 lang: es-ES
 document_version: "1.0"
-project_version: "0.0.17"
+project_version: "0.0.21"
 status: "PLANNING / NO OWN TELEMETRY / ONLINE SYSTEMS NOT OPEN"
 ---
 
@@ -15,9 +15,9 @@ status: "PLANNING / NO OWN TELEMETRY / ONLINE SYSTEMS NOT OPEN"
 **Desarrollador:** VRM Games / Blas Luis Rocha González  
 **Plataforma prevista:** PC / Steam  
 **Motor:** Unity 6.3 LTS `6000.3.18f1` / URP `17.3.0`  
-**Versión observada:** `0.0.17`  
+**Versión observada:** `0.0.21`  
 **Fecha de verificación normativa y de fuentes:** 1 de julio de 2026  
-**Estado:** Sprints 0–15 `CLOSED / PASS`; Sprint 16 `IN PROGRESS`; Sprint 17 y H6 `PENDING`  
+**Estado:** Sprints 0–15 `CLOSED / PASS`; Sprint 16 `COMPLETED / PASS`; Sprint 17 `PENDING / READY TO OPEN`; H6 `BLOCKED / NOT RUN`  
 **Estado de datos:** `LOCAL-FIRST`; telemetría propia, backend, Cloud, analytics y crash reporting externo `NOT OPEN`
 
 > **Aviso:** este documento es un plan técnico, operativo y de gobernanza. No sustituye asesoramiento jurídico profesional ni una evaluación concreta de la autoridad o del responsable del tratamiento. Antes de publicar una política, activar un SDK, transferir datos o tratar datos de menores debe realizarse revisión jurídica y de seguridad adecuada al caso.
@@ -100,7 +100,7 @@ Los adjuntos voluntarios se consideran potencialmente identificables, se almacen
 
 Este capítulo pertenece al bloque **Gobernanza y estado**. Su objetivo es convertir **estado actual del proyecto** en una decisión verificable de producto, no en una declaración genérica de cumplimiento. Se aplica a desarrollo, QA, soporte, Steam, web y cualquier proveedor futuro.
 
-**Estado y contexto.** Aplicación `0.0.17`, Windows x64, Unity `6000.3.18f1`. No se encontraron Steamworks, UGS Analytics runtime, SDK externo de analytics/crash, HTTP de producto, Cloud o device fingerprinting. Unity Analytics, Cloud Diagnostics, Ads, Purchasing y Performance Reporting aparecen desactivados en `UnityConnectSettings.asset`; Engine Diagnostics está configurado, lo que requiere revisión separada de editor/herramienta.
+**Estado y contexto.** Aplicación `0.0.21`, Windows x64, Unity `6000.3.18f1`. No se encontraron Steamworks, UGS Analytics runtime, SDK externo de analytics/crash, HTTP de producto, Cloud o device fingerprinting. Unity Analytics, Cloud Diagnostics, Ads, Purchasing y Performance Reporting aparecen desactivados en `UnityConnectSettings.asset`; Engine Diagnostics está configurado, lo que requiere revisión separada de editor/herramienta.
 
 **Regla de Cartridge & Cloud.** Se puede publicar una primera versión sin telemetría propia. Antes de afirmar “cero datos”, se verifican build, plataforma, herramientas, soporte y website.
 

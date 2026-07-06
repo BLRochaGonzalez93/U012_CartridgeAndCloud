@@ -2,7 +2,7 @@
 ---
 title: "Cartridge & Cloud — Unity Project Setup Guide"
 author: "VRM Games / Blas Luis Rocha González"
-date: "2026-07-01"
+date: "2026-07-06"
 lang: "es-ES"
 document_version: "1.0"
 status: "Fuente vigente de configuración y restauración del proyecto Unity"
@@ -10,7 +10,7 @@ project: "Cartridge & Cloud"
 platform: "PC / Steam"
 engine: "Unity 6.3 LTS 6000.3.18f1"
 render_pipeline: "URP 17.3.0"
-application_version_reference: "0.0.17"
+application_version_reference: "0.0.21"
 ---
 
 # Cartridge & Cloud — Unity Project Setup Guide
@@ -94,17 +94,21 @@ como **deuda o migración pendiente**.
 | Revisión del Editor | `5ebeb53e4c07` |
 | Pipeline | URP `17.3.0` |
 | Plataforma inicial | Windows x64 |
-| Versión de aplicación | `0.0.17` |
+| Versión de aplicación | `0.0.21` |
 | Application Identifier | `com.vrmgames.cartridgeandcloud` |
 | Input | Input System Package |
 | Color Space | Linear |
 | Profile de calidad para Standalone | `PC` |
 | Build Profile | `Windows_Development` |
 | Pruebas documentadas | `1215 EditMode + 70 PlayMode = 1285 PASS` |
-| Estado | Sprints 0–15 cerrados; Sprint 16 en curso |
+| Estado | Sprints 0–15 cerrados; Sprint 16 `COMPLETED / PASS`; Sprint 17 `PENDING / READY TO OPEN` |
 
 Los resultados de pruebas son una referencia de la working copy de la baseline v0.6. Una
 máquina nueva debe volver a ejecutarlos; no debe copiar su estado como si fuera evidencia propia.
+
+### 0.2.1. Cierre operativo de Sprint 16
+
+La build Windows x64 `0.0.21` se ejecutó fuera del Editor desde Bootstrap. El Golden Path, la persistencia tras reinicio, la revisión de `Player.log`, las pruebas automatizadas y la regresión manual finalizaron en PASS. StoreInitial queda aceptada como escena representativa y Sprint 17 puede prepararse sin reabrir el gate de autoría de Sprint 16.
 
 ---
 
@@ -452,7 +456,7 @@ Detenerse antes de hacer commit.
 | Company Name | `VRM Games` |
 | Product Name | `Cartridge & Cloud` |
 | Identifier Standalone | `com.vrmgames.cartridgeandcloud` |
-| Bundle Version | `0.0.17` en la baseline |
+| Bundle Version | `0.0.21` en la baseline vigente |
 | Color Space | Linear |
 | Player Log | Activado |
 | Input Handling | Input System Package |
@@ -711,27 +715,17 @@ validar producción, salvo un test aislado que lo declare.
 
 ## 10.4. Estado de migración observado
 
-`EditorBuildSettings.asset` y `Windows_Development.asset` todavía contienen:
+La configuración validada para el cierre de Sprint 16 utiliza el flujo:
 
 ```text
 Bootstrap
 MainMenu
-Store
-TestLab
+StoreInitial
 ```
 
-`StoreInitial` existe, pero aún no sustituye a `Store` en el profile suministrado. Esto es
-coherente con Sprint 16 en curso.
+`StoreInitial` está conectada al runtime y fue validada mediante build Windows x64 externa `0.0.21`, Golden Path, persistencia y revisión de `Player.log`. `Store` permanece como escena histórica y `TestLab` no forma parte del recorrido productivo de cierre.
 
-**PROHIBIDO:** cambiar la lista únicamente para aparentar el cierre. Primero deben conectarse:
-
-- `StoreInitialSceneContext`;
-- runtime;
-- persistencia;
-- catálogos;
-- input;
-- Golden Path;
-- build externa.
+**PROHIBIDO:** degradar esta configuración, reintroducir `Store` como destino productivo o incluir `TestLab` en una candidata H6 sin una decisión y validación explícitas.
 
 ## 10.5. TestLab
 

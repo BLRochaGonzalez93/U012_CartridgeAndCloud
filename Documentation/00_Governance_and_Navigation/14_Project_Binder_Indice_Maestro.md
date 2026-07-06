@@ -1,7 +1,7 @@
 ---
 title: "Cartridge & Cloud — Project Binder / Índice Maestro"
 author: "VRM Games / Blas Luis Rocha González"
-date: "2026-07-01"
+date: "2026-07-06"
 lang: es-ES
 version: "1.1-RC1"
 status: "Current Candidate / Updated during documentation consolidation"
@@ -14,10 +14,10 @@ baseline: "00–34 / RC1 consolidation"
 **Estudio / autor:** VRM Games / Blas Luis Rocha González  
 **Plataforma inicial:** PC / Steam  
 **Motor observado:** Unity `6000.3.18f1` / URP `17.3.0`  
-**Versión de aplicación de referencia:** `0.0.17`  
+**Versión de aplicación de referencia:** `0.0.21`  
 **Versión del Binder:** `1.1-RC1`  
-**Fotografía documental:** 2026-07-01  
-**Estado técnico:** Sprints 0–15 `CLOSED / PASS`; Sprint 16 `IN PROGRESS`; Sprint 17 `PENDING`; H6 `BLOCKED / NOT RUN`.  
+**Fotografía documental:** 2026-07-06  
+**Estado técnico:** Sprints 0–15 `CLOSED / PASS`; Sprint 16 `COMPLETED / PASS`; Sprint 17 `PENDING / READY TO OPEN`; H6 `BLOCKED / NOT RUN`.  
 **Estado documental:** 00–34 presentes; 12 y 13 regenerados; 14 actualizado por este archivo; consolidación final todavía abierta.
 
 > **Regla maestra:** este Binder gobierna la navegación, la localización de autoridad y la ruta inicial de decisión. No sustituye los contratos de producto, las especificaciones técnicas, los registros operativos, las evidencias ni los signoffs. Una afirmación solo puede considerarse cerrada cuando coinciden requisito, estado operativo, implementación observada, prueba, evidencia y decisión formal cuando corresponda.
@@ -87,8 +87,8 @@ Cubre los 35 documentos numerados 00–34, los artefactos externos que se genera
 | Dimensión | Estado actual | Fuente principal |
 | --- | --- | --- |
 | Producto | Título provisional; PC/Steam; vertical slice representativo | 00, 01, 02 |
-| Tecnología | Unity 6000.3.18f1; URP 17.3.0; aplicación 0.0.17 | 03, 10, 11, 34 |
-| Producción | Sprint 16 en curso; Sprint 17 no abierto | 06, 12 |
+| Tecnología | Unity 6000.3.18f1; URP 17.3.0; aplicación 0.0.21 | 03, 10, 11, 34 |
+| Producción | Sprint 16 COMPLETED/PASS; Sprint 17 pendiente y listo para apertura formal | 06, 12 |
 | H6 | 266 controles; estado inicial NOT RUN/BLOCKED | 02, 31 |
 | Release | 209 controles; fase comercial no autorizada | 24, 28, 31 |
 | Documentación | 00–34 presentes; cierre de baseline en curso | 12–16, 32, 34 |
@@ -99,7 +99,7 @@ Cubre los 35 documentos numerados 00–34, los artefactos externos que se genera
 
 ## 2.1. Interpretación obligatoria
 
-La generación de documentos 00–34 significa que existe un marco de trabajo completo; no significa que los work packages, controles, builds, licencias, traducciones, accesibilidad, rendimiento, backups o gates estén ejecutados. El estado técnico sigue estando condicionado por StoreInitial, el cierre de Sprint 16, la estabilización de Sprint 17 y la ejecución reproducible de H6.
+La generación de documentos 00–34 significa que existe un marco de trabajo completo; no significa que los work packages, controles, builds, licencias, traducciones, accesibilidad, rendimiento, backups o gates estén ejecutados. StoreInitial y el cierre de Sprint 16 ya están aprobados; el estado técnico queda condicionado por la apertura y estabilización de Sprint 17 y por la ejecución reproducible de H6.
 
 ## 2.2. Métricas operativas vigentes
 
@@ -964,16 +964,16 @@ El Excel 13 conserva 424 relaciones documentales normalizadas. Este Binder ofrec
 | Periodo | Estado | Interpretación |
 | --- | --- | --- |
 | Sprints 0–15 | CLOSED / PASS | Se hereda la baseline funcional y sus ADR; no se reabre sin cambio formal. |
-| Sprint 16 | IN PROGRESS | Integración representativa de arte/audio/StoreInitial y build posterior. |
-| Sprint 17 | PENDING | Estabilización; no abre hasta cerrar Sprint 16. |
+| Sprint 16 | COMPLETED / PASS | Integración representativa de arte/audio/StoreInitial y build `0.0.21` aprobadas. |
+| Sprint 17 | PENDING / READY TO OPEN | La condición de entrada de S16 está satisfecha; falta kickoff formal. |
 | Post-H6 | NOT OPEN | Steam, campañas y release requieren decisiones separadas. |
 
 ## 10.2. Gates principales
 
 | Gate | Documento contractual | Control operativo | Estado |
 | --- | --- | --- | --- |
-| Sprint 16 close | 06 / ADR-0067 | 12, 31 | IN PROGRESS |
-| Sprint 17 open/close | 06 | 12, 31 | PENDING |
+| Sprint 16 close | 06 / ADR-0067 | 12, 31 | COMPLETED / PASS |
+| Sprint 17 open/close | 06 | 12, 31 | PENDING / READY TO OPEN |
 | H6 | 02 | 31 | BLOCKED / NOT RUN |
 | Premarketing | 28 | 31 | PENDING |
 | Steam phase | 24 | 31 | PENDING |
@@ -983,7 +983,11 @@ El Excel 13 conserva 424 relaciones documentales normalizadas. Este Binder ofrec
 | Launch | 24–28, 33–34 | 31 | BLOCKED |
 | Final documentation baseline | 13–16, 32, 34 | 31/32 | IN PROGRESS |
 
-## 10.3. Condiciones mínimas de H6
+## 10.3. Registro de cierre de Sprint 16
+
+El `2026-07-06`, VRM Games registró aprobación visual y funcional de StoreInitial, build externa `0.0.21`, Golden Path, persistencia, suites automatizadas, regresión manual y Player.log en PASS. El cierre desbloquea la apertura formal de Sprint 17, pero no modifica el estado de H6.
+
+## 10.4. Condiciones mínimas de H6
 
 - Sprint 16 y 17 formalmente cerrados.
 - Build candidata inmutable y reproducible.

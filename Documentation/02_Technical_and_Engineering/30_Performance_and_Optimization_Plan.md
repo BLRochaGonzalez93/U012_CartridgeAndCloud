@@ -2,11 +2,11 @@
 title: "Cartridge & Cloud — Performance and Optimization Plan"
 subtitle: "Plan maestro consolidado de rendimiento, profiling, memoria, carga, renderizado, escalabilidad y gates técnicos"
 author: "VRM Games / Blas Luis Rocha González"
-date: "2026-07-01"
+date: "2026-07-06"
 lang: "es-ES"
 document_number: "30"
 document_version: "1.0"
-project_version_reference: "0.0.17"
+project_version_reference: "0.0.21"
 platform: "PC / Steam"
 engine: "Unity 6.3 LTS 6000.3.18f1"
 render_pipeline: "URP 17.3.0"
@@ -18,7 +18,7 @@ status: "CONSOLIDATED PLAN / BASELINE MEASUREMENT PENDING / RELEASE TARGETS NOT 
 **Proyecto:** Cartridge & Cloud  
 **Desarrollador:** VRM Games / Blas Luis Rocha González  
 **Plataforma inicial:** PC / Steam, Windows x64  
-**Estado técnico de referencia:** Sprints 0–15 `CLOSED / PASS`; Sprint 16 `IN PROGRESS`; Sprint 17, H6 y Release Candidate `PENDING`  
+**Estado técnico de referencia:** Sprints 0–15 `CLOSED / PASS`; Sprint 16 `COMPLETED / PASS`; Sprint 17 `PENDING / READY TO OPEN`; H6 y Release Candidate `PENDING / NOT RUN`  
 **Objetivo histórico heredado:** `60 FPS a 1920 × 1080`, tienda equipada y hasta `8` clientes simultáneos  
 **Presupuestos históricos heredados:** carga del vertical slice `< 5 s`, cierre/guardado `< 2 s`, allocations por frame próximas a cero en simulación estable  
 **Estado de medición:** no existe todavía un informe de profiling de build representativa que permita aprobar hardware mínimo, percentiles, memoria máxima, requisitos de Steam o claims públicos de optimización  
@@ -2399,13 +2399,13 @@ En un proyecto unipersonal una misma persona puede ocupar todos los roles, pero 
 
 | ID | Hallazgo observado | Riesgo | Acción |
 |---|---|---|---|
-| PERF-DEBT-001 | StoreInitial fuera del Build Profile | no hay perfil representativo | integrar tras gate |
+| PERF-DEBT-001 | StoreInitial integrada en build de cierre `0.0.21` | RESUELTA S16 | conservar perfil representativo y repetir en QA/H6 |
 | PERF-DEBT-002 | TestLab en Development Profile | no apto para release | crear perfiles separados |
 | PERF-DEBT-003 | 1024×768 por defecto | no representa target | definir display settings |
 | PERF-DEBT-004 | ventana no redimensionable | UX/PC | revisar y probar |
 | PERF-DEBT-005 | VSync 0 sin cap explícito | pacing/consumo | diseñar política |
 | PERF-DEBT-006 | no hardware de referencia cumplimentado | target no reproducible | registrar equipo |
-| PERF-DEBT-007 | sin baseline Player post-StoreInitial | gate bloqueado | capturar Sprint 17 |
+| PERF-DEBT-007 | existe Player post-StoreInitial, pero falta baseline de profiling | rendimiento no aprobado | capturar métricas en Sprint 17 |
 | PERF-DEBT-008 | ResolveReferences en Update | CPU/búsquedas | medir y cachear si procede |
 | PERF-DEBT-009 | Update por cliente | escalabilidad | medir a 8/stress |
 | PERF-DEBT-010 | wall occlusion por LateUpdate | CPU/material state | perf marker y NonAlloc si procede |

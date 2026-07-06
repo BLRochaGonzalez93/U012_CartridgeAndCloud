@@ -2,10 +2,10 @@
 title: "Cartridge & Cloud — Steam Publishing Plan"
 subtitle: "Plan consolidado de preparación, publicación, lanzamiento y operación inicial en Steam"
 author: "VRM Games / Blas Luis Rocha González"
-date: "2026-07-01"
+date: "2026-07-06"
 lang: es-ES
 document_version: "1.0"
-project_version: "0.0.17"
+project_version: "0.0.21"
 status: "PLANNING / NOT ONBOARDED / PUBLIC DISTRIBUTION BLOCKED"
 ---
 
@@ -15,8 +15,8 @@ status: "PLANNING / NOT ONBOARDED / PUBLIC DISTRIBUTION BLOCKED"
 **Desarrollador previsto:** VRM Games / Blas Luis Rocha González  
 **Plataforma inicial:** PC / Steam  
 **Motor:** Unity 6.3 LTS `6000.3.18f1` / URP `17.3.0`  
-**Versión observada:** `0.0.17`  
-**Estado:** Sprints 0–15 `CLOSED / PASS`; Sprint 16 `IN PROGRESS`; Sprint 17 y H6 `PENDING`  
+**Versión observada:** `0.0.21`  
+**Estado:** Sprints 0–15 `CLOSED / PASS`; Sprint 16 `COMPLETED / PASS`; Sprint 17 `PENDING / READY TO OPEN`; H6 `BLOCKED / NOT RUN`  
 **Fecha de verificación de Steamworks:** 1 de julio de 2026
 
 > **Aviso:** este documento es un plan operativo de publicación y control. No sustituye asesoramiento jurídico, fiscal, contable o contractual. Los requisitos de Steamworks, las plantillas, los términos, las políticas de contenido y los procesos de revisión se revalidarán en la cuenta de partner antes de cada decisión irreversible.
@@ -174,9 +174,9 @@ La publicación se rige por veracidad, trazabilidad, reversibilidad, mínimo pri
 
 # 9. Estado ejecutivo actual
 
-Resume la preparación real al 1 de julio de 2026.
+Resume la preparación real actualizada al 6 de julio de 2026.
 
-**Estado actual.** Proyecto `Cartridge & Cloud` de `VRM Games`, versión `0.0.17`. No hay integración Steamworks, paquetes Steam ni assets de marketing Steam detectados; las búsquedas encontraron 0 referencias técnicas y 0 recursos con nombres de Steam/marketing.
+**Estado actual.** Proyecto `Cartridge & Cloud` de `VRM Games`, versión `0.0.21`. No hay integración Steamworks, paquetes Steam ni assets de marketing Steam detectados; las búsquedas encontraron 0 referencias técnicas y 0 recursos con nombres de Steam/marketing.
 
 **Regla de aprobación.** El estado de distribución pública es `BLOCKED`. Las builds actuales solo son aptas para desarrollo o QA interna según su registro.
 
@@ -194,11 +194,11 @@ Resume la preparación real al 1 de julio de 2026.
 | AppID | No documentado |
 | Página de tienda | No preparada |
 | Store assets/tráiler | No detectados |
-| Build Profile | Bootstrap, MainMenu, Store, TestLab |
-| StoreInitial | Objetivo; fuera del perfil actual |
+| Build validada S16 | Bootstrap, MainMenu, StoreInitial |
+| StoreInitial | Integrada y aprobada para Sprint 16; no es candidata H6/Steam |
 | Localización ES/EN | Planificada; tablas no demostradas |
 | Legal público | 0 builds elegibles |
-| H6 | PENDING |
+| H6 | BLOCKED / NOT RUN |
 
 # 10. Verificación oficial vigente
 
@@ -1004,7 +1004,7 @@ Todo asset comercial debe conservar source editable, export, plantilla, autor, l
 
 La página debe representar lo que recibe el comprador.
 
-**Estado actual.** StoreInitial aún no es runtime y las imágenes conceptuales son más maduras que la build actual.
+**Estado actual.** StoreInitial es runtime y fue validada en la build interna `0.0.21`; las imágenes conceptuales continúan sin poder presentarse como screenshots si no proceden de esa build o de una candidata posterior.
 
 **Regla de aprobación.** No publicar conceptos como screenshots ni usar renders para insinuar sistemas no jugables. El arte de cápsula puede ser ilustrativo, pero screenshots/tráiler deben ser gameplay real.
 
@@ -1676,7 +1676,7 @@ Features como Family Sharing, Remote Play, Workshop, leaderboards o cards deben 
 
 La versión interna, Unity bundle version, Git commit, Build ID propio y Steam BuildID deben poder correlacionarse.
 
-**Estado actual.** Existe versión 0.0.17 y registros BLD-S00–S15/Build001/002, pero no Steam BuildID.
+**Estado actual.** Existe versión `0.0.21`, registros hasta el cierre de Sprint 16 y una build interna validada, pero no existe Steam BuildID.
 
 **Regla de aprobación.** No usar Steam BuildID como versión del producto ni perder la correlación.
 

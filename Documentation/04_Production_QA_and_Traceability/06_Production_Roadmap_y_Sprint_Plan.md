@@ -1,7 +1,7 @@
 ---
 title: "Cartridge & Cloud — Production Roadmap y Sprint Plan"
 author: "VRM Games / Blas Luis Rocha González"
-date: "2026-07-01"
+date: "2026-07-06"
 lang: "es-ES"
 document_version: "1.0"
 status: "Fuente vigente de planificación y producción"
@@ -9,7 +9,7 @@ project: "Cartridge & Cloud"
 platform: "PC / Steam"
 engine: "Unity 6.3 LTS 6000.3.18f1"
 render_pipeline: "URP 17.3.0"
-application_version_reference: "0.0.17"
+application_version_reference: "0.0.21"
 documentary_baseline: "v0.6"
 ---
 
@@ -88,8 +88,8 @@ Los datos de estado contenidos en este documento corresponden a la baseline docu
 - último commit técnico validado en la baseline: `091090c43855b0b26b09abe9335d18b978ac7eab`;
 - `main` observado por esa baseline: `d54316c771aab2143993e99b9fd58f2f88016568`;
 - Sprints 0–15: `CLOSED / PASS`;
-- Sprint 16: `IN PROGRESS`;
-- Sprint 17: `PENDING`;
+- Sprint 16: `COMPLETED / PASS` en la build `0.0.21` el 6 de julio de 2026;
+- Sprint 17: `PENDING / READY TO OPEN`;
 - baseline automatizada: `1215 EditMode + 70 PlayMode = 1285 PASS`.
 
 Estos SHA y resultados deben considerarse **trazabilidad histórica de la baseline**, no una
@@ -250,8 +250,8 @@ Se permiten únicamente:
 | Bloque | Estado | Resultado |
 |---|---|---|
 | Sprints 0–15 | `CLOSED / PASS` | vertical slice funcional integrado |
-| Sprint 16 | `IN PROGRESS` | escena, arte, audio y presentación representativa |
-| Sprint 17 | `PENDING` | estabilización, balance, rendimiento, QA y build |
+| Sprint 16 | `COMPLETED / PASS` | escena, arte, audio y presentación representativa aprobados en build `0.0.21` |
+| Sprint 17 | `PENDING / READY TO OPEN` | estabilización, balance, rendimiento, QA y build; entrada de S16 satisfecha |
 | H0–H5 | completados funcionalmente | fundación, control, inventario, ventas, día y persistencia |
 | H6 | pendiente | aprobación formal del vertical slice |
 | Post-H6 | no aprobado | roadmap condicionado a revisión posterior |
@@ -404,9 +404,11 @@ Esta cifra:
 
 ## 5.1. Estado
 
-`IN PROGRESS`
+`COMPLETED / PASS`
 
-Versión de aplicación de referencia: `0.0.17`.
+Versión de aplicación y build de cierre: `0.0.21`.
+
+Fecha de cierre formal: `2026-07-06`.
 
 ## 5.2. Objetivo
 
@@ -433,7 +435,7 @@ La documentación vigente registra como completados o validados:
 - conexión con catálogo runtime;
 - suites EditMode y PlayMode en PASS.
 
-Estos resultados no cierran el sprint porque la composición visual actual no está aprobada.
+Estos resultados formaban la base previa al cierre; la composición visual activa, la conexión funcional, la build externa y la evidencia posterior quedaron aprobadas. El registro histórico original indicaba que la composición visual actual no está aprobada.
 
 ## 5.4. Problemas no aceptados
 
@@ -727,7 +729,7 @@ No deben incluirse dentro del prefab del entorno:
 
 ## 5.10. Definition of Done de Sprint 16
 
-Sprint 16 se cierra cuando:
+Sprint 16 se considera cerrado porque se han verificado los siguientes criterios:
 
 1. `StoreInitial.unity` existe y está autorada;
 2. `StoreInitialEnvironment.prefab` contiene solo entorno fijo;
@@ -748,7 +750,26 @@ Sprint 16 se cierra cuando:
 17. la documentación y trazabilidad están actualizadas;
 18. existe aprobación manual visual explícita.
 
-## 5.11. Condición de bloqueo
+## 5.11. Registro de aprobación visual y funcional
+
+| Evidencia / decisión | Resultado |
+|---|---|
+| Autoría representativa de StoreInitial | PASS |
+| Aprobación visual manual | PASS |
+| Integración funcional y referencias explícitas | PASS |
+| Compilación | PASS |
+| EditMode | PASS |
+| PlayMode | PASS |
+| Regresión manual | PASS |
+| Golden Path en build Windows x64 externa | PASS |
+| Guardado, cierre, reapertura y carga equivalente | PASS |
+| Revisión de Player.log | PASS, sin errores bloqueantes |
+| Defectos S0/S1 dentro del alcance | 0 abiertos conocidos |
+| Decisión del Project Owner / VRM Games | `COMPLETED / PASS` |
+
+Sprint 17 queda habilitado para apertura formal, pero permanece `PENDING / READY TO OPEN` hasta registrar su kickoff y baseline de entrada. H6 sigue `BLOCKED / NOT RUN`.
+
+## 5.12. Condición de bloqueo
 
 Si la composición representativa exige cambiar una regla funcional cerrada, el sprint debe
 detenerse y clasificar el problema como:
@@ -768,7 +789,7 @@ No debe resolverse ocultando el problema mediante offsets arbitrarios o búsqued
 
 ## 6.1. Estado
 
-`PENDING`
+`PENDING / READY TO OPEN`
 
 ## 6.2. Condición de apertura
 

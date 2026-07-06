@@ -2,7 +2,7 @@
 title: "Cartridge & Cloud — Art Bible"
 subtitle: "Dirección artística, producción visual, StoreInitial y pipeline de assets"
 author: "VRM Games / Blas Luis Rocha González"
-date: "2026-07-01"
+date: "2026-07-06"
 lang: es-ES
 document_id: "CC-DOC-17"
 document_version: "1.0"
@@ -11,7 +11,7 @@ project: "Cartridge & Cloud"
 platform: "PC / Steam"
 engine: "Unity 6.3 LTS 6000.3.18f1"
 render_pipeline: "URP 17.3.0"
-application_version: "0.0.17"
+application_version: "0.0.21"
 owner: "VRM Games"
 ---
 
@@ -19,10 +19,14 @@ owner: "VRM Games"
 
 **Archivo:** `17_Art_Bible.md`  
 **Propósito:** establecer la autoridad visual y el procedimiento de producción artística de Cartridge & Cloud.  
-**Estado del proyecto:** Sprints 0–15 `CLOSED / PASS`; Sprint 16 `IN PROGRESS`; Sprint 17 `PENDING`; H6 `PENDING`.  
+**Estado del proyecto:** Sprints 0–15 `CLOSED / PASS`; Sprint 16 `COMPLETED / PASS`; Sprint 17 `PENDING / READY TO OPEN`; H6 `BLOCKED / NOT RUN`.  
 **Escena objetivo:** `StoreInitial.unity`, aproximadamente `10 × 15 m`, grid lógico `20 × 30` a `0,5 m`.  
-**Baseline automatizada observada:** `1215 EditMode + 70 PlayMode = 1285 PASS`, previa al cierre visual de StoreInitial.  
+**Validación vigente:** compilación, EditMode, PlayMode, regresión manual y build externa `0.0.21` en PASS; StoreInitial cuenta con aprobación visual explícita de Sprint 16.  
 **Regla de interpretación:** una imagen atractiva, un prefab que instancia o una suite verde no equivalen por sí solos a aprobación artística, integración funcional ni cierre de gate.
+
+## Aprobación visual de Sprint 16 — 2026-07-06
+
+La composición representativa de `StoreInitial` queda aprobada para el cierre de Sprint 16. La revisión confirma layout, escala, lectura de zonas, arquitectura, puerta, mobiliario, productos, personajes, colliders, navegación y relación entre pivotes/anchors sin defectos visuales bloqueantes. Esta aprobación se limita al gate de Sprint 16 y no sustituye la revisión artística, legal, de rendimiento o accesibilidad exigida por H6.
 
 > Esta Art Bible consolida toda la genealogía disponible, incluidas las Art Bible v0.3, v0.4 y v0.5; la repetición de v0.3 en las baselines v0.3 y v0.4; los catálogos de contenido v0.1, v0.2 y v0.3; las UI Style Guide v0.3–v0.5; los registros legales v0.3–v0.5; los planes y registros de Sprint 16; el kit modular de Blender; los assets serializados de Unity; y las referencias conceptuales aprobadas. Las decisiones históricas no se eliminan: se clasifican como vigentes, sustituidas, diferidas o visión.
 
@@ -1477,27 +1481,21 @@ La etiqueta debe acompañar archivo y publicación. Las cápsulas de Steam puede
 Se conservará una cámara de captura reproducible, resolución, build ID, ajustes gráficos y fecha. No se retocará una captura hasta cambiar la lectura de producto o sistema sin indicarlo.
 
 
-# 86. Deuda y decisiones pendientes
+# 86. Deuda histórica resuelta y decisiones pendientes
 
-Deuda artística/integradora conocida:
+El cierre de Sprint 16 resolvió la deuda representativa que afectaba a `StoreInitial`: composición, `StoreInitialEnvironment.prefab`, `StoreInitialSceneContext`, conexión runtime, retirada del blockout procedural productivo, muros/puerta/almacén, personajes visuales, colliders autorados y build post-integración fueron validados en `0.0.21`.
 
-- StoreInitial aún no contiene composición representativa;
-- falta `StoreInitialEnvironment.prefab`;
-- falta `StoreInitialSceneContext` implementado/validado;
-- runtime sigue en `Store` con blockout procedural activo;
-- muros, puerta y storage fallaron revisión;
-- personajes no tienen modelo visual integrado;
-- no hay texturas de producción;
-- no hay VFX assets dedicados;
-- no hay shader de outline probado;
-- colliders de prefabs no están demostrados como componentes Unity;
-- build post-integración pendiente;
-- localización ES/EN de señalética pendiente;
-- resolución objetivo y AA final deben validarse;
-- estrategia de desgaste/material overlay es futura;
-- licencias y procedencia deben consolidarse en registro específico.
+Continúan abiertas para Sprint 17/H6 o fases posteriores:
 
-Ninguna de estas deudas invalida la dirección. Sí impide declarar el pase representativo como finalizado.
+- ampliar o sustituir texturas que sigan siendo provisionales cuando la revisión artística lo requiera;
+- incorporar VFX dedicados únicamente donde aporten feedback verificable;
+- decidir y probar el shader de outline o una alternativa accesible;
+- completar localización ES/EN de señalética y UI;
+- validar resolución objetivo, AA y presupuestos visuales mediante profiling;
+- mantener la estrategia de desgaste/material overlay como trabajo futuro;
+- consolidar licencias y procedencia en el registro específico.
+
+Estas deudas restantes no reabren Sprint 16, pero pueden bloquear Sprint 17 o H6 según su criterio asociado.
 
 
 # 87. Protocolo de aprobación de un asset

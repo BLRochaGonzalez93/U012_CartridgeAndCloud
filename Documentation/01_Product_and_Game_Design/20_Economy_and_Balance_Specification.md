@@ -2,7 +2,7 @@
 title: "Cartridge & Cloud — Economy and Balance Specification"
 subtitle: "Economía, inventario, precios, demanda, ciclo diario, tuning y validación"
 author: "VRM Games / Blas Luis Rocha González"
-date: "2026-07-01"
+date: "2026-07-06"
 lang: es-ES
 document_id: "CC-DOC-20"
 document_version: "1.0"
@@ -11,7 +11,7 @@ project: "Cartridge & Cloud"
 platform: "PC / Steam"
 engine: "Unity 6.3 LTS 6000.3.18f1"
 render_pipeline: "URP 17.3.0"
-application_version: "0.0.17"
+application_version: "0.0.21"
 owner: "VRM Games"
 ---
 
@@ -19,7 +19,7 @@ owner: "VRM Games"
 
 **Archivo:** `20_Economy_and_Balance_Specification.md`  
 **Propósito:** definir la autoridad económica y el procedimiento de diseño, implementación, tuning, prueba y aprobación de los sistemas de dinero, inventario, proveedores, pedidos, clientes, checkout, ciclo diario y progresión de Cartridge & Cloud.  
-**Estado del proyecto:** Sprints 0–15 `CLOSED / PASS`; Sprint 16 `IN PROGRESS`; Sprint 17 `PENDING`; H6 `PENDING`.  
+**Estado del proyecto:** Sprints 0–15 `CLOSED / PASS`; Sprint 16 `COMPLETED / PASS`; Sprint 17 `PENDING / READY TO OPEN`; H6 `BLOCKED / NOT RUN`.  
 **Estado económico observado:** núcleo transaccional implementado, balance final pendiente; dos capas de catálogo coexistentes; campaña económica de siete días aún no aprobada en build externa.  
 **Regla de interpretación:** una fórmula correcta y tests verdes demuestran integridad, no diversión, ritmo, claridad ni equilibrio. Los valores históricos se preservan, pero solo son vigentes cuando la jerarquía y la evidencia actual los ratifican.
 

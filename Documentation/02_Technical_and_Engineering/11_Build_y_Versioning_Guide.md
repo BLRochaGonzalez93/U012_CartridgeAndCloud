@@ -1,7 +1,7 @@
 ---
 title: "Cartridge & Cloud — Build y Versioning Guide"
 author: "VRM Games / Blas Luis Rocha González"
-date: "2026-07-01"
+date: "2026-07-06"
 lang: "es-ES"
 document_version: "1.0"
 status: "Fuente vigente de build, versionado, empaquetado y trazabilidad"
@@ -9,7 +9,7 @@ project: "Cartridge & Cloud"
 platform: "PC / Steam"
 engine: "Unity 6.3 LTS 6000.3.18f1"
 render_pipeline: "URP 17.3.0"
-application_version_reference: "0.0.17"
+application_version_reference: "0.0.21"
 persistence_schema_reference: "IntegratedGameStateSnapshot schema 2"
 documentary_baseline_reference: "v0.6"
 ---
@@ -137,12 +137,12 @@ Se usan estas etiquetas:
 
 ## 1.2. Fecha de la fotografía
 
-La fotografía técnica corresponde al **1 de julio de 2026**. Un SHA, versión o estado no debe
+La fotografía técnica original corresponde al **1 de julio de 2026** y fue actualizada con el cierre operativo del **6 de julio de 2026**. Un SHA, versión o estado no debe
 reutilizarse como si describiera automáticamente una working copy posterior.
 
 ---
 
-# 2. Fotografía técnica actual
+# 2. Fotografía técnica vigente
 
 | Campo | Estado observado |
 |---|---|
@@ -151,7 +151,7 @@ reutilizarse como si describiera automáticamente una working copy posterior.
 | Unity | `6000.3.18f1` (`5ebeb53e4c07`) |
 | URP | `17.3.0` |
 | Plataforma objetivo | Windows x64 |
-| Versión de aplicación | `0.0.17` |
+| Versión de aplicación | `0.0.21` |
 | Application Identifier | `com.vrmgames.cartridgeandcloud` |
 | Input | Input System (`activeInputHandler: 1`) |
 | Player log | activado |
@@ -159,16 +159,28 @@ reutilizarse como si describiera automáticamente una working copy posterior.
 | Backend de desarrollo | Mono por baseline/ausencia de override Standalone |
 | Compresión Development | LZ4 |
 | Build Profile | `Windows_Development` |
-| Escenas del perfil | Bootstrap, MainMenu, Store, TestLab |
+| Escenas validadas para cierre | Bootstrap, MainMenu, StoreInitial |
 | Escena objetivo del slice | `StoreInitial` |
 | Resolución por defecto observada | `1024 × 768` |
 | Ventana redimensionable observada | desactivada |
 | Schema de sesión mínimo | 1 |
 | Schema integrado | 2 |
 | Tests documentados | 1215 EditMode + 70 PlayMode = 1285 PASS |
-| Estado | Sprints 0–15 cerrados; Sprint 16 activo; Sprint 17 pendiente |
+| Estado | Sprints 0–15 cerrados; Sprint 16 `COMPLETED / PASS`; Sprint 17 `PENDING / READY TO OPEN` |
 
-## 2.1. Discrepancias activas
+## 2.1. Registro de build de cierre de Sprint 16
+
+- Build ID lógico: `BLD-016-POST`.
+- Versión: `0.0.21`.
+- Plataforma: Windows x64 Development.
+- Arranque: Bootstrap → MainMenu → StoreInitial.
+- Pruebas automatizadas: PASS.
+- Golden Path externo: PASS.
+- Persistencia tras cierre y reapertura: PASS.
+- `Player.log`: revisado sin errores bloqueantes.
+- Estado: build aceptada para cerrar Sprint 16; no es candidata H6 ni artefacto público.
+
+## 2.2. Discrepancias activas
 
 La configuración observada todavía no representa el objetivo final de Sprint 16:
 
@@ -203,7 +215,7 @@ separado.
 
 | Eje | Ejemplo | Autoridad | Qué identifica |
 |---|---|---|---|
-| Aplicación | `0.0.17` | `PlayerSettings.bundleVersion` | evolución jugable/técnica |
+| Aplicación | `0.0.21` | `PlayerSettings.bundleVersion` | evolución jugable/técnica |
 | Build | `Build003` | registro de artefacto | iteración concreta de una misma versión |
 | Git | SHA de 40 caracteres | repositorio | código y assets exactos |
 | Schema | `2` | snapshot/codec | forma persistente compatible |
@@ -281,7 +293,7 @@ La secuencia inicial observada usa el patch para representar el cierre de sprint
 | 13 | `0.0.14` | economía y resultados |
 | 14 | `0.0.15` | save/load integrado |
 | 15 | `0.0.16` | integración UI/UX |
-| 16 | `0.0.17` | presentación representativa en curso |
+| 16 | `0.0.21` | presentación representativa y build externa cerradas en PASS |
 | 17 | por congelar | estabilización y H6 |
 
 La versión de Sprint 17 no se inventa en esta guía. Debe congelarse al abrir el sprint y comprobar
@@ -2546,7 +2558,8 @@ PASS / BLOCKED / FAIL
 | Sprint 13 | `0.0.14` | Development | PASS | record operativo |
 | Sprint 14 | `0.0.15` | Development | PASS | save/recovery validados |
 | Sprint 15 | `0.0.16` | Development | PASS | UI, slots y autosave validados |
-| Sprint 16 preintegración | `0.0.17` | Development | PASS documentado | requiere nueva build post-integración |
+| Sprint 16 preintegración | `0.0.17` | Development | PASS histórico | sustituido por la build de cierre |
+| Sprint 16 cierre | `0.0.21` | Development Windows x64 | PASS | Golden Path, persistencia y Player.log revisados |
 
 ## 54.1. Lecciones
 
@@ -2555,7 +2568,7 @@ PASS / BLOCKED / FAIL
 - los hashes tienen más valor en hitos;
 - PlayMode assemblies deben usar `UNITY_INCLUDE_TESTS` para no entrar al Player;
 - los warnings de Unity Services son no bloqueantes mientras no exista dependencia;
-- la transición a StoreInitial exige nueva evidencia, no reutilizar el PASS anterior.
+- la transición a StoreInitial quedó respaldada por nueva evidencia en `0.0.21`; el PASS previo no se reutilizó como sustituto.
 
 ---
 

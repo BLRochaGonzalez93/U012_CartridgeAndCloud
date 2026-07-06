@@ -1,7 +1,7 @@
 ---
 title: "Cartridge & Cloud — QA Testing Plan"
 author: "VRM Games / Blas Luis Rocha González"
-date: "2026-07-01"
+date: "2026-07-06"
 lang: "es-ES"
 document_version: "1.0"
 status: "Fuente vigente de estrategia de calidad"
@@ -10,7 +10,7 @@ platform: "PC / Steam"
 engine: "Unity 6.3 LTS 6000.3.18f1"
 render_pipeline: "URP 17.3.0"
 unity_test_framework: "1.6.0"
-application_version_reference: "0.0.17"
+application_version_reference: "0.0.21"
 documentary_baseline: "v0.6"
 ---
 
@@ -87,12 +87,12 @@ La baseline documental de referencia registra:
 | Elemento | Estado de referencia |
 |---|---|
 | Sprints 0–15 | `CLOSED / PASS` |
-| Sprint 16 | `IN PROGRESS` |
-| Sprint 17 | `PENDING` |
+| Sprint 16 | `COMPLETED / PASS` |
+| Sprint 17 | `PENDING / READY TO OPEN` |
 | EditMode | `1215 PASS` |
 | PlayMode | `70 PASS` |
 | Total automatizado | `1285 PASS` |
-| Aplicación | `0.0.17` |
+| Aplicación | `0.0.21` |
 | Plataforma de build | Windows x64 |
 | Escena objetivo | `StoreInitial.unity` |
 
@@ -2181,18 +2181,22 @@ Añade:
 
 # 22. Gates de Sprint 16
 
-## 22.1. Estado actual documentado
+## 22.1. Estado final documentado
 
-- EditMode `1215 PASS`;
-- PlayMode `70 PASS`;
-- prefabs representativos cargan;
-- arquitectura visual: abierta;
-- puerta: abierta;
-- mobiliario inicial: abierto;
-- click-through de UI: abierto;
-- Golden Path post-scene: pendiente;
-- build post-scene: pendiente;
-- aprobación visual: pendiente.
+- compilación: PASS;
+- EditMode: PASS;
+- PlayMode: PASS;
+- prefabs representativos: PASS;
+- arquitectura visual, puerta, mobiliario, colliders y navegación: PASS;
+- input UI/mundo y click-through: PASS;
+- Golden Path post-integración: PASS;
+- build Windows x64 externa `0.0.21`: PASS;
+- guardado, cierre, reapertura y carga equivalente: PASS;
+- `Player.log`: revisado sin errores bloqueantes;
+- regresión manual: PASS;
+- aprobación visual: PASS;
+- aprobación funcional: PASS;
+- Sprint 16: `COMPLETED / PASS`.
 
 ## 22.2. Criterios automáticos
 
@@ -2242,6 +2246,10 @@ Sprint 16 no cierra hasta:
 8. revisar `Player.log`;
 9. cerrar S0/S1;
 10. actualizar evidencia y documentación.
+
+## 22.5. Signoff de cierre
+
+El Project Owner / VRM Games registra el cierre de Sprint 16 el `2026-07-06` sobre la build `0.0.21`. No quedan defectos S0/S1 conocidos dentro del alcance del gate. La evidencia se conserva en los registros de producción, trazabilidad, build y signoff existentes. Este PASS no se propaga automáticamente a Sprint 17 ni a H6.
 
 ---
 

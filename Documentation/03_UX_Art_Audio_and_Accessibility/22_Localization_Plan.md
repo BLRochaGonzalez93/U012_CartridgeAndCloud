@@ -2,11 +2,11 @@
 title: "Cartridge & Cloud — Localization Plan"
 subtitle: "Arquitectura ES/EN, keys, pipeline, QA lingüístico y gobierno"
 author: "VRM Games / Blas Luis Rocha González"
-date: "2026-07-01"
+date: "2026-07-06"
 lang: es-ES
 version: "1.0-consolidated"
 status: "Current plan / implementation pending"
-application_version: "0.0.17"
+application_version: "0.0.21"
 ---
 
 # Cartridge & Cloud — Plan de Localización
@@ -17,7 +17,7 @@ application_version: "0.0.17"
 **Motor:** Unity 6.3 LTS `6000.3.18f1` / URP `17.3.0`  
 **Paquete:** `com.unity.localization` `1.5.12`  
 **Idiomas iniciales:** `es-ES`, `en-US`, pseudolocale de QA  
-**Estado:** Sprints 0–15 CLOSED/PASS; Sprint 16 IN PROGRESS; Sprint 17 PENDING; H6 PENDING  
+**Estado:** Sprints 0–15 CLOSED/PASS; Sprint 16 COMPLETED/PASS; Sprint 17 PENDING/READY TO OPEN; H6 BLOCKED/NOT RUN  
 
 > Este documento conserva la genealogía completa de los planes históricos y distingue con precisión especificación, implementación, contenido, QA y evidencia.
 
@@ -77,7 +77,7 @@ La consolidación evita dos errores: tratar una especificación de preproducció
 
 # 4. Resumen ejecutivo del estado actual
 
-El proyecto utiliza Unity `6000.3.18f1`, aplicación `0.0.17` y `com.unity.localization` `1.5.12`. La carpeta `Assets/_Project/Content/Localization/` contiene únicamente `.gitkeep`; no se han encontrado assets de Locale, String Table, Shared Table Data o Asset Table, ni referencias productivas a `UnityEngine.Localization`, `LocalizedString` o `LocalizationSettings`.
+El proyecto utiliza Unity `6000.3.18f1`, aplicación `0.0.21` y `com.unity.localization` `1.5.12`. La carpeta `Assets/_Project/Content/Localization/` contiene únicamente `.gitkeep`; no se han encontrado assets de Locale, String Table, Shared Table Data o Asset Table, ni referencias productivas a `UnityEngine.Localization`, `LocalizedString` o `LocalizationSettings`.
 
 Existen **15 claves técnicas** en ScriptableObjects de productos, clientes y proveedores. `ContentCatalog.asset` contiene **14 nombres directos en inglés** para los seis productos y ocho muebles Phase 1. `21_Initial_Content_Catalog.xlsx` registra 23 keys de contenido/UI —12 existentes y 11 propuestas— más una fila de estado del sistema. La interfaz runtime usa `LegacyRuntime.ttf` y strings hardcodeadas; por tanto, Sprint 17 debe crear infraestructura, migrar texto, validar ES/EN y producir evidencia de build antes de H6.
 

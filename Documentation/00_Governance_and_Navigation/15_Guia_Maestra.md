@@ -2,7 +2,7 @@
 title: "Cartridge & Cloud — Guía Maestra"
 subtitle: "Manual operativo integral para dirigir, implementar, validar, publicar, transferir y gobernar el proyecto"
 author: "VRM Games / Blas Luis Rocha González"
-date: "2026-07-01"
+date: "2026-07-06"
 lang: es-ES
 version: "1.1-RC1"
 status: "Current Candidate / Documentation Consolidation"
@@ -14,10 +14,10 @@ status: "Current Candidate / Documentation Consolidation"
 **Motor:** Unity 6.3 LTS `6000.3.18f1`
 **Render pipeline:** URP `17.3.0`
 **Lenguaje:** C# 9.0 / `netstandard2.1`
-**Versión de aplicación observada:** `0.0.17`
-**Estado global:** Sprints 0–15 `CLOSED / PASS`; Sprint 16 `IN PROGRESS`; Sprint 17 `PENDING`; H6 `BLOCKED / NOT RUN`; Release `NOT OPEN`
+**Versión de aplicación observada:** `0.0.21`
+**Estado global:** Sprints 0–15 `CLOSED / PASS`; Sprint 16 `COMPLETED / PASS`; Sprint 17 `PENDING / READY TO OPEN`; H6 `BLOCKED / NOT RUN`; Release `NOT OPEN`
 **Baseline automatizada de referencia:** `1215 EditMode + 70 PlayMode = 1285 PASS`
-**Trabajo técnico inmediato:** autoría, conexión, validación visual y build post-integración de `StoreInitial`  
+**Trabajo técnico inmediato:** apertura y ejecución controlada de Sprint 17: balance, siete días, rendimiento, localización, QA y candidata H6  
 **Trabajo documental inmediato:** adoptar esta Guía, actualizar 21, 23, 31, 33 y 34, generar manifiesto 32 candidato y regenerar 16
 **Baseline documental:** conjunto completo `00–34`; documentos 12 y 13 regenerados; 14 y 15 actualizados; consolidación RC1 en curso.
 
@@ -178,19 +178,19 @@ Una fuente histórica puede ser más detallada que una revisión posterior. Cuan
 
 La fotografía vigente separa cuatro planos. No deben reducirse a un único porcentaje:
 
-1. **Producto y código:** Sprints 0–15 tienen cierre histórico `CLOSED / PASS`; Sprint 16 sigue abierto y StoreInitial necesita integración y aceptación representativa.
+1. **Producto y código:** Sprints 0–15 tienen cierre histórico `CLOSED / PASS`; Sprint 16 está `COMPLETED / PASS` y StoreInitial dispone de integración y aceptación representativa.
 2. **Validación:** H6 no se ha ejecutado contra la matriz completa del documento 31; los estados `NOT RUN` no son fallos, pero bloquean una aprobación.
 3. **Release:** Steam, Coming Soon, demo, Playtest, RC y lanzamiento son gates posteriores y separados. Ninguno está abierto por el mero hecho de existir planes 24, 25 y 28.
 4. **Documentación:** los documentos 00–34 existen, pero la baseline final todavía requiere actualizaciones dirigidas, auditoría, manifest definitivo, checksums, informe de validación y ZIP inmutable.
 
 | Dimensión | Estado vigente | Fuente operativa | Interpretación obligatoria |
 | --- | --- | --- | --- |
-| Aplicación | `0.0.17` | 11, 12 y proyecto Unity observado | Identificador técnico; no equivale a versión comercial |
+| Aplicación | `0.0.21` | 11, 12 y proyecto Unity observado | Identificador técnico; no equivale a versión comercial |
 | Automatización histórica | `1215 EditMode + 70 PlayMode = 1285 PASS` | 08, 12 y cierres de sprint | Fotografía aceptada; debe repetirse en candidatas impactadas |
 | Backlog maestro | 612 elementos | 12 | Mezcla historia, trabajo activo, políticas, WPs y cierre documental |
 | Work packages | 224 | 12 | Un WP documentado no está implementado por existir su plan |
-| Sprint 16 | `IN PROGRESS` | 06, 12, 31 y 34 | Requiere StoreInitial, input UI, Golden Path y build postintegración |
-| Sprint 17 | `PENDING` | 06, 12 y 31 | Solo se abre tras cierre formal de Sprint 16 |
+| Sprint 16 | `COMPLETED / PASS` | 06, 12, 13, 31 y 34 | StoreInitial, input UI, Golden Path, persistencia y build postintegración aprobados |
+| Sprint 17 | `PENDING / READY TO OPEN` | 06, 12 y 31 | La entrada de S16 está satisfecha; requiere kickoff formal |
 | H6 | `BLOCKED / NOT RUN` | 02 y 31 | 266 controles y evidencia/signoff todavía pendientes |
 | Release readiness | `NOT OPEN / NOT RUN` | 24, 25, 28 y 31 | 209 controles posteriores a H6 |
 | Riesgos | 180 registrados; 174 fuera de tolerancia provisional | 33 | Exposición conservadora hasta validar controles y owners |
@@ -200,14 +200,14 @@ La fotografía vigente separa cuatro planos. No deben reducirse a un único porc
 
 ## Trabajo técnico obligatorio inmediato
 
-1. Continuar autoría manual de suelo, muros, entrada y zonas de `StoreInitial`.
-2. Corregir puerta automática mediante referencias explícitas.
-3. Colocar mobiliario inicial sin mezclarlo con placement dinámico.
-4. Crear roots, anchors y `StoreInitialSceneContext`.
-5. Conectar el runtime existente sin reconstruir arquitectura por nombres o bounds.
-6. Desactivar el shell procedural solo después de validar la escena autorada.
-7. Bloquear acciones de mundo cuando la UI consume el puntero.
-8. Ejecutar suites, Golden Path, recorrido manual y build postintegración.
+1. Congelar y registrar la baseline de entrada de Sprint 17.
+2. Abrir formalmente Sprint 17 sin introducir sistemas mayores nuevos.
+3. Ejecutar balance y sesión completa de siete días.
+4. Ejecutar perfilado, carga objetivo y soak test en build.
+5. Completar localización mínima ES/EN o registrar una excepción formal del gate.
+6. Preparar los perfiles `Windows_QA` y `Windows_H6_Candidate`.
+7. Consolidar evidencia de QA, rendimiento, persistencia, localización y logs.
+8. Ejecutar Sprint 17 y preparar la candidata H6 sin declarar todavía la Vertical Slice aprobada.
 
 ## Secuencia documental autorizada
 
@@ -1680,6 +1680,10 @@ Empleados, investigación, puestos informáticos, comercio online, publishing, d
 ## Regla de diseño futuro
 
 Documentar interfaces y límites puede ser útil; implementar stubs, tablas, menús o datos que no participan en el gate actual añade mantenimiento y debe evitarse.
+
+# 54.1. Cierre formal de Sprint 16
+
+Sprint 16 fue cerrado como `COMPLETED / PASS` el `2026-07-06` sobre la build `0.0.21`. La aprobación incluye StoreInitial, integración funcional, input UI/mundo, suites automatizadas, regresión manual, Golden Path externo, persistencia tras reinicio y revisión de Player.log. No quedan S0/S1 conocidos dentro del alcance de cierre.
 
 # 55. Cómo abrir Sprint 17
 

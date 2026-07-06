@@ -2,11 +2,11 @@
 title: "Cartridge & Cloud — Accessibility and Inclusive Design Plan"
 subtitle: "Plan maestro consolidado de accesibilidad visual, auditiva, motora y cognitiva, diseño inclusivo, validación, Steam y operación de lanzamiento"
 author: "VRM Games / Blas Luis Rocha González"
-date: "2026-07-01"
+date: "2026-07-06"
 lang: "es-ES"
 document_number: "29"
 document_version: "1.0"
-project_version_reference: "0.0.17"
+project_version_reference: "0.0.21"
 platform: "PC / Steam"
 engine: "Unity 6.3 LTS 6000.3.18f1"
 render_pipeline: "URP 17.3.0"
@@ -18,7 +18,7 @@ status: "CONSOLIDATED PLAN / PARTIALLY IMPLEMENTED / RELEASE VALIDATION PENDING"
 **Proyecto:** Cartridge & Cloud  
 **Desarrollador:** VRM Games / Blas Luis Rocha González  
 **Plataforma inicial:** PC / Steam  
-**Estado técnico de referencia:** Sprints 0–15 `CLOSED / PASS`; Sprint 16 `IN PROGRESS`; Sprint 17 y H6 `PENDING`  
+**Estado técnico de referencia:** Sprints 0–15 `CLOSED / PASS`; Sprint 16 `COMPLETED / PASS`; Sprint 17 `PENDING / READY TO OPEN`; H6 `BLOCKED / NOT RUN`  
 **Estado de accesibilidad actual:** existe una base funcional de preferencias globales, escala de UI/texto, reducción de movimiento, tutorial, confirmaciones destructivas y navegación por ratón/teclado; la cobertura integral y la validación de lanzamiento permanecen abiertas  
 **Clasificación del documento:** interno y normativo para diseño, implementación, QA, localización, arte, audio, publicación y soporte  
 **Naturaleza:** plan de producto y proceso; no constituye certificación legal, declaración pública de conformidad ni autorización para marcar características en Steam
