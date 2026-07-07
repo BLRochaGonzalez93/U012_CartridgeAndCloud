@@ -1,7 +1,7 @@
 ---
 title: "Cartridge & Cloud — Game Design Document"
 author: "VRM Games / Blas Luis Rocha González"
-date: "2026-07-06"
+date: "2026-07-07"
 lang: "es-ES"
 document_version: "1.0"
 status: "Fuente vigente de diseño de juego"
@@ -4505,3 +4505,70 @@ Cuando sea sustituido:
 
 **Estado del documento:** fuente vigente de diseño de juego para la nueva carpeta
 `Documentacion/`.
+
+---
+
+<!-- W0_S17_PHASE1_START -->
+
+# Actualización contractual W0 - reglas de juego
+
+## Estado operativo vigente tras W0
+
+| Elemento | Estado vigente | Alcance de la afirmación |
+|---|---|---|
+| Baseline de entrada | `main@efbc1a885a1d6819f764ec8cff8a465ad1986661` / aplicación `0.0.21` | Referencia congelada para iniciar la remediación |
+| W0 documental | `COMPLETED / DOCUMENTAL PASS` | Decisiones formalizadas y contratos sincronizados; no implica implementación |
+| Decisiones funcionales abiertas | `0` | DEC-01 a DEC-12 cerradas mediante ADR-0074 a ADR-0085 |
+| Sprint17_Phase1 | `BLOCKED / REMEDIATION REQUIRED` | W1-W7 no iniciadas y W8 no ejecutada |
+| H6 | `BLOCKED / NOT RUN` | Sin ejecución ni signoff H6 |
+| Vertical Slice | `NOT ACCEPTED` | No debe declararse completa ni aprobada |
+
+Las referencias anteriores a Sprint 17 como `PENDING / READY TO OPEN` se conservan como fotografía histórica de cierre de Sprint 16. Para cualquier trabajo posterior prevalece el estado de esta actualización W0.
+
+
+## Decisiones formalizadas
+
+| ADR | DEC | Decisión cerrada | Consecuencia inmediata |
+|---|---|---|---|
+| ADR-0074 | DEC-01 | Día H6 configurable de 300 s; velocidades visibles x0,5, x1, x2 y x4; `PauseService` independiente | Caracterizar tiempo, HUD, pausa y transiciones antes de W1 |
+| ADR-0075 | DEC-02 | `SimulationClock` / `StoreDay` es la única autoridad de tiempo de negocio | Ningún estado o sistema mantiene un reloj de negocio paralelo |
+| ADR-0076 | DEC-03 | Guardado manual solo desde pausa en `BeforeOpen`, `Closed` o `Results`, sin mutaciones pendientes | Reanudación exacta a mitad de día queda Post-H6 |
+| ADR-0077 | DEC-04 | Checkout funcional obligatorio para abrir; no retirar el último durante `Open` | Una invalidación sobrevenida bloquea nuevos spawns y exige recuperación o cierre controlado |
+| ADR-0078 | DEC-05 | Máximo H6 configurable de 8 clientes activos; activo = no `Despawned` | Pruebas de capacidad, abandono, cierre y ausencia de deadlock |
+| ADR-0079 | DEC-06 | La solicitud reserva fondos; la recepción descuenta caja, registra `SupplierReceivingCost` y añade stock una vez | Commit de recepción atómico e idempotente |
+| ADR-0080 | DEC-07 | `Process All` es todo-o-nada sobre órdenes independientes, reserva el total y crea un `DeliveryRun` | Sin cobros, recepciones ni stock parciales |
+| ADR-0081 | DEC-08 | Displays monoproducto hasta H6; cantidades, retirada, retorno y limpieza de vacío obligatorios | Multiproducto queda Post-H6 |
+| ADR-0082 | DEC-09 | Management conserva detalle del día actual y los dos completados anteriores; días más antiguos mantienen `DailySummary` individual y acumulados lifetime | Campaña mínima de siete días con navegación y persistencia |
+| ADR-0083 | DEC-10 | Al cerrar el día 7 se aplica una vez el 10 % de `max(0, resultado bruto técnico semanal)` | Costes fijos quedan Post-H6; el impuesto debe ser idempotente |
+| ADR-0084 | DEC-11 | Wall occlusion desactivada mediante feature flag prioritaria; toggle oculto; valores antiguos migrados o ignorados | Regresión obligatoria de cámara y settings |
+| ADR-0085 | DEC-12 | Contrato de pivote base-centro mediante wrappers o `GroundAnchor`, con migración/compensación única | No desplazar escenas o saves previos; congelar contrato tras W7 |
+
+El siguiente identificador ADR disponible queda reservado como `ADR-0086`.
+
+## Reglas funcionales consolidadas
+
+### Tiempo, pausa y jornada
+
+La jornada H6 dura inicialmente 300 segundos de tiempo de negocio a velocidad x1. El jugador puede seleccionar x0,5, x1, x2 o x4. `PauseService` congela la simulación sin convertirse en una velocidad ni alterar la autoridad temporal. `SimulationClock` / `StoreDay` gobierna timers, estados y cierres.
+
+### Apertura, clientes y checkout
+
+La tienda solo puede abrir si existe al menos un checkout funcional. El último checkout no puede retirarse durante `Open`. Si queda inválido, se bloquean nuevas admisiones y se guía al jugador a reparar o cerrar. H6 limita a ocho clientes activos, contando cualquier cliente cuyo estado no sea `Despawned`.
+
+### Pedidos, recepción y economía
+
+Solicitar entrega reserva fondos persistentes. Recibir realiza un único commit: descuenta caja, publica `SupplierReceivingCost`, materializa stock y libera la reserva. `Process All` valida y reserva el total antes de crear un solo `DeliveryRun`, manteniendo órdenes individuales independientes. El día 7 publica una sola obligación del 10 % sobre el resultado bruto técnico semanal positivo.
+
+### Displays, guardado e histórico
+
+Los displays son monoproducto hasta H6 y soportan cantidad, retirada, retorno y limpieza al quedar vacíos. El guardado manual se ofrece desde pausa solo en `BeforeOpen`, `Closed` o `Results` y cuando no existen mutaciones pendientes. Management conserva detalle del día actual y los dos completados previos; cada día anterior mantiene su propio `DailySummary` y los acumulados lifetime continúan separados.
+
+## Regla de cierre y no propagación
+
+- El cierre de W0 no abre W1-W7 automáticamente; cada ola requiere su propia evidencia y control de cambios.
+- No se declara Sprint17_Phase1 completada mientras W8 no haya ejecutado la regresión integral.
+- No se propaga `PASS` de Sprint 16 a H6 ni a la Vertical Slice.
+- No se introducen sistemas Post-H6 durante la remediación.
+- Código, escenas, prefabs, builds y tests ejecutables no han sido modificados por esta actualización documental.
+
+<!-- W0_S17_PHASE1_END -->

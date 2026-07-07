@@ -1,7 +1,7 @@
 ---
 title: "Cartridge & Cloud — Build y Versioning Guide"
 author: "VRM Games / Blas Luis Rocha González"
-date: "2026-07-06"
+date: "2026-07-07"
 lang: "es-ES"
 document_version: "1.0"
 status: "Fuente vigente de build, versionado, empaquetado y trazabilidad"
@@ -3167,3 +3167,44 @@ IL2CPP, firma o Steam.
 | `s8.md` | 1531 | `975e35974c3ac193dedc354ad39f652dccd31356a4d69ec241dddcfdd84f29c1` |
 | `s9.md` | 773 | `743edb2e5421984273fb169aab3fbb16c48d6b0ac2e177c5e83ba01b51099304` |
 | `steam_v05.md` | 1866 | `f7840ee791e07430dd750500421dc6e262d21d5119e634634919247ff13cf8d0` |
+
+---
+
+<!-- W0_S17_PHASE1_START -->
+
+# Actualización de baseline y build W0
+
+## Estado operativo vigente tras W0
+
+| Elemento | Estado vigente | Alcance de la afirmación |
+|---|---|---|
+| Baseline de entrada | `main@efbc1a885a1d6819f764ec8cff8a465ad1986661` / aplicación `0.0.21` | Referencia congelada para iniciar la remediación |
+| W0 documental | `COMPLETED / DOCUMENTAL PASS` | Decisiones formalizadas y contratos sincronizados; no implica implementación |
+| Decisiones funcionales abiertas | `0` | DEC-01 a DEC-12 cerradas mediante ADR-0074 a ADR-0085 |
+| Sprint17_Phase1 | `BLOCKED / REMEDIATION REQUIRED` | W1-W7 no iniciadas y W8 no ejecutada |
+| H6 | `BLOCKED / NOT RUN` | Sin ejecución ni signoff H6 |
+| Vertical Slice | `NOT ACCEPTED` | No debe declararse completa ni aprobada |
+
+Las referencias anteriores a Sprint 17 como `PENDING / READY TO OPEN` se conservan como fotografía histórica de cierre de Sprint 16. Para cualquier trabajo posterior prevalece el estado de esta actualización W0.
+
+## Baseline de remediación
+
+| Campo | Valor |
+|---|---|
+| Rama | `main` |
+| Commit | `efbc1a885a1d6819f764ec8cff8a465ad1986661` |
+| Versión de aplicación | `0.0.21` |
+| Alcance | entrada documental para W1-W8 |
+| Build H6 | no creada / no aprobada |
+
+Cada ola debe registrar commit, versión, pruebas afectadas y compatibilidad de save. W8 exige build Windows x64 externa, Golden Path, campaña de siete días, cierre/reapertura, `Player.log` y reconciliación de inventario/economía. Ningún artefacto de Sprint 16 se renombra como build H6.
+
+## Regla de cierre y no propagación
+
+- El cierre de W0 no abre W1-W7 automáticamente; cada ola requiere su propia evidencia y control de cambios.
+- No se declara Sprint17_Phase1 completada mientras W8 no haya ejecutado la regresión integral.
+- No se propaga `PASS` de Sprint 16 a H6 ni a la Vertical Slice.
+- No se introducen sistemas Post-H6 durante la remediación.
+- Código, escenas, prefabs, builds y tests ejecutables no han sido modificados por esta actualización documental.
+
+<!-- W0_S17_PHASE1_END -->

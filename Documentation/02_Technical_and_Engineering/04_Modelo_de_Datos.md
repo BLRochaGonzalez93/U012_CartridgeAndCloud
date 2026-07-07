@@ -1,7 +1,7 @@
 ---
 title: "Cartridge & Cloud — Modelo de Datos"
 author: "VRM Games / Blas Luis Rocha González"
-date: "2026-07-01"
+date: "2026-07-07"
 lang: "es-ES"
 document_version: "1.0"
 status: "Fuente vigente del modelo de datos"
@@ -2689,3 +2689,50 @@ IntegratedGameStateSnapshot (schema 2)
 
 **Estado del documento:** fuente vigente del modelo de datos para la nueva carpeta
 `Documentacion/`. La ruta prevista es `Documentacion/04_Modelo_de_Datos.md`.
+
+---
+
+<!-- W0_S17_PHASE1_START -->
+
+# Actualización del modelo W0
+
+## Estado operativo vigente tras W0
+
+| Elemento | Estado vigente | Alcance de la afirmación |
+|---|---|---|
+| Baseline de entrada | `main@efbc1a885a1d6819f764ec8cff8a465ad1986661` / aplicación `0.0.21` | Referencia congelada para iniciar la remediación |
+| W0 documental | `COMPLETED / DOCUMENTAL PASS` | Decisiones formalizadas y contratos sincronizados; no implica implementación |
+| Decisiones funcionales abiertas | `0` | DEC-01 a DEC-12 cerradas mediante ADR-0074 a ADR-0085 |
+| Sprint17_Phase1 | `BLOCKED / REMEDIATION REQUIRED` | W1-W7 no iniciadas y W8 no ejecutada |
+| H6 | `BLOCKED / NOT RUN` | Sin ejecución ni signoff H6 |
+| Vertical Slice | `NOT ACCEPTED` | No debe declararse completa ni aprobada |
+
+Las referencias anteriores a Sprint 17 como `PENDING / READY TO OPEN` se conservan como fotografía histórica de cierre de Sprint 16. Para cualquier trabajo posterior prevalece el estado de esta actualización W0.
+
+## Entidades y campos requeridos
+
+| Agregado / DTO | Campo o relación | Invariante |
+|---|---|---|
+| `SimulationClockState` | `ElapsedBusinessSeconds`, `SelectedSpeed`, `IsPaused` derivado | Un único reloj de negocio; velocidad en (0.5, 1, 2, 4) |
+| `StoreDayState` | `DayNumber`, `Phase`, `DayDurationSeconds` | 300 s configurable para H6 |
+| `FundsReservation` | `ReservationId`, `OrderIds`, `AmountMinor`, `Status` | La suma activa reduce fondos disponibles |
+| `DeliveryRun` | lista de `OrderId`, estado y receipt idempotency key | Un Process All, múltiples órdenes conservadas |
+| `DisplayState` | `AssignedProductId?`, `VisibleQuantity`, `Capacity` | Máximo un producto hasta H6 |
+| `SaveEligibilitySnapshot` | fase, mutaciones pendientes, motivo de bloqueo | Guardado manual solo si todos los checks pasan |
+| `DailySummary` | día, ingresos, costes, impuesto, clientes, ventas | Una fila lógica por día completado |
+| `ManagementHistory` | detalle actual, dos días detallados, lista de summaries, lifetime | No colapsar días antiguos en un único total |
+| `WeeklyTaxState` | semana, base, importe, posting id | Exactamente una publicación por semana cerrada |
+| `PresentationSettings` | versión y wall occlusion efectiva false | Preferencia antigua no reactiva la función |
+| `PlacementAnchor` | base-center local y migration marker | Compensación única, no acumulativa |
+
+La evolución del schema debe aceptar la baseline `0.0.21`, inicializar campos nuevos de forma determinista y rechazar estados imposibles sin pérdida silenciosa.
+
+## Regla de cierre y no propagación
+
+- El cierre de W0 no abre W1-W7 automáticamente; cada ola requiere su propia evidencia y control de cambios.
+- No se declara Sprint17_Phase1 completada mientras W8 no haya ejecutado la regresión integral.
+- No se propaga `PASS` de Sprint 16 a H6 ni a la Vertical Slice.
+- No se introducen sistemas Post-H6 durante la remediación.
+- Código, escenas, prefabs, builds y tests ejecutables no han sido modificados por esta actualización documental.
+
+<!-- W0_S17_PHASE1_END -->

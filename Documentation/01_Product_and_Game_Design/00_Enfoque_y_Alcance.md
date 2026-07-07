@@ -1,7 +1,7 @@
 ---
 title: "Cartridge & Cloud — Enfoque y Alcance"
 author: "VRM Games / Blas Luis Rocha González"
-date: "2026-07-06"
+date: "2026-07-07"
 lang: "es-ES"
 document_version: "1.0"
 status: "Fuente vigente de enfoque y alcance"
@@ -4493,3 +4493,40 @@ Estos valores son provisionales.
 ---
 
 **Estado del documento:** fuente vigente de enfoque y alcance para la nueva carpeta `Documentacion/`. Cualquier sustitución deberá registrar explícitamente la versión, la motivación y las decisiones modificadas.
+
+---
+
+<!-- W0_S17_PHASE1_START -->
+
+# Actualización de alcance W0 - Sprint17_Phase1
+
+## Estado operativo vigente tras W0
+
+| Elemento | Estado vigente | Alcance de la afirmación |
+|---|---|---|
+| Baseline de entrada | `main@efbc1a885a1d6819f764ec8cff8a465ad1986661` / aplicación `0.0.21` | Referencia congelada para iniciar la remediación |
+| W0 documental | `COMPLETED / DOCUMENTAL PASS` | Decisiones formalizadas y contratos sincronizados; no implica implementación |
+| Decisiones funcionales abiertas | `0` | DEC-01 a DEC-12 cerradas mediante ADR-0074 a ADR-0085 |
+| Sprint17_Phase1 | `BLOCKED / REMEDIATION REQUIRED` | W1-W7 no iniciadas y W8 no ejecutada |
+| H6 | `BLOCKED / NOT RUN` | Sin ejecución ni signoff H6 |
+| Vertical Slice | `NOT ACCEPTED` | No debe declararse completa ni aprobada |
+
+Las referencias anteriores a Sprint 17 como `PENDING / READY TO OPEN` se conservan como fotografía histórica de cierre de Sprint 16. Para cualquier trabajo posterior prevalece el estado de esta actualización W0.
+
+## Límites de alcance confirmados
+
+- H6 usa un día de cinco minutos configurables y cuatro velocidades visibles; la pausa no es una quinta velocidad.
+- El alcance H6 mantiene displays monoproducto, máximo de ocho clientes activos, historial detallado limitado y tributación semanal técnica.
+- Guardado exacto a mitad de día, displays multiproducto y costes fijos recurrentes quedan Post-H6.
+- La remediación no incorpora empleados, investigación, comercio online, publishing ni sistemas empresariales tardíos.
+- La Vertical Slice solo podrá considerarse aceptada después de implementación, pruebas, build y signoff; la coherencia documental por sí sola no la cierra.
+
+## Regla de cierre y no propagación
+
+- El cierre de W0 no abre W1-W7 automáticamente; cada ola requiere su propia evidencia y control de cambios.
+- No se declara Sprint17_Phase1 completada mientras W8 no haya ejecutado la regresión integral.
+- No se propaga `PASS` de Sprint 16 a H6 ni a la Vertical Slice.
+- No se introducen sistemas Post-H6 durante la remediación.
+- Código, escenas, prefabs, builds y tests ejecutables no han sido modificados por esta actualización documental.
+
+<!-- W0_S17_PHASE1_END -->

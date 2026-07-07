@@ -1,7 +1,7 @@
 ---
 title: "Cartridge & Cloud — Production Roadmap y Sprint Plan"
 author: "VRM Games / Blas Luis Rocha González"
-date: "2026-07-06"
+date: "2026-07-07"
 lang: "es-ES"
 document_version: "1.0"
 status: "Fuente vigente de planificación y producción"
@@ -2427,3 +2427,63 @@ Documentacion/
 `Documentacion/`. Su estado operativo deberá actualizarse al cerrar Sprint 16, abrir Sprint 17
 y decidir el gate H6.
 
+---
+
+<!-- W0_S17_PHASE1_START -->
+
+# 24. Remediación Sprint17_Phase1 - actualización W0
+
+## Estado operativo vigente tras W0
+
+| Elemento | Estado vigente | Alcance de la afirmación |
+|---|---|---|
+| Baseline de entrada | `main@efbc1a885a1d6819f764ec8cff8a465ad1986661` / aplicación `0.0.21` | Referencia congelada para iniciar la remediación |
+| W0 documental | `COMPLETED / DOCUMENTAL PASS` | Decisiones formalizadas y contratos sincronizados; no implica implementación |
+| Decisiones funcionales abiertas | `0` | DEC-01 a DEC-12 cerradas mediante ADR-0074 a ADR-0085 |
+| Sprint17_Phase1 | `BLOCKED / REMEDIATION REQUIRED` | W1-W7 no iniciadas y W8 no ejecutada |
+| H6 | `BLOCKED / NOT RUN` | Sin ejecución ni signoff H6 |
+| Vertical Slice | `NOT ACCEPTED` | No debe declararse completa ni aprobada |
+
+Las referencias anteriores a Sprint 17 como `PENDING / READY TO OPEN` se conservan como fotografía histórica de cierre de Sprint 16. Para cualquier trabajo posterior prevalece el estado de esta actualización W0.
+
+## Plan por olas
+
+| Ola | Alcance | Estado tras W0 | Entrada obligatoria | Salida mínima |
+|---|---|---|---|---|
+| W0 | decisiones, contratos, caracterización y baseline | `COMPLETED / DOCUMENTAL PASS` | contraste documental | 0 decisiones funcionales abiertas |
+| W1 | tiempo, velocidades y pausa | `NOT STARTED` | CHAR-TIM ejecutada | DEC-01/02 implementadas y verificadas |
+| W2 | checkout, apertura y clientes | `NOT STARTED` | CHAR-CUS ejecutada | DEC-04/05 verificadas |
+| W3 | pedidos, recepción, Process All, impuesto | `NOT STARTED` | CHAR-ODR ejecutada | DEC-06/07/10 verificadas |
+| W4 | displays monoproducto | `NOT STARTED` | CHAR-DSP ejecutada | DEC-08 verificada |
+| W5 | guardado seguro | `NOT STARTED` | CHAR-SAV ejecutada | DEC-03 verificada |
+| W6 | histórico Management | `NOT STARTED` | CHAR-MGT ejecutada | DEC-09 verificada |
+| W7 | occlusion, pivotes y GroundAnchor | `NOT STARTED` | CHAR-ART ejecutada | DEC-11/12 verificadas |
+| W8 | regresión integral y candidata | `NOT RUN` | W1-W7 cerradas | build externa, siete días y evidencia completa |
+
+No se abre trabajo Post-H6 ni se declara Sprint17_Phase1 completada antes de W8.
+
+## Pruebas de caracterización previas a las olas
+
+| Grupo | IDs | Ola protegida | Cobertura mínima | Estado |
+|---|---|---|---|---|
+| Tiempo y pausa | `CHAR-TIM-001` a `CHAR-TIM-008` | W1 | reloj, velocidades, pausa anidada, HUD, transiciones y persistencia | `DEFINED / NOT RUN` |
+| Clientes y checkout | `CHAR-CUS-001` a `CHAR-CUS-009` | W2 | ocho activos, checkout obligatorio, FIFO, cierre, abandono y recuperación | `DEFINED / NOT RUN` |
+| Pedidos y economía | `CHAR-ODR-001` a `CHAR-ODR-010` | W3 | reserva de fondos, Process All, receipt, stock, ledger, semana e impuesto | `DEFINED / NOT RUN` |
+| Displays | `CHAR-DSP-001` a `CHAR-DSP-006` | W4 | asignación única, cantidades, retorno, clear-empty y save/load | `DEFINED / NOT RUN` |
+| Guardado | `CHAR-SAV-001` a `CHAR-SAV-008` | W5 | estados seguros, mutaciones pendientes, backup, recovery e idempotencia | `DEFINED / NOT RUN` |
+| Management | `CHAR-MGT-001` a `CHAR-MGT-008` | W6 | día actual + 2, `DailySummary`, lifetime, scroll, filtros, ES/EN y resolución | `DEFINED / NOT RUN` |
+| Autoría y settings | `CHAR-ART-001` a `CHAR-ART-007` | W7 | occlusion false, migración de preferencias, pivotes, GroundAnchor y compatibilidad | `DEFINED / NOT RUN` |
+| Regresión integral | `CHAR-REG-001` a `CHAR-REG-010` | W8 | siete días, build externa, logs, save/reload, reconciliación y no duplicados | `DEFINED / NOT RUN` |
+
+La definición documental de un caso no equivale a ejecución ni a PASS. Ninguna ola puede modificar el comportamiento protegido sin capturar primero el resultado de caracterización correspondiente.
+
+
+## Regla de cierre y no propagación
+
+- El cierre de W0 no abre W1-W7 automáticamente; cada ola requiere su propia evidencia y control de cambios.
+- No se declara Sprint17_Phase1 completada mientras W8 no haya ejecutado la regresión integral.
+- No se propaga `PASS` de Sprint 16 a H6 ni a la Vertical Slice.
+- No se introducen sistemas Post-H6 durante la remediación.
+- Código, escenas, prefabs, builds y tests ejecutables no han sido modificados por esta actualización documental.
+
+<!-- W0_S17_PHASE1_END -->

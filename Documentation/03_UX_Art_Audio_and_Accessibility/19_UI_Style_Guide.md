@@ -2,7 +2,7 @@
 title: "Cartridge & Cloud — UI Style Guide"
 subtitle: "Sistema visual, interacción, accesibilidad, localización e implementación de interfaz"
 author: "VRM Games / Blas Luis Rocha González"
-date: "2026-07-01"
+date: "2026-07-07"
 lang: es-ES
 version: "1.0-consolidated-draft"
 status: "Normative direction / implementation partially representative"
@@ -1720,3 +1720,46 @@ El mantenimiento periódico incluye:
 - registrar cambios en `13_Trazabilidad_y_Control_de_Cambios.xlsx`.
 
 La guía se revisará cuando cambie una regla, no por cada ajuste menor de contenido. El código y los assets son evidencia de implementación; el documento conserva intención, contratos y procedimiento. Cuando difieran, se abre una discrepancia y se decide qué fuente debe corregirse. Esta práctica evita que la guía se convierta en una descripción ideal desconectada del juego o, en el extremo contrario, en una simple transcripción del código actual.
+
+---
+
+<!-- W0_S17_PHASE1_START -->
+
+# Actualización UI W0
+
+## Estado operativo vigente tras W0
+
+| Elemento | Estado vigente | Alcance de la afirmación |
+|---|---|---|
+| Baseline de entrada | `main@efbc1a885a1d6819f764ec8cff8a465ad1986661` / aplicación `0.0.21` | Referencia congelada para iniciar la remediación |
+| W0 documental | `COMPLETED / DOCUMENTAL PASS` | Decisiones formalizadas y contratos sincronizados; no implica implementación |
+| Decisiones funcionales abiertas | `0` | DEC-01 a DEC-12 cerradas mediante ADR-0074 a ADR-0085 |
+| Sprint17_Phase1 | `BLOCKED / REMEDIATION REQUIRED` | W1-W7 no iniciadas y W8 no ejecutada |
+| H6 | `BLOCKED / NOT RUN` | Sin ejecución ni signoff H6 |
+| Vertical Slice | `NOT ACCEPTED` | No debe declararse completa ni aprobada |
+
+Las referencias anteriores a Sprint 17 como `PENDING / READY TO OPEN` se conservan como fotografía histórica de cierre de Sprint 16. Para cualquier trabajo posterior prevalece el estado de esta actualización W0.
+
+## Componentes afectados
+
+| Componente | Regla W0 |
+|---|---|
+| Speed controls | cuatro opciones visibles: x0,5, x1, x2 y x4; selección persistente y estado inequívoco |
+| Pause panel | pausa independiente, reanudar, guardar cuando sea seguro y motivo cuando no lo sea |
+| Open Store | disabled state con requisito de checkout funcional |
+| Orders | total reservado, validación previa y confirmación de `Process All` todo-o-nada |
+| Management history | navegación por días, summaries individuales, lifetime, scroll y empty states |
+| Settings | wall occlusion no visible durante H6 |
+| Feedback | ninguna acción atómica debe producir doble toast, doble sonido o doble contabilización por reintento |
+
+Validar ES/EN, 1280x720 y 1920x1080 antes de cerrar W6/W8.
+
+## Regla de cierre y no propagación
+
+- El cierre de W0 no abre W1-W7 automáticamente; cada ola requiere su propia evidencia y control de cambios.
+- No se declara Sprint17_Phase1 completada mientras W8 no haya ejecutado la regresión integral.
+- No se propaga `PASS` de Sprint 16 a H6 ni a la Vertical Slice.
+- No se introducen sistemas Post-H6 durante la remediación.
+- Código, escenas, prefabs, builds y tests ejecutables no han sido modificados por esta actualización documental.
+
+<!-- W0_S17_PHASE1_END -->

@@ -1,7 +1,7 @@
 ---
 title: "Cartridge & Cloud — Vertical Slice Specification"
 author: "VRM Games / Blas Luis Rocha González"
-date: "2026-07-06"
+date: "2026-07-07"
 lang: "es-ES"
 document_version: "1.0"
 status: "Contrato vigente de cierre del vertical slice"
@@ -1531,3 +1531,66 @@ Todo cambio mayor deberá indicar:
 ---
 
 **Estado del documento:** contrato vigente para el cierre del vertical slice en la nueva carpeta `Documentacion/`.
+
+---
+
+<!-- W0_S17_PHASE1_START -->
+
+# Actualización contractual W0 - criterios H6
+
+## Estado operativo vigente tras W0
+
+| Elemento | Estado vigente | Alcance de la afirmación |
+|---|---|---|
+| Baseline de entrada | `main@efbc1a885a1d6819f764ec8cff8a465ad1986661` / aplicación `0.0.21` | Referencia congelada para iniciar la remediación |
+| W0 documental | `COMPLETED / DOCUMENTAL PASS` | Decisiones formalizadas y contratos sincronizados; no implica implementación |
+| Decisiones funcionales abiertas | `0` | DEC-01 a DEC-12 cerradas mediante ADR-0074 a ADR-0085 |
+| Sprint17_Phase1 | `BLOCKED / REMEDIATION REQUIRED` | W1-W7 no iniciadas y W8 no ejecutada |
+| H6 | `BLOCKED / NOT RUN` | Sin ejecución ni signoff H6 |
+| Vertical Slice | `NOT ACCEPTED` | No debe declararse completa ni aprobada |
+
+Las referencias anteriores a Sprint 17 como `PENDING / READY TO OPEN` se conservan como fotografía histórica de cierre de Sprint 16. Para cualquier trabajo posterior prevalece el estado de esta actualización W0.
+
+## Criterios de aceptación añadidos o aclarados
+
+| ID | Criterio contractual | Bloqueante |
+|---|---|---|
+| VS-TIM-W0-01 | Jornada configurable de 300 s a x1 y controles x0,5/x1/x2/x4 | Sí |
+| VS-TIM-W0-02 | Pausa independiente; timers, spawn, paciencia, cierre y economía no avanzan | Sí |
+| VS-CHK-W0-01 | No se abre sin checkout funcional y no se retira el último durante `Open` | Sí |
+| VS-CUS-W0-01 | Ocho clientes activos como máximo H6, sin deadlocks ni clientes huérfanos | Sí |
+| VS-ORD-W0-01 | Reserva persistente, recepción atómica e idempotente y `Process All` todo-o-nada | Sí |
+| VS-DSP-W0-01 | Display monoproducto con conservación de stock, retorno y clear-empty | Sí |
+| VS-SAV-W0-01 | Guardado manual solo en estados seguros y sin mutaciones pendientes | Sí |
+| VS-MGT-W0-01 | Día actual + dos detallados, `DailySummary` por día anterior y lifetime | Sí |
+| VS-ECO-W0-01 | Impuesto del día 7 calculado y publicado exactamente una vez | Sí |
+| VS-CAM-W0-01 | Wall occlusion desactivada y preferencias antiguas no la reactivan | Sí |
+| VS-ART-W0-01 | Pivote base-centro / GroundAnchor preserva escenas, placements y saves | Sí |
+
+Todos estos criterios parten como `NOT RUN`. La Vertical Slice permanece `NOT ACCEPTED` hasta completar W1-W8 y el signoff H6.
+
+## Pruebas de caracterización previas a las olas
+
+| Grupo | IDs | Ola protegida | Cobertura mínima | Estado |
+|---|---|---|---|---|
+| Tiempo y pausa | `CHAR-TIM-001` a `CHAR-TIM-008` | W1 | reloj, velocidades, pausa anidada, HUD, transiciones y persistencia | `DEFINED / NOT RUN` |
+| Clientes y checkout | `CHAR-CUS-001` a `CHAR-CUS-009` | W2 | ocho activos, checkout obligatorio, FIFO, cierre, abandono y recuperación | `DEFINED / NOT RUN` |
+| Pedidos y economía | `CHAR-ODR-001` a `CHAR-ODR-010` | W3 | reserva de fondos, Process All, receipt, stock, ledger, semana e impuesto | `DEFINED / NOT RUN` |
+| Displays | `CHAR-DSP-001` a `CHAR-DSP-006` | W4 | asignación única, cantidades, retorno, clear-empty y save/load | `DEFINED / NOT RUN` |
+| Guardado | `CHAR-SAV-001` a `CHAR-SAV-008` | W5 | estados seguros, mutaciones pendientes, backup, recovery e idempotencia | `DEFINED / NOT RUN` |
+| Management | `CHAR-MGT-001` a `CHAR-MGT-008` | W6 | día actual + 2, `DailySummary`, lifetime, scroll, filtros, ES/EN y resolución | `DEFINED / NOT RUN` |
+| Autoría y settings | `CHAR-ART-001` a `CHAR-ART-007` | W7 | occlusion false, migración de preferencias, pivotes, GroundAnchor y compatibilidad | `DEFINED / NOT RUN` |
+| Regresión integral | `CHAR-REG-001` a `CHAR-REG-010` | W8 | siete días, build externa, logs, save/reload, reconciliación y no duplicados | `DEFINED / NOT RUN` |
+
+La definición documental de un caso no equivale a ejecución ni a PASS. Ninguna ola puede modificar el comportamiento protegido sin capturar primero el resultado de caracterización correspondiente.
+
+
+## Regla de cierre y no propagación
+
+- El cierre de W0 no abre W1-W7 automáticamente; cada ola requiere su propia evidencia y control de cambios.
+- No se declara Sprint17_Phase1 completada mientras W8 no haya ejecutado la regresión integral.
+- No se propaga `PASS` de Sprint 16 a H6 ni a la Vertical Slice.
+- No se introducen sistemas Post-H6 durante la remediación.
+- Código, escenas, prefabs, builds y tests ejecutables no han sido modificados por esta actualización documental.
+
+<!-- W0_S17_PHASE1_END -->

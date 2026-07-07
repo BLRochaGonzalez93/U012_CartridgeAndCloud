@@ -2,7 +2,7 @@
 ---
 title: "Cartridge & Cloud — Unity Project Setup Guide"
 author: "VRM Games / Blas Luis Rocha González"
-date: "2026-07-06"
+date: "2026-07-07"
 lang: "es-ES"
 document_version: "1.0"
 status: "Fuente vigente de configuración y restauración del proyecto Unity"
@@ -2740,3 +2740,45 @@ comprendidos.
 **Estado del documento:** fuente vigente de configuración, restauración y validación inicial del
 proyecto Unity para la nueva carpeta `Documentacion/`.
 
+---
+
+<!-- W0_S17_PHASE1_START -->
+
+# Actualización Unity W0 - cámara y pivotes
+
+## Estado operativo vigente tras W0
+
+| Elemento | Estado vigente | Alcance de la afirmación |
+|---|---|---|
+| Baseline de entrada | `main@efbc1a885a1d6819f764ec8cff8a465ad1986661` / aplicación `0.0.21` | Referencia congelada para iniciar la remediación |
+| W0 documental | `COMPLETED / DOCUMENTAL PASS` | Decisiones formalizadas y contratos sincronizados; no implica implementación |
+| Decisiones funcionales abiertas | `0` | DEC-01 a DEC-12 cerradas mediante ADR-0074 a ADR-0085 |
+| Sprint17_Phase1 | `BLOCKED / REMEDIATION REQUIRED` | W1-W7 no iniciadas y W8 no ejecutada |
+| H6 | `BLOCKED / NOT RUN` | Sin ejecución ni signoff H6 |
+| Vertical Slice | `NOT ACCEPTED` | No debe declararse completa ni aprobada |
+
+Las referencias anteriores a Sprint 17 como `PENDING / READY TO OPEN` se conservan como fotografía histórica de cierre de Sprint 16. Para cualquier trabajo posterior prevalece el estado de esta actualización W0.
+
+## Wall occlusion
+
+- La policy efectiva de H6 es `false` y tiene prioridad sobre PlayerPrefs, assets o valores serializados antiguos.
+- El control de usuario queda oculto durante H6. Una preferencia antigua se migra o ignora, pero no puede reactivar la función.
+- La regresión debe comprobar cámara orbital, zoom, paredes, entrada, checkout, displays y almacén en Editor y build externa.
+
+## Pivotes y GroundAnchor
+
+- El contrato de colocación es base-centro en espacio local.
+- Un FBX con pivote incompatible se envuelve en un prefab raíz o expone `GroundAnchor`; no se compensa repetidamente desde runtime.
+- La migración de instancias existentes registra versión/marcador y se ejecuta como máximo una vez.
+- Escenas y saves de `0.0.21` deben conservar posición, rotación, footprint, colliders y navegación.
+- Tras W7, el contrato queda congelado y cualquier excepción requiere ADR/cambio trazado.
+
+## Regla de cierre y no propagación
+
+- El cierre de W0 no abre W1-W7 automáticamente; cada ola requiere su propia evidencia y control de cambios.
+- No se declara Sprint17_Phase1 completada mientras W8 no haya ejecutado la regresión integral.
+- No se propaga `PASS` de Sprint 16 a H6 ni a la Vertical Slice.
+- No se introducen sistemas Post-H6 durante la remediación.
+- Código, escenas, prefabs, builds y tests ejecutables no han sido modificados por esta actualización documental.
+
+<!-- W0_S17_PHASE1_END -->

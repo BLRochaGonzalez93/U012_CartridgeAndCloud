@@ -2,7 +2,7 @@
 title: "Cartridge & Cloud — Economy and Balance Specification"
 subtitle: "Economía, inventario, precios, demanda, ciclo diario, tuning y validación"
 author: "VRM Games / Blas Luis Rocha González"
-date: "2026-07-06"
+date: "2026-07-07"
 lang: es-ES
 document_id: "CC-DOC-20"
 document_version: "1.0"
@@ -1183,3 +1183,43 @@ La canonización requiere un estado por fila: CURRENT-RUNTIME, TECHNICAL-LEGACY,
 Antes de exportar a Unity o copiar valores, se valida que el catálogo no contenga marcas reales, licencias incompletas o assets ausentes. Los cambios se rastrean mediante Change ID y versión. El hash del libro forma parte de la campaña de balance.
 
 La aceptación de `21` exigirá reconciliar los seis productos Phase 1 con los seis técnicos, documentar no equivalencias, definir aliases y elegir el camino de migración. Hasta ese momento, esta especificación seguirá marcando el doble catálogo como deuda A1/A2 según el flujo afectado.
+
+---
+
+<!-- W0_S17_PHASE1_START -->
+
+# Actualización económica W0
+
+## Estado operativo vigente tras W0
+
+| Elemento | Estado vigente | Alcance de la afirmación |
+|---|---|---|
+| Baseline de entrada | `main@efbc1a885a1d6819f764ec8cff8a465ad1986661` / aplicación `0.0.21` | Referencia congelada para iniciar la remediación |
+| W0 documental | `COMPLETED / DOCUMENTAL PASS` | Decisiones formalizadas y contratos sincronizados; no implica implementación |
+| Decisiones funcionales abiertas | `0` | DEC-01 a DEC-12 cerradas mediante ADR-0074 a ADR-0085 |
+| Sprint17_Phase1 | `BLOCKED / REMEDIATION REQUIRED` | W1-W7 no iniciadas y W8 no ejecutada |
+| H6 | `BLOCKED / NOT RUN` | Sin ejecución ni signoff H6 |
+| Vertical Slice | `NOT ACCEPTED` | No debe declararse completa ni aprobada |
+
+Las referencias anteriores a Sprint 17 como `PENDING / READY TO OPEN` se conservan como fotografía histórica de cierre de Sprint 16. Para cualquier trabajo posterior prevalece el estado de esta actualización W0.
+
+## Contratos económicos cerrados
+
+1. **Reserva de fondos.** Al solicitar una entrega se crea una reserva persistente por el importe total; el saldo disponible excluye reservas activas.
+2. **Recepción.** El receipt valida orden, reserva y capacidad; después descuenta caja, publica `SupplierReceivingCost`, añade stock una vez y completa la reserva. Repetir el comando no produce un segundo efecto.
+3. **Process All.** Se calcula el total de todas las órdenes elegibles y se valida antes de mutar. Si una orden falla, ninguna se procesa. Si todas pasan, se crea un `DeliveryRun` y las órdenes conservan sus IDs.
+4. **Resultado semanal.** El resultado bruto técnico semanal se deriva del ledger autoritativo. Al cierre del día 7 se registra una vez un impuesto del 10 % de `max(0, resultado)`.
+5. **Diferidos.** Alquiler, servicios, electricidad y otros costes fijos recurrentes quedan Post-H6.
+6. **Reconciliación.** Caja, reservas, stock, ledger, resumen diario y resumen semanal deben reconstruirse tras save/load sin divergencia.
+
+Los valores permanecen configurables para balance; cambiar un valor no autoriza alterar estas invariantes.
+
+## Regla de cierre y no propagación
+
+- El cierre de W0 no abre W1-W7 automáticamente; cada ola requiere su propia evidencia y control de cambios.
+- No se declara Sprint17_Phase1 completada mientras W8 no haya ejecutado la regresión integral.
+- No se propaga `PASS` de Sprint 16 a H6 ni a la Vertical Slice.
+- No se introducen sistemas Post-H6 durante la remediación.
+- Código, escenas, prefabs, builds y tests ejecutables no han sido modificados por esta actualización documental.
+
+<!-- W0_S17_PHASE1_END -->

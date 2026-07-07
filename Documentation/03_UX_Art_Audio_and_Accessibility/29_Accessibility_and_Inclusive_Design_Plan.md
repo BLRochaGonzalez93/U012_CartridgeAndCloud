@@ -2,7 +2,7 @@
 title: "Cartridge & Cloud — Accessibility and Inclusive Design Plan"
 subtitle: "Plan maestro consolidado de accesibilidad visual, auditiva, motora y cognitiva, diseño inclusivo, validación, Steam y operación de lanzamiento"
 author: "VRM Games / Blas Luis Rocha González"
-date: "2026-07-06"
+date: "2026-07-07"
 lang: "es-ES"
 document_number: "29"
 document_version: "1.0"
@@ -2851,3 +2851,44 @@ El documento 29 se considera generado cuando:
 **Estado de este documento:** `COMPLETE AS CONSOLIDATED PLAN / IMPLEMENTATION AND RELEASE VALIDATION PENDING`.
 
 **Siguiente documento de la secuencia:** `30_Performance_and_Optimization_Plan.md`.
+
+---
+
+<!-- W0_S17_PHASE1_START -->
+
+# Actualización de accesibilidad W0
+
+## Estado operativo vigente tras W0
+
+| Elemento | Estado vigente | Alcance de la afirmación |
+|---|---|---|
+| Baseline de entrada | `main@efbc1a885a1d6819f764ec8cff8a465ad1986661` / aplicación `0.0.21` | Referencia congelada para iniciar la remediación |
+| W0 documental | `COMPLETED / DOCUMENTAL PASS` | Decisiones formalizadas y contratos sincronizados; no implica implementación |
+| Decisiones funcionales abiertas | `0` | DEC-01 a DEC-12 cerradas mediante ADR-0074 a ADR-0085 |
+| Sprint17_Phase1 | `BLOCKED / REMEDIATION REQUIRED` | W1-W7 no iniciadas y W8 no ejecutada |
+| H6 | `BLOCKED / NOT RUN` | Sin ejecución ni signoff H6 |
+| Vertical Slice | `NOT ACCEPTED` | No debe declararse completa ni aprobada |
+
+Las referencias anteriores a Sprint 17 como `PENDING / READY TO OPEN` se conservan como fotografía histórica de cierre de Sprint 16. Para cualquier trabajo posterior prevalece el estado de esta actualización W0.
+
+## Controles añadidos
+
+- Velocidad y pausa se comunican mediante texto, estado y feedback, no solo color o animación.
+- Los controles x0,5/x1/x2/x4 mantienen targets legibles y navegación por teclado.
+- Un guardado bloqueado informa la causa y la siguiente acción.
+- La falta de checkout funcional se explica antes de abrir y durante una invalidación.
+- El histórico de Management es operable con scroll, foco, teclado y resoluciones 720p/1080p en ES/EN.
+- Ocultar wall occlusion elimina una opción no soportada sin dejar foco invisible, etiqueta huérfana ni preferencia efectiva.
+- Las correcciones de pivote no cambian áreas de interacción, colliders o navegación de forma que creen barreras nuevas.
+
+Estas condiciones se verifican en las suites `CHAR-TIM`, `CHAR-CUS`, `CHAR-MGT`, `CHAR-ART` y `CHAR-REG`; siguen `NOT RUN`.
+
+## Regla de cierre y no propagación
+
+- El cierre de W0 no abre W1-W7 automáticamente; cada ola requiere su propia evidencia y control de cambios.
+- No se declara Sprint17_Phase1 completada mientras W8 no haya ejecutado la regresión integral.
+- No se propaga `PASS` de Sprint 16 a H6 ni a la Vertical Slice.
+- No se introducen sistemas Post-H6 durante la remediación.
+- Código, escenas, prefabs, builds y tests ejecutables no han sido modificados por esta actualización documental.
+
+<!-- W0_S17_PHASE1_END -->

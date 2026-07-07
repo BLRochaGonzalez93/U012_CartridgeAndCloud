@@ -2,7 +2,7 @@
 title: "Cartridge & Cloud — Performance and Optimization Plan"
 subtitle: "Plan maestro consolidado de rendimiento, profiling, memoria, carga, renderizado, escalabilidad y gates técnicos"
 author: "VRM Games / Blas Luis Rocha González"
-date: "2026-07-06"
+date: "2026-07-07"
 lang: "es-ES"
 document_number: "30"
 document_version: "1.0"
@@ -3104,3 +3104,44 @@ El documento 30 se considera generado cuando:
 **Estado de este documento:** `COMPLETE AS CONSOLIDATED PLAN / MEASUREMENT, IMPLEMENTATION AND RELEASE VALIDATION PENDING`.
 
 **Siguiente documento de la secuencia:** `31_H6_and_Release_Readiness_Checklist.xlsx`.
+
+---
+
+<!-- W0_S17_PHASE1_START -->
+
+# Actualización de rendimiento W0
+
+## Estado operativo vigente tras W0
+
+| Elemento | Estado vigente | Alcance de la afirmación |
+|---|---|---|
+| Baseline de entrada | `main@efbc1a885a1d6819f764ec8cff8a465ad1986661` / aplicación `0.0.21` | Referencia congelada para iniciar la remediación |
+| W0 documental | `COMPLETED / DOCUMENTAL PASS` | Decisiones formalizadas y contratos sincronizados; no implica implementación |
+| Decisiones funcionales abiertas | `0` | DEC-01 a DEC-12 cerradas mediante ADR-0074 a ADR-0085 |
+| Sprint17_Phase1 | `BLOCKED / REMEDIATION REQUIRED` | W1-W7 no iniciadas y W8 no ejecutada |
+| H6 | `BLOCKED / NOT RUN` | Sin ejecución ni signoff H6 |
+| Vertical Slice | `NOT ACCEPTED` | No debe declararse completa ni aprobada |
+
+Las referencias anteriores a Sprint 17 como `PENDING / READY TO OPEN` se conservan como fotografía histórica de cierre de Sprint 16. Para cualquier trabajo posterior prevalece el estado de esta actualización W0.
+
+## Escenarios de caracterización obligatorios
+
+- Día de 300 s a x0,5, x1, x2 y x4 con equivalencia lógica dentro de la tolerancia definida.
+- Pausa sostenida y anidada sin avance de spawn, paciencia, cierre, entregas o impuestos.
+- Ocho clientes activos recorriendo browsing, reserva, cola, checkout, abandono y salida.
+- Process All con varias órdenes y recepción sin duplicados ni allocations crecientes por reintento.
+- Campaña persistente de siete días con histórico, impuesto semanal, save/reload y comparación de memoria.
+- Wall occlusion efectiva false; el perfil no puede justificar reactivar una opción descartada por contrato.
+- Regresión de pivotes/GroundAnchor sin cambios de transforms o navegación tras load.
+
+El objetivo de W0 es congelar el escenario, no declarar métricas. Todos los resultados permanecen `NOT RUN` hasta W1-W8.
+
+## Regla de cierre y no propagación
+
+- El cierre de W0 no abre W1-W7 automáticamente; cada ola requiere su propia evidencia y control de cambios.
+- No se declara Sprint17_Phase1 completada mientras W8 no haya ejecutado la regresión integral.
+- No se propaga `PASS` de Sprint 16 a H6 ni a la Vertical Slice.
+- No se introducen sistemas Post-H6 durante la remediación.
+- Código, escenas, prefabs, builds y tests ejecutables no han sido modificados por esta actualización documental.
+
+<!-- W0_S17_PHASE1_END -->

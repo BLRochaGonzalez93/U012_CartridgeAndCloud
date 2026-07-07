@@ -1,7 +1,7 @@
 ---
 title: "Cartridge & Cloud — Auditoría Global de Coherencia"
 author: "VRM Games / Blas Luis Rocha González"
-date: "2026-07-02"
+date: "2026-07-07"
 lang: "es-ES"
 document_version: "1.1-CANDIDATE"
 status: "Auditoría candidata — baseline no congelada"
@@ -835,3 +835,61 @@ El núcleo de producto y técnica es utilizable, y la candidata ya tiene una est
 **Estado de este documento:** `CANDIDATE AUDIT COMPLETE / BLOCKERS OPEN / FINAL REAUDIT REQUIRED`.
 
 **Siguiente acción:** registrar y resolver findings; actualizar documentos dependientes; regenerar esta auditoría como final antes de cerrar 32 y el paquete inmutable.
+
+---
+
+<!-- W0_S17_PHASE1_START -->
+
+# 18. Auditoría dirigida W0 - 2026-07-07
+
+## Estado operativo vigente tras W0
+
+| Elemento | Estado vigente | Alcance de la afirmación |
+|---|---|---|
+| Baseline de entrada | `main@efbc1a885a1d6819f764ec8cff8a465ad1986661` / aplicación `0.0.21` | Referencia congelada para iniciar la remediación |
+| W0 documental | `COMPLETED / DOCUMENTAL PASS` | Decisiones formalizadas y contratos sincronizados; no implica implementación |
+| Decisiones funcionales abiertas | `0` | DEC-01 a DEC-12 cerradas mediante ADR-0074 a ADR-0085 |
+| Sprint17_Phase1 | `BLOCKED / REMEDIATION REQUIRED` | W1-W7 no iniciadas y W8 no ejecutada |
+| H6 | `BLOCKED / NOT RUN` | Sin ejecución ni signoff H6 |
+| Vertical Slice | `NOT ACCEPTED` | No debe declararse completa ni aprobada |
+
+Las referencias anteriores a Sprint 17 como `PENDING / READY TO OPEN` se conservan como fotografía histórica de cierre de Sprint 16. Para cualquier trabajo posterior prevalece el estado de esta actualización W0.
+
+## Resultado de coherencia documental
+
+| Control | Resultado W0 | Observación |
+|---|---|---|
+| Decisiones funcionales DEC-01 a DEC-12 | `PASS DOCUMENTAL` | Formalizadas como ADR-0074 a ADR-0085 |
+| Contratos afectados | `SYNCHRONIZED` | Actualización propagada sin eliminar contenido previo |
+| Pruebas de caracterización | `DEFINED / NOT RUN` | Catálogo añadido a QA; no existe evidencia de ejecución |
+| Implementación W1-W7 | `NOT STARTED` | Fuera del alcance de W0 |
+| Regresión W8 | `NOT RUN` | Bloqueante para levantar la remediación |
+| H6 / Vertical Slice | `BLOCKED` | Sin propagación de PASS |
+
+Los hallazgos de ambigüedad funcional asociados a DEC-01 a DEC-12 quedan cerrados a nivel de decisión. Los hallazgos de implementación, evidencia, rendimiento, accesibilidad, build, persistencia o signoff permanecen abiertos hasta W1-W8.
+
+## Pruebas de caracterización previas a las olas
+
+| Grupo | IDs | Ola protegida | Cobertura mínima | Estado |
+|---|---|---|---|---|
+| Tiempo y pausa | `CHAR-TIM-001` a `CHAR-TIM-008` | W1 | reloj, velocidades, pausa anidada, HUD, transiciones y persistencia | `DEFINED / NOT RUN` |
+| Clientes y checkout | `CHAR-CUS-001` a `CHAR-CUS-009` | W2 | ocho activos, checkout obligatorio, FIFO, cierre, abandono y recuperación | `DEFINED / NOT RUN` |
+| Pedidos y economía | `CHAR-ODR-001` a `CHAR-ODR-010` | W3 | reserva de fondos, Process All, receipt, stock, ledger, semana e impuesto | `DEFINED / NOT RUN` |
+| Displays | `CHAR-DSP-001` a `CHAR-DSP-006` | W4 | asignación única, cantidades, retorno, clear-empty y save/load | `DEFINED / NOT RUN` |
+| Guardado | `CHAR-SAV-001` a `CHAR-SAV-008` | W5 | estados seguros, mutaciones pendientes, backup, recovery e idempotencia | `DEFINED / NOT RUN` |
+| Management | `CHAR-MGT-001` a `CHAR-MGT-008` | W6 | día actual + 2, `DailySummary`, lifetime, scroll, filtros, ES/EN y resolución | `DEFINED / NOT RUN` |
+| Autoría y settings | `CHAR-ART-001` a `CHAR-ART-007` | W7 | occlusion false, migración de preferencias, pivotes, GroundAnchor y compatibilidad | `DEFINED / NOT RUN` |
+| Regresión integral | `CHAR-REG-001` a `CHAR-REG-010` | W8 | siete días, build externa, logs, save/reload, reconciliación y no duplicados | `DEFINED / NOT RUN` |
+
+La definición documental de un caso no equivale a ejecución ni a PASS. Ninguna ola puede modificar el comportamiento protegido sin capturar primero el resultado de caracterización correspondiente.
+
+
+## Regla de cierre y no propagación
+
+- El cierre de W0 no abre W1-W7 automáticamente; cada ola requiere su propia evidencia y control de cambios.
+- No se declara Sprint17_Phase1 completada mientras W8 no haya ejecutado la regresión integral.
+- No se propaga `PASS` de Sprint 16 a H6 ni a la Vertical Slice.
+- No se introducen sistemas Post-H6 durante la remediación.
+- Código, escenas, prefabs, builds y tests ejecutables no han sido modificados por esta actualización documental.
+
+<!-- W0_S17_PHASE1_END -->
