@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using VRMGames.CartridgeAndCloud.Application.UIUX;
 using VRMGames.CartridgeAndCloud.Domain.Persistence;
+using VRMGames.CartridgeAndCloud.Domain.Store;
 using VRMGames.CartridgeAndCloud.Infrastructure.UIUX;
 using VRMGames.CartridgeAndCloud.Application.Store;
 using VRMGames.CartridgeAndCloud.Infrastructure.Audio;
@@ -18,6 +19,7 @@ using VRMGames.CartridgeAndCloud.Runtime.Inventory;
 using VRMGames.CartridgeAndCloud.Runtime.Navigation;
 using VRMGames.CartridgeAndCloud.Runtime.Placement;
 using VRMGames.CartridgeAndCloud.Runtime.UIUX;
+using VRMGames.CartridgeAndCloud.Domain.DayCycle;
 using VRMGames.CartridgeAndCloud.Domain.GameSession;
 using VRMGames.CartridgeAndCloud.Presentation.Store.Authoring;
 namespace VRMGames.CartridgeAndCloud.Runtime.Composition
@@ -56,6 +58,9 @@ public static StoreRuntimeCompositionRoot
             _navMesh;
         private SupplierDeliveryPresenter
             _supplierDeliveries;
+        private StoreOperationalGate
+            _operationalGate;
+        private string _lastObservedDayState = string.Empty;
 
         [RuntimeInitializeOnLoadMethod(
             RuntimeInitializeLoadType.BeforeSceneLoad)]
@@ -97,6 +102,53 @@ public static StoreRuntimeCompositionRoot
             HandleSceneLoaded(
                 SceneManager.GetActiveScene(),
                 LoadSceneMode.Single);
+        }
+
+        private void Update()
+        {
+            if (_operationalGate == null)
+            {
+                return;
+            }
+
+            _operationalGate.Tick(
+                Time.unscaledDeltaTime);
+
+            if (!_operationalGate
+                    .TryConsumeControlledClosingRequest(
+                        out string reason))
+            {
+                return;
+            }
+
+            UIRuntimeCompositionRoot root =
+                UIRuntimeCompositionRoot.Instance;
+
+            if (root == null ||
+                !root.ActiveSession.HasActiveSession ||
+                !string.Equals(
+                    root.ActiveSession.Snapshot
+                        .DayCycle.State,
+                    "Open",
+                    StringComparison.Ordinal))
+            {
+                return;
+            }
+
+            bool transitioned = root.TryTransitionDay(
+                "Closing",
+                out string transitionReason);
+            string detail = transitioned
+                ? reason
+                : reason + " " + transitionReason;
+            root.SetUserMessage(detail);
+
+            HandleFeedback(
+                new GameplayFeedbackEvent(
+                    GameplayFeedbackType
+                        .ClosingWarning,
+                    detail,
+                    "checkout-zone"));
         }
 
         private void OnDestroy()
@@ -197,9 +249,11 @@ public static StoreRuntimeCompositionRoot
                     catalog,
                     repository,
                     s15.ActiveSession,
-                    new SystemUtcClock());
+                    new SystemUtcClock(),
+                    s15.SaveMutations);
 
-            _service.InitializeForActiveSlot();
+            _service.InitializeForActiveSlot(
+                s15.Slots.LastLoadRecoveredFromBackup);
 
             _audio =
                 _storeRuntime.AddComponent<
@@ -263,6 +317,20 @@ public static StoreRuntimeCompositionRoot
             _navMesh.Configure(
                 sceneContext.Navigation);
 
+            _operationalGate =
+                new StoreOperationalGate(
+                    _service,
+                    catalog,
+                    _settings.MaximumCustomers);
+            s15.RegisterStoreOperationalGate(
+                _operationalGate);
+            s15.RegisterStoreClosingEconomyService(
+                _service);
+            s15.RegisterStoreManagementStateProvider(
+                _service);
+            s15.RegisterManualSaveCheckpointParticipant(
+                _service);
+
             _characters =
                 _storeRuntime.AddComponent<
                     StoreCharacterLoopController>();
@@ -292,8 +360,17 @@ public static StoreRuntimeCompositionRoot
                 _storeRuntime.AddComponent<SupplierDeliveryPresenter>();
             _supplierDeliveries.Configure(
                 _presentationAsset,
+                _service,
                 _binder.EntranceAnchor,
                 _binder.ReceivingAnchor);
+
+            foreach (StoreDeliveryRunRecord run in _service.State.DeliveryRuns)
+            {
+                if (run.Status == StoreDeliveryRunStatus.InTransit)
+                {
+                    _supplierDeliveries.Present(run.DeliveryRunId);
+                }
+            }
 
             _operations.Configure(
                 _service,
@@ -383,7 +460,7 @@ public static StoreRuntimeCompositionRoot
             _inventoryVisuals?.Refresh();
 
             if (feedback.Kind ==
-                GameplayFeedbackType.OrderReceived &&
+                GameplayFeedbackType.DeliveryRunStarted &&
                 !string.IsNullOrWhiteSpace(feedback.CorrelationId))
             {
                 _supplierDeliveries?.Present(feedback.CorrelationId);
@@ -423,31 +500,16 @@ public static StoreRuntimeCompositionRoot
 
             if (succeeded)
             {
-                try
-                {
-                    _service.SaveCheckpoint();
+                _operations
+                    ?.SetAutosaveCompleted(
+                        true);
 
-                    _operations
-                        ?.SetAutosaveCompleted(
-                            true);
-
-                    HandleFeedback(
-                        new GameplayFeedbackEvent(
-                            GameplayFeedbackType
-                                .AutosaveSucceeded,
-                            "Vertical slice state saved.",
-                            "cash-hud"));
-                }
-                catch (Exception exception)
-                {
-                    HandleFeedback(
-                        new GameplayFeedbackEvent(
-                            GameplayFeedbackType
-                                .AutosaveFailed,
-                            "Phase 1 sidecar save failed: " +
-                            exception.Message,
-                            "cash-hud"));
-                }
+                HandleFeedback(
+                    new GameplayFeedbackEvent(
+                        GameplayFeedbackType
+                            .AutosaveSucceeded,
+                        "Vertical slice state saved.",
+                        "cash-hud"));
             }
             else
             {
@@ -471,37 +533,46 @@ public static StoreRuntimeCompositionRoot
                 return;
             }
 
+            _service?.SynchronizeManagementDay();
+
+            string state = snapshot.DayCycle.State;
+            bool stateChanged = !string.Equals(
+                _lastObservedDayState,
+                state,
+                StringComparison.Ordinal);
+            _lastObservedDayState = state;
+
             if (!string.Equals(
-                    snapshot.DayCycle.State,
+                    state,
                     "Closed",
                     StringComparison.Ordinal))
             {
-                _operations
-                    ?.SetAutosaveCompleted(false);
+                _operations?.SetAutosaveCompleted(false);
             }
 
-            if (string.Equals(
-                    snapshot.DayCycle.State,
-                    "Closing",
-                    StringComparison.Ordinal))
+            if (!stateChanged)
+            {
+                return;
+            }
+
+            if (string.Equals(state, "Closing", StringComparison.Ordinal))
             {
                 HandleFeedback(
                     new GameplayFeedbackEvent(
-                        GameplayFeedbackType
-                            .ClosingWarning,
+                        GameplayFeedbackType.ClosingWarning,
                         "Store is closing.",
                         "store-entrance"));
             }
-            else if (string.Equals(
-                         snapshot.DayCycle.State,
-                         "Closed",
-                         StringComparison.Ordinal))
+            else if (string.Equals(state, "Closed", StringComparison.Ordinal))
             {
                 HandleFeedback(
                     new GameplayFeedbackEvent(
-                        GameplayFeedbackType
-                            .DayClosed,
-                        "Day closed.",
+                        GameplayFeedbackType.DayClosed,
+                        StoreTradingHoursPolicy.IsDayComplete(
+                            snapshot.DayCycle.ElapsedDaySeconds,
+                            snapshot.DayCycle.DayDurationSeconds)
+                            ? "Day closed at 24:00."
+                            : "Store closed. It may reopen before 22:00.",
                         "checkout-zone"));
             }
         }
@@ -524,7 +595,25 @@ public static StoreRuntimeCompositionRoot
                     HandleAutosaveCompleted;
                 s15.ActiveSession.SnapshotChanged -=
                     HandleSnapshotChanged;
+
+                if (_operationalGate != null)
+                {
+                    s15.UnregisterStoreOperationalGate(
+                        _operationalGate);
+                }
+
+                if (_service != null)
+                {
+                    s15.UnregisterStoreClosingEconomyService(
+                        _service);
+                    s15.UnregisterStoreManagementStateProvider(
+                        _service);
+                    s15.UnregisterManualSaveCheckpointParticipant(
+                        _service);
+                }
             }
+
+            _operationalGate?.ClearCustomers();
 
             if (_service != null)
             {
@@ -562,6 +651,7 @@ public static StoreRuntimeCompositionRoot
             _inventoryVisuals = null;
             _navMesh = null;
             _supplierDeliveries = null;
+            _operationalGate = null;
         }
     }
 }

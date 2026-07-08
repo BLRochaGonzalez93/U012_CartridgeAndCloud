@@ -69,6 +69,8 @@ namespace VRMGames.CartridgeAndCloud.Domain.DayCycle
     {
         public int OpenDurationSeconds { get; }
 
+        public int DayDurationSeconds => OpenDurationSeconds;
+
         public bool AutoBeginClosing { get; }
 
         public StoreDayPolicy(
@@ -91,7 +93,8 @@ namespace VRMGames.CartridgeAndCloud.Domain.DayCycle
         None = 0,
         InvalidState = 1,
         InvalidElapsedSeconds = 2,
-        ClosingConditionsNotMet = 3
+        ClosingConditionsNotMet = 3,
+        OutsideTradingHours = 4
     }
 
     public sealed class StoreDayTransitionResult
@@ -169,6 +172,8 @@ namespace VRMGames.CartridgeAndCloud.Domain.DayCycle
                 0,
                 Policy.OpenDurationSeconds -
                 ElapsedOpenSeconds);
+
+        public int ElapsedDaySeconds => ElapsedOpenSeconds;
 
         public bool CanAcceptCustomers =>
             State == StoreDayState.Open;

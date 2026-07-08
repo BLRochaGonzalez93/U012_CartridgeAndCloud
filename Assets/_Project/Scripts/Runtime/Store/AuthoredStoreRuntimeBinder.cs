@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 using VRMGames.CartridgeAndCloud.Infrastructure.Store;
+using VRMGames.CartridgeAndCloud.Presentation.Camera;
 using VRMGames.CartridgeAndCloud.Presentation.Store.Authoring;
 using VRMGames.CartridgeAndCloud.Presentation.Store.Doors;
 using VRMGames.CartridgeAndCloud.Presentation.Store.Occlusion;
@@ -62,13 +63,55 @@ namespace VRMGames.CartridgeAndCloud.Runtime.Store
                 _shell.DoorOpenDistance,
                 _shell.DoorSpeed);
 
+            ConfigureCamera(context);
+
             if (WallOcclusion != null)
             {
                 WallOcclusion.Configure(
                     context.GameplayCamera,
                     context.TechnicalPlayer,
-                    _settings.HideOccludingWalls);
+                    _settings.HideOccludingWalls,
+                    _settings.AllowWallOcclusionToggle);
             }
         }
+
+        private void ConfigureCamera(
+            StoreInitialSceneContext context)
+        {
+            UnityEngine.Camera camera =
+                context.GameplayCamera;
+
+            OrbitCameraRig rig =
+                camera.GetComponent<
+                    OrbitCameraRig>();
+
+            if (rig == null)
+            {
+                throw new InvalidOperationException(
+                    "GameplayCamera requires OrbitCameraRig authoring.");
+            }
+
+            Transform target =
+                rig.Target != null
+                    ? rig.Target
+                    : context.TechnicalPlayer;
+
+            rig.Configure(
+                target,
+                _settings.CameraYawDegrees,
+                _settings.CameraPitchDegrees,
+                _settings.CameraDistance,
+                _settings.CreateCameraConstraints());
+
+            camera.fieldOfView =
+                _settings.CameraFieldOfView;
+
+            camera.nearClipPlane =
+                _settings.CameraNearClipPlane;
+
+            camera.farClipPlane =
+                _settings.CameraFarClipPlane;
+        }
+
     }
 }

@@ -28,9 +28,9 @@ namespace VRMGames.CartridgeAndCloud.Runtime.Store
             ClearChildren(technicalContainer.transform);
 
             Renderer technicalRenderer = technicalContainer.GetComponent<Renderer>();
-            float groundY = technicalRenderer != null
-                ? technicalRenderer.bounds.min.y
-                : technicalContainer.transform.position.y;
+            float groundY = GroundingUtility.ResolveBasePlaneHeight(
+                technicalContainer.transform,
+                technicalRenderer);
             if (technicalRenderer != null)
             {
                 technicalRenderer.enabled = false;
@@ -54,7 +54,14 @@ namespace VRMGames.CartridgeAndCloud.Runtime.Store
             worldPosition.y = groundY;
             instance.transform.position = worldPosition;
             instance.transform.rotation = technicalContainer.transform.rotation;
-            GroundingUtility.AlignVisualRootToGround(instance.transform);
+            if (!GroundingUtility.AlignRootToGroundAnchor(
+                    instance.transform,
+                    groundY))
+            {
+                throw new InvalidOperationException(
+                    $"Furniture prefab '{prefab.name}' has no valid GroundAnchor or base-centre pivot.");
+            }
+
             return instance;
         }
 
@@ -71,7 +78,14 @@ namespace VRMGames.CartridgeAndCloud.Runtime.Store
             instance.name = instanceName;
             instance.transform.SetPositionAndRotation(worldPosition, Quaternion.identity);
             instance.transform.localScale = Vector3.one;
-            GroundingUtility.AlignVisualRootToGround(instance.transform);
+            if (!GroundingUtility.AlignRootToGroundAnchor(
+                    instance.transform,
+                    worldPosition.y))
+            {
+                throw new InvalidOperationException(
+                    $"Furniture prefab '{prefab.name}' has no valid GroundAnchor or base-centre pivot.");
+            }
+
             return instance;
         }
 
@@ -131,28 +145,30 @@ namespace VRMGames.CartridgeAndCloud.Runtime.Store
 
             StoreFixturePrefabAuthoring authoring =
                 prefab.GetComponent<StoreFixturePrefabAuthoring>();
-            if (authoring == null ||
-                !string.Equals(
+
+            if (authoring == null)
+            {
+                throw new InvalidOperationException(
+                    $"Furniture prefab '{prefab.name}' has an invalid authoring contract: " +
+                    "StoreFixturePrefabAuthoring is missing.");
+            }
+
+            if (!string.Equals(
                     authoring.DefinitionId,
                     definitionId,
                     StringComparison.Ordinal))
             {
                 throw new InvalidOperationException(
-                    $"Furniture prefab '{prefab.name}' has an invalid authoring contract.");
+                    $"Furniture prefab '{prefab.name}' is authored for " +
+                    $"'{authoring.DefinitionId}', not '{definitionId}'.");
             }
 
-            Transform collision = prefab.transform.Find("Collision");
-            if (collision == null ||
-                collision.GetComponentInChildren<BoxCollider>(true) == null)
+            if (!authoring.TryValidate(
+                    out string validationReport))
             {
                 throw new InvalidOperationException(
-                    $"Furniture prefab '{prefab.name}' is missing authored Collision.");
-            }
-
-            if (prefab.transform.Find("Anchors") == null)
-            {
-                throw new InvalidOperationException(
-                    $"Furniture prefab '{prefab.name}' is missing authored Anchors.");
+                    $"Furniture prefab '{prefab.name}' has an invalid authoring contract: " +
+                    validationReport);
             }
         }
 

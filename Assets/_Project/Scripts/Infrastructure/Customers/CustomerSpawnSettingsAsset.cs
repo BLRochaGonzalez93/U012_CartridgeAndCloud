@@ -10,7 +10,7 @@ namespace VRMGames.CartridgeAndCloud.Infrastructure.Customers
     {
         [SerializeField]
         [Min(1)]
-        private int _maxActiveCustomers = 6;
+        private int _maxActiveCustomers = 8;
 
         [SerializeField]
         [Min(1)]

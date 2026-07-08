@@ -121,6 +121,33 @@ namespace VRMGames.CartridgeAndCloud.Application.Persistence
                 new List<EconomyLedgerSaveRecord>(
                     source.LedgerEntries);
 
+            foreach (EconomyLedgerSaveRecord existing in ledger)
+            {
+                if (!string.Equals(
+                        existing.EntryId,
+                        entryId,
+                        StringComparison.Ordinal))
+                {
+                    continue;
+                }
+
+                if (!string.Equals(
+                        existing.PostingType,
+                        postingType,
+                        StringComparison.Ordinal) ||
+                    !string.Equals(
+                        existing.SourceId,
+                        sourceId,
+                        StringComparison.Ordinal) ||
+                    existing.MinorUnits != amountCents)
+                {
+                    throw new InvalidOperationException(
+                        "Ledger entry ID is already used by a different posting.");
+                }
+
+                return ledger;
+            }
+
             ledger.Add(
                 new EconomyLedgerSaveRecord(
                     entryId,

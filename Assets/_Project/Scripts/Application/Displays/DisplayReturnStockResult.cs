@@ -95,6 +95,8 @@ namespace VRMGames.CartridgeAndCloud.Application.Displays
         InsufficientDisplayQuantity = 5,
         DestinationCapacityExceeded = 6,
         TransferRejected = 7,
-        ClearAssignmentRejected = 8
+        ClearAssignmentRejected = 8,
+        ActiveReservationsPresent = 9,
+        ReservationQuantityInvalid = 10
     }
 }

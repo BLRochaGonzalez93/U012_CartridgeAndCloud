@@ -151,6 +151,7 @@ namespace VRMGames.CartridgeAndCloud.Infrastructure.UIUX
         {
             switch (kind)
             {
+                case GameplayFeedbackType.DeliveryRunStarted:
                 case GameplayFeedbackType.OrderReceived:
                 case GameplayFeedbackType.CustomerSatisfied:
                 case GameplayFeedbackType.CheckoutCompleted:

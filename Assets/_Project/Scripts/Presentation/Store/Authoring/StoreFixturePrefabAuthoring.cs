@@ -5,7 +5,7 @@ namespace VRMGames.CartridgeAndCloud.Presentation.Store.Authoring
 {
     /// <summary>
     /// Immutable identity contract for a complete furniture prefab. Geometry,
-    /// collision and anchors must already be authored in the prefab asset.
+    /// collision, anchors and grounding must already be authored in the prefab.
     /// </summary>
     [DisallowMultipleComponent]
     public sealed class StoreFixturePrefabAuthoring : MonoBehaviour
@@ -28,9 +28,11 @@ namespace VRMGames.CartridgeAndCloud.Presentation.Store.Authoring
             }
 
             Transform collision = transform.Find("Collision");
-            if (collision == null || collision.GetComponent<BoxCollider>() == null)
+            if (collision == null ||
+                collision.GetComponent<BoxCollider>() == null)
             {
-                report = $"{name} is missing Collision/BoxCollider.";
+                report =
+                    $"{name} is missing Collision/BoxCollider.";
                 return false;
             }
 
@@ -40,14 +42,44 @@ namespace VRMGames.CartridgeAndCloud.Presentation.Store.Authoring
                 return false;
             }
 
+            PrefabPhysicalContractAuthoring physical =
+                GetComponent<PrefabPhysicalContractAuthoring>();
+
+            if (physical == null)
+            {
+                report =
+                    $"{name} is missing PrefabPhysicalContractAuthoring.";
+                return false;
+            }
+
+            if (!physical.TryValidate(out report))
+            {
+                return false;
+            }
+
+            if (!physical.TryGetGroundAnchor(
+                    out Transform groundAnchor) ||
+                groundAnchor == null)
+            {
+                report =
+                    $"{name} has no valid ground reference.";
+                return false;
+            }
+
             report = "Furniture prefab contract is valid.";
             return true;
         }
 
-        public void Configure(string definitionId, float cellSize)
+        public void Configure(
+            string definitionId,
+            float cellSize)
         {
-            _definitionId = definitionId?.Trim() ?? string.Empty;
-            _cellSize = Mathf.Max(0.01f, cellSize);
+            _definitionId =
+                definitionId?.Trim() ??
+                string.Empty;
+
+            _cellSize =
+                Mathf.Max(0.01f, cellSize);
         }
     }
 }

@@ -123,7 +123,7 @@ namespace VRMGames.CartridgeAndCloud.Tests.EditMode.Displays
         }
 
         [Test]
-        public void Restock_InsufficientSource_FailsWithoutMutation()
+        public void Restock_RequestAboveSource_TransfersAvailableUnits()
         {
             Context context = CreateContext(sourceUnits: 2);
 
@@ -133,17 +133,15 @@ namespace VRMGames.CartridgeAndCloud.Tests.EditMode.Displays
                     context.Display,
                     new Quantity(3));
 
-            AssertFailureUnchanged(
-                context,
-                result,
-                DisplayRestockFailureReason
-                    .InsufficientSourceQuantity,
-                2,
-                0);
+            Assert.That(result.Succeeded, Is.True);
+            Assert.That(result.RequestedQuantity.Value, Is.EqualTo(3));
+            Assert.That(result.TransferredQuantity.Value, Is.EqualTo(2));
+            Assert.That(context.Source.UsedCapacity, Is.Zero);
+            Assert.That(context.Display.Inventory.UsedCapacity, Is.EqualTo(2));
         }
 
         [Test]
-        public void Restock_AboveDisplayCapacity_FailsWithoutMutation()
+        public void Restock_RequestAboveDisplayCapacity_FillsAvailableCapacity()
         {
             Context context = CreateContext(sourceUnits: 10);
 
@@ -153,13 +151,11 @@ namespace VRMGames.CartridgeAndCloud.Tests.EditMode.Displays
                     context.Display,
                     new Quantity(7));
 
-            AssertFailureUnchanged(
-                context,
-                result,
-                DisplayRestockFailureReason
-                    .DisplayCapacityExceeded,
-                10,
-                0);
+            Assert.That(result.Succeeded, Is.True);
+            Assert.That(result.RequestedQuantity.Value, Is.EqualTo(7));
+            Assert.That(result.TransferredQuantity.Value, Is.EqualTo(6));
+            Assert.That(context.Source.UsedCapacity, Is.EqualTo(4));
+            Assert.That(context.Display.Inventory.UsedCapacity, Is.EqualTo(6));
         }
 
         [Test]
@@ -235,7 +231,7 @@ namespace VRMGames.CartridgeAndCloud.Tests.EditMode.Displays
         }
 
         [Test]
-        public void Restock_TransitSource_IsAllowed()
+        public void Restock_TransitSource_IsRejected()
         {
             Context context = CreateContext(
                 sourceUnits: 3,
@@ -247,7 +243,13 @@ namespace VRMGames.CartridgeAndCloud.Tests.EditMode.Displays
                     context.Display,
                     new Quantity(2));
 
-            Assert.That(result.Succeeded, Is.True);
+            Assert.That(result.Succeeded, Is.False);
+            Assert.That(
+                result.FailureReason,
+                Is.EqualTo(DisplayRestockFailureReason
+                    .SourceContainerTypeNotAllowed));
+            Assert.That(context.Source.UsedCapacity, Is.EqualTo(3));
+            Assert.That(context.Display.Inventory.UsedCapacity, Is.Zero);
         }
 
         private static Context CreateContext(

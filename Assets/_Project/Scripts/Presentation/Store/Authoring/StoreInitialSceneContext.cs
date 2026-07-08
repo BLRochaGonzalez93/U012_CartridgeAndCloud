@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using UnityEngine;
+using VRMGames.CartridgeAndCloud.Presentation.Camera;
 using VRMGames.CartridgeAndCloud.Presentation.Placement;
 using VRMGames.CartridgeAndCloud.Presentation.Store.Doors;
 using VRMGames.CartridgeAndCloud.Presentation.Store.Occlusion;
@@ -95,8 +96,23 @@ namespace VRMGames.CartridgeAndCloud.Presentation.Store.Authoring
             _customerSpawnAnchors;
         public IReadOnlyList<Transform> RequiredAccessAnchors =>
             _requiredAccessAnchors;
-        public AutomaticSlidingDoorController Door => _door;
-        public AutomaticDoorParts DoorParts => _doorParts;
+        public AutomaticSlidingDoorController Door
+        {
+            get
+            {
+                ResolveDoorContract();
+                return _door;
+            }
+        }
+
+        public AutomaticDoorParts DoorParts
+        {
+            get
+            {
+                ResolveDoorContract();
+                return _doorParts;
+            }
+        }
         public UnityEngine.Camera GameplayCamera => _gameplayCamera;
         public WallOcclusionController WallOcclusion => _wallOcclusion;
         public GameObject EnvironmentRoot => _environmentRoot;
@@ -166,6 +182,8 @@ namespace VRMGames.CartridgeAndCloud.Presentation.Store.Authoring
 
         public bool TryValidate(out string report)
         {
+            ResolveDoorContract();
+
             StringBuilder errors = new StringBuilder();
 
             Require(_placementSurface, "PlacementSurface", errors);
@@ -179,6 +197,27 @@ namespace VRMGames.CartridgeAndCloud.Presentation.Store.Authoring
             Require(_door, "AutomaticSlidingDoorController", errors);
             Require(_doorParts, "AutomaticDoorParts", errors);
             Require(_gameplayCamera, "GameplayCamera", errors);
+
+            if (_gameplayCamera != null)
+            {
+                OrbitCameraRig cameraRig =
+                    _gameplayCamera.GetComponent<
+                        OrbitCameraRig>();
+
+                Require(
+                    cameraRig,
+                    "GameplayCamera/OrbitCameraRig",
+                    errors);
+
+                if (cameraRig != null &&
+                    !cameraRig.TryValidateAuthoring(
+                        out string cameraReport))
+                {
+                    errors.AppendLine(
+                        "- " + cameraReport);
+                }
+            }
+
             Require(_environmentRoot, "EnvironmentRoot", errors);
             Require(Navigation, "StoreNavigationAuthoring", errors);
             Require(_initialFurnitureRoot, "InitialFurnitureRoot", errors);
@@ -258,6 +297,29 @@ namespace VRMGames.CartridgeAndCloud.Presentation.Store.Authoring
             {
                 throw new InvalidOperationException(
                     "StoreInitial scene contract is invalid:\n" + report);
+            }
+        }
+
+        private void ResolveDoorContract()
+        {
+            if (_door == null && _environmentRoot != null)
+            {
+                _door = _environmentRoot
+                    .GetComponentInChildren<AutomaticSlidingDoorController>(true);
+            }
+
+            if (_doorParts == null)
+            {
+                if (_door != null)
+                {
+                    _doorParts = _door.GetComponent<AutomaticDoorParts>();
+                }
+
+                if (_doorParts == null && _environmentRoot != null)
+                {
+                    _doorParts = _environmentRoot
+                        .GetComponentInChildren<AutomaticDoorParts>(true);
+                }
             }
         }
 

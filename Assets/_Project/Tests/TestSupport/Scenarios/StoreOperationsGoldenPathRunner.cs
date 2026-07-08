@@ -190,11 +190,11 @@ namespace VRMGames.CartridgeAndCloud.Runtime.Development.Scenarios
                 service.State.Orders.Count == 2;
 
             StoreOperationResult checkoutReceive =
-                service.ReceiveOrder(
+                service.DispatchAndComplete(
                     checkoutOrder.Detail);
 
             StoreOperationResult displayReceive =
-                service.ReceiveOrder(
+                service.DispatchAndComplete(
                     displayOrder.Detail);
 
             LastFurnitureReceived =
@@ -235,7 +235,7 @@ namespace VRMGames.CartridgeAndCloud.Runtime.Development.Scenarios
                 productOrder.Succeeded;
 
             StoreOperationResult productReceive =
-                service.ReceiveOrder(
+                service.DispatchAndComplete(
                     productOrder.Detail);
 
             LastProductReceived =

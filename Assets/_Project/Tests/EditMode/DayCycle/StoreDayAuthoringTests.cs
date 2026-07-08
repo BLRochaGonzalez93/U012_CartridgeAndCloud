@@ -1,5 +1,6 @@
 using NUnit.Framework;
 using UnityEngine;
+using VRMGames.CartridgeAndCloud.Application.DayCycle;
 using VRMGames.CartridgeAndCloud.Domain.DayCycle;
 using VRMGames.CartridgeAndCloud.Infrastructure.Customers;
 using VRMGames.CartridgeAndCloud.Infrastructure.DayCycle;
@@ -215,6 +216,57 @@ namespace VRMGames.CartridgeAndCloud.Tests.EditMode.DayCycle
                 Assert.Throws<
                     System.ArgumentOutOfRangeException>(
                     () => controller.Tick(-1f));
+            }
+            finally
+            {
+                Object.DestroyImmediate(gameObject);
+                Object.DestroyImmediate(asset);
+            }
+        }
+
+
+        [Test] public void RuntimeController_UsesSharedClockAndPauseService()
+        {
+            StoreDaySettingsAsset asset =
+                ScriptableObject.CreateInstance<
+                    StoreDaySettingsAsset>();
+            GameObject gameObject =
+                new GameObject("StoreDayControllerTest");
+
+            try
+            {
+                asset.Configure(
+                    "day-test",
+                    10,
+                    true,
+                    true);
+                SimulationClock clock =
+                    new SimulationClock();
+                PauseService pause =
+                    new PauseService();
+                StoreDayRuntimeController controller =
+                    gameObject.AddComponent<
+                        StoreDayRuntimeController>();
+                controller.Configure(
+                    asset,
+                    null,
+                    false,
+                    clock,
+                    pause);
+                controller.Initialize();
+
+                clock.SetSpeed(2f);
+                pause.RequestPause("test");
+                controller.Tick(2f);
+                Assert.That(
+                    controller.Day.ElapsedOpenSeconds,
+                    Is.Zero);
+
+                pause.ReleasePause("test");
+                controller.Tick(1f);
+                Assert.That(
+                    controller.Day.ElapsedOpenSeconds,
+                    Is.EqualTo(2));
             }
             finally
             {

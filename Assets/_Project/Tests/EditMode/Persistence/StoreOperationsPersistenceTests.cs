@@ -1,5 +1,6 @@
 using System.IO;
 using NUnit.Framework;
+using VRMGames.CartridgeAndCloud.Application.Store;
 using VRMGames.CartridgeAndCloud.Domain.Identifiers;
 using VRMGames.CartridgeAndCloud.Domain.Store;
 using VRMGames.CartridgeAndCloud.Infrastructure.Persistence;
@@ -136,6 +137,67 @@ namespace VRMGames.CartridgeAndCloud.Tests.EditMode.Persistence
                 _repository.Load(
                     new SaveSlotId(1)),
                 Is.Null);
+        }
+
+        [Test]
+        public void PreferBackup_LoadsMatchingPreviousCheckpoint()
+        {
+            _repository.Save(State());
+            _repository.Save(State(generation: 2));
+
+            StoreOperationsState loaded =
+                _repository.Load(
+                    new SaveSlotId(0),
+                    preferBackup: true);
+
+            Assert.That(loaded.Generation, Is.EqualTo(1));
+            Assert.That(
+                _repository.Load(
+                    new SaveSlotId(0))
+                    .Generation,
+                Is.EqualTo(1));
+        }
+
+        [Test]
+        public void Checkpoint_DisposeWithoutCommitRestoresPreviousState()
+        {
+            _repository.Save(State());
+
+            using (IStoreOperationsCheckpoint checkpoint =
+                   _repository.BeginCheckpoint(
+                       State(generation: 2)))
+            {
+                Assert.That(
+                    _repository.Load(
+                        new SaveSlotId(0))
+                        .Generation,
+                    Is.EqualTo(2));
+            }
+
+            Assert.That(
+                _repository.Load(
+                    new SaveSlotId(0))
+                    .Generation,
+                Is.EqualTo(1));
+        }
+
+        [Test]
+        public void Checkpoint_CommitKeepsNewState()
+        {
+            _repository.Save(State());
+
+            using (IStoreOperationsCheckpoint checkpoint =
+                   _repository.BeginCheckpoint(
+                       State(generation: 2)))
+            {
+                checkpoint.Commit();
+            }
+
+            Assert.That(
+                _repository.Load(
+                    new SaveSlotId(0))
+                    .Generation,
+                Is.EqualTo(2));
         }
 
         [Test]

@@ -1723,3 +1723,15 @@ El siguiente identificador ADR disponible queda reservado como `ADR-0086`.
 - Código, escenas, prefabs, builds y tests ejecutables no han sido modificados por esta actualización documental.
 
 <!-- W0_S17_PHASE1_END -->
+
+---
+
+## Actualización posterior a W8 — Implementación S17-MOD-002…010
+
+| Artefacto | Ruta | Estado |
+|---|---|---|
+| ADR-0086 | `02_Technical_and_Engineering/Architecture_Decisions/ADR-0086_Reloj_Global_Continuo_y_Proyeccion_24h.md` | `ACCEPTED / IMPLEMENTED CANDIDATE` |
+| ADR-0087 | `02_Technical_and_Engineering/Architecture_Decisions/ADR-0087_Ventana_Comercial_y_Aperturas_Multiples.md` | `ACCEPTED / IMPLEMENTED CANDIDATE` |
+| Registro de implementación | `04_Production_QA_and_Traceability/U012_S17_MOD_002_010_Implementation_Record.md` | `PENDING UNITY VALIDATION` |
+
+La decisión cubre `S17-MOD-002` a `S17-MOD-010`; `S17-MOD-001` queda absorbida por ADR-0086. El siguiente ADR disponible es `ADR-0088`.

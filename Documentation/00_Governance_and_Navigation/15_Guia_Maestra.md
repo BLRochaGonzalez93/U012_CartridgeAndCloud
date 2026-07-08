@@ -3348,3 +3348,28 @@ La definición documental de un caso no equivale a ejecución ni a PASS. Ninguna
 - Código, escenas, prefabs, builds y tests ejecutables no han sido modificados por esta actualización documental.
 
 <!-- W0_S17_PHASE1_END -->
+
+---
+
+# 67. Decisión final e implementación de modificaciones diferidas S17
+
+Tras el cierre `W0–W8 / PASS`, se aprueba la implementación integral de `S17-MOD-002` a `S17-MOD-010`. `S17-MOD-001` queda absorbida por el contrato de reloj continuo de `S17-MOD-007`.
+
+| Decisión | Estado candidato | Fuente normativa |
+|---|---|---|
+| Visitas sin producto visible | `IMPLEMENTED / PENDING VALIDATION` | S17-MOD-002 |
+| Una visita por `DeliveryRun` | `IMPLEMENTED / PENDING VALIDATION` | S17-MOD-003 |
+| Inventario disponible solo tras recepción | `IMPLEMENTED / PENDING VALIDATION` | S17-MOD-004 |
+| LOD persistente y caja proporcionada | `IMPLEMENTED / PENDING VALIDATION` | S17-MOD-005 |
+| Hora `HH:mm` | `IMPLEMENTED / PENDING VALIDATION` | ADR-0086 |
+| Reloj continuo salvo pausa | `IMPLEMENTED / PENDING VALIDATION` | ADR-0086 |
+| Aperturas múltiples 08:00–22:00 | `IMPLEMENTED / PENDING VALIDATION` | ADR-0087 |
+| Grounding mundial sin offsets por prefab | `IMPLEMENTED / PENDING VALIDATION` | S17-MOD-009 / ADR-0085 |
+| Staff orientado por anchors | `IMPLEMENTED / PENDING VALIDATION` | S17-MOD-010 |
+
+Los nuevos ADR vigentes son:
+
+- `ADR-0086`: reloj global continuo y proyección de 24 horas;
+- `ADR-0087`: ventana comercial y aperturas múltiples.
+
+El siguiente identificador ADR disponible es `ADR-0088`. El estado de esta sección no sustituye la validación en Unity; la candidata deberá superar la regresión completa W1–W8 más los nuevos casos S17-MOD antes de declararse `PASS`.

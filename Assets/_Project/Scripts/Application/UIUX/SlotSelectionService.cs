@@ -57,6 +57,13 @@ namespace VRMGames.CartridgeAndCloud.Application.UIUX
         private readonly DefaultIntegratedGameStateFactory
             _factory;
         private readonly IUtcClock _clock;
+        private readonly HashSet<int> _recoveredSlots =
+            new HashSet<int>();
+
+        public bool LastLoadRecoveredFromBackup {
+            get;
+            private set;
+        }
 
         public SlotSelectionService(
             IIntegratedSaveRepository repository,
@@ -118,6 +125,11 @@ namespace VRMGames.CartridgeAndCloud.Application.UIUX
 
             if (result.Succeeded && snapshot != null)
             {
+                if (result.RecoveredFromBackup)
+                {
+                    _recoveredSlots.Add(slotId.Value);
+                }
+
                 return new SlotDescriptor(
                     slotId,
                     result.RecoveredFromBackup
@@ -174,6 +186,9 @@ namespace VRMGames.CartridgeAndCloud.Application.UIUX
             SaveSlotId slotId,
             bool overwriteConfirmed)
         {
+            LastLoadRecoveredFromBackup = false;
+            _recoveredSlots.Remove(slotId.Value);
+
             SlotDescriptor descriptor =
                 Inspect(slotId);
 
@@ -215,6 +230,7 @@ namespace VRMGames.CartridgeAndCloud.Application.UIUX
             _activeSession.Activate(
                 slotId,
                 snapshot);
+            _recoveredSlots.Remove(slotId.Value);
 
             return new SlotOperationResult(
                 SlotOperationStatus.Success,
@@ -224,6 +240,10 @@ namespace VRMGames.CartridgeAndCloud.Application.UIUX
         public SlotOperationResult Continue(
             SaveSlotId slotId)
         {
+            LastLoadRecoveredFromBackup = false;
+            bool recoveredDuringInspection =
+                _recoveredSlots.Remove(slotId.Value);
+
             IntegratedSaveRepositoryResult result =
                 _repository.Load(
                     slotId,
@@ -246,19 +266,28 @@ namespace VRMGames.CartridgeAndCloud.Application.UIUX
             _activeSession.Activate(
                 slotId,
                 snapshot);
+            LastLoadRecoveredFromBackup =
+                result.RecoveredFromBackup ||
+                recoveredDuringInspection;
 
             return new SlotOperationResult(
-                result.RecoveredFromBackup
+                LastLoadRecoveredFromBackup
                     ? SlotOperationStatus
                         .RecoveredFromBackup
                     : SlotOperationStatus.Success,
-                result.Detail);
+                recoveredDuringInspection &&
+                string.IsNullOrWhiteSpace(result.Detail)
+                    ? "Backup restored during slot inspection."
+                    : result.Detail);
         }
 
         public SlotOperationResult Delete(
             SaveSlotId slotId,
             bool confirmed)
         {
+            LastLoadRecoveredFromBackup = false;
+            _recoveredSlots.Remove(slotId.Value);
+
             if (!confirmed)
             {
                 return new SlotOperationResult(

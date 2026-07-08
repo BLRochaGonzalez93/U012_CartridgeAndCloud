@@ -633,7 +633,7 @@ namespace VRMGames.CartridgeAndCloud.Tests.PlayMode.Store
                     .OrderId;
 
             Assert.That(
-                service.ReceiveOrder(
+                service.DispatchAndComplete(
                     shelfOrderId)
                     .Succeeded,
                 Is.True);
@@ -736,7 +736,7 @@ namespace VRMGames.CartridgeAndCloud.Tests.PlayMode.Store
                     .OrderId;
 
             Assert.That(
-                service.ReceiveOrder(
+                service.DispatchAndComplete(
                     checkoutOrderId)
                     .Succeeded,
                 Is.True);
@@ -850,7 +850,7 @@ namespace VRMGames.CartridgeAndCloud.Tests.PlayMode.Store
                     .OrderId;
 
             Assert.That(
-                service.ReceiveOrder(
+                service.DispatchAndComplete(
                     productOrderId)
                     .Succeeded,
                 Is.True);

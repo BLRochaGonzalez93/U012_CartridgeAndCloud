@@ -3,6 +3,7 @@ using System.IO;
 using VRMGames.CartridgeAndCloud.Application.GameSession;
 using VRMGames.CartridgeAndCloud.Application.Persistence;
 using VRMGames.CartridgeAndCloud.Domain.Identifiers;
+using VRMGames.CartridgeAndCloud.Domain.DayCycle;
 using VRMGames.CartridgeAndCloud.Domain.Persistence;
 
 using VRMGames.CartridgeAndCloud.Domain.GameSession;
@@ -55,7 +56,9 @@ namespace VRMGames.CartridgeAndCloud.Tests.EditMode.Persistence
             ClosedSnapshot(
                 SaveSlotId? slot = null,
                 long cashCents = 1000,
-                DateTime? updatedUtc = null)
+                DateTime? updatedUtc = null,
+                float simulationSpeedMultiplier =
+                    SimulationSpeedPolicy.Normal)
         {
             return new IntegratedGameStateSnapshot(
                 IntegratedGameStateSnapshot
@@ -152,7 +155,8 @@ namespace VRMGames.CartridgeAndCloud.Tests.EditMode.Persistence
                     "Closed",
                     300,
                     300,
-                    true),
+                    true,
+                    simulationSpeedMultiplier),
                 new[]
                 {
                     new EconomyLedgerSaveRecord(
@@ -175,7 +179,9 @@ namespace VRMGames.CartridgeAndCloud.Tests.EditMode.Persistence
         public static IntegratedGameStateSnapshot
             OpenSnapshot(
                 SaveSlotId? slot = null,
-                long cashCents = 1000)
+                long cashCents = 1000,
+                float simulationSpeedMultiplier =
+                    SimulationSpeedPolicy.Normal)
         {
             return new IntegratedGameStateSnapshot(
                 IntegratedGameStateSnapshot
@@ -256,7 +262,8 @@ namespace VRMGames.CartridgeAndCloud.Tests.EditMode.Persistence
                     "Open",
                     300,
                     100,
-                    true),
+                    true,
+                    simulationSpeedMultiplier),
                 new EconomyLedgerSaveRecord[0]);
         }
 

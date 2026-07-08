@@ -108,6 +108,83 @@ namespace VRMGames.CartridgeAndCloud.Tests.EditMode.Displays
                     .DestinationCapacityExceeded));
         }
 
+
+        [Test]
+        public void Return_TransitDestination_IsRejected()
+        {
+            Context context = CreateContext(
+                5,
+                InventoryContainerType.Transit);
+
+            DisplayReturnStockResult result =
+                context.Service.Return(
+                    context.Display,
+                    context.Destination,
+                    new Quantity(1));
+
+            Assert.That(result.Succeeded, Is.False);
+            Assert.That(
+                result.FailureReason,
+                Is.EqualTo(DisplayReturnStockFailureReason
+                    .DestinationContainerTypeNotAllowed));
+            Assert.That(context.Display.Inventory.UsedCapacity, Is.EqualTo(5));
+            Assert.That(context.Destination.UsedCapacity, Is.Zero);
+        }
+
+        [Test]
+        public void Return_ReservedUnitsCannotBeRemoved()
+        {
+            Context context = CreateContext(5);
+
+            DisplayReturnStockResult result =
+                context.Service.Return(
+                    context.Display,
+                    context.Destination,
+                    new Quantity(4),
+                    new Quantity(2));
+
+            Assert.That(result.Succeeded, Is.False);
+            Assert.That(
+                result.FailureReason,
+                Is.EqualTo(DisplayReturnStockFailureReason
+                    .ActiveReservationsPresent));
+            Assert.That(context.Display.Inventory.UsedCapacity, Is.EqualTo(5));
+            Assert.That(context.Destination.UsedCapacity, Is.Zero);
+        }
+
+        [Test]
+        public void Return_UnreservedUnitsCanBeRemoved()
+        {
+            Context context = CreateContext(5);
+
+            DisplayReturnStockResult result =
+                context.Service.Return(
+                    context.Display,
+                    context.Destination,
+                    new Quantity(3),
+                    new Quantity(2));
+
+            Assert.That(result.Succeeded, Is.True);
+            Assert.That(context.Display.Inventory.UsedCapacity, Is.EqualTo(2));
+            Assert.That(context.Destination.UsedCapacity, Is.EqualTo(3));
+        }
+
+        [Test]
+        public void ReturnAll_EmptyDisplayPreservesAssignment()
+        {
+            Context context = CreateContext(0);
+
+            DisplayReturnStockResult result =
+                context.Service.ReturnAll(
+                    context.Display,
+                    context.Destination);
+
+            Assert.That(result.Succeeded, Is.True);
+            Assert.That(result.ReturnedQuantity, Is.EqualTo(Quantity.Zero));
+            Assert.That(result.AssignmentCleared, Is.False);
+            Assert.That(context.Display.HasAssignedProduct, Is.True);
+        }
+
         [Test]
         public void ReturnAllAndClear_EmptiesAndClearsAssignment()
         {

@@ -1620,7 +1620,7 @@ LODGroup:
     - renderer: {fileID: 7197753506671703997}
     - renderer: {fileID: 6075101710545053952}
     - renderer: {fileID: 1128378788236311901}
-  - screenRelativeHeight: 0.1
+  - screenRelativeHeight: 0
     fadeTransitionWidth: 0
     renderers:
     - renderer: {fileID: 776890242148968960}

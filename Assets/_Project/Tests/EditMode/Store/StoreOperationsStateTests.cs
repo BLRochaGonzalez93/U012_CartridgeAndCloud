@@ -87,18 +87,37 @@ namespace VRMGames.CartridgeAndCloud.Tests.EditMode.Store
         }
 
         [Test]
-        public void Order_ReceiveAllChangesState()
+        public void Order_InTransitReceiveAllChangesState()
         {
+            const string deliveryRunId = "delivery-run-001";
+
             StoreOrderRecord order =
-                Order().ReceiveAll();
+                Order()
+                    .BeginTransit(deliveryRunId)
+                    .ReceiveAll();
 
             Assert.That(
                 order.State,
-                Is.EqualTo(
-                    StoreOrderStatus.Received));
+                Is.EqualTo(StoreOrderStatus.Received));
+
             Assert.That(
                 order.ReceivedUnits,
                 Is.EqualTo(order.OrderedUnits));
+
+            Assert.That(
+                order.ReservedCostCents,
+                Is.Zero);
+
+            Assert.That(
+                order.DeliveryRunId,
+                Is.EqualTo(deliveryRunId));
+        }
+
+        [Test]
+        public void Order_ReceiveAllRejectsReservedState()
+        {
+            Assert.Throws<InvalidOperationException>(
+                () => Order().ReceiveAll());
         }
 
         [Test]

@@ -13,6 +13,7 @@ using VRMGames.CartridgeAndCloud.Runtime.Characters;
 using VRMGames.CartridgeAndCloud.Runtime.Composition;
 using VRMGames.CartridgeAndCloud.Runtime.Store;
 using VRMGames.CartridgeAndCloud.Runtime.Placement;
+using VRMGames.CartridgeAndCloud.Presentation.Store.Occlusion;
 namespace VRMGames.CartridgeAndCloud.Runtime.UIUX
 {
     public sealed class StoreOperationsScreen :
@@ -355,16 +356,51 @@ namespace VRMGames.CartridgeAndCloud.Runtime.UIUX
                 "Current step: " +
                 status.Step);
 
+            string currency =
+                UIRuntimeCompositionRoot
+                    .Instance.ActiveSession
+                    .Snapshot.CurrencyCode;
+
             AddParagraph(
-                $"Cash: " +
-                StoreUiProjectionService
-                    .FormatMoney(
-                        UIRuntimeCompositionRoot
-                            .Instance.ActiveSession
-                            .Snapshot.CashCents,
-                        UIRuntimeCompositionRoot
-                            .Instance.ActiveSession
-                            .Snapshot.CurrencyCode));
+                "Cash total: " +
+                StoreUiProjectionService.FormatMoney(
+                    UIRuntimeCompositionRoot
+                        .Instance.ActiveSession
+                        .Snapshot.CashCents,
+                    currency));
+
+            AddParagraph(
+                "Reserved for orders: " +
+                StoreUiProjectionService.FormatMoney(
+                    _service.ReservedFundsCents,
+                    currency));
+
+            AddParagraph(
+                "Available cash: " +
+                StoreUiProjectionService.FormatMoney(
+                    _service.AvailableCashCents,
+                    currency));
+
+            AddParagraph(
+                "Current weekly gross: " +
+                StoreUiProjectionService.FormatMoney(
+                    _service.State.WeeklyGrossResultCents,
+                    currency));
+
+            if (_service.State.LastSettledWeek > 0)
+            {
+                AddParagraph(
+                    "Last weekly settlement · week " +
+                    _service.State.LastSettledWeek +
+                    "\nGross: " +
+                    StoreUiProjectionService.FormatMoney(
+                        _service.State.LastWeeklyGrossResultCents,
+                        currency) +
+                    "\nTax (10% positive gross): " +
+                    StoreUiProjectionService.FormatMoney(
+                        _service.State.LastWeeklyTaxCents,
+                        currency));
+            }
 
             AddParagraph(
                 $"Completed sales: " +
@@ -376,6 +412,22 @@ namespace VRMGames.CartridgeAndCloud.Runtime.UIUX
 
         private void BuildShop()
         {
+            string currency =
+                UIRuntimeCompositionRoot
+                    .Instance.ActiveSession
+                    .Snapshot.CurrencyCode;
+
+            AddHeading("Purchasing power");
+            AddParagraph(
+                "Available: " +
+                StoreUiProjectionService.FormatMoney(
+                    _service.AvailableCashCents,
+                    currency) +
+                " · Reserved: " +
+                StoreUiProjectionService.FormatMoney(
+                    _service.ReservedFundsCents,
+                    currency));
+
             AddHeading(
                 "Furniture catalog");
 
@@ -432,13 +484,47 @@ namespace VRMGames.CartridgeAndCloud.Runtime.UIUX
         {
             AddHeading("Pending deliveries");
 
+            string currency =
+                UIRuntimeCompositionRoot
+                    .Instance.ActiveSession
+                    .Snapshot.CurrencyCode;
+
+            AddParagraph(
+                "Cash total: " +
+                StoreUiProjectionService.FormatMoney(
+                    UIRuntimeCompositionRoot
+                        .Instance.ActiveSession
+                        .Snapshot.CashCents,
+                    currency) +
+                "\nReserved: " +
+                StoreUiProjectionService.FormatMoney(
+                    _service.ReservedFundsCents,
+                    currency) +
+                "\nAvailable: " +
+                StoreUiProjectionService.FormatMoney(
+                    _service.AvailableCashCents,
+                    currency));
+
             bool any = false;
 
             foreach (StoreOrderRecord order
                      in _service.State.Orders)
             {
-                if (order.State !=
-                    StoreOrderStatus.Ordered)
+                if (order.State == StoreOrderStatus.InTransit)
+                {
+                    any = true;
+                    AddParagraph(
+                        order.OrderId + "\n" +
+                        order.ItemId + " × " +
+                        order.OrderedUnits + "\nIn transit · " +
+                        order.DeliveryRunId + " · reserved " +
+                        StoreUiProjectionService.FormatMoney(
+                            order.ReservedCostCents,
+                            currency));
+                    continue;
+                }
+
+                if (order.State != StoreOrderStatus.Reserved)
                 {
                     continue;
                 }
@@ -446,24 +532,62 @@ namespace VRMGames.CartridgeAndCloud.Runtime.UIUX
                 any = true;
 
                 AddAction(
-                    $"{order.OrderId}\n" +
-                    $"{order.ItemId} × " +
-                    $"{order.OrderedUnits}",
-                    "Receive & pay",
-                    () =>
-                    {
-                        StoreOperationResult result =
-                            _service.ReceiveOrder(
-                                order.OrderId);
+                    order.OrderId + "\n" +
+                    order.ItemId + " × " +
+                    order.OrderedUnits + "\nReserved " +
+                    StoreUiProjectionService.FormatMoney(
+                        order.ReservedCostCents,
+                        currency),
+                    "Dispatch delivery",
+                    () => Execute(
+                        _service.ReceiveOrder(
+                            order.OrderId)));
 
-                        Execute(result);
-                    });
+                AddAction(
+                    "Release reservation for " +
+                    order.OrderId,
+                    "Cancel order",
+                    () => Execute(
+                        _service.CancelOrder(
+                            order.OrderId)));
             }
 
             if (!any)
             {
                 AddParagraph(
-                    "No pending deliveries.");
+                    "No reserved or in-transit deliveries.");
+            }
+            else if (_service.PendingOrderCount > 0)
+            {
+                AddAction(
+                    _service.PendingOrderCount +
+                    " reserved orders · total committed " +
+                    StoreUiProjectionService.FormatMoney(
+                        _service.ReservedFundsCents,
+                        currency),
+                    "Dispatch all in one run",
+                    () => Execute(
+                        _service.ProcessAllPendingOrders()));
+            }
+
+            AddHeading("Delivery runs");
+            if (_service.State.DeliveryRuns.Count == 0)
+            {
+                AddParagraph("No delivery runs.");
+            }
+            else
+            {
+                foreach (StoreDeliveryRunRecord run
+                         in _service.State.DeliveryRuns)
+                {
+                    AddParagraph(
+                        run.DeliveryRunId + " · " +
+                        run.OrderIds.Count + " orders · " +
+                        StoreUiProjectionService.FormatMoney(
+                            run.TotalCostCents,
+                            currency) + " · " +
+                        run.Status);
+                }
             }
         }
 
@@ -555,14 +679,36 @@ namespace VRMGames.CartridgeAndCloud.Runtime.UIUX
                         ? "unassigned"
                         : fixture.AssignedProductId;
 
+                int activeReservations =
+                    _service.GetActiveReservedQuantity(
+                        fixture.InstanceId);
+
+                int unreservedUnits =
+                    _service.GetUnreservedDisplayQuantity(
+                        fixture.InstanceId);
+
+                int backroomStock =
+                    string.IsNullOrWhiteSpace(
+                        fixture.AssignedProductId)
+                        ? 0
+                        : _service
+                            .GetProductWarehouseQuantity(
+                                fixture.AssignedProductId);
+
                 AddParagraph(
                     fixture.InstanceId + "\n" +
                     furniture.DisplayName + "\n" +
                     "Product: " +
                     assignedProductName + "\n" +
-                    "Stock: " +
+                    "Visible stock: " +
                     fixture.ProductQuantity + "/" +
-                    furniture.Capacity);
+                    furniture.Capacity + "\n" +
+                    "Reserved: " +
+                    activeReservations +
+                    " · Returnable: " +
+                    unreservedUnits + "\n" +
+                    "Received backroom stock: " +
+                    backroomStock);
 
                 if (string.IsNullOrWhiteSpace(
                         fixture.AssignedProductId))
@@ -573,7 +719,7 @@ namespace VRMGames.CartridgeAndCloud.Runtime.UIUX
                         RetailProductDefinition
                             captured = product;
 
-                        int backroomStock =
+                        int availableStock =
                             _service
                                 .GetProductWarehouseQuantity(
                                     captured.ProductId);
@@ -581,32 +727,78 @@ namespace VRMGames.CartridgeAndCloud.Runtime.UIUX
                         AddAction(
                             "Assign " +
                             captured.DisplayName +
-                            " · backroom " +
-                            backroomStock,
+                            " · received backroom " +
+                            availableStock,
                             "Assign",
                             () => Execute(
                                 _service.AssignProduct(
                                     fixture.InstanceId,
                                     captured.ProductId)));
                     }
+
+                    continue;
                 }
-                else
+
+                AddAction(
+                    "Transfer one received unit from backroom",
+                    "Restock 1",
+                    () => Execute(
+                        _service.RestockDisplay(
+                            fixture.InstanceId,
+                            1)));
+
+                AddAction(
+                    "Fill with the minimum of received stock and free capacity",
+                    "Restock max",
+                    () => Execute(
+                        _service.RestockDisplay(
+                            fixture.InstanceId,
+                            furniture.Capacity)));
+
+                if (fixture.ProductQuantity > 0 &&
+                    unreservedUnits > 0)
                 {
                     AddAction(
-                        "Transfer from backroom",
-                        "Restock 1",
+                        "Return one unreserved unit to backroom",
+                        "Return 1",
                         () => Execute(
-                            _service.RestockDisplay(
+                            _service.ReturnDisplayStock(
                                 fixture.InstanceId,
                                 1)));
+                }
+
+                if (fixture.ProductQuantity > 0 &&
+                    activeReservations == 0)
+                {
+                    AddAction(
+                        "Return every visible unit and keep the assignment",
+                        "Return all",
+                        () => Execute(
+                            _service.ReturnAllDisplayStock(
+                                fixture.InstanceId)));
 
                     AddAction(
-                        "Transfer from backroom",
-                        "Restock 5",
+                        "Return every unit and leave the display unassigned",
+                        "Return & clear",
                         () => Execute(
-                            _service.RestockDisplay(
-                                fixture.InstanceId,
-                                5)));
+                            _service.ReturnAllAndClearDisplay(
+                                fixture.InstanceId)));
+                }
+                else if (fixture.ProductQuantity == 0 &&
+                         activeReservations == 0)
+                {
+                    AddAction(
+                        "Remove the product assignment from this empty display",
+                        "Clear assignment",
+                        () => Execute(
+                            _service.ClearDisplayAssignment(
+                                fixture.InstanceId)));
+                }
+
+                if (activeReservations > 0)
+                {
+                    AddParagraph(
+                        "Stock mutation is limited while active customer reservations exist.");
                 }
             }
 
@@ -632,6 +824,20 @@ namespace VRMGames.CartridgeAndCloud.Runtime.UIUX
             AddParagraph(
                 "A customer walks through entrance, evaluates a stocked product, picks it, queues, completes checkout and exits.");
 
+            AddParagraph(
+                "Active customers: " +
+                _characters.ActiveCustomerCount + "/" +
+                _characters.MaximumCustomerCount);
+
+            if (UIRuntimeCompositionRoot.Instance
+                    .StoreOperationalGate != null)
+            {
+                AddParagraph(
+                    UIRuntimeCompositionRoot.Instance
+                        .StoreOperationalGate
+                        .StatusDetail);
+            }
+
             Button button =
                 AddAction(
                     "Serve the next available customer",
@@ -641,8 +847,7 @@ namespace VRMGames.CartridgeAndCloud.Runtime.UIUX
                             .TryServeNextCustomer()));
 
             button.interactable =
-                !_characters
-                    .IsCustomerSequenceRunning;
+                _characters.CanServeNextCustomer;
         }
 
         private void BuildSettings()
@@ -650,23 +855,36 @@ namespace VRMGames.CartridgeAndCloud.Runtime.UIUX
             AddHeading(
                 "Visibility");
 
-            bool hideWalls =
-                _binder.WallOcclusion != null &&
-                _binder.WallOcclusion
-                    .HideOccludingWalls;
+            WallOcclusionController wallOcclusion =
+                _binder.WallOcclusion;
 
-            AddAction(
-                "Walls between camera and player",
-                hideWalls
-                    ? "Hide: ON"
-                    : "Hide: OFF",
-                () =>
-                {
-                    _binder.WallOcclusion
-                        ?.SetEnabled(
+            if (wallOcclusion == null)
+            {
+                AddParagraph(
+                    "Automatic wall occlusion is unavailable.");
+            }
+            else if (!wallOcclusion.CanChangeVisibility)
+            {
+                AddParagraph(
+                    "Automatic wall occlusion: Disabled for H6.");
+            }
+            else
+            {
+                bool hideWalls =
+                    wallOcclusion.HideOccludingWalls;
+
+                AddAction(
+                    "Walls between camera and player",
+                    hideWalls
+                        ? "Hide: ON"
+                        : "Hide: OFF",
+                    () =>
+                    {
+                        wallOcclusion.SetEnabled(
                             !hideWalls);
-                    RebuildContent();
-                });
+                        RebuildContent();
+                    });
+            }
 
             AddHeading(
                 "Audio channels");

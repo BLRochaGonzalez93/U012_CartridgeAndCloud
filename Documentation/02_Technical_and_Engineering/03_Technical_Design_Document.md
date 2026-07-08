@@ -3363,3 +3363,15 @@ La definición documental de un caso no equivale a ejecución ni a PASS. Ninguna
 - Código, escenas, prefabs, builds y tests ejecutables no han sido modificados por esta actualización documental.
 
 <!-- W0_S17_PHASE1_END -->
+
+---
+
+## Actualización técnica S17-MOD-002…010
+
+- `SimulationClock` avanza globalmente salvo pausa y se proyecta mediante `StoreTradingHoursPolicy`.
+- Los cierres comerciales intermedios no ejecutan settlement ni autosave diario.
+- `StoreOrderStatus` diferencia `Reserved`, `InTransit` y `Received`; `CompleteDeliveryRun` es el único commit de caja, ledger y stock.
+- `DeliveryRunStarted` genera una sola presentación visual por run.
+- `GroundingUtility` resuelve anchors anidados y opera en espacio mundial.
+- El checkout autorado expone `StaffPoint` y `StaffLookTarget`.
+- El último LOD de cada prefab usa umbral 0 y permanece disponible sin culling LOD en todo el rango de cámara; los límites de zoom no cambian.

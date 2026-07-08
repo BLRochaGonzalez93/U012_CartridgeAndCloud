@@ -27,7 +27,7 @@ namespace VRMGames.CartridgeAndCloud.Tests.EditMode.UIUX
                     Is.EqualTo("EUR"));
                 Assert.That(
                     asset.DayDurationSeconds,
-                    Is.GreaterThan(0));
+                    Is.EqualTo(300));
             }
             finally
             {

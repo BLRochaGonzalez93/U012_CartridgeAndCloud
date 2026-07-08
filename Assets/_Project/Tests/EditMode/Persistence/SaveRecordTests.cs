@@ -1,5 +1,6 @@
 using NUnit.Framework;
 using VRMGames.CartridgeAndCloud.Domain.Persistence;
+using VRMGames.CartridgeAndCloud.Domain.DayCycle;
 
 using VRMGames.CartridgeAndCloud.Domain.Economy;
 namespace VRMGames.CartridgeAndCloud.Tests.EditMode.Persistence
@@ -185,6 +186,36 @@ namespace VRMGames.CartridgeAndCloud.Tests.EditMode.Persistence
                     10,
                     11,
                     true));
+        }
+
+
+        [Test] public void DayCycle_OldConstructorDefaultsToNormalSpeed()
+        {
+            DayCycleSaveRecord record =
+                new DayCycleSaveRecord(
+                    "day",
+                    "Open",
+                    300,
+                    10,
+                    true);
+
+            Assert.That(
+                record.SimulationSpeedMultiplier,
+                Is.EqualTo(
+                    SimulationSpeedPolicy.Normal));
+        }
+
+        [Test] public void DayCycle_RejectsUnsupportedSpeed()
+        {
+            Assert.Throws<
+                System.ArgumentOutOfRangeException>(
+                () => new DayCycleSaveRecord(
+                    "day",
+                    "Open",
+                    300,
+                    10,
+                    true,
+                    3f));
         }
 
         [Test] public void Ledger_RejectsZeroAmount()

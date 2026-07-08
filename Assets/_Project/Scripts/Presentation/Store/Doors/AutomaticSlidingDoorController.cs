@@ -167,14 +167,14 @@ namespace VRMGames.CartridgeAndCloud.Presentation.Store.Doors
                     _leftPanel.localPosition,
                     leftTarget,
                     _speed *
-                    Time.unscaledDeltaTime);
+                    Time.deltaTime);
 
             _rightPanel.localPosition =
                 Vector3.MoveTowards(
                     _rightPanel.localPosition,
                     rightTarget,
                     _speed *
-                    Time.unscaledDeltaTime);
+                    Time.deltaTime);
         }
 
 

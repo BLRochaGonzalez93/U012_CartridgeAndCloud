@@ -47,6 +47,14 @@ namespace VRMGames.CartridgeAndCloud.Presentation.Placement
             _accessValidator;
         private int _nextSequence = 1;
 
+        public Func<PlacementInstanceId, string>
+            RemovalGuard { get; set; }
+
+        public string LastRemovalBlockReason {
+            get;
+            private set;
+        } = string.Empty;
+
         public bool IsPlacementModeActive { get; private set; }
 
         public int PlacedCount =>
@@ -449,6 +457,23 @@ namespace VRMGames.CartridgeAndCloud.Presentation.Placement
             PlacementInstanceId id)
         {
             EnsureRegistry();
+
+            string removalBlockReason =
+                RemovalGuard?.Invoke(id) ??
+                string.Empty;
+
+            if (!string.IsNullOrWhiteSpace(
+                    removalBlockReason))
+            {
+                LastRemovalBlockReason =
+                    removalBlockReason;
+                CurrentFailureReason =
+                    PlacementFailureReason
+                        .RemovalBlocked;
+                return false;
+            }
+
+            LastRemovalBlockReason = string.Empty;
 
             if (!_registry.TryRemove(
                     id,

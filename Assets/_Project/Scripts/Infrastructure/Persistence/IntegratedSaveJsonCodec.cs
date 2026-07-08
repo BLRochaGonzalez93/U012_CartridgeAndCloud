@@ -8,6 +8,7 @@ using VRMGames.CartridgeAndCloud.Domain.Identifiers;
 using VRMGames.CartridgeAndCloud.Domain.Persistence;
 
 using VRMGames.CartridgeAndCloud.Domain.Checkout;
+using VRMGames.CartridgeAndCloud.Domain.DayCycle;
 using VRMGames.CartridgeAndCloud.Domain.Economy;
 using VRMGames.CartridgeAndCloud.Domain.Inventory;
 using VRMGames.CartridgeAndCloud.Domain.Suppliers;
@@ -907,6 +908,7 @@ namespace VRMGames.CartridgeAndCloud.Infrastructure.Persistence
             public int openDurationSeconds;
             public int elapsedOpenSeconds;
             public bool autoBeginClosing;
+            public float simulationSpeedMultiplier;
 
             public static DayCycleDto FromRecord(
                 DayCycleSaveRecord record)
@@ -920,7 +922,9 @@ namespace VRMGames.CartridgeAndCloud.Infrastructure.Persistence
                     elapsedOpenSeconds =
                         record.ElapsedOpenSeconds,
                     autoBeginClosing =
-                        record.AutoBeginClosing
+                        record.AutoBeginClosing,
+                    simulationSpeedMultiplier =
+                        record.SimulationSpeedMultiplier
                 };
             }
 
@@ -931,7 +935,10 @@ namespace VRMGames.CartridgeAndCloud.Infrastructure.Persistence
                     state,
                     openDurationSeconds,
                     elapsedOpenSeconds,
-                    autoBeginClosing);
+                    autoBeginClosing,
+                    SimulationSpeedPolicy
+                        .NormalizeOrDefault(
+                            simulationSpeedMultiplier));
             }
         }
 

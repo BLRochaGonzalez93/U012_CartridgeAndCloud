@@ -2,17 +2,22 @@ using System;
 using System.IO;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using VRMGames.CartridgeAndCloud.Application.DayCycle;
+using VRMGames.CartridgeAndCloud.Application.Customers;
 using VRMGames.CartridgeAndCloud.Application.Persistence;
+using VRMGames.CartridgeAndCloud.Application.Store;
 using VRMGames.CartridgeAndCloud.Application.UIUX;
-using VRMGames.CartridgeAndCloud.Domain.Persistence;
-using VRMGames.CartridgeAndCloud.Infrastructure.Persistence;
-
 using VRMGames.CartridgeAndCloud.Domain.Checkout;
+using VRMGames.CartridgeAndCloud.Domain.DayCycle;
 using VRMGames.CartridgeAndCloud.Domain.Economy;
+using VRMGames.CartridgeAndCloud.Domain.GameSession;
+using VRMGames.CartridgeAndCloud.Domain.Persistence;
+using VRMGames.CartridgeAndCloud.Domain.Store;
 using VRMGames.CartridgeAndCloud.Infrastructure.GameSession;
+using VRMGames.CartridgeAndCloud.Infrastructure.Persistence;
 using VRMGames.CartridgeAndCloud.Infrastructure.UIUX;
 using VRMGames.CartridgeAndCloud.Runtime.UIUX;
-using VRMGames.CartridgeAndCloud.Domain.GameSession;
+
 namespace VRMGames.CartridgeAndCloud.Runtime.Composition
 {
     [DefaultExecutionOrder(-10000)]
@@ -24,6 +29,11 @@ namespace VRMGames.CartridgeAndCloud.Runtime.Composition
 
         private int _lastInstalledSceneHandle =
             int.MinValue;
+        private string _midnightFinalizedDayId = string.Empty;
+        private string _clockSessionId =
+            string.Empty;
+        private string _clockDayId =
+            string.Empty;
 
         public static UIRuntimeCompositionRoot
             Instance { get; private set; }
@@ -56,6 +66,16 @@ namespace VRMGames.CartridgeAndCloud.Runtime.Composition
             private set;
         }
 
+        public ManualSaveService ManualSave {
+            get;
+            private set;
+        }
+
+        public ISaveMutationRegistry SaveMutations {
+            get;
+            private set;
+        }
+
         public StoreUiProjectionService Projection {
             get;
             private set;
@@ -65,6 +85,33 @@ namespace VRMGames.CartridgeAndCloud.Runtime.Composition
             get;
             private set;
         }
+
+        public ISimulationClock SimulationClock {
+            get;
+            private set;
+        }
+
+        public IPauseService PauseService {
+            get;
+            private set;
+        }
+
+        public IStoreOperationalGate StoreOperationalGate {
+            get;
+            private set;
+        }
+
+        public IStoreClosingEconomyService
+            StoreClosingEconomyService {
+                get;
+                private set;
+            }
+
+        public IStoreManagementStateProvider
+            StoreManagementStateProvider {
+                get;
+                private set;
+            }
 
         public string LastUserMessage {
             get;
@@ -151,6 +198,15 @@ namespace VRMGames.CartridgeAndCloud.Runtime.Composition
             ActiveSession =
                 new ActiveGameSessionService();
 
+            SystemUtcClock utcClock =
+                new SystemUtcClock();
+            SaveMutations =
+                new SaveMutationRegistry();
+            SimulationClock =
+                new SimulationClock();
+            PauseService =
+                new PauseService();
+
             DefaultIntegratedGameStateFactory
                 factory =
                     new DefaultIntegratedGameStateFactory(
@@ -165,7 +221,7 @@ namespace VRMGames.CartridgeAndCloud.Runtime.Composition
                     autosaveMarkerRepository,
                     ActiveSession,
                     factory,
-                    new SystemUtcClock());
+                    utcClock);
 
             Autosave =
                 new DailyAutosaveService(
@@ -173,12 +229,24 @@ namespace VRMGames.CartridgeAndCloud.Runtime.Composition
                     autosaveMarkerRepository,
                     ActiveSession);
 
+            ManualSave =
+                new ManualSaveService(
+                    saveRepository,
+                    ActiveSession,
+                    PauseService,
+                    SaveMutations,
+                    utcClock);
+
             Projection =
                 new StoreUiProjectionService();
 
             InputGate =
                 new UiInputContextGate();
 
+            ActiveSession.SnapshotChanged +=
+                HandleSnapshotChanged;
+            PauseService.Changed +=
+                HandlePauseChanged;
             SceneManager.sceneLoaded +=
                 HandleSceneLoaded;
         }
@@ -187,6 +255,35 @@ namespace VRMGames.CartridgeAndCloud.Runtime.Composition
         {
             InstallForScene(
                 SceneManager.GetActiveScene());
+        }
+
+        private void Update()
+        {
+            if (!IsStoreSceneActive() ||
+                !ActiveSession.HasActiveSession)
+            {
+                ApplyUnitySimulationRate();
+                return;
+            }
+
+            IntegratedGameStateSnapshot snapshot =
+                ActiveSession.Snapshot;
+            SynchronizeSimulationClock(snapshot);
+
+            SimulationClockTickResult tick =
+                SimulationClock.Tick(
+                    Time.unscaledDeltaTime,
+                    PauseService.IsPaused);
+
+            if (tick.WholeSecondChanged ||
+                tick.ReachedEnd)
+            {
+                PublishSimulationTime(
+                    snapshot,
+                    tick.ReachedEnd);
+            }
+
+            TryFinalizeDayAtMidnight();
         }
 
         private void OnDestroy()
@@ -198,7 +295,25 @@ namespace VRMGames.CartridgeAndCloud.Runtime.Composition
 
             SceneManager.sceneLoaded -=
                 HandleSceneLoaded;
+
+            if (ActiveSession != null)
+            {
+                ActiveSession.SnapshotChanged -=
+                    HandleSnapshotChanged;
+            }
+
+            if (PauseService != null)
+            {
+                PauseService.Changed -=
+                    HandlePauseChanged;
+                PauseService.Clear();
+            }
+
             InputGate?.ExitUiExclusive();
+            StoreOperationalGate = null;
+            StoreClosingEconomyService = null;
+            StoreManagementStateProvider = null;
+            Time.timeScale = 1f;
             Instance = null;
         }
 
@@ -208,8 +323,98 @@ namespace VRMGames.CartridgeAndCloud.Runtime.Composition
                 message ?? string.Empty;
         }
 
+        public ManualSaveEvaluation EvaluateManualSave()
+        {
+            return ManualSave.Evaluate();
+        }
+
+        public ManualSaveResult TryManualSave()
+        {
+            ManualSaveResult result =
+                ManualSave.Save();
+            LastUserMessage = result.Detail;
+            return result;
+        }
+
+        public void RegisterManualSaveCheckpointParticipant(
+            IManualSaveCheckpointParticipant participant)
+        {
+            ManualSave.RegisterCheckpointParticipant(
+                participant);
+            Autosave.RegisterCheckpointParticipant(
+                participant);
+        }
+
+        public void UnregisterManualSaveCheckpointParticipant(
+            IManualSaveCheckpointParticipant participant)
+        {
+            ManualSave.UnregisterCheckpointParticipant(
+                participant);
+            Autosave.UnregisterCheckpointParticipant(
+                participant);
+        }
+
+        public void RegisterStoreOperationalGate(
+            IStoreOperationalGate gate)
+        {
+            StoreOperationalGate = gate ??
+                throw new ArgumentNullException(
+                    nameof(gate));
+        }
+
+        public void UnregisterStoreOperationalGate(
+            IStoreOperationalGate gate)
+        {
+            if (ReferenceEquals(
+                    StoreOperationalGate,
+                    gate))
+            {
+                StoreOperationalGate = null;
+            }
+        }
+
+        public void RegisterStoreClosingEconomyService(
+            IStoreClosingEconomyService service)
+        {
+            StoreClosingEconomyService = service ??
+                throw new ArgumentNullException(
+                    nameof(service));
+        }
+
+        public void UnregisterStoreClosingEconomyService(
+            IStoreClosingEconomyService service)
+        {
+            if (ReferenceEquals(
+                    StoreClosingEconomyService,
+                    service))
+            {
+                StoreClosingEconomyService = null;
+            }
+        }
+
+        public void RegisterStoreManagementStateProvider(
+            IStoreManagementStateProvider provider)
+        {
+            StoreManagementStateProvider = provider ??
+                throw new ArgumentNullException(nameof(provider));
+        }
+
+        public void UnregisterStoreManagementStateProvider(
+            IStoreManagementStateProvider provider)
+        {
+            if (ReferenceEquals(
+                    StoreManagementStateProvider,
+                    provider))
+            {
+                StoreManagementStateProvider = null;
+            }
+        }
+
         public void EnterStore()
         {
+            PauseService.Clear();
+            Time.timeScale = 1f;
+
             SceneManager.LoadSceneAsync(
                 Settings.StoreSceneName,
                 LoadSceneMode.Single);
@@ -217,11 +422,66 @@ namespace VRMGames.CartridgeAndCloud.Runtime.Composition
 
         public void ReturnToMainMenu()
         {
+            PauseService.Clear();
             InputGate.ExitUiExclusive();
+            Time.timeScale = 1f;
 
             SceneManager.LoadSceneAsync(
                 Settings.MainMenuSceneName,
                 LoadSceneMode.Single);
+        }
+
+        public bool TrySetSimulationSpeed(
+            float multiplier,
+            out string reason)
+        {
+            if (!ActiveSession.HasActiveSession)
+            {
+                reason = "No active session.";
+                return false;
+            }
+
+            try
+            {
+                SimulationClock.SetSpeed(multiplier);
+
+                IntegratedGameStateSnapshot current =
+                    ActiveSession.Snapshot;
+                DayCycleSaveRecord nextDay =
+                    new DayCycleSaveRecord(
+                        current.DayCycle.DayId,
+                        current.DayCycle.State,
+                        current.DayCycle
+                            .OpenDurationSeconds,
+                        current.DayCycle
+                            .ElapsedOpenSeconds,
+                        current.DayCycle
+                            .AutoBeginClosing,
+                        SimulationClock
+                            .SelectedSpeedMultiplier);
+
+                ActiveSession.Replace(
+                    CloneWithDayCycle(
+                        current,
+                        nextDay,
+                        current.CheckoutStation));
+
+                reason =
+                    "Simulation speed set to " +
+                    SimulationSpeedPolicy.Format(
+                        SimulationClock
+                            .SelectedSpeedMultiplier) +
+                    ".";
+                LastUserMessage = reason;
+                ApplyUnitySimulationRate();
+                return true;
+            }
+            catch (Exception exception)
+            {
+                reason = exception.Message;
+                LastUserMessage = reason;
+                return false;
+            }
         }
 
         public DailyAutosaveResult
@@ -248,7 +508,10 @@ namespace VRMGames.CartridgeAndCloud.Runtime.Composition
             if (!string.Equals(
                     snapshot.DayCycle.State,
                     "Closed",
-                    StringComparison.Ordinal))
+                    StringComparison.Ordinal) ||
+                !StoreTradingHoursPolicy.IsDayComplete(
+                    snapshot.DayCycle.ElapsedDaySeconds,
+                    snapshot.DayCycle.DayDurationSeconds))
             {
                 return new DailyAutosaveResult(
                     DailyAutosaveStatus.NotClosed,
@@ -261,7 +524,6 @@ namespace VRMGames.CartridgeAndCloud.Runtime.Composition
             LastUserMessage = result.Detail;
             return result;
         }
-
 
         public bool TryTransitionDay(
             string targetState,
@@ -284,13 +546,31 @@ namespace VRMGames.CartridgeAndCloud.Runtime.Composition
             string currentState =
                 current.DayCycle.State;
 
-            bool validTransition =
-                (currentState == "BeforeOpen" &&
-                 targetState == "Open") ||
-                (currentState == "Open" &&
-                 targetState == "Closing") ||
-                (currentState == "Closing" &&
-                 targetState == "Closed");
+            bool dayComplete =
+                StoreTradingHoursPolicy.IsDayComplete(
+                    current.DayCycle.ElapsedDaySeconds,
+                    current.DayCycle.DayDurationSeconds);
+
+            if (targetState == "Open" &&
+                (currentState == "BeforeOpen" || currentState == "Closed") &&
+                !StoreTradingHoursPolicy.CanOpen(
+                    current.DayCycle.ElapsedDaySeconds,
+                    current.DayCycle.DayDurationSeconds))
+            {
+                reason =
+                    "The store can only open between 08:00 and 22:00. Current time: " +
+                    StoreTradingHoursPolicy.FormatTime(
+                        current.DayCycle.ElapsedDaySeconds,
+                        current.DayCycle.DayDurationSeconds) + ".";
+                LastUserMessage = reason;
+                return false;
+            }
+
+            bool validTransition = StoreTradingHoursPolicy.CanTransition(
+                currentState,
+                targetState,
+                current.DayCycle.ElapsedDaySeconds,
+                current.DayCycle.DayDurationSeconds);
 
             if (!validTransition)
             {
@@ -298,6 +578,65 @@ namespace VRMGames.CartridgeAndCloud.Runtime.Composition
                     $"Cannot transition from " +
                     $"{currentState} to {targetState}.";
                 return false;
+            }
+
+            if (targetState == "Open")
+            {
+
+                if (StoreOperationalGate == null &&
+                    IsStoreSceneActive())
+                {
+                    reason =
+                        "Store runtime is still initializing. Try opening again in a moment.";
+                    return false;
+                }
+
+                if (StoreOperationalGate != null)
+                {
+                    StoreCustomerAdmissionDecision opening =
+                        StoreOperationalGate
+                            .EvaluateOpening();
+
+                    if (!opening.Allowed)
+                    {
+                        reason = opening.Detail;
+                        LastUserMessage = reason;
+                        return false;
+                    }
+                }
+            }
+
+            if (targetState == "Closed" &&
+                StoreOperationalGate != null)
+            {
+                StoreCustomerAdmissionDecision closing =
+                    StoreOperationalGate
+                        .EvaluateClosingCompletion();
+
+                if (!closing.Allowed)
+                {
+                    reason = closing.Detail;
+                    LastUserMessage = reason;
+                    return false;
+                }
+            }
+
+            if (targetState == "Closed" &&
+                dayComplete &&
+                StoreClosingEconomyService != null)
+            {
+                StoreOperationResult settlement =
+                    StoreClosingEconomyService
+                        .SettleClosingEconomy();
+
+                if (!settlement.Succeeded)
+                {
+                    reason = settlement.Detail;
+                    LastUserMessage = reason;
+                    return false;
+                }
+
+                current = ActiveSession.Snapshot;
             }
 
             string stationState =
@@ -326,47 +665,30 @@ namespace VRMGames.CartridgeAndCloud.Runtime.Composition
                 currentEntryId = string.Empty;
             }
 
-            int elapsed =
-                targetState == "Closed"
-                    ? current.DayCycle
-                        .OpenDurationSeconds
-                    : current.DayCycle
-                        .ElapsedOpenSeconds;
-
             try
             {
+                DayCycleSaveRecord nextDay =
+                    new DayCycleSaveRecord(
+                        current.DayCycle.DayId,
+                        targetState,
+                        current.DayCycle
+                            .OpenDurationSeconds,
+                        current.DayCycle
+                            .ElapsedOpenSeconds,
+                        current.DayCycle
+                            .AutoBeginClosing,
+                        current.DayCycle
+                            .SimulationSpeedMultiplier);
+
                 IntegratedGameStateSnapshot next =
-                    new IntegratedGameStateSnapshot(
-                        current.SchemaVersion,
-                        current.SessionId,
-                        current.SlotId,
-                        current.CreatedUtc,
-                        DateTime.UtcNow,
-                        current.CurrentDay,
-                        current.CashCents,
-                        current.CurrencyCode,
-                        current.Inventories,
-                        current.SupplierOrders,
-                        current.Displays,
-                        current.Customers,
-                        current.ShoppingSessions,
-                        current.Reservations,
-                        current.QueueEntries,
+                    CloneWithDayCycle(
+                        current,
+                        nextDay,
                         new CheckoutStationSaveRecord(
                             current.CheckoutStation
                                 .StationId,
                             stationState,
-                            currentEntryId),
-                        current.Transactions,
-                        new DayCycleSaveRecord(
-                            current.DayCycle.DayId,
-                            targetState,
-                            current.DayCycle
-                                .OpenDurationSeconds,
-                            elapsed,
-                            current.DayCycle
-                                .AutoBeginClosing),
-                        current.LedgerEntries);
+                            currentEntryId));
 
                 DailyAutosaveResult result =
                     PublishAuthoritativeSnapshot(next);
@@ -403,10 +725,13 @@ namespace VRMGames.CartridgeAndCloud.Runtime.Composition
             if (!string.Equals(
                     current.DayCycle.State,
                     "Closed",
-                    StringComparison.Ordinal))
+                    StringComparison.Ordinal) ||
+                !StoreTradingHoursPolicy.IsDayComplete(
+                    current.DayCycle.ElapsedDaySeconds,
+                    current.DayCycle.DayDurationSeconds))
             {
                 throw new InvalidOperationException(
-                    "The current day must be closed.");
+                    "The current day must be closed at 24:00.");
             }
 
             int nextDay = checked(
@@ -444,10 +769,280 @@ namespace VRMGames.CartridgeAndCloud.Runtime.Composition
                             .OpenDurationSeconds,
                         0,
                         current.DayCycle
-                            .AutoBeginClosing),
+                            .AutoBeginClosing,
+                        current.DayCycle
+                            .SimulationSpeedMultiplier),
                     new EconomyLedgerSaveRecord[0]);
 
+            PauseService.Clear();
+            _midnightFinalizedDayId = string.Empty;
             ActiveSession.Replace(next);
+        }
+
+        private void PublishSimulationTime(
+            IntegratedGameStateSnapshot source,
+            bool reachedEnd)
+        {
+            if (!ActiveSession.HasActiveSession ||
+                source != ActiveSession.Snapshot)
+            {
+                return;
+            }
+
+            int elapsed = SimulationClock.ElapsedWholeSeconds;
+            int duration = source.DayCycle.DayDurationSeconds;
+            string nextState = source.DayCycle.State;
+
+            if (string.Equals(nextState, "Open", StringComparison.Ordinal) &&
+                StoreTradingHoursPolicy.HasReachedForcedClosing(
+                    elapsed,
+                    duration))
+            {
+                nextState = "Closing";
+            }
+            else if (reachedEnd &&
+                     string.Equals(nextState, "BeforeOpen", StringComparison.Ordinal))
+            {
+                nextState = "Closed";
+            }
+
+            DayCycleSaveRecord nextDay =
+                new DayCycleSaveRecord(
+                    source.DayCycle.DayId,
+                    nextState,
+                    duration,
+                    elapsed,
+                    source.DayCycle.AutoBeginClosing,
+                    SimulationClock.SelectedSpeedMultiplier);
+
+            ActiveSession.Replace(
+                CloneWithDayCycle(
+                    source,
+                    nextDay,
+                    source.CheckoutStation));
+
+            if (!string.Equals(
+                    source.DayCycle.State,
+                    nextState,
+                    StringComparison.Ordinal))
+            {
+                LastUserMessage =
+                    nextState == "Closing"
+                        ? "It is 22:00. The store is closing and no new customers may enter."
+                        : "The day reached 24:00 and is ready to finalize.";
+            }
+        }
+
+        private void TryFinalizeDayAtMidnight()
+        {
+            if (!ActiveSession.HasActiveSession)
+            {
+                return;
+            }
+
+            IntegratedGameStateSnapshot snapshot = ActiveSession.Snapshot;
+            if (!StoreTradingHoursPolicy.IsDayComplete(
+                    snapshot.DayCycle.ElapsedDaySeconds,
+                    snapshot.DayCycle.DayDurationSeconds) ||
+                string.Equals(
+                    _midnightFinalizedDayId,
+                    snapshot.DayCycle.DayId,
+                    StringComparison.Ordinal))
+            {
+                return;
+            }
+
+            if (string.Equals(snapshot.DayCycle.State, "Open", StringComparison.Ordinal))
+            {
+                TryTransitionDay("Closing", out _);
+                snapshot = ActiveSession.Snapshot;
+            }
+
+            if (string.Equals(snapshot.DayCycle.State, "Closing", StringComparison.Ordinal))
+            {
+                if (StoreOperationalGate != null)
+                {
+                    StoreCustomerAdmissionDecision closing =
+                        StoreOperationalGate.EvaluateClosingCompletion();
+                    if (!closing.Allowed)
+                    {
+                        return;
+                    }
+                }
+
+                if (TryTransitionDay("Closed", out _))
+                {
+                    _midnightFinalizedDayId = snapshot.DayCycle.DayId;
+                }
+                return;
+            }
+
+            if (string.Equals(snapshot.DayCycle.State, "BeforeOpen", StringComparison.Ordinal))
+            {
+                if (TryTransitionDay("Closed", out _))
+                {
+                    _midnightFinalizedDayId = snapshot.DayCycle.DayId;
+                }
+                return;
+            }
+
+            if (string.Equals(snapshot.DayCycle.State, "Closed", StringComparison.Ordinal))
+            {
+                if (StoreClosingEconomyService != null)
+                {
+                    StoreOperationResult settlement =
+                        StoreClosingEconomyService.SettleClosingEconomy();
+                    if (!settlement.Succeeded)
+                    {
+                        LastUserMessage = settlement.Detail;
+                        return;
+                    }
+                    snapshot = ActiveSession.Snapshot;
+                }
+
+                _midnightFinalizedDayId = snapshot.DayCycle.DayId;
+                PublishAuthoritativeSnapshot(snapshot);
+            }
+        }
+
+        private static IntegratedGameStateSnapshot
+            CloneWithDayCycle(
+                IntegratedGameStateSnapshot source,
+                DayCycleSaveRecord dayCycle,
+                CheckoutStationSaveRecord checkoutStation)
+        {
+            return new IntegratedGameStateSnapshot(
+                source.SchemaVersion,
+                source.SessionId,
+                source.SlotId,
+                source.CreatedUtc,
+                DateTime.UtcNow,
+                source.CurrentDay,
+                source.CashCents,
+                source.CurrencyCode,
+                source.Inventories,
+                source.SupplierOrders,
+                source.Displays,
+                source.Customers,
+                source.ShoppingSessions,
+                source.Reservations,
+                source.QueueEntries,
+                checkoutStation,
+                source.Transactions,
+                dayCycle,
+                source.LedgerEntries);
+        }
+
+        private void HandleSnapshotChanged(
+            IntegratedGameStateSnapshot snapshot)
+        {
+            if (snapshot == null)
+            {
+                return;
+            }
+
+            SynchronizeSimulationClock(snapshot);
+            ApplyUnitySimulationRate();
+        }
+
+        private void SynchronizeSimulationClock(
+            IntegratedGameStateSnapshot snapshot)
+        {
+            string sessionId =
+                snapshot.SessionId.ToString();
+            float selectedSpeed =
+                SimulationSpeedPolicy
+                    .NormalizeOrDefault(
+                        snapshot.DayCycle
+                            .SimulationSpeedMultiplier);
+
+            bool requiresFullSynchronization =
+                !string.Equals(
+                    _clockSessionId,
+                    sessionId,
+                    StringComparison.Ordinal) ||
+                !string.Equals(
+                    _clockDayId,
+                    snapshot.DayCycle.DayId,
+                    StringComparison.Ordinal) ||
+                SimulationClock.DurationSeconds !=
+                    snapshot.DayCycle
+                        .OpenDurationSeconds ||
+                SimulationClock.ElapsedWholeSeconds !=
+                    snapshot.DayCycle
+                        .ElapsedOpenSeconds;
+
+            if (requiresFullSynchronization)
+            {
+                SimulationClock.Synchronize(
+                    snapshot.DayCycle
+                        .OpenDurationSeconds,
+                    snapshot.DayCycle
+                        .ElapsedOpenSeconds,
+                    selectedSpeed);
+                _clockSessionId = sessionId;
+                _clockDayId =
+                    snapshot.DayCycle.DayId;
+                return;
+            }
+
+            if (Math.Abs(
+                    SimulationClock
+                        .SelectedSpeedMultiplier -
+                    selectedSpeed) > 0.0001f)
+            {
+                SimulationClock.SetSpeed(
+                    selectedSpeed);
+            }
+        }
+
+        private void HandlePauseChanged(bool isPaused)
+        {
+            ApplyUnitySimulationRate();
+            LastUserMessage = isPaused
+                ? "Simulation paused."
+                : "Simulation resumed at " +
+                  SimulationSpeedPolicy.Format(
+                      SimulationClock
+                          .SelectedSpeedMultiplier) +
+                  ".";
+        }
+
+        private void ApplyUnitySimulationRate()
+        {
+            float targetRate = 1f;
+
+            if (IsStoreSceneActive() &&
+                ActiveSession != null &&
+                ActiveSession.HasActiveSession)
+            {
+                if (PauseService.IsPaused)
+                {
+                    targetRate = 0f;
+                }
+                else
+                {
+                    targetRate =
+                        SimulationClock.SelectedSpeedMultiplier;
+                }
+            }
+
+            if (!Mathf.Approximately(
+                    Time.timeScale,
+                    targetRate))
+            {
+                Time.timeScale = targetRate;
+            }
+        }
+
+        private bool IsStoreSceneActive()
+        {
+            return Settings != null &&
+                   string.Equals(
+                       SceneManager
+                           .GetActiveScene().name,
+                       Settings.StoreSceneName,
+                       StringComparison.Ordinal);
         }
 
         private void HandleSceneLoaded(
@@ -476,6 +1071,9 @@ namespace VRMGames.CartridgeAndCloud.Runtime.Composition
             if (scene.name ==
                 Settings.MainMenuSceneName)
             {
+                PauseService.Clear();
+                Time.timeScale = 1f;
+
                 GameObject screen =
                     new GameObject(
                         "Sprint15MainMenuUI");
@@ -486,12 +1084,25 @@ namespace VRMGames.CartridgeAndCloud.Runtime.Composition
             else if (scene.name ==
                      Settings.StoreSceneName)
             {
+                if (ActiveSession.HasActiveSession)
+                {
+                    SynchronizeSimulationClock(
+                        ActiveSession.Snapshot);
+                }
+
+                ApplyUnitySimulationRate();
+
                 GameObject screen =
                     new GameObject(
                         "Sprint15StoreUI");
                 screen.AddComponent<
                     StoreHudScreen>()
                     .Initialize(this);
+            }
+            else
+            {
+                PauseService.Clear();
+                Time.timeScale = 1f;
             }
         }
 

@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using VRMGames.CartridgeAndCloud.Domain.DayCycle;
 
 using VRMGames.CartridgeAndCloud.Domain.Economy;
 using VRMGames.CartridgeAndCloud.Domain.Inventory;
@@ -375,8 +376,11 @@ namespace VRMGames.CartridgeAndCloud.Domain.Persistence
         public string DayId { get; }
         public string State { get; }
         public int OpenDurationSeconds { get; }
+        public int DayDurationSeconds => OpenDurationSeconds;
         public int ElapsedOpenSeconds { get; }
+        public int ElapsedDaySeconds => ElapsedOpenSeconds;
         public bool AutoBeginClosing { get; }
+        public float SimulationSpeedMultiplier { get; }
 
         public DayCycleSaveRecord(
             string dayId,
@@ -384,6 +388,23 @@ namespace VRMGames.CartridgeAndCloud.Domain.Persistence
             int openDurationSeconds,
             int elapsedOpenSeconds,
             bool autoBeginClosing)
+            : this(
+                dayId,
+                state,
+                openDurationSeconds,
+                elapsedOpenSeconds,
+                autoBeginClosing,
+                SimulationSpeedPolicy.Normal)
+        {
+        }
+
+        public DayCycleSaveRecord(
+            string dayId,
+            string state,
+            int openDurationSeconds,
+            int elapsedOpenSeconds,
+            bool autoBeginClosing,
+            float simulationSpeedMultiplier)
         {
             DayId = SaveRecordGuard.Required(
                 dayId,
@@ -408,6 +429,10 @@ namespace VRMGames.CartridgeAndCloud.Domain.Persistence
             }
 
             AutoBeginClosing = autoBeginClosing;
+            SimulationSpeedMultiplier =
+                SimulationSpeedPolicy.RequireSupported(
+                    simulationSpeedMultiplier,
+                    nameof(simulationSpeedMultiplier));
         }
     }
 

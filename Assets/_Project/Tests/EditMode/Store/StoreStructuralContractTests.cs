@@ -96,6 +96,18 @@ namespace VRMGames.CartridgeAndCloud.Tests.EditMode.Store
                 Transform collision = prefab.transform.Find("Collision");
                 Assert.That(collision, Is.Not.Null, prefab.name);
                 Assert.That(prefab.transform.Find("Anchors"), Is.Not.Null, prefab.name);
+                Assert.That(
+                    prefab.transform.Find(
+                        PrefabPhysicalContractAuthoring.GroundAnchorName),
+                    Is.Not.Null,
+                    prefab.name);
+                PrefabPhysicalContractAuthoring physical =
+                    prefab.GetComponent<PrefabPhysicalContractAuthoring>();
+                Assert.That(physical, Is.Not.Null, prefab.name);
+                Assert.That(
+                    physical.TryValidate(out string physicalReport),
+                    Is.True,
+                    physicalReport);
                 Assert.That(collision.GetComponent<BoxCollider>(), Is.Not.Null, prefab.name);
                 Assert.That(collision.GetComponent<NavMeshObstacle>(), Is.Not.Null, prefab.name);
                 Assert.That(

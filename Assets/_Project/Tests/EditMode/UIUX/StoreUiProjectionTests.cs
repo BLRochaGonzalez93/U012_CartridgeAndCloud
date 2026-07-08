@@ -157,7 +157,7 @@ namespace VRMGames.CartridgeAndCloud.Tests.EditMode.UIUX
                 Is.EqualTo(3));
         }
 
-        [Test] public void DayCyclePanel_HasThreeRows()
+        [Test] public void DayCyclePanel_HasTimeAndSpeedRows()
         {
             ManagementPanelSnapshot panel =
                 _service.BuildPanel(
@@ -167,7 +167,10 @@ namespace VRMGames.CartridgeAndCloud.Tests.EditMode.UIUX
 
             Assert.That(
                 panel.Rows.Count,
-                Is.EqualTo(3));
+                Is.EqualTo(4));
+            Assert.That(
+                panel.Rows[3].Label,
+                Is.EqualTo("Speed"));
         }
 
         [Test] public void EconomyPanel_CalculatesGross()

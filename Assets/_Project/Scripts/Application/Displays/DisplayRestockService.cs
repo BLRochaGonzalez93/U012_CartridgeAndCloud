@@ -111,18 +111,6 @@ namespace VRMGames.CartridgeAndCloud.Application.Displays
                     visibleBefore);
             }
 
-            if (quantity > sourceBefore)
-            {
-                return Failure(
-                    DisplayRestockFailureReason
-                        .InsufficientSourceQuantity,
-                    productId,
-                    quantity,
-                    sourceBefore,
-                    displayBefore,
-                    visibleBefore);
-            }
-
             if (display.Inventory.AvailableCapacity == 0)
             {
                 return Failure(
@@ -134,12 +122,16 @@ namespace VRMGames.CartridgeAndCloud.Application.Displays
                     visibleBefore);
             }
 
-            if (quantity.Value >
-                display.Inventory.AvailableCapacity)
+            int transferableUnits = Math.Min(
+                quantity.Value,
+                Math.Min(
+                    sourceBefore.Value,
+                    display.Inventory.AvailableCapacity));
+
+            if (transferableUnits < 1)
             {
                 return Failure(
-                    DisplayRestockFailureReason
-                        .DisplayCapacityExceeded,
+                    DisplayRestockFailureReason.TransferRejected,
                     productId,
                     quantity,
                     sourceBefore,
@@ -147,12 +139,15 @@ namespace VRMGames.CartridgeAndCloud.Application.Displays
                     visibleBefore);
             }
 
+            Quantity transferredQuantity =
+                new Quantity(transferableUnits);
+
             InventoryTransferResult transfer =
                 _transferService.Transfer(
                     source,
                     display.Inventory,
                     productId,
-                    quantity);
+                    transferredQuantity);
 
             if (!transfer.Succeeded)
             {
@@ -168,7 +163,7 @@ namespace VRMGames.CartridgeAndCloud.Application.Displays
             return DisplayRestockResult.Success(
                 productId,
                 quantity,
-                quantity,
+                transferredQuantity,
                 transfer.SourceQuantityBefore,
                 transfer.SourceQuantityAfter,
                 transfer.DestinationQuantityBefore,
@@ -226,8 +221,7 @@ namespace VRMGames.CartridgeAndCloud.Application.Displays
         private static bool IsAllowedSourceType(
             InventoryContainerType type)
         {
-            return type == InventoryContainerType.Storage ||
-                   type == InventoryContainerType.Transit;
+            return type == InventoryContainerType.Storage;
         }
 
         private static DisplayRestockResult Failure(

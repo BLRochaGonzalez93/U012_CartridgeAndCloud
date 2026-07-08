@@ -245,7 +245,19 @@ namespace VRMGames.CartridgeAndCloud.Tests.EditMode.Store
                 Is.EqualTo("StoreInitial"));
             Assert.That(
                 settings.HideOccludingWalls,
-                Is.True);
+                Is.False);
+            Assert.That(
+                settings.AllowWallOcclusionToggle,
+                Is.False);
+            Assert.That(
+                settings.CameraDistance,
+                Is.EqualTo(12f));
+            Assert.That(
+                settings.CameraMaximumDistance,
+                Is.EqualTo(18f));
+            Assert.That(
+                settings.MaximumCustomers,
+                Is.EqualTo(8));
         }
 
         [Test]

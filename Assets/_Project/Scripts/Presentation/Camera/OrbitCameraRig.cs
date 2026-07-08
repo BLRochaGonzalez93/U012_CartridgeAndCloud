@@ -34,6 +34,10 @@ namespace VRMGames.CartridgeAndCloud.Presentation.Camera
         private bool _stateInitialized;
 
         public Transform Target => _target;
+        public float MinimumPitchDegrees => _minimumPitchDegrees;
+        public float MaximumPitchDegrees => _maximumPitchDegrees;
+        public float MinimumDistance => _minimumDistance;
+        public float MaximumDistance => _maximumDistance;
 
         public OrbitCameraState CurrentState
         {
@@ -80,6 +84,48 @@ namespace VRMGames.CartridgeAndCloud.Presentation.Camera
             _stateInitialized = true;
             SynchronizeSerializedState();
             ApplyPose();
+        }
+
+        public bool TryValidateAuthoring(
+            out string report)
+        {
+            if (_target == null)
+            {
+                report =
+                    "Orbit camera requires an authored target.";
+                return false;
+            }
+
+            if (_minimumPitchDegrees >
+                _maximumPitchDegrees)
+            {
+                report =
+                    "Orbit camera pitch range is invalid.";
+                return false;
+            }
+
+            if (_minimumDistance <= 0f ||
+                _minimumDistance >
+                _maximumDistance)
+            {
+                report =
+                    "Orbit camera distance range is invalid.";
+                return false;
+            }
+
+            if (_distance <
+                    _minimumDistance ||
+                _distance >
+                    _maximumDistance)
+            {
+                report =
+                    "Orbit camera initial distance is outside its configured limits.";
+                return false;
+            }
+
+            report =
+                "Orbit camera authoring is valid.";
+            return true;
         }
 
         public void SetTarget(Transform target)

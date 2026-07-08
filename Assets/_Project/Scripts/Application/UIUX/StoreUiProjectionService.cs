@@ -2,7 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using VRMGames.CartridgeAndCloud.Domain.Persistence;
+using VRMGames.CartridgeAndCloud.Domain.DayCycle;
 using VRMGames.CartridgeAndCloud.Domain.UIUX;
+using VRMGames.CartridgeAndCloud.Domain.Store;
 
 using VRMGames.CartridgeAndCloud.Domain.Checkout;
 using VRMGames.CartridgeAndCloud.Domain.Economy;
@@ -50,7 +52,8 @@ namespace VRMGames.CartridgeAndCloud.Application.UIUX
 
         public ManagementPanelSnapshot BuildPanel(
             IntegratedGameStateSnapshot snapshot,
-            ManagementPanelId panelId)
+            ManagementPanelId panelId,
+            StoreOperationsState operationsState = null)
         {
             if (snapshot == null)
             {
@@ -60,14 +63,16 @@ namespace VRMGames.CartridgeAndCloud.Application.UIUX
 
             switch (panelId)
             {
+                case ManagementPanelId.Overview:
+                    return Overview(snapshot, operationsState);
                 case ManagementPanelId.Inventory:
                     return Inventory(snapshot);
                 case ManagementPanelId.Suppliers:
-                    return Suppliers(snapshot);
+                    return Suppliers(snapshot, operationsState);
                 case ManagementPanelId.Displays:
                     return Displays(snapshot);
                 case ManagementPanelId.Customers:
-                    return Customers(snapshot);
+                    return Customers(snapshot, operationsState);
                 case ManagementPanelId.Shopping:
                     return Shopping(snapshot);
                 case ManagementPanelId.Checkout:
@@ -75,7 +80,11 @@ namespace VRMGames.CartridgeAndCloud.Application.UIUX
                 case ManagementPanelId.DayCycle:
                     return DayCycle(snapshot);
                 case ManagementPanelId.Economy:
-                    return Economy(snapshot);
+                    return Economy(snapshot, operationsState);
+                case ManagementPanelId.History:
+                    return History(snapshot, operationsState);
+                case ManagementPanelId.Weekly:
+                    return Weekly(snapshot, operationsState);
                 case ManagementPanelId.Help:
                     return Help();
                 case ManagementPanelId.Accessibility:
@@ -128,23 +137,53 @@ namespace VRMGames.CartridgeAndCloud.Application.UIUX
         }
 
         private static ManagementPanelSnapshot Suppliers(
-            IntegratedGameStateSnapshot snapshot)
+            IntegratedGameStateSnapshot snapshot,
+            StoreOperationsState operationsState)
         {
             List<ManagementPanelRow> rows =
                 new List<ManagementPanelRow>();
 
-            foreach (SupplierOrderSaveRecord order
-                     in snapshot.SupplierOrders)
+            if (operationsState != null)
             {
-                rows.Add(Row(
-                    order.OrderId,
-                    $"{order.ReceivedUnits}/" +
-                    $"{order.OrderedUnits}",
-                    order.State + " · " +
-                    FormatMoney(
-                        order.UnitCostCents,
-                        snapshot.CurrencyCode) +
-                    " each"));
+                foreach (StoreOrderRecord order in operationsState.Orders)
+                {
+                    rows.Add(Row(
+                        order.OrderId,
+                        FormatMoney(order.TotalCostCents, snapshot.CurrencyCode),
+                        order.State + " · " + order.ItemId +
+                        (order.ReservedCostCents > 0
+                            ? " · reserved " + FormatMoney(
+                                order.ReservedCostCents,
+                                snapshot.CurrencyCode)
+                            : string.Empty) +
+                        (!string.IsNullOrWhiteSpace(order.DeliveryRunId)
+                            ? " · " + order.DeliveryRunId
+                            : string.Empty)));
+                }
+
+                foreach (StoreDeliveryRunRecord run in operationsState.DeliveryRuns)
+                {
+                    rows.Add(Row(
+                        run.DeliveryRunId,
+                        FormatMoney(run.TotalCostCents, snapshot.CurrencyCode),
+                        run.Status + " · " + run.OrderIds.Count + " order(s)"));
+                }
+            }
+            else
+            {
+                foreach (SupplierOrderSaveRecord order
+                         in snapshot.SupplierOrders)
+                {
+                    rows.Add(Row(
+                        order.OrderId,
+                        $"{order.ReceivedUnits}/" +
+                        $"{order.OrderedUnits}",
+                        order.State + " · " +
+                        FormatMoney(
+                            order.UnitCostCents,
+                            snapshot.CurrencyCode) +
+                        " each"));
+                }
             }
 
             if (rows.Count == 0)
@@ -157,7 +196,7 @@ namespace VRMGames.CartridgeAndCloud.Application.UIUX
 
             return Panel(
                 ManagementPanelId.Suppliers,
-                "Suppliers & Orders",
+                "Suppliers, Orders & Delivery Runs",
                 rows);
         }
 
@@ -193,10 +232,29 @@ namespace VRMGames.CartridgeAndCloud.Application.UIUX
         }
 
         private static ManagementPanelSnapshot Customers(
-            IntegratedGameStateSnapshot snapshot)
+            IntegratedGameStateSnapshot snapshot,
+            StoreOperationsState operationsState)
         {
             List<ManagementPanelRow> rows =
                 new List<ManagementPanelRow>();
+
+            StoreManagementDayDetailRecord day =
+                CurrentDay(operationsState, snapshot.CurrentDay);
+            if (day != null)
+            {
+                rows.Add(Row(
+                    "Visitors",
+                    day.VisitorCount.ToString(CultureInfo.InvariantCulture),
+                    "Admitted today"));
+                rows.Add(Row(
+                    "Buyers",
+                    day.BuyerCount.ToString(CultureInfo.InvariantCulture),
+                    "Visits ending in purchase"));
+                rows.Add(Row(
+                    "Abandoned",
+                    day.AbandonedCustomerCount.ToString(CultureInfo.InvariantCulture),
+                    "Visits ending without purchase"));
+            }
 
             foreach (CustomerSaveRecord customer
                      in snapshot.Customers)
@@ -213,7 +271,7 @@ namespace VRMGames.CartridgeAndCloud.Application.UIUX
                 rows.Add(Row(
                     "Customers",
                     "0",
-                    "No active customers"));
+                    "No customer activity"));
             }
 
             return Panel(
@@ -323,34 +381,114 @@ namespace VRMGames.CartridgeAndCloud.Application.UIUX
                             : "Manual closing"),
                     Row(
                         "Time",
-                        $"{snapshot.DayCycle.ElapsedOpenSeconds}/" +
-                        $"{snapshot.DayCycle.OpenDurationSeconds}s",
-                        "Logical integer seconds")
+                        StoreTradingHoursPolicy.FormatTime(
+                            snapshot.DayCycle.ElapsedDaySeconds,
+                            snapshot.DayCycle.DayDurationSeconds),
+                        "24-hour SimulationClock authority · Open 08:00–22:00"),
+                    Row(
+                        "Speed",
+                        SimulationSpeedPolicy.Format(
+                            snapshot.DayCycle
+                                .SimulationSpeedMultiplier),
+                        "Pause is independent from speed")
+                });
+        }
+
+        private static ManagementPanelSnapshot Overview(
+            IntegratedGameStateSnapshot snapshot,
+            StoreOperationsState operationsState)
+        {
+            StoreManagementDayDetailRecord day =
+                CurrentDay(operationsState, snapshot.CurrentDay);
+
+            long reserved = operationsState == null
+                ? 0
+                : operationsState.ReservedFundsCents;
+            long available = Math.Max(0, snapshot.CashCents - reserved);
+
+            return Panel(
+                ManagementPanelId.Overview,
+                "Management Overview",
+                new[]
+                {
+                    Row(
+                        "Cash",
+                        FormatMoney(snapshot.CashCents, snapshot.CurrencyCode),
+                        "Current balance"),
+                    Row(
+                        "Reserved",
+                        FormatMoney(reserved, snapshot.CurrencyCode),
+                        "Pending supplier orders"),
+                    Row(
+                        "Available",
+                        FormatMoney(available, snapshot.CurrencyCode),
+                        "Cash minus reservations"),
+                    Row(
+                        "Day revenue",
+                        FormatMoney(day == null ? 0 : day.RevenueCents, snapshot.CurrencyCode),
+                        "Confirmed checkout revenue"),
+                    Row(
+                        "Day costs",
+                        FormatMoney(day == null ? 0 : day.SupplierCostCents, snapshot.CurrencyCode),
+                        "Received supplier costs"),
+                    Row(
+                        "Day tax",
+                        FormatMoney(day == null ? 0 : day.TaxCents, snapshot.CurrencyCode),
+                        "Weekly tax posted on this day"),
+                    Row(
+                        "Day net",
+                        FormatMoney(day == null ? 0 : day.NetResultCents, snapshot.CurrencyCode),
+                        day != null && day.IsClosed ? "Final" : "In progress"),
+                    Row(
+                        "Visitors",
+                        (day == null ? 0 : day.VisitorCount).ToString(CultureInfo.InvariantCulture),
+                        "Customers admitted"),
+                    Row(
+                        "Buyers / Sales",
+                        (day == null ? 0 : day.BuyerCount).ToString(CultureInfo.InvariantCulture) +
+                        " / " +
+                        (day == null ? 0 : day.CompletedSales).ToString(CultureInfo.InvariantCulture),
+                        "Purchased visits and transactions")
                 });
         }
 
         private static ManagementPanelSnapshot Economy(
-            IntegratedGameStateSnapshot snapshot)
+            IntegratedGameStateSnapshot snapshot,
+            StoreOperationsState operationsState)
         {
-            long revenue = 0;
-            long costs = 0;
+            StoreManagementDayDetailRecord day =
+                CurrentDay(operationsState, snapshot.CurrentDay);
 
-            foreach (EconomyLedgerSaveRecord entry
-                     in snapshot.LedgerEntries)
+            long revenue = day == null ? 0 : day.RevenueCents;
+            long costs = day == null ? 0 : day.SupplierCostCents;
+            long tax = day == null ? 0 : day.TaxCents;
+
+            if (day == null)
             {
-                if (string.Equals(
-                        entry.PostingType,
-                        "CheckoutRevenue",
-                        StringComparison.Ordinal))
+                foreach (EconomyLedgerSaveRecord entry
+                         in snapshot.LedgerEntries)
                 {
-                    revenue += entry.MinorUnits;
-                }
-                else if (string.Equals(
-                             entry.PostingType,
-                             "SupplierReceivingCost",
-                             StringComparison.Ordinal))
-                {
-                    costs += entry.MinorUnits;
+                    if (string.Equals(
+                            entry.PostingType,
+                            "CheckoutRevenue",
+                            StringComparison.Ordinal))
+                    {
+                        revenue = checked(revenue + entry.MinorUnits);
+                    }
+                    else if (string.Equals(
+                                 entry.PostingType,
+                                 "SupplierReceivingCost",
+                                 StringComparison.Ordinal))
+                    {
+                        costs = checked(costs + entry.MinorUnits);
+                    }
+                    else if (string.Equals(
+                                 entry.PostingType,
+                                 "WeeklyTax",
+                                 StringComparison.Ordinal))
+                    {
+                        tax = checked(tax + entry.MinorUnits);
+                    }
                 }
             }
 
@@ -361,29 +499,156 @@ namespace VRMGames.CartridgeAndCloud.Application.UIUX
                 {
                     Row(
                         "Cash",
-                        FormatMoney(
-                            snapshot.CashCents,
-                            snapshot.CurrencyCode),
+                        FormatMoney(snapshot.CashCents, snapshot.CurrencyCode),
                         "Current session cash"),
                     Row(
                         "Revenue",
-                        FormatMoney(
-                            revenue,
-                            snapshot.CurrencyCode),
+                        FormatMoney(revenue, snapshot.CurrencyCode),
                         "Checkout revenue"),
                     Row(
                         "Supplier costs",
-                        FormatMoney(
-                            costs,
-                            snapshot.CurrencyCode),
+                        FormatMoney(costs, snapshot.CurrencyCode),
                         "Received costs"),
                     Row(
                         "Gross result",
-                        FormatMoney(
-                            revenue - costs,
-                            snapshot.CurrencyCode),
-                        "Revenue minus received costs")
+                        FormatMoney(revenue - costs, snapshot.CurrencyCode),
+                        "Revenue minus received costs"),
+                    Row(
+                        "Tax",
+                        FormatMoney(tax, snapshot.CurrencyCode),
+                        "Weekly tax recognized once"),
+                    Row(
+                        "Net result",
+                        FormatMoney(revenue - costs - tax, snapshot.CurrencyCode),
+                        day != null && day.IsClosed ? "Final" : "In progress")
                 });
+        }
+
+        private static ManagementPanelSnapshot History(
+            IntegratedGameStateSnapshot snapshot,
+            StoreOperationsState operationsState)
+        {
+            List<ManagementPanelRow> rows =
+                new List<ManagementPanelRow>();
+
+            if (operationsState != null)
+            {
+                for (int index =
+                         operationsState.ManagementHistory.RecentDayDetails.Count - 1;
+                     index >= 0;
+                     index--)
+                {
+                    StoreManagementDayDetailRecord day =
+                        operationsState.ManagementHistory.RecentDayDetails[index];
+                    rows.Add(Row(
+                        "Day " + day.DayNumber.ToString(CultureInfo.InvariantCulture),
+                        FormatMoney(day.NetResultCents, snapshot.CurrencyCode),
+                        "Detailed · " + day.CompletedSales + " sales · " +
+                        day.VisitorCount + " visitors · " +
+                        (day.IsClosed ? "Closed" : "Current")));
+
+                    foreach (StoreSaleDetailRecord sale in day.Sales)
+                    {
+                        rows.Add(Row(
+                            "  Sale " + sale.TransactionId,
+                            FormatMoney(sale.RevenueCents, snapshot.CurrencyCode),
+                            sale.ProductId + " · " + sale.Units + " unit(s)"));
+                    }
+
+                    foreach (StoreReceiptDetailRecord receipt in day.Receipts)
+                    {
+                        rows.Add(Row(
+                            "  Receipt " + receipt.OrderId,
+                            FormatMoney(receipt.SupplierCostCents, snapshot.CurrencyCode),
+                            receipt.DeliveryRunId + " · " + receipt.ItemId));
+                    }
+                }
+
+                for (int index =
+                         operationsState.ManagementHistory.DailySummaries.Count - 1;
+                     index >= 0;
+                     index--)
+                {
+                    StoreDailySummaryRecord day =
+                        operationsState.ManagementHistory.DailySummaries[index];
+                    rows.Add(Row(
+                        "Day " + day.DayNumber.ToString(CultureInfo.InvariantCulture),
+                        FormatMoney(day.NetResultCents, snapshot.CurrencyCode),
+                        "Summary · " + day.CompletedSales + " sales · " +
+                        day.Visitors + " visitors"));
+                }
+            }
+
+            if (rows.Count == 0)
+            {
+                rows.Add(Row(
+                    "History",
+                    "0 days",
+                    "No management history recorded"));
+            }
+
+            return Panel(
+                ManagementPanelId.History,
+                "Recent Detail & Daily Summaries",
+                rows);
+        }
+
+        private static ManagementPanelSnapshot Weekly(
+            IntegratedGameStateSnapshot snapshot,
+            StoreOperationsState operationsState)
+        {
+            long revenue = operationsState == null
+                ? 0
+                : operationsState.WeeklyRevenueCents;
+            long costs = operationsState == null
+                ? 0
+                : operationsState.WeeklySupplierCostCents;
+            long gross = checked(revenue - costs);
+
+            return Panel(
+                ManagementPanelId.Weekly,
+                "Weekly Economy",
+                new[]
+                {
+                    Row(
+                        "Current revenue",
+                        FormatMoney(revenue, snapshot.CurrencyCode),
+                        "Accumulated this week"),
+                    Row(
+                        "Current supplier costs",
+                        FormatMoney(costs, snapshot.CurrencyCode),
+                        "Recognized this week"),
+                    Row(
+                        "Current gross",
+                        FormatMoney(gross, snapshot.CurrencyCode),
+                        "Tax base candidate"),
+                    Row(
+                        "Last settled week",
+                        (operationsState == null ? 0 : operationsState.LastSettledWeek)
+                            .ToString(CultureInfo.InvariantCulture),
+                        "Applied exactly once"),
+                    Row(
+                        "Last gross",
+                        FormatMoney(
+                            operationsState == null ? 0 : operationsState.LastWeeklyGrossResultCents,
+                            snapshot.CurrencyCode),
+                        "Gross result at settlement"),
+                    Row(
+                        "Last tax",
+                        FormatMoney(
+                            operationsState == null ? 0 : operationsState.LastWeeklyTaxCents,
+                            snapshot.CurrencyCode),
+                        "10% of positive gross result")
+                });
+        }
+
+        private static StoreManagementDayDetailRecord CurrentDay(
+            StoreOperationsState operationsState,
+            int dayNumber)
+        {
+            return operationsState == null
+                ? null
+                : operationsState.ManagementHistory.FindDetailedDay(dayNumber);
         }
 
         private static ManagementPanelSnapshot Help()

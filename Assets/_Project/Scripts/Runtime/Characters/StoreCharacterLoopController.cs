@@ -4,13 +4,16 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 using VRMGames.CartridgeAndCloud.Application.Store;
+using VRMGames.CartridgeAndCloud.Application.Customers;
 using VRMGames.CartridgeAndCloud.Application.UIUX;
 using VRMGames.CartridgeAndCloud.Domain.Characters;
+using VRMGames.CartridgeAndCloud.Domain.Customers;
 using VRMGames.CartridgeAndCloud.Domain.Placement;
 using VRMGames.CartridgeAndCloud.Domain.Store;
 using VRMGames.CartridgeAndCloud.Infrastructure.Store;
 using VRMGames.CartridgeAndCloud.Infrastructure.Customers;
 using VRMGames.CartridgeAndCloud.Runtime.Placement;
+using VRMGames.CartridgeAndCloud.Runtime.Composition;
 using VRMGames.CartridgeAndCloud.Presentation.Placement;
 using VRMGames.CartridgeAndCloud.Presentation.Characters;
 using VRMGames.CartridgeAndCloud.Presentation.Grounding;
@@ -29,12 +32,30 @@ namespace VRMGames.CartridgeAndCloud.Runtime.Characters
         private Transform _receiving;
         private int _maximumCustomers;
         private int _activeCustomers;
+        private int _nextRuntimeCustomerSequence = 1;
+        private ICustomerActivityRuntime _customerActivity;
         private Transform _characterRoot;
         private Transform _employee;
         private IReadOnlyList<Transform> _exteriorSpawnAnchors = Array.Empty<Transform>();
 
+        public int ActiveCustomerCount =>
+            _customerActivity != null
+                ? _customerActivity.ActiveCustomerCount
+                : _activeCustomers;
+
+        public int MaximumCustomerCount =>
+            _customerActivity != null
+                ? _customerActivity.MaximumCustomerCount
+                : _maximumCustomers;
+
         public bool IsCustomerSequenceRunning =>
-            _activeCustomers > 0;
+            ActiveCustomerCount > 0;
+
+        public bool CanServeNextCustomer =>
+            _customerActivity == null
+                ? _activeCustomers < _maximumCustomers
+                : _customerActivity
+                    .EvaluateAdmission().Allowed;
 
         public StoreOperationResult
             LastCustomerPurchaseResult {
@@ -94,6 +115,11 @@ namespace VRMGames.CartridgeAndCloud.Runtime.Characters
                 Mathf.Max(1, maximumCustomers);
             _exteriorSpawnAnchors =
                 exteriorSpawnAnchors ?? Array.Empty<Transform>();
+            _customerActivity =
+                UIRuntimeCompositionRoot.Instance
+                    ?.StoreOperationalGate as
+                    ICustomerActivityRuntime;
+            _nextRuntimeCustomerSequence = 1;
 
             GameObject root =
                 new GameObject(
@@ -113,42 +139,84 @@ namespace VRMGames.CartridgeAndCloud.Runtime.Characters
         public StoreOperationResult
             TryServeNextCustomer()
         {
-            if (_activeCustomers >=
+            if (_customerActivity == null &&
+                _activeCustomers >=
                 _maximumCustomers)
             {
                 return StoreOperationResult
                     .Failure(
                         StoreOperationStatus
-                            .InvalidState,
-                        "Maximum authored customers reached.");
+                            .CapacityExceeded,
+                        "Maximum active customer capacity reached.");
             }
 
-            StoreOperationResult validation =
-                _service
-                    .ValidateNextCustomerPurchase();
+            int sequence =
+                _nextRuntimeCustomerSequence++;
+            CustomerInstanceId customerId =
+                new CustomerInstanceId(
+                    "customer-" +
+                    sequence.ToString("0000"));
 
-            if (!validation.Succeeded)
+            if (_customerActivity != null)
             {
-                LastCustomerPurchaseResult =
-                    validation;
+                StoreCustomerAdmissionDecision admission =
+                    _customerActivity.TryAdmit(
+                        customerId);
 
-                _service.PublishFeedback(
-                    new GameplayFeedbackEvent(
-                        GameplayFeedbackType
-                            .CustomerFrustrated,
-                        validation.Detail,
-                        "store-entrance"));
+                if (!admission.Allowed)
+                {
+                    StoreOperationStatus status =
+                        admission.FailureReason ==
+                        StoreCustomerAdmissionFailureReason
+                            .CapacityReached
+                            ? StoreOperationStatus
+                                .CapacityExceeded
+                            : admission.FailureReason ==
+                              StoreCustomerAdmissionFailureReason
+                                  .CheckoutUnavailable
+                                ? StoreOperationStatus
+                                    .CheckoutRequired
+                                : admission.FailureReason ==
+                                  StoreCustomerAdmissionFailureReason
+                                      .StoreNotOpen ||
+                                  admission.FailureReason ==
+                                  StoreCustomerAdmissionFailureReason
+                                      .StoreClosing
+                                    ? StoreOperationStatus
+                                        .StoreMustBeOpen
+                                    : StoreOperationStatus
+                                        .InvalidState;
 
-                return validation;
+                    return StoreOperationResult.Failure(
+                        status,
+                        admission.Detail);
+                }
             }
 
             LastCustomerPurchaseResult = null;
+            _service.RecordCustomerVisit(customerId.Value);
+
+            if (_customerActivity == null)
+            {
+                // Reserve fallback capacity synchronously so repeated
+                // admissions in the same frame cannot exceed the limit.
+                _activeCustomers++;
+            }
+
+            string customerActorId =
+                sequence % 2 == 0
+                    ? "customer-female-01"
+                    : "customer-male-01";
 
             StartCoroutine(
-                CustomerSequence());
+                CustomerSequence(
+                    customerId,
+                    customerActorId));
 
             return StoreOperationResult.Success(
-                "Customer sequence started.");
+                "Customer admitted. " +
+                ActiveCustomerCount + "/" +
+                MaximumCustomerCount + " active.");
         }
 
         private void OnDestroy()
@@ -202,70 +270,111 @@ namespace VRMGames.CartridgeAndCloud.Runtime.Characters
                 _employee.position = checkout.position;
                 GroundingUtility.TrySnapRootToGround(_employee);
             }
+
+            if (employeeAgent != null)
+            {
+                employeeAgent.updateRotation = false;
+                if (employeeAgent.isOnNavMesh)
+                {
+                    employeeAgent.ResetPath();
+                }
+            }
+
+            Transform lookTarget =
+                FindNamedChild(checkoutRoot, "StaffLookTarget")
+                ?? FindNamedChild(checkoutRoot, "CustomerCheckoutStandPoint")
+                ?? checkoutRoot;
+
+            if (lookTarget != null &&
+                StaffOrientationUtility.TryResolveHorizontalRotation(
+                    _employee.position,
+                    lookTarget.position,
+                    out Quaternion staffRotation))
+            {
+                _employee.rotation = staffRotation;
+            }
         }
 
-        private IEnumerator CustomerSequence()
+        private IEnumerator CustomerSequence(
+            CustomerInstanceId customerId,
+            string customerActorId)
         {
-            _activeCustomers++;
-
-            string customerId =
-                "customer-" +
-                _service.State
-                    .NextCustomerSequence
-                    .ToString("0000");
-
-            string customerActorId =
-                _service.State.NextCustomerSequence % 2 == 0
-                    ? "customer-female-01"
-                    : "customer-male-01";
-
             Vector3 spawnPosition = ResolveExteriorSpawnPosition();
-            GameObject customer =
-                CharacterPrefabFactory.Instantiate(
-                    _presentationCatalog,
-                    customerActorId,
-                    _characterRoot,
-                    customerId,
-                    CharacterRole.Customer,
-                    spawnPosition);
+            GameObject customer = null;
+            bool purchaseSucceeded = false;
 
             try
             {
+                customer =
+                    CharacterPrefabFactory.Instantiate(
+                        _presentationCatalog,
+                        customerActorId,
+                        _characterRoot,
+                        customerId.Value,
+                        CharacterRole.Customer,
+                        spawnPosition);
+
                 Transform display =
                     FindStockedDisplayTransform(
                         customer.transform.position);
 
-                if (display == null)
+                if (display == null &&
+                    CustomerVisitFallbackPolicy.ShouldBrowseWithoutPurchase(
+                        hasVisibleProduct: false,
+                        admissionAllowed: true))
                 {
-                    LastCustomerPurchaseResult =
-                        StoreOperationResult
-                            .Failure(
-                                StoreOperationStatus
-                                    .InvalidState,
-                                "The stocked display visual is unavailable.");
+                    Transform fallback =
+                        FindFallbackBrowseTransform(
+                            customer.transform.position);
+                    Vector3 destination = fallback != null
+                        ? fallback.position
+                        : _entrance.position + _entrance.forward * 1.4f;
 
-                    _service.PublishFeedback(
-                        new GameplayFeedbackEvent(
-                            GameplayFeedbackType
-                                .CustomerFrustrated,
-                            LastCustomerPurchaseResult
-                                .Detail,
-                            "store-entrance"));
-
-                    yield return AnimateState(
-                        customer.transform,
-                        "frustrated",
-                        0.9f);
-
-                    NavMeshActorMovement.Result rejectedExit =
+                    NavMeshActorMovement.Result fallbackMovement =
                         new NavMeshActorMovement.Result();
                     yield return NavMeshActorMovement.MoveTo(
                         customer.transform,
-                        _entrance.position +
-                        _entrance.forward *
-                        -1.8f,
+                        destination,
                         2f,
-                        rejectedExit);
+                        fallbackMovement);
+
+                    if (!fallbackMovement.Succeeded)
+                    {
+                        PublishNavigationFailure(
+                            customer,
+                            "the fallback browsing point",
+                            fallbackMovement.FailureReason);
+                        yield break;
+                    }
+
+                    SetCustomerState(
+                        customerId,
+                        ActiveCustomerState.Browsing);
+                    _service.PublishFeedback(
+                        new GameplayFeedbackEvent(
+                            GameplayFeedbackType.CustomerFrustrated,
+                            "Customer found no visible products and is leaving without a purchase.",
+                            fallback != null ? fallback.name : "store-entrance"));
+
+                    yield return AnimateState(
+                        customer.transform,
+                        "observe",
+                        0.75f);
+                    yield return AnimateState(
+                        customer.transform,
+                        "frustrated",
+                        0.65f);
+
+                    SetCustomerState(
+                        customerId,
+                        ActiveCustomerState.Leaving);
+                    NavMeshActorMovement.Result fallbackExit =
+                        new NavMeshActorMovement.Result();
+                    yield return NavMeshActorMovement.MoveTo(
+                        customer.transform,
+                        _entrance.position - _entrance.forward * 1.8f,
+                        2f,
+                        fallbackExit);
                     yield break;
                 }
 
@@ -285,6 +394,10 @@ namespace VRMGames.CartridgeAndCloud.Runtime.Characters
                         browseMovement.FailureReason);
                     yield break;
                 }
+
+                SetCustomerState(
+                    customerId,
+                    ActiveCustomerState.Browsing);
 
                 _service.PublishFeedback(
                     new GameplayFeedbackEvent(
@@ -335,10 +448,18 @@ namespace VRMGames.CartridgeAndCloud.Runtime.Characters
                     yield break;
                 }
 
+                SetCustomerState(
+                    customerId,
+                    ActiveCustomerState.Queueing);
+
                 yield return AnimateState(
                     customer.transform,
                     "queue",
                     0.7f);
+
+                SetCustomerState(
+                    customerId,
+                    ActiveCustomerState.CheckingOut);
 
                 StoreOperationResult purchase =
                     _service
@@ -346,6 +467,7 @@ namespace VRMGames.CartridgeAndCloud.Runtime.Characters
 
                 LastCustomerPurchaseResult =
                     purchase;
+                purchaseSucceeded = purchase.Succeeded;
 
                 if (!purchase.Succeeded)
                 {
@@ -364,6 +486,10 @@ namespace VRMGames.CartridgeAndCloud.Runtime.Characters
                         : "frustrated",
                     0.85f);
 
+                SetCustomerState(
+                    customerId,
+                    ActiveCustomerState.Leaving);
+
                 NavMeshActorMovement.Result completedExit =
                     new NavMeshActorMovement.Result();
                 yield return NavMeshActorMovement.MoveTo(
@@ -376,13 +502,45 @@ namespace VRMGames.CartridgeAndCloud.Runtime.Characters
             }
             finally
             {
-                if (customer != null)
+                try
                 {
-                    Destroy(customer);
+                    _service.RecordCustomerOutcome(
+                        customerId.Value,
+                        purchaseSucceeded
+                            ? StoreCustomerVisitOutcome.Purchased
+                            : StoreCustomerVisitOutcome.Abandoned);
                 }
+                finally
+                {
+                    if (customer != null)
+                    {
+                        Destroy(customer);
+                    }
 
-                _activeCustomers--;
+                    if (_customerActivity != null)
+                    {
+                        _customerActivity.TrySetState(
+                            customerId,
+                            ActiveCustomerState.Despawned);
+                    }
+                    else
+                    {
+                        _activeCustomers =
+                            Mathf.Max(
+                                0,
+                                _activeCustomers - 1);
+                    }
+                }
             }
+        }
+
+        private void SetCustomerState(
+            CustomerInstanceId customerId,
+            ActiveCustomerState state)
+        {
+            _customerActivity?.TrySetState(
+                customerId,
+                state);
         }
 
         private void SpawnEmployee()
@@ -457,6 +615,9 @@ namespace VRMGames.CartridgeAndCloud.Runtime.Characters
         {
             return FindNamedChild(
                        checkoutRoot,
+                       "StaffPoint")
+                   ?? FindNamedChild(
+                       checkoutRoot,
                        "EmployeeStandPoint")
                    ?? checkoutRoot;
         }
@@ -492,6 +653,45 @@ namespace VRMGames.CartridgeAndCloud.Runtime.Characters
             return destination;
         }
 
+        private Transform FindFallbackBrowseTransform(
+            Vector3 customerPosition)
+        {
+            CustomerBrowseFixtureAuthoring[] browseFixtures =
+                UnityEngine.Object.FindObjectsByType<CustomerBrowseFixtureAuthoring>(
+                    FindObjectsInactive.Exclude,
+                    FindObjectsSortMode.None);
+
+            Transform nearest = null;
+            float nearestDistance = float.PositiveInfinity;
+            foreach (CustomerBrowseFixtureAuthoring browse in browseFixtures)
+            {
+                if (browse == null)
+                {
+                    continue;
+                }
+
+                foreach (Transform point in browse.Points)
+                {
+                    if (point == null)
+                    {
+                        continue;
+                    }
+
+                    Vector3 flatPoint = point.position;
+                    flatPoint.y = customerPosition.y;
+                    float distance =
+                        (flatPoint - customerPosition).sqrMagnitude;
+                    if (distance < nearestDistance)
+                    {
+                        nearestDistance = distance;
+                        nearest = point;
+                    }
+                }
+            }
+
+            return nearest;
+        }
+
         private Transform FindStockedDisplayTransform(
             Vector3 customerPosition)
         {
@@ -503,7 +703,8 @@ namespace VRMGames.CartridgeAndCloud.Runtime.Characters
             foreach (PlacedStoreFixtureRecord fixture
                      in _service.State.Fixtures)
             {
-                if (fixture.ProductQuantity < 1)
+                if (_service.GetUnreservedDisplayQuantity(
+                        fixture.InstanceId) < 1)
                 {
                     continue;
                 }
@@ -709,7 +910,7 @@ namespace VRMGames.CartridgeAndCloud.Runtime.Characters
             float elapsed = 0f;
             while (target != null && elapsed < duration)
             {
-                elapsed += Time.unscaledDeltaTime;
+                elapsed += Time.deltaTime;
                 yield return null;
             }
         }

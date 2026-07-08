@@ -1,5 +1,6 @@
 using System;
 using VRMGames.CartridgeAndCloud.Domain.Identifiers;
+using VRMGames.CartridgeAndCloud.Domain.DayCycle;
 using VRMGames.CartridgeAndCloud.Domain.Persistence;
 
 namespace VRMGames.CartridgeAndCloud.Application.UIUX
@@ -85,7 +86,8 @@ namespace VRMGames.CartridgeAndCloud.Application.UIUX
                     "BeforeOpen",
                     _dayDurationSeconds,
                     0,
-                    true),
+                    true,
+                    SimulationSpeedPolicy.Normal),
                 new EconomyLedgerSaveRecord[0]);
         }
     }

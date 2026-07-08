@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using VRMGames.CartridgeAndCloud.Application.DayCycle;
 using VRMGames.CartridgeAndCloud.Domain.DayCycle;
 using VRMGames.CartridgeAndCloud.Infrastructure.Customers;
 
@@ -18,7 +19,8 @@ namespace VRMGames.CartridgeAndCloud.Infrastructure.DayCycle
         private bool _autoRun = true;
 
         private StoreDay _day;
-        private float _secondAccumulator;
+        private ISimulationClock _clock;
+        private IPauseService _pauseService;
 
         public bool IsInitialized => _day != null;
 
@@ -26,6 +28,16 @@ namespace VRMGames.CartridgeAndCloud.Infrastructure.DayCycle
             _day ??
             throw new InvalidOperationException(
                 "Store day is not initialized.");
+
+        public ISimulationClock Clock =>
+            _clock ??
+            throw new InvalidOperationException(
+                "Simulation clock is not initialized.");
+
+        public IPauseService PauseService =>
+            _pauseService ??
+            throw new InvalidOperationException(
+                "Pause service is not initialized.");
 
         private void Awake()
         {
@@ -39,7 +51,7 @@ namespace VRMGames.CartridgeAndCloud.Infrastructure.DayCycle
         {
             if (_autoRun)
             {
-                Tick(Time.deltaTime);
+                Tick(Time.unscaledDeltaTime);
             }
         }
 
@@ -48,11 +60,31 @@ namespace VRMGames.CartridgeAndCloud.Infrastructure.DayCycle
             CustomerTechnicalSpawner customerSpawner,
             bool autoRun)
         {
+            Configure(
+                settings,
+                customerSpawner,
+                autoRun,
+                new SimulationClock(),
+                new PauseService());
+        }
+
+        public void Configure(
+            StoreDaySettingsAsset settings,
+            CustomerTechnicalSpawner customerSpawner,
+            bool autoRun,
+            ISimulationClock clock,
+            IPauseService pauseService)
+        {
             _settings = settings;
             _customerSpawner = customerSpawner;
             _autoRun = autoRun;
+            _clock = clock ??
+                throw new ArgumentNullException(
+                    nameof(clock));
+            _pauseService = pauseService ??
+                throw new ArgumentNullException(
+                    nameof(pauseService));
             _day = null;
-            _secondAccumulator = 0f;
         }
 
         public void Initialize()
@@ -68,7 +100,14 @@ namespace VRMGames.CartridgeAndCloud.Infrastructure.DayCycle
                     "Store day settings asset is required.");
             }
 
+            _clock ??= new SimulationClock();
+            _pauseService ??= new PauseService();
             _day = _settings.BuildDay();
+
+            _clock.Synchronize(
+                _day.Policy.OpenDurationSeconds,
+                _day.ElapsedOpenSeconds,
+                SimulationSpeedPolicy.Normal);
 
             if (_settings.AutoOpenOnInitialize)
             {
@@ -78,14 +117,14 @@ namespace VRMGames.CartridgeAndCloud.Infrastructure.DayCycle
             ApplySpawnGate();
         }
 
-        public void Tick(float deltaTime)
+        public void Tick(float unscaledDeltaTime)
         {
-            if (deltaTime < 0f ||
-                float.IsNaN(deltaTime) ||
-                float.IsInfinity(deltaTime))
+            if (unscaledDeltaTime < 0f ||
+                float.IsNaN(unscaledDeltaTime) ||
+                float.IsInfinity(unscaledDeltaTime))
             {
                 throw new ArgumentOutOfRangeException(
-                    nameof(deltaTime));
+                    nameof(unscaledDeltaTime));
             }
 
             if (!IsInitialized)
@@ -99,17 +138,20 @@ namespace VRMGames.CartridgeAndCloud.Infrastructure.DayCycle
                 return;
             }
 
-            _secondAccumulator += deltaTime;
-            int wholeSeconds =
-                Mathf.FloorToInt(_secondAccumulator);
+            SimulationClockTickResult tick =
+                _clock.Tick(
+                    unscaledDeltaTime,
+                    _pauseService.IsPaused);
 
-            if (wholeSeconds <= 0)
+            int elapsedDelta =
+                tick.CurrentElapsedSeconds -
+                _day.ElapsedOpenSeconds;
+
+            if (elapsedDelta > 0)
             {
-                return;
+                _day.Advance(elapsedDelta);
             }
 
-            _secondAccumulator -= wholeSeconds;
-            _day.Advance(wholeSeconds);
             ApplySpawnGate();
         }
 

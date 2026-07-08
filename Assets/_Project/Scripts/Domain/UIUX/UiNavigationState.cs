@@ -26,7 +26,10 @@ namespace VRMGames.CartridgeAndCloud.Domain.UIUX
         DayCycle = 7,
         Economy = 8,
         Help = 9,
-        Accessibility = 10
+        Accessibility = 10,
+        Overview = 11,
+        History = 12,
+        Weekly = 13
     }
 
     public sealed class UiNavigationEntry

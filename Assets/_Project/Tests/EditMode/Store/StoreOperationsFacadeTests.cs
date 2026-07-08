@@ -182,7 +182,7 @@ namespace VRMGames.CartridgeAndCloud.Tests.EditMode.Store
                     "central-shelf",
                     1).Detail;
 
-            _service.ReceiveOrder(orderId);
+            _service.DispatchAndComplete(orderId);
 
             Assert.That(
                 _active.Snapshot.CashCents,
@@ -197,7 +197,7 @@ namespace VRMGames.CartridgeAndCloud.Tests.EditMode.Store
                     "central-shelf",
                     1).Detail;
 
-            _service.ReceiveOrder(orderId);
+            _service.DispatchAndComplete(orderId);
 
             Assert.That(
                 _active.Snapshot
@@ -219,7 +219,7 @@ namespace VRMGames.CartridgeAndCloud.Tests.EditMode.Store
                     "central-shelf",
                     2).Detail;
 
-            _service.ReceiveOrder(orderId);
+            _service.DispatchAndComplete(orderId);
 
             Assert.That(
                 _service
@@ -236,10 +236,10 @@ namespace VRMGames.CartridgeAndCloud.Tests.EditMode.Store
                     "central-shelf",
                     1).Detail;
 
-            _service.ReceiveOrder(orderId);
+            _service.DispatchAndComplete(orderId);
 
             Assert.That(
-                _service.ReceiveOrder(orderId)
+                _service.DispatchAndComplete(orderId)
                     .Status,
                 Is.EqualTo(
                     StoreOperationStatus
@@ -247,7 +247,7 @@ namespace VRMGames.CartridgeAndCloud.Tests.EditMode.Store
         }
 
         [Test]
-        public void ReceiveOrder_InsufficientCashFails()
+        public void Order_InsufficientAvailableCashFailsBeforeReservation()
         {
             ActiveGameSessionService poor =
                 StoreOperationsTestFactory
@@ -261,20 +261,19 @@ namespace VRMGames.CartridgeAndCloud.Tests.EditMode.Store
                     _clock);
             service.InitializeForActiveSlot();
 
-            string orderId =
+            StoreOperationResult result =
                 service.OrderFurniture(
                     "central-shelf",
-                    1).Detail;
+                    1);
 
             Assert.That(
-                service.ReceiveOrder(orderId)
-                    .Status,
+                result.Status,
                 Is.EqualTo(
                     StoreOperationStatus
                         .InsufficientCash));
-            Assert.That(
-                poor.Snapshot.CashCents,
-                Is.EqualTo(100));
+            Assert.That(service.State.Orders.Count, Is.EqualTo(0));
+            Assert.That(service.ReservedFundsCents, Is.EqualTo(0));
+            Assert.That(poor.Snapshot.CashCents, Is.EqualTo(100));
         }
 
         [Test]
@@ -458,7 +457,7 @@ namespace VRMGames.CartridgeAndCloud.Tests.EditMode.Store
                     "game-neon-drift",
                     1).Detail;
 
-            _service.ReceiveOrder(orderId);
+            _service.DispatchAndComplete(orderId);
 
             Assert.That(
                 _service
@@ -509,7 +508,7 @@ namespace VRMGames.CartridgeAndCloud.Tests.EditMode.Store
         }
 
         [Test]
-        public void Restock_RejectsCapacityOverflow()
+        public void Restock_RequestAboveStockAndCapacity_TransfersMinimum()
         {
             PlaceDisplay();
             ReceiveProduct();
@@ -517,13 +516,19 @@ namespace VRMGames.CartridgeAndCloud.Tests.EditMode.Store
                 "fixture-1",
                 "game-neon-drift");
 
-            Assert.That(
+            StoreOperationResult result =
                 _service.RestockDisplay(
                     "fixture-1",
-                    33).Status,
-                Is.EqualTo(
-                    StoreOperationStatus
-                        .CapacityExceeded));
+                    33);
+
+            Assert.That(result.Succeeded, Is.True);
+            Assert.That(
+                _service.State.Fixtures[0].ProductQuantity,
+                Is.EqualTo(12));
+            Assert.That(
+                _service.GetProductWarehouseQuantity(
+                    "game-neon-drift"),
+                Is.Zero);
         }
 
         [Test]
@@ -727,6 +732,28 @@ namespace VRMGames.CartridgeAndCloud.Tests.EditMode.Store
         }
 
         [Test]
+        public void RemoveLastCheckout_WhileOpenIsRejected()
+        {
+            PrepareCheckoutAndStockedDisplay();
+            OpenStore();
+
+            StoreOperationResult result =
+                _service.RemoveFurniturePlacement(
+                    "checkout");
+
+            Assert.That(result.Succeeded, Is.False);
+            Assert.That(
+                result.Status,
+                Is.EqualTo(
+                    StoreOperationStatus
+                        .CheckoutRequired));
+            Assert.That(
+                _service.HasPlacedKind(
+                    StoreFixtureKind.CheckoutCounter),
+                Is.True);
+        }
+
+        [Test]
         public void RemoveDisplay_ReturnsFurnitureAndProducts()
         {
             PrepareStockedDisplay(5);
@@ -821,7 +848,7 @@ namespace VRMGames.CartridgeAndCloud.Tests.EditMode.Store
                 _service.OrderFurniture(
                     definitionId,
                     quantity).Detail;
-            _service.ReceiveOrder(orderId);
+            _service.DispatchAndComplete(orderId);
         }
 
         private void ReceiveProduct()
@@ -830,7 +857,7 @@ namespace VRMGames.CartridgeAndCloud.Tests.EditMode.Store
                 _service.OrderProduct(
                     "game-neon-drift",
                     1).Detail;
-            _service.ReceiveOrder(orderId);
+            _service.DispatchAndComplete(orderId);
         }
 
         private void PlaceDisplay()

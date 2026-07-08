@@ -65,7 +65,8 @@ namespace VRMGames.CartridgeAndCloud.Domain.Economy
     public enum EconomyPostingType
     {
         CheckoutRevenue = 0,
-        SupplierReceivingCost = 1
+        SupplierReceivingCost = 1,
+        WeeklyTax = 2
     }
 
     public readonly struct EconomyPostingKey :

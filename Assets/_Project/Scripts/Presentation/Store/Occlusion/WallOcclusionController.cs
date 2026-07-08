@@ -22,13 +22,44 @@ namespace VRMGames.CartridgeAndCloud.Presentation.Store.Occlusion
             private set;
         }
 
+        public bool CanChangeVisibility {
+            get;
+            private set;
+        }
+
         public void Configure(
             UnityCamera camera,
             Transform target,
             bool defaultValue)
         {
+            Configure(
+                camera,
+                target,
+                defaultValue,
+                allowUserToggle: true);
+        }
+
+        public void Configure(
+            UnityCamera camera,
+            Transform target,
+            bool defaultValue,
+            bool allowUserToggle)
+        {
             _camera = camera;
             _target = target;
+            CanChangeVisibility =
+                allowUserToggle;
+
+            if (!CanChangeVisibility)
+            {
+                HideOccludingWalls = false;
+                PlayerPrefs.SetInt(
+                    PlayerPrefsKey,
+                    0);
+                PlayerPrefs.Save();
+                RestoreAll();
+                return;
+            }
 
             HideOccludingWalls =
                 PlayerPrefs.GetInt(
@@ -38,6 +69,13 @@ namespace VRMGames.CartridgeAndCloud.Presentation.Store.Occlusion
 
         public void SetEnabled(bool enabled)
         {
+            if (!CanChangeVisibility)
+            {
+                HideOccludingWalls = false;
+                RestoreAll();
+                return;
+            }
+
             HideOccludingWalls = enabled;
 
             PlayerPrefs.SetInt(

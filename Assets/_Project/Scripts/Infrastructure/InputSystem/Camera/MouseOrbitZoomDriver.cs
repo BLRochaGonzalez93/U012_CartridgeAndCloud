@@ -1,6 +1,7 @@
 using UnityEngine;
 using VRMGames.CartridgeAndCloud.Application.InputContexts;
 using VRMGames.CartridgeAndCloud.Presentation.Camera;
+using VRMGames.CartridgeAndCloud.Infrastructure.Store;
 
 namespace VRMGames.CartridgeAndCloud.Infrastructure.InputSystem.Camera
 {
@@ -29,7 +30,30 @@ namespace VRMGames.CartridgeAndCloud.Infrastructure.InputSystem.Camera
 
         private void Awake()
         {
-            _cameraRig = GetComponent<OrbitCameraRig>();
+            _cameraRig =
+                GetComponent<OrbitCameraRig>();
+
+            StoreRuntimeAssetRegistry registry =
+                StoreRuntimeAssetRegistry
+                    .FindLoaded();
+
+            ApplySettings(registry?.Settings);
+        }
+
+
+        public void ApplySettings(
+            StoreRuntimeSettingsAsset settings)
+        {
+            if (settings == null)
+            {
+                return;
+            }
+
+            _orbitSensitivity =
+                settings.CameraOrbitSensitivity;
+
+            _zoomSensitivity =
+                settings.CameraZoomSensitivity;
         }
 
         public void Initialize(

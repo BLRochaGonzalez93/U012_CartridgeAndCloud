@@ -77,6 +77,18 @@ namespace VRMGames.CartridgeAndCloud.Tests.PlayMode.UIUX
         }
 
         [UnityTest]
+        public IEnumerator RuntimeRoot_HasManualSaveServices()
+        {
+            yield return null;
+
+            UIRuntimeCompositionRoot root =
+                UIRuntimeCompositionRoot.Instance;
+
+            Assert.That(root.ManualSave, Is.Not.Null);
+            Assert.That(root.SaveMutations, Is.Not.Null);
+        }
+
+        [UnityTest]
         public IEnumerator RuntimeRoot_HasProjectionService()
         {
             yield return null;
@@ -95,6 +107,23 @@ namespace VRMGames.CartridgeAndCloud.Tests.PlayMode.UIUX
             Assert.That(
                 UIRuntimeCompositionRoot
                     .Instance.ActiveSession,
+                Is.Not.Null);
+        }
+
+
+        [UnityTest]
+        public IEnumerator RuntimeRoot_HasSimulationClockAndPauseService()
+        {
+            yield return null;
+
+            UIRuntimeCompositionRoot root =
+                UIRuntimeCompositionRoot.Instance;
+
+            Assert.That(
+                root.SimulationClock,
+                Is.Not.Null);
+            Assert.That(
+                root.PauseService,
                 Is.Not.Null);
         }
 

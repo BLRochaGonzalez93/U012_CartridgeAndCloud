@@ -4572,3 +4572,11 @@ Los displays son monoproducto hasta H6 y soportan cantidad, retirada, retorno y 
 - Código, escenas, prefabs, builds y tests ejecutables no han sido modificados por esta actualización documental.
 
 <!-- W0_S17_PHASE1_END -->
+
+---
+
+## Actualización normativa S17-MOD-002…010
+
+El día H6 representa `00:00–24:00` sobre la duración técnica configurable. El reloj avanza en todos los estados salvo pausa. La tienda puede abrir y cerrar varias veces entre `08:00` y `22:00`; a las `22:00` comienza el cierre controlado y a las `24:00` se liquida la jornada una sola vez. El HUD muestra `HH:mm`.
+
+Los clientes pueden visitar una tienda sin producto visible, ejecutar browsing de fallback y abandonar sin compra. Los pedidos permanecen reservados o en tránsito y solo se convierten en inventario utilizable cuando la visita logística física completa el receipt. `Process All` se representa mediante una sola visita por `DeliveryRun`.

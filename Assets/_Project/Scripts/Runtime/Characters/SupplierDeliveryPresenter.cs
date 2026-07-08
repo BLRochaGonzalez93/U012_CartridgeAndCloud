@@ -3,9 +3,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using VRMGames.CartridgeAndCloud.Application.Store;
 using VRMGames.CartridgeAndCloud.Domain.Characters;
 using VRMGames.CartridgeAndCloud.Infrastructure.Store;
 using VRMGames.CartridgeAndCloud.Runtime.Store;
+using VRMGames.CartridgeAndCloud.Domain.Store;
 
 namespace VRMGames.CartridgeAndCloud.Runtime.Characters
 {
@@ -16,7 +18,7 @@ namespace VRMGames.CartridgeAndCloud.Runtime.Characters
     [DisallowMultipleComponent]
     public sealed class SupplierDeliveryPresenter : MonoBehaviour
     {
-        private const float DeliveryCrateScale = 0.55f;
+        private const float DeliveryCrateScale = 0.38f;
 
         private readonly DeliveryPresentationRegistry _registry =
             new DeliveryPresentationRegistry();
@@ -24,6 +26,7 @@ namespace VRMGames.CartridgeAndCloud.Runtime.Characters
             new Queue<string>();
 
         private StorePresentationCatalogAsset _presentationCatalog;
+        private StoreOperationsFacade _operations;
         private Transform _entrance;
         private Transform _receiving;
         private Transform _presentationRoot;
@@ -33,11 +36,14 @@ namespace VRMGames.CartridgeAndCloud.Runtime.Characters
 
         public void Configure(
             StorePresentationCatalogAsset presentationCatalog,
+            StoreOperationsFacade operations,
             Transform entrance,
             Transform receiving)
         {
             _presentationCatalog = presentationCatalog ??
                 throw new ArgumentNullException(nameof(presentationCatalog));
+            _operations = operations ??
+                throw new ArgumentNullException(nameof(operations));
             _entrance = entrance ??
                 throw new ArgumentNullException(nameof(entrance));
             _receiving = receiving ??
@@ -180,6 +186,17 @@ namespace VRMGames.CartridgeAndCloud.Runtime.Characters
                 crate.transform.localScale =
                     Vector3.one * DeliveryCrateScale;
                 SetDroppedCrateState(crate);
+
+                StoreOperationResult receipt =
+                    _operations.CompleteDeliveryRun(deliveryId);
+                if (!receipt.Succeeded)
+                {
+                    Debug.LogError(
+                        $"[Delivery] Physical receipt failed for '{deliveryId}': " +
+                        receipt.Detail,
+                        deliveryRoot);
+                    yield break;
+                }
 
                 NavMeshActorMovement.Result outbound =
                     new NavMeshActorMovement.Result();

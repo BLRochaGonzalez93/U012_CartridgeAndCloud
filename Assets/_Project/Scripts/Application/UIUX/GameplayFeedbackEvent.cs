@@ -84,7 +84,8 @@ namespace VRMGames.CartridgeAndCloud.Application.UIUX
         AutosaveSucceeded = 17,
         AutosaveFailed = 18,
         DoorOpened = 19,
-        DoorClosed = 20
+        DoorClosed = 20,
+        DeliveryRunStarted = 21
     }
 
     public interface IGameplayFeedbackSink

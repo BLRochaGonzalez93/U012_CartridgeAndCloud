@@ -108,6 +108,9 @@ namespace VRMGames.CartridgeAndCloud.Infrastructure.Audio
                         GameplayFeedbackType.OrderReceived,
                         "OrderReceived"),
                     Feedback(
+                        GameplayFeedbackType.DeliveryRunStarted,
+                        "OrderReceived"),
+                    Feedback(
                         GameplayFeedbackType.CustomerSatisfied,
                         "Checkout"),
                     Feedback(

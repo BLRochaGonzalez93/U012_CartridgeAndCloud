@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: CC_StoreDaySettings_Technical
   m_EditorClassIdentifier:
   _dayId: technical-day-001
-  _openDurationSeconds: 8
+  _openDurationSeconds: 300
   _autoOpenOnInitialize: 1
   _autoBeginClosing: 1

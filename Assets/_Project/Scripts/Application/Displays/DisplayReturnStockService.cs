@@ -27,26 +27,44 @@ namespace VRMGames.CartridgeAndCloud.Application.Displays
             InventoryContainer destination,
             Quantity quantity)
         {
+            return Return(
+                display,
+                destination,
+                quantity,
+                Quantity.Zero);
+        }
+
+        public DisplayReturnStockResult Return(
+            DisplayInstance display,
+            InventoryContainer destination,
+            Quantity quantity,
+            Quantity activeReservedQuantity)
+        {
             return ReturnInternal(
                 display,
                 destination,
                 quantity,
-                clearAssignment: false);
+                activeReservedQuantity,
+                clearAssignment: false,
+                allowEmpty: false);
         }
 
-        public DisplayReturnStockResult ReturnAllAndClear(
+        public DisplayReturnStockResult ReturnAll(
             DisplayInstance display,
             InventoryContainer destination)
         {
-            if (display == null)
-            {
-                throw new ArgumentNullException(nameof(display));
-            }
+            return ReturnAll(
+                display,
+                destination,
+                Quantity.Zero);
+        }
 
-            if (destination == null)
-            {
-                throw new ArgumentNullException(nameof(destination));
-            }
+        public DisplayReturnStockResult ReturnAll(
+            DisplayInstance display,
+            InventoryContainer destination,
+            Quantity activeReservedQuantity)
+        {
+            ValidateArguments(display, destination);
 
             if (!display.HasAssignedProduct)
             {
@@ -64,56 +82,66 @@ namespace VRMGames.CartridgeAndCloud.Application.Displays
             Quantity quantity =
                 display.Inventory.GetQuantity(productId);
 
-            if (quantity.IsZero)
+            return ReturnInternal(
+                display,
+                destination,
+                quantity,
+                activeReservedQuantity,
+                clearAssignment: false,
+                allowEmpty: true);
+        }
+
+        public DisplayReturnStockResult ReturnAllAndClear(
+            DisplayInstance display,
+            InventoryContainer destination)
+        {
+            return ReturnAllAndClear(
+                display,
+                destination,
+                Quantity.Zero);
+        }
+
+        public DisplayReturnStockResult ReturnAllAndClear(
+            DisplayInstance display,
+            InventoryContainer destination,
+            Quantity activeReservedQuantity)
+        {
+            ValidateArguments(display, destination);
+
+            if (!display.HasAssignedProduct)
             {
-                Quantity destinationBefore =
-                    destination.GetQuantity(productId);
-
-                DisplayClearAssignmentResult clear =
-                    display.TryClearAssignment();
-
-                if (!clear.Succeeded)
-                {
-                    return DisplayReturnStockResult.Failure(
-                        DisplayReturnStockFailureReason
-                            .ClearAssignmentRejected,
-                        productId,
-                        Quantity.Zero,
-                        destinationBefore);
-                }
-
-                return DisplayReturnStockResult.Success(
-                    productId,
+                return DisplayReturnStockResult.Failure(
+                    DisplayReturnStockFailureReason
+                        .DisplayHasNoAssignedProduct,
+                    default(ProductDefinitionId),
                     Quantity.Zero,
-                    Quantity.Zero,
-                    Quantity.Zero,
-                    destinationBefore,
-                    destinationBefore,
-                    assignmentCleared: true);
+                    Quantity.Zero);
             }
+
+            ProductDefinitionId productId =
+                display.AssignedProductId;
+
+            Quantity quantity =
+                display.Inventory.GetQuantity(productId);
 
             return ReturnInternal(
                 display,
                 destination,
                 quantity,
-                clearAssignment: true);
+                activeReservedQuantity,
+                clearAssignment: true,
+                allowEmpty: true);
         }
 
         private DisplayReturnStockResult ReturnInternal(
             DisplayInstance display,
             InventoryContainer destination,
             Quantity quantity,
-            bool clearAssignment)
+            Quantity activeReservedQuantity,
+            bool clearAssignment,
+            bool allowEmpty)
         {
-            if (display == null)
-            {
-                throw new ArgumentNullException(nameof(display));
-            }
-
-            if (destination == null)
-            {
-                throw new ArgumentNullException(nameof(destination));
-            }
+            ValidateArguments(display, destination);
 
             ProductDefinitionId productId =
                 display.HasAssignedProduct
@@ -129,15 +157,6 @@ namespace VRMGames.CartridgeAndCloud.Application.Displays
                 display.HasAssignedProduct
                     ? destination.GetQuantity(productId)
                     : Quantity.Zero;
-
-            if (quantity.IsZero)
-            {
-                return Failure(
-                    DisplayReturnStockFailureReason.InvalidQuantity,
-                    productId,
-                    displayBefore,
-                    destinationBefore);
-            }
 
             if (!IsAllowedDestinationType(destination.Type))
             {
@@ -157,6 +176,69 @@ namespace VRMGames.CartridgeAndCloud.Application.Displays
                     productId,
                     displayBefore,
                     destinationBefore);
+            }
+
+            if (activeReservedQuantity > displayBefore)
+            {
+                return Failure(
+                    DisplayReturnStockFailureReason
+                        .ReservationQuantityInvalid,
+                    productId,
+                    displayBefore,
+                    destinationBefore);
+            }
+
+            if (!activeReservedQuantity.IsZero &&
+                (clearAssignment || quantity >
+                    displayBefore.Subtract(activeReservedQuantity)))
+            {
+                return Failure(
+                    DisplayReturnStockFailureReason
+                        .ActiveReservationsPresent,
+                    productId,
+                    displayBefore,
+                    destinationBefore);
+            }
+
+            if (quantity.IsZero)
+            {
+                if (!allowEmpty)
+                {
+                    return Failure(
+                        DisplayReturnStockFailureReason.InvalidQuantity,
+                        productId,
+                        displayBefore,
+                        destinationBefore);
+                }
+
+                bool assignmentCleared = false;
+
+                if (clearAssignment)
+                {
+                    DisplayClearAssignmentResult clear =
+                        display.TryClearAssignment();
+
+                    if (!clear.Succeeded)
+                    {
+                        return Failure(
+                            DisplayReturnStockFailureReason
+                                .ClearAssignmentRejected,
+                            productId,
+                            displayBefore,
+                            destinationBefore);
+                    }
+
+                    assignmentCleared = true;
+                }
+
+                return DisplayReturnStockResult.Success(
+                    productId,
+                    Quantity.Zero,
+                    displayBefore,
+                    displayBefore,
+                    destinationBefore,
+                    destinationBefore,
+                    assignmentCleared);
             }
 
             if (displayBefore.IsZero)
@@ -204,7 +286,7 @@ namespace VRMGames.CartridgeAndCloud.Application.Displays
                     destinationBefore);
             }
 
-            bool assignmentCleared = false;
+            bool cleared = false;
 
             if (clearAssignment)
             {
@@ -234,7 +316,7 @@ namespace VRMGames.CartridgeAndCloud.Application.Displays
                         destinationBefore);
                 }
 
-                assignmentCleared = true;
+                cleared = true;
             }
 
             return DisplayReturnStockResult.Success(
@@ -244,14 +326,28 @@ namespace VRMGames.CartridgeAndCloud.Application.Displays
                 transfer.SourceQuantityAfter,
                 transfer.DestinationQuantityBefore,
                 transfer.DestinationQuantityAfter,
-                assignmentCleared);
+                cleared);
+        }
+
+        private static void ValidateArguments(
+            DisplayInstance display,
+            InventoryContainer destination)
+        {
+            if (display == null)
+            {
+                throw new ArgumentNullException(nameof(display));
+            }
+
+            if (destination == null)
+            {
+                throw new ArgumentNullException(nameof(destination));
+            }
         }
 
         private static bool IsAllowedDestinationType(
             InventoryContainerType type)
         {
-            return type == InventoryContainerType.Storage ||
-                   type == InventoryContainerType.Transit;
+            return type == InventoryContainerType.Storage;
         }
 
         private static DisplayReturnStockResult Failure(

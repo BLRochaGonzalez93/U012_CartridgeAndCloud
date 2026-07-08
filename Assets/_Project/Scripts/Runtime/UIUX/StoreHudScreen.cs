@@ -2,7 +2,9 @@ using System;
 using UnityEngine;
 using UnityEngine.UI;
 using VRMGames.CartridgeAndCloud.Application.UIUX;
+using VRMGames.CartridgeAndCloud.Application.Persistence;
 using VRMGames.CartridgeAndCloud.Domain.Persistence;
+using VRMGames.CartridgeAndCloud.Domain.DayCycle;
 using VRMGames.CartridgeAndCloud.Domain.UIUX;
 
 using VRMGames.CartridgeAndCloud.Domain.Economy;
@@ -13,6 +15,9 @@ namespace VRMGames.CartridgeAndCloud.Runtime.UIUX
     public sealed class StoreHudScreen :
         MonoBehaviour
     {
+        private const string PauseOwnerId =
+            "StoreHudPauseMenu";
+
         private UIRuntimeCompositionRoot _root;
         private Canvas _canvas;
         private Text _dayText;
@@ -21,6 +26,7 @@ namespace VRMGames.CartridgeAndCloud.Runtime.UIUX
         private Text _customersText;
         private Text _queueText;
         private Text _saveText;
+        private Text _speedText;
         private GameObject _panelOverlay;
         private GameObject _confirmationOverlay;
         private GameObject _pauseOverlay;
@@ -65,6 +71,8 @@ namespace VRMGames.CartridgeAndCloud.Runtime.UIUX
                 HandleAutosaveCompleted;
             UiInputSignals.CancelRequested -=
                 HandleCancelRequested;
+            _root.PauseService.ReleasePause(
+                PauseOwnerId);
             _root.InputGate.ExitUiExclusive();
         }
 
@@ -167,17 +175,64 @@ namespace VRMGames.CartridgeAndCloud.Runtime.UIUX
                 top,
                 "SaveStatus",
                 "Save --");
+            _speedText = HudValue(
+                top,
+                "SimulationSpeed",
+                "Speed x1");
+
+            AddSpeedButton(
+                top,
+                "SpeedHalf",
+                "x0.5",
+                SimulationSpeedPolicy.Half);
+            AddSpeedButton(
+                top,
+                "SpeedNormal",
+                "x1",
+                SimulationSpeedPolicy.Normal);
+            AddSpeedButton(
+                top,
+                "SpeedDouble",
+                "x2",
+                SimulationSpeedPolicy.Double);
+            AddSpeedButton(
+                top,
+                "SpeedQuadruple",
+                "x4",
+                SimulationSpeedPolicy.Quadruple);
 
             Button pause =
                 ProceduralUiFactory.CreateButton(
                     top,
                     "PauseButton",
-                    "Menu",
+                    "Pause",
                     OpenPause,
                     ScaleText(18));
             pause.gameObject
                 .GetComponent<LayoutElement>()
-                .preferredWidth = 110f;
+                .preferredWidth = 100f;
+        }
+
+        private void AddSpeedButton(
+            Transform parent,
+            string name,
+            string label,
+            float multiplier)
+        {
+            Button button =
+                ProceduralUiFactory.CreateButton(
+                    parent,
+                    name,
+                    label,
+                    () => SetSimulationSpeed(
+                        multiplier),
+                    ScaleText(15));
+
+            LayoutElement layout =
+                button.gameObject
+                    .GetComponent<LayoutElement>();
+            layout.preferredWidth = 62f;
+            layout.flexibleWidth = 0f;
         }
 
         private void BuildNavigation()
@@ -226,6 +281,10 @@ namespace VRMGames.CartridgeAndCloud.Runtime.UIUX
 
             AddPanelButton(
                 navigation,
+                ManagementPanelId.Overview,
+                "Overview");
+            AddPanelButton(
+                navigation,
                 ManagementPanelId.Inventory,
                 "Inventory");
             AddPanelButton(
@@ -256,6 +315,14 @@ namespace VRMGames.CartridgeAndCloud.Runtime.UIUX
                 navigation,
                 ManagementPanelId.Economy,
                 "Economy");
+            AddPanelButton(
+                navigation,
+                ManagementPanelId.History,
+                "History");
+            AddPanelButton(
+                navigation,
+                ManagementPanelId.Weekly,
+                "Weekly");
             AddPanelButton(
                 navigation,
                 ManagementPanelId.Help,
@@ -352,21 +419,56 @@ namespace VRMGames.CartridgeAndCloud.Runtime.UIUX
                 "Day " + hud.CurrentDay;
             _stateText.text =
                 hud.StoreState + " · " +
-                hud.ElapsedSeconds + "/" +
-                hud.DurationSeconds + "s";
+                StoreTradingHoursPolicy.FormatTime(
+                    hud.ElapsedSeconds,
+                    hud.DurationSeconds);
             _cashText.text =
                 StoreUiProjectionService
                     .FormatMoney(
                         hud.CashCents,
                         hud.CurrencyCode);
+            int activeCustomers =
+                _root.StoreOperationalGate != null
+                    ? _root.StoreOperationalGate
+                        .ActiveCustomerCount
+                    : hud.ActiveCustomers;
+
             _customersText.text =
-                "Customers " +
-                hud.ActiveCustomers;
+                _root.StoreOperationalGate != null
+                    ? "Customers " +
+                      activeCustomers + "/" +
+                      _root.StoreOperationalGate
+                          .MaximumCustomerCount
+                    : "Customers " +
+                      activeCustomers;
+
+            string operationalStatus =
+                _root.StoreOperationalGate == null
+                    ? string.Empty
+                    : _root.StoreOperationalGate
+                        .AdmissionBlocked
+                        ? " · Admission blocked"
+                        : !_root.StoreOperationalGate
+                              .CheckoutOperational
+                            ? " · Checkout unavailable"
+                            : " · Checkout ready";
+
             _queueText.text =
                 "Queue " + hud.QueueLength +
-                " · " + hud.CheckoutState;
+                " · " + hud.CheckoutState +
+                operationalStatus;
             _saveText.text =
                 "Save " + hud.SaveStatus;
+            _speedText.text =
+                _root.PauseService.IsPaused
+                    ? "Paused · " +
+                      SimulationSpeedPolicy.Format(
+                          _root.SimulationClock
+                              .SelectedSpeedMultiplier)
+                    : "Speed " +
+                      SimulationSpeedPolicy.Format(
+                          _root.SimulationClock
+                              .SelectedSpeedMultiplier);
 
             TryClosedDayAutosave(snapshot);
         }
@@ -378,6 +480,9 @@ namespace VRMGames.CartridgeAndCloud.Runtime.UIUX
                     snapshot.DayCycle.State,
                     "Closed",
                     StringComparison.Ordinal) ||
+                !StoreTradingHoursPolicy.IsDayComplete(
+                    snapshot.DayCycle.ElapsedDaySeconds,
+                    snapshot.DayCycle.DayDurationSeconds) ||
                 string.Equals(
                     _autosaveAttemptedDay,
                     snapshot.DayCycle.DayId,
@@ -495,6 +600,9 @@ namespace VRMGames.CartridgeAndCloud.Runtime.UIUX
             if (_root.ActiveSession
                     .Snapshot.DayCycle.State ==
                     "Closed" &&
+                StoreTradingHoursPolicy.IsDayComplete(
+                    _root.ActiveSession.Snapshot.DayCycle.ElapsedDaySeconds,
+                    _root.ActiveSession.Snapshot.DayCycle.DayDurationSeconds) &&
                 (panelId ==
                     ManagementPanelId.DayCycle ||
                  panelId ==
@@ -535,7 +643,9 @@ namespace VRMGames.CartridgeAndCloud.Runtime.UIUX
             ManagementPanelSnapshot snapshot =
                 _root.Projection.BuildPanel(
                     _root.ActiveSession.Snapshot,
-                    panelId);
+                    panelId,
+                    _root.StoreManagementStateProvider
+                        ?.ManagementState);
 
             Text title =
                 ProceduralUiFactory.CreateText(
@@ -840,22 +950,60 @@ namespace VRMGames.CartridgeAndCloud.Runtime.UIUX
         }
 
 
+        private void SetSimulationSpeed(
+            float multiplier)
+        {
+            bool succeeded =
+                _root.TrySetSimulationSpeed(
+                    multiplier,
+                    out string reason);
+
+            _root.SetUserMessage(reason);
+            Refresh();
+
+            if (!succeeded)
+            {
+                ShowConfirmation(
+                    "Speed change blocked",
+                    reason,
+                    CloseConfirmation);
+            }
+        }
+
         private void AddDayCycleAction(
             Transform actions)
         {
-            string state =
-                _root.ActiveSession
-                    .Snapshot.DayCycle.State;
+            DayCycleSaveRecord day =
+                _root.ActiveSession.Snapshot.DayCycle;
+            string state = day.State;
 
             switch (state)
             {
                 case "BeforeOpen":
-                    ProceduralUiFactory.CreateButton(
-                        actions,
-                        "OpenStore",
-                        "Open Store",
-                        () => TransitionDay("Open"),
-                        ScaleText(18));
+                case "Closed":
+                    if (!StoreTradingHoursPolicy.IsDayComplete(
+                            day.ElapsedDaySeconds,
+                            day.DayDurationSeconds))
+                    {
+                        Button open = ProceduralUiFactory.CreateButton(
+                            actions,
+                            "OpenStore",
+                            StoreTradingHoursPolicy.CanOpen(
+                                day.ElapsedDaySeconds,
+                                day.DayDurationSeconds)
+                                ? "Open Store"
+                                : StoreTradingHoursPolicy.HasReachedForcedClosing(
+                                    day.ElapsedDaySeconds,
+                                    day.DayDurationSeconds)
+                                    ? "Closed for the day"
+                                    : "Opens at 08:00",
+                            () => TransitionDay("Open"),
+                            ScaleText(18));
+                        open.interactable =
+                            StoreTradingHoursPolicy.CanOpen(
+                                day.ElapsedDaySeconds,
+                                day.DayDurationSeconds);
+                    }
                     break;
 
                 case "Open":
@@ -1130,13 +1278,22 @@ namespace VRMGames.CartridgeAndCloud.Runtime.UIUX
             }
 
             ClosePanel();
+            _root.PauseService.RequestPause(
+                PauseOwnerId);
             _root.InputGate.EnterUiExclusive();
+
+            ManualSaveEvaluation saveEvaluation =
+                _root.EvaluateManualSave();
 
             _pauseOverlay =
                 BuildModal(
                     "Pause",
-                    "Store management is paused " +
-                    "while this menu is open.");
+                    "Simulation paused. Selected speed: " +
+                    SimulationSpeedPolicy.Format(
+                        _root.SimulationClock
+                            .SelectedSpeedMultiplier) +
+                    ".\n\n" +
+                    saveEvaluation.Detail);
 
             RectTransform panel =
                 _pauseOverlay.transform
@@ -1150,6 +1307,16 @@ namespace VRMGames.CartridgeAndCloud.Runtime.UIUX
                     "Resume",
                     ClosePause,
                     ScaleText(20));
+
+            Button save =
+                ProceduralUiFactory.CreateButton(
+                    panel,
+                    "SaveGame",
+                    "Save Game",
+                    SaveFromPause,
+                    ScaleText(20));
+            save.interactable =
+                saveEvaluation.Allowed;
 
             ProceduralUiFactory.CreateButton(
                 panel,
@@ -1186,6 +1353,55 @@ namespace VRMGames.CartridgeAndCloud.Runtime.UIUX
             ProceduralUiFactory.Select(resume);
         }
 
+        private void SaveFromPause()
+        {
+            ManualSaveResult result =
+                _root.TryManualSave();
+            RefreshPauseSaveState(result.Detail);
+        }
+
+        private void RefreshPauseSaveState(
+            string preferredMessage = null)
+        {
+            if (_pauseOverlay == null)
+            {
+                return;
+            }
+
+            RectTransform panel =
+                _pauseOverlay.transform
+                    .Find("ModalPanel")
+                    .GetComponent<RectTransform>();
+            ManualSaveEvaluation evaluation =
+                _root.EvaluateManualSave();
+
+            Transform bodyTransform =
+                panel.Find("Body");
+            if (bodyTransform != null)
+            {
+                Text body =
+                    bodyTransform.GetComponent<Text>();
+                body.text =
+                    "Simulation paused. Selected speed: " +
+                    SimulationSpeedPolicy.Format(
+                        _root.SimulationClock
+                            .SelectedSpeedMultiplier) +
+                    ".\n\n" +
+                    (string.IsNullOrWhiteSpace(
+                         preferredMessage)
+                        ? evaluation.Detail
+                        : preferredMessage);
+            }
+
+            Transform saveTransform =
+                panel.Find("SaveGame");
+            if (saveTransform != null)
+            {
+                saveTransform.GetComponent<Button>()
+                    .interactable = evaluation.Allowed;
+            }
+        }
+
         private void RequestReturnToMainMenu()
         {
             bool closed =
@@ -1199,8 +1415,9 @@ namespace VRMGames.CartridgeAndCloud.Runtime.UIUX
             {
                 ShowConfirmation(
                     "Return to Main Menu?",
-                    "Only closed days autosave. " +
-                    "Unsaved progress may be lost.",
+                    "Manual saves are available from pause " +
+                    "only in safe store states. Unsaved " +
+                    "progress may be lost.",
                     _root.ReturnToMainMenu);
                 return;
             }
@@ -1346,6 +1563,8 @@ namespace VRMGames.CartridgeAndCloud.Runtime.UIUX
                 _pauseOverlay = null;
             }
 
+            _root.PauseService.ReleasePause(
+                PauseOwnerId);
             RestoreGameplayIfNoModal();
             ProceduralUiFactory.Select(
                 _firstHudButton);

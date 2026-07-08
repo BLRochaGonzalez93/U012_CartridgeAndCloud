@@ -1,8 +1,12 @@
 using System;
+using System.Text;
+using System.Security.Cryptography;
 using System.Text.RegularExpressions;
 using NUnit.Framework;
+using UnityEngine;
 using VRMGames.CartridgeAndCloud.Application.Persistence;
 using VRMGames.CartridgeAndCloud.Domain.Persistence;
+using VRMGames.CartridgeAndCloud.Domain.DayCycle;
 using VRMGames.CartridgeAndCloud.Infrastructure.Persistence;
 
 using VRMGames.CartridgeAndCloud.Domain.Checkout;
@@ -89,6 +93,65 @@ namespace VRMGames.CartridgeAndCloud.Tests.EditMode.Persistence
             Assert.That(
                 restored.LedgerEntries[0].CurrencyCode,
                 Is.EqualTo("EUR"));
+        }
+
+
+        [Test]
+        public void CHAR_TIM_008_CodecPreservesSelectedSimulationSpeed()
+        {
+            IntegratedGameStateSnapshot source =
+                PersistenceTestFactory.OpenSnapshot(
+                    simulationSpeedMultiplier:
+                        SimulationSpeedPolicy.Quadruple);
+            string json = _codec.Encode(source, 4);
+
+            IntegratedGameStateSnapshot restored =
+                _codec.Decode(
+                    json,
+                    source.SlotId,
+                    out _);
+
+            Assert.That(
+                restored.DayCycle
+                    .SimulationSpeedMultiplier,
+                Is.EqualTo(
+                    SimulationSpeedPolicy.Quadruple));
+        }
+
+
+        [Test]
+        public void Codec_LegacyDayWithoutSpeedDefaultsToNormal()
+        {
+            IntegratedGameStateSnapshot source =
+                PersistenceTestFactory.OpenSnapshot();
+            string encoded = _codec.Encode(source, 5);
+            TestEnvelope envelope =
+                JsonUtility.FromJson<TestEnvelope>(
+                    encoded);
+
+            envelope.payloadJson =
+                Regex.Replace(
+                    envelope.payloadJson,
+                    ",\"simulationSpeedMultiplier\":" +
+                    "(?:1(?:\\.0+)?)",
+                    string.Empty);
+            envelope.payloadSha256 =
+                ComputeSha256(
+                    envelope.payloadJson);
+
+            IntegratedGameStateSnapshot restored =
+                _codec.Decode(
+                    JsonUtility.ToJson(
+                        envelope,
+                        true),
+                    source.SlotId,
+                    out _);
+
+            Assert.That(
+                restored.DayCycle
+                    .SimulationSpeedMultiplier,
+                Is.EqualTo(
+                    SimulationSpeedPolicy.Normal));
         }
 
         [Test] public void Codec_IsDeterministicForSameInput()
@@ -278,5 +341,37 @@ namespace VRMGames.CartridgeAndCloud.Tests.EditMode.Persistence
                     source.SlotId),
                 Is.EqualTo(12));
         }
+        private static string ComputeSha256(
+            string value)
+        {
+            byte[] bytes =
+                Encoding.UTF8.GetBytes(value);
+
+            using (SHA256 sha256 = SHA256.Create())
+            {
+                byte[] hash = sha256.ComputeHash(bytes);
+                StringBuilder builder =
+                    new StringBuilder(hash.Length * 2);
+
+                foreach (byte item in hash)
+                {
+                    builder.Append(item.ToString("x2"));
+                }
+
+                return builder.ToString();
+            }
+        }
+
+        [Serializable]
+        private sealed class TestEnvelope
+        {
+            public int schemaVersion;
+            public string slot;
+            public long generation;
+            public long updatedUtcTicks;
+            public string payloadJson;
+            public string payloadSha256;
+        }
+
     }
 }

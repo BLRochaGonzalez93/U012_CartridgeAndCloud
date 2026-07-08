@@ -110,6 +110,7 @@ namespace VRMGames.CartridgeAndCloud.Domain.Placement
         Overlap = 2,
         DuplicateId = 3,
         NotFound = 4,
-        AccessBlocked = 5
+        AccessBlocked = 5,
+        RemovalBlocked = 6
     }
 }

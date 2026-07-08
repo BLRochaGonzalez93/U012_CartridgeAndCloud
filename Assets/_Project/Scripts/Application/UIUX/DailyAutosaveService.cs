@@ -1,5 +1,6 @@
 using System;
 using VRMGames.CartridgeAndCloud.Application.Persistence;
+using VRMGames.CartridgeAndCloud.Domain.DayCycle;
 using VRMGames.CartridgeAndCloud.Domain.Persistence;
 
 namespace VRMGames.CartridgeAndCloud.Application.UIUX
@@ -44,6 +45,8 @@ namespace VRMGames.CartridgeAndCloud.Application.UIUX
         private readonly ActiveGameSessionService
             _activeSession;
 
+        private IManualSaveCheckpointParticipant
+            _checkpointParticipant;
         private bool _saving;
 
         public DailyAutosaveStatus CurrentStatus {
@@ -71,6 +74,25 @@ namespace VRMGames.CartridgeAndCloud.Application.UIUX
                     nameof(activeSession));
         }
 
+        public void RegisterCheckpointParticipant(
+            IManualSaveCheckpointParticipant participant)
+        {
+            _checkpointParticipant = participant ??
+                throw new ArgumentNullException(
+                    nameof(participant));
+        }
+
+        public void UnregisterCheckpointParticipant(
+            IManualSaveCheckpointParticipant participant)
+        {
+            if (ReferenceEquals(
+                    _checkpointParticipant,
+                    participant))
+            {
+                _checkpointParticipant = null;
+            }
+        }
+
         public DailyAutosaveResult TryAutosave()
         {
             if (!_activeSession.HasActiveSession)
@@ -88,14 +110,17 @@ namespace VRMGames.CartridgeAndCloud.Application.UIUX
             if (!string.Equals(
                     snapshot.DayCycle.State,
                     "Closed",
-                    StringComparison.Ordinal))
+                    StringComparison.Ordinal) ||
+                !StoreTradingHoursPolicy.IsDayComplete(
+                    snapshot.DayCycle.ElapsedDaySeconds,
+                    snapshot.DayCycle.DayDurationSeconds))
             {
                 CurrentStatus =
                     DailyAutosaveStatus.NotClosed;
                 return new DailyAutosaveResult(
                     CurrentStatus,
                     dayId,
-                    "The store day is not closed.");
+                    "The store day is not closed at 24:00.");
             }
 
             if (_saving)
@@ -125,8 +150,26 @@ namespace VRMGames.CartridgeAndCloud.Application.UIUX
             CurrentStatus =
                 DailyAutosaveStatus.Saving;
 
+            IManualSaveCheckpoint checkpoint = null;
+
             try
             {
+                if (_checkpointParticipant != null)
+                {
+                    if (!_checkpointParticipant.CanCheckpoint(
+                            out string checkpointReason))
+                    {
+                        return Finish(
+                            DailyAutosaveStatus.Failed,
+                            dayId,
+                            checkpointReason);
+                    }
+
+                    checkpoint =
+                        _checkpointParticipant
+                            .BeginCheckpoint();
+                }
+
                 IntegratedSaveRepositoryResult result =
                     _repository.Save(snapshot);
 
@@ -137,6 +180,8 @@ namespace VRMGames.CartridgeAndCloud.Application.UIUX
                         dayId,
                         result.Detail);
                 }
+
+                checkpoint?.Commit();
 
                 _markerRepository.SaveLastSavedDay(
                     snapshot.SlotId,
@@ -156,6 +201,7 @@ namespace VRMGames.CartridgeAndCloud.Application.UIUX
             }
             finally
             {
+                checkpoint?.Dispose();
                 _saving = false;
             }
         }

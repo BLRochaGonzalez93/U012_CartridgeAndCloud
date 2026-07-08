@@ -89,7 +89,8 @@ namespace VRMGames.CartridgeAndCloud.Tests.EditMode
                     "UnityEngine.TestRunner",
                     "UnityEditor.TestRunner",
                     "VRMGames.CartridgeAndCloud.Tests.Support",
-                    "Unity.AI.Navigation"
+                    "Unity.AI.Navigation",
+                    "VRMGames.CartridgeAndCloud.Editor.ProjectOrganization"
                 },
                 noEngineReferences: false,
                 includePlatforms: new[] { "Editor" },

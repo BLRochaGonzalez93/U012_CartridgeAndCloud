@@ -13,7 +13,21 @@ MonoBehaviour:
   m_Name: StoreRuntimeSettings
   m_EditorClassIdentifier: 
   _storeSceneName: StoreInitial
-  _hideOccludingWalls: 1
+  _hideOccludingWalls: 0
+  _allowWallOcclusionToggle: 0
   _showProcedurePanel: 1
   _vfxPoolSize: 24
-  _maximumCustomers: 4
+  _maximumCustomers: 8
+  _cameraYawDegrees: 0
+  _cameraPitchDegrees: 48
+  _cameraDistance: 12
+  _cameraMinimumPitchDegrees: 25
+  _cameraMaximumPitchDegrees: 75
+  _cameraMinimumDistance: 5
+  _cameraMaximumDistance: 18
+  _cameraOrbitSensitivity: 0.2
+  _cameraZoomSensitivity: 0.5
+  _cameraFieldOfView: 60
+  _cameraNearClipPlane: 0.3
+  _cameraFarClipPlane: 120
+  _groundAnchorTolerance: 0.02

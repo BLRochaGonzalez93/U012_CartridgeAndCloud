@@ -222,6 +222,92 @@ namespace VRMGames.CartridgeAndCloud.Tests.EditMode.UIUX
                 });
         }
 
+        [Test]
+        public void RecoveredInspection_IsCarriedIntoContinue()
+        {
+            WithService(
+                (service, saves, active, ___, ____) =>
+                {
+                    SaveSlotId slot =
+                        UIUXTestFactory.Slot();
+                    saves.Save(
+                        UIUXTestFactory.ClosedSnapshot(
+                            slot,
+                            cash: 100));
+                    saves.Save(
+                        UIUXTestFactory.ClosedSnapshot(
+                            slot,
+                            cash: 200));
+                    System.IO.File.WriteAllText(
+                        saves.GetPrimaryPath(slot),
+                        "{broken");
+
+                    Assert.That(
+                        service.Inspect(slot).State,
+                        Is.EqualTo(
+                            SlotPresentationState.Recovered));
+
+                    SlotOperationResult result =
+                        service.Continue(slot);
+
+                    Assert.That(
+                        result.Status,
+                        Is.EqualTo(
+                            SlotOperationStatus
+                                .RecoveredFromBackup));
+                    Assert.That(
+                        service.LastLoadRecoveredFromBackup,
+                        Is.True);
+                    Assert.That(
+                        active.Snapshot.CashCents,
+                        Is.EqualTo(100));
+                });
+        }
+
+        [Test]
+        public void CreateNew_AfterRecoveredInspectionClearsRecoveryFlag()
+        {
+            WithService(
+                (service, saves, _, ___, ____) =>
+                {
+                    SaveSlotId slot =
+                        UIUXTestFactory.Slot();
+                    saves.Save(
+                        UIUXTestFactory.ClosedSnapshot(
+                            slot,
+                            cash: 100));
+                    saves.Save(
+                        UIUXTestFactory.ClosedSnapshot(
+                            slot,
+                            cash: 200));
+                    System.IO.File.WriteAllText(
+                        saves.GetPrimaryPath(slot),
+                        "{broken");
+
+                    Assert.That(
+                        service.Inspect(slot).State,
+                        Is.EqualTo(
+                            SlotPresentationState.Recovered));
+                    Assert.That(
+                        service.CreateNew(
+                            slot,
+                            overwriteConfirmed: true)
+                            .Succeeded,
+                        Is.True);
+
+                    SlotOperationResult result =
+                        service.Continue(slot);
+
+                    Assert.That(
+                        result.Status,
+                        Is.EqualTo(
+                            SlotOperationStatus.Success));
+                    Assert.That(
+                        service.LastLoadRecoveredFromBackup,
+                        Is.False);
+                });
+        }
+
         [Test] public void Slots_AreIndependent()
         {
             WithService(

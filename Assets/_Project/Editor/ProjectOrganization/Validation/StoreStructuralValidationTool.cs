@@ -26,6 +26,8 @@ namespace VRMGames.CartridgeAndCloud.Editor.ProjectOrganization.Validation
             "Assets/_Project/Data/Catalogs/RepresentativePrefabCatalog.asset";
         private const string PresentationCatalogPath =
             "Assets/_Project/Data/Catalogs/PresentationCatalog.asset";
+        private const string SettingsPath =
+            "Assets/_Project/Settings/Runtime/StoreRuntimeSettings.asset";
 
         [MenuItem("Cartridge & Cloud/Validation/Validate Store Structure")]
         public static void ValidateFromMenu()
@@ -45,6 +47,7 @@ namespace VRMGames.CartridgeAndCloud.Editor.ProjectOrganization.Validation
         public static IReadOnlyList<string> Validate()
         {
             List<string> errors = new List<string>();
+            ValidateRuntimeSettings(errors);
             ValidateEnvironment(errors);
             ValidateFurniture(errors);
             ValidateArchitectureProductsAndFutureContent(errors);
@@ -94,32 +97,162 @@ namespace VRMGames.CartridgeAndCloud.Editor.ProjectOrganization.Validation
             }
         }
 
-        private static void ValidateFurniture(List<string> errors)
+        private static void ValidateRuntimeSettings(
+            List<string> errors)
+        {
+            StoreRuntimeSettingsAsset settings =
+                AssetDatabase.LoadAssetAtPath<
+                    StoreRuntimeSettingsAsset>(
+                        SettingsPath);
+
+            if (settings == null)
+            {
+                errors.Add(
+                    "StoreRuntimeSettings.asset is missing.");
+                return;
+            }
+
+            if (!settings.TryValidateAuthoring(
+                    out string report))
+            {
+                errors.Add(report);
+            }
+        }
+
+        private static void ValidateFurniture(
+            List<string> errors)
         {
             foreach (string guid in AssetDatabase.FindAssets(
                          "t:Prefab",
-                         new[] { "Assets/_Project/Prefabs/Furniture" }))
+                         new[]
+                         {
+                             "Assets/_Project/Prefabs/Furniture"
+                         }))
             {
-                string path = AssetDatabase.GUIDToAssetPath(guid);
-                GameObject prefab = AssetDatabase.LoadAssetAtPath<GameObject>(path);
+                string path =
+                    AssetDatabase.GUIDToAssetPath(
+                        guid);
+
+                GameObject prefab =
+                    AssetDatabase.LoadAssetAtPath<
+                        GameObject>(path);
+
                 if (prefab == null)
                 {
                     continue;
                 }
 
-                Transform collision = prefab.transform.Find("Collision");
-                Transform anchors = prefab.transform.Find("Anchors");
-                if (collision == null || anchors == null)
+                StoreFixturePrefabAuthoring fixture =
+                    prefab.GetComponent<
+                        StoreFixturePrefabAuthoring>();
+
+                if (fixture == null)
                 {
-                    errors.Add($"{path} requires Collision and Anchors.");
+                    errors.Add(
+                        $"{path} lacks StoreFixturePrefabAuthoring.");
                     continue;
                 }
 
-                if (collision.GetComponent<BoxCollider>() == null ||
-                    collision.GetComponent<NavMeshObstacle>() == null ||
-                    collision.GetComponent<StoreFixtureNavigationObstacle>() == null)
+                if (!fixture.TryValidate(
+                        out string report))
                 {
-                    errors.Add($"{path} requires authored collider and carved obstacle.");
+                    errors.Add(
+                        $"{path}: {report}");
+                    continue;
+                }
+
+                Transform groundAnchor =
+                    prefab.transform.Find(
+                        PrefabPhysicalContractAuthoring
+                            .GroundAnchorName);
+
+                StoreRuntimeSettingsAsset settings =
+                    AssetDatabase.LoadAssetAtPath<
+                        StoreRuntimeSettingsAsset>(
+                            SettingsPath);
+
+                float groundTolerance =
+                    settings == null
+                        ? 0.02f
+                        : settings.GroundAnchorTolerance;
+
+                if (groundAnchor == null)
+                {
+                    errors.Add(
+                        $"{path} requires a direct GroundAnchor child.");
+                }
+                else if (groundAnchor.localPosition.sqrMagnitude >
+                         groundTolerance * groundTolerance)
+                {
+                    errors.Add(
+                        $"{path} GroundAnchor exceeds the configured base tolerance.");
+                }
+
+                if (path.EndsWith(
+                        "CheckoutCounter.prefab",
+                        StringComparison.Ordinal))
+                {
+                    Transform staffPoint =
+                        FindNamedChild(prefab.transform, "StaffPoint");
+                    Transform staffLookTarget =
+                        FindNamedChild(prefab.transform, "StaffLookTarget");
+                    if (staffPoint == null || staffLookTarget == null)
+                    {
+                        errors.Add(
+                            $"{path} requires StaffPoint and StaffLookTarget anchors.");
+                    }
+                }
+
+                Transform collision =
+                    prefab.transform.Find("Collision");
+
+                if (collision == null ||
+                    collision.GetComponent<
+                        BoxCollider>() == null ||
+                    collision.GetComponent<
+                        NavMeshObstacle>() == null ||
+                    collision.GetComponent<
+                        StoreFixtureNavigationObstacle>() == null)
+                {
+                    errors.Add(
+                        $"{path} requires authored collider and carved obstacle.");
+                }
+
+                LODGroup lod =
+                    prefab.GetComponent<LODGroup>();
+
+                if (lod == null)
+                {
+                    errors.Add(
+                        $"{path} requires an authored LODGroup.");
+                    continue;
+                }
+
+                LOD[] levels = lod.GetLODs();
+                if (levels.Length < 2)
+                {
+                    errors.Add(
+                        $"{path} requires at least two authored LOD levels.");
+                }
+
+                if (levels.Length > 0 &&
+                    levels[levels.Length - 1]
+                        .screenRelativeTransitionHeight > 0f)
+                {
+                    errors.Add(
+                        $"{path} last LOD must remain visible at the full gameplay zoom range.");
+                }
+
+                for (int index = 0;
+                     index < levels.Length;
+                     index++)
+                {
+                    if (levels[index].renderers == null ||
+                        levels[index].renderers.Length == 0)
+                    {
+                        errors.Add(
+                            $"{path} LOD {index} has no renderers.");
+                    }
                 }
             }
         }
@@ -259,5 +392,24 @@ namespace VRMGames.CartridgeAndCloud.Editor.ProjectOrganization.Validation
                 }
             }
         }
+        private static Transform FindNamedChild(
+            Transform root,
+            string name)
+        {
+            foreach (Transform child in
+                     root.GetComponentsInChildren<Transform>(true))
+            {
+                if (string.Equals(
+                        child.name,
+                        name,
+                        StringComparison.Ordinal))
+                {
+                    return child;
+                }
+            }
+
+            return null;
+        }
+
     }
 }

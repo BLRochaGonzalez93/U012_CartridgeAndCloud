@@ -4,6 +4,7 @@ using VRMGames.CartridgeAndCloud.Application.Placement;
 using VRMGames.CartridgeAndCloud.Presentation.Camera;
 using VRMGames.CartridgeAndCloud.Presentation.Placement;
 using VRMGames.CartridgeAndCloud.Presentation.PlayerMovement;
+using VRMGames.CartridgeAndCloud.Infrastructure.Store;
 
 namespace VRMGames.CartridgeAndCloud.Infrastructure.InputSystem.Actions
 {
@@ -48,6 +49,7 @@ namespace VRMGames.CartridgeAndCloud.Infrastructure.InputSystem.Actions
 
         private void Awake()
         {
+            ApplyCentralSettings();
             ResolveReferences();
         }
 
@@ -93,6 +95,31 @@ namespace VRMGames.CartridgeAndCloud.Infrastructure.InputSystem.Actions
                 Mathf.Max(0f, orbitSensitivity);
             _zoomSensitivity =
                 Mathf.Max(0f, zoomSensitivity);
+        }
+
+
+        public void ApplySettings(
+            StoreRuntimeSettingsAsset settings)
+        {
+            if (settings == null)
+            {
+                return;
+            }
+
+            _orbitSensitivity =
+                settings.CameraOrbitSensitivity;
+
+            _zoomSensitivity =
+                settings.CameraZoomSensitivity;
+        }
+
+        private void ApplyCentralSettings()
+        {
+            StoreRuntimeAssetRegistry registry =
+                StoreRuntimeAssetRegistry
+                    .FindLoaded();
+
+            ApplySettings(registry?.Settings);
         }
 
         public void SetPlacementRuntimeController(

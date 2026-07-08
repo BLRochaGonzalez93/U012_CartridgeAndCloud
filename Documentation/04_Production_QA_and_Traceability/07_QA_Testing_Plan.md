@@ -3384,3 +3384,9 @@ La definición documental de un caso no equivale a ejecución ni a PASS. Ninguna
 - Código, escenas, prefabs, builds y tests ejecutables no han sido modificados por esta actualización documental.
 
 <!-- W0_S17_PHASE1_END -->
+
+---
+
+## Regresión adicional S17-MOD-002…010
+
+La candidata posterior a W8 debe ejecutar de nuevo EditMode, PlayMode, Golden Path y build Windows x64. La cobertura adicional incluye visitas con cero producto, un courier por run, no disponibilidad antes del receipt, idempotencia de recepción, LOD persistente, hora `HH:mm`, reloj en todos los estados, aperturas múltiples, grounding anidado y orientación del staff en rotaciones 0/90/180/270.

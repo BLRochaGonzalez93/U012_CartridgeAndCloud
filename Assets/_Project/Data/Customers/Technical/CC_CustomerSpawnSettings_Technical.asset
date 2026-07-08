@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a143a960e4c84feda34ffd120b945feb, type: 3}
   m_Name: CC_CustomerSpawnSettings_Technical
   m_EditorClassIdentifier:
-  _maxActiveCustomers: 6
+  _maxActiveCustomers: 8
   _arrivalIntervalSeconds: 8
   _destroyTechnicalViewOnExit: 1

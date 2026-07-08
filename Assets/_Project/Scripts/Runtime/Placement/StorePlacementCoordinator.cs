@@ -748,6 +748,13 @@ namespace VRMGames.CartridgeAndCloud.Runtime.Placement
                             PlacementRuntimeController>();
             }
 
+            if (_runtime != null &&
+                _runtime.RemovalGuard == null)
+            {
+                _runtime.RemovalGuard =
+                    EvaluateRemoval;
+            }
+
             if (_preview == null)
             {
                 _preview =
@@ -765,8 +772,40 @@ namespace VRMGames.CartridgeAndCloud.Runtime.Placement
             }
         }
 
+        private string EvaluateRemoval(
+            PlacementInstanceId id)
+        {
+            if (_service == null)
+            {
+                return string.Empty;
+            }
+
+            StoreOperationResult result =
+                _service.CanRemoveFurniturePlacement(
+                    id.Value);
+
+            if (result.Succeeded)
+            {
+                return string.Empty;
+            }
+
+            FeedbackRaised?.Invoke(
+                new GameplayFeedbackEvent(
+                    GameplayFeedbackType
+                        .PlacementInvalid,
+                    result.Detail,
+                    id.Value));
+
+            return result.Detail;
+        }
+
         private void OnDestroy()
         {
+            if (_runtime != null)
+            {
+                _runtime.RemovalGuard = null;
+            }
+
             DestroyTemporaryDefinition();
         }
 
