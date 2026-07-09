@@ -1,0 +1,704 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b11a58205ec3474ca216360e9fa74a8, type: 3}
+  m_Name: UI_Store Shared Data
+  m_EditorClassIdentifier: Unity.Localization::UnityEngine.Localization.Tables.SharedTableData
+  m_TableCollectionName: UI_Store
+  m_TableCollectionNameGuidString: 400c434cda26c744881d66f459e46286
+  m_Entries:
+  - m_Id: 191381504
+    m_Key: ui.store.accessibility.tutorial_enabled
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964416
+    m_Key: ui.store.closed_for_day
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964417
+    m_Key: ui.store.day_transition_blocked
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964418
+    m_Key: ui.store.hud.admission_blocked
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964419
+    m_Key: ui.store.hud.cash
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964420
+    m_Key: ui.store.hud.cash_empty
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964421
+    m_Key: ui.store.hud.checkout_ready
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964422
+    m_Key: ui.store.hud.checkout_unavailable
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964423
+    m_Key: ui.store.hud.customers
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964424
+    m_Key: ui.store.hud.customers_capacity
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964425
+    m_Key: ui.store.hud.customers_count
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964426
+    m_Key: ui.store.hud.customers_empty
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964427
+    m_Key: ui.store.hud.day
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964428
+    m_Key: ui.store.hud.day_empty
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964429
+    m_Key: ui.store.hud.paused_runtime
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964430
+    m_Key: ui.store.hud.paused_speed
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964431
+    m_Key: ui.store.hud.queue
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964432
+    m_Key: ui.store.hud.queue_count
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964433
+    m_Key: ui.store.hud.queue_empty
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964434
+    m_Key: ui.store.hud.save
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964435
+    m_Key: ui.store.hud.save_empty
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964436
+    m_Key: ui.store.hud.save_status
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964437
+    m_Key: ui.store.hud.speed
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964438
+    m_Key: ui.store.hud.speed_runtime
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964439
+    m_Key: ui.store.hud.state
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964440
+    m_Key: ui.store.hud.state_empty
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964441
+    m_Key: ui.store.management.checkout
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964442
+    m_Key: ui.store.management.customers
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964443
+    m_Key: ui.store.management.day_cycle
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964444
+    m_Key: ui.store.management.displays
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964445
+    m_Key: ui.store.management.economy
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964446
+    m_Key: ui.store.management.heading
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964447
+    m_Key: ui.store.management.history
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964448
+    m_Key: ui.store.management.inventory
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964449
+    m_Key: ui.store.management.overview
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964450
+    m_Key: ui.store.management.shopping
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964451
+    m_Key: ui.store.management.suppliers
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964452
+    m_Key: ui.store.management.weekly
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964453
+    m_Key: ui.store.no_session.body
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964454
+    m_Key: ui.store.no_session.title
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964455
+    m_Key: ui.store.opens_at
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964456
+    m_Key: ui.store.panel.accessibility.confirmations
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964457
+    m_Key: ui.store.panel.accessibility.destructive
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964458
+    m_Key: ui.store.panel.accessibility.global_preference
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964459
+    m_Key: ui.store.panel.accessibility.reduce_motion_status
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964460
+    m_Key: ui.store.panel.accessibility.tutorial_status
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964461
+    m_Key: ui.store.panel.checkout.no_entry
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964462
+    m_Key: ui.store.panel.checkout.persisted
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964463
+    m_Key: ui.store.panel.checkout.title
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964464
+    m_Key: ui.store.panel.checkout.transactions
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964465
+    m_Key: ui.store.panel.customers.abandoned
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964466
+    m_Key: ui.store.panel.customers.abandoned_status
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964467
+    m_Key: ui.store.panel.customers.buyers
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964468
+    m_Key: ui.store.panel.customers.buyers_status
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964469
+    m_Key: ui.store.panel.customers.no_activity
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964470
+    m_Key: ui.store.panel.customers.patience
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964471
+    m_Key: ui.store.panel.customers.title
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964472
+    m_Key: ui.store.panel.customers.visitors
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964473
+    m_Key: ui.store.panel.customers.visitors_status
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964474
+    m_Key: ui.store.panel.day_cycle.authority
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964475
+    m_Key: ui.store.panel.day_cycle.auto_closing
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964476
+    m_Key: ui.store.panel.day_cycle.day
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964477
+    m_Key: ui.store.panel.day_cycle.manual_closing
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964478
+    m_Key: ui.store.panel.day_cycle.pause_independent
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964479
+    m_Key: ui.store.panel.day_cycle.speed
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964480
+    m_Key: ui.store.panel.day_cycle.state
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964481
+    m_Key: ui.store.panel.day_cycle.time
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964482
+    m_Key: ui.store.panel.day_cycle.title
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964483
+    m_Key: ui.store.panel.displays.no_displays
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964484
+    m_Key: ui.store.panel.displays.title
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964485
+    m_Key: ui.store.panel.economy.current_cash
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964486
+    m_Key: ui.store.panel.economy.gross
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964487
+    m_Key: ui.store.panel.economy.gross_status
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964488
+    m_Key: ui.store.panel.economy.net
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964489
+    m_Key: ui.store.panel.economy.revenue
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964490
+    m_Key: ui.store.panel.economy.revenue_status
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964491
+    m_Key: ui.store.panel.economy.supplier_costs
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964492
+    m_Key: ui.store.panel.economy.supplier_costs_status
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964493
+    m_Key: ui.store.panel.economy.tax
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964494
+    m_Key: ui.store.panel.economy.tax_status
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964495
+    m_Key: ui.store.panel.economy.title
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964496
+    m_Key: ui.store.panel.help.activate
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964497
+    m_Key: ui.store.panel.help.autosave_once
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964498
+    m_Key: ui.store.panel.help.back
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964499
+    m_Key: ui.store.panel.help.close_layer
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964500
+    m_Key: ui.store.panel.help.management
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964501
+    m_Key: ui.store.panel.help.move_focus
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964502
+    m_Key: ui.store.panel.help.navigation
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964503
+    m_Key: ui.store.panel.help.open_panels
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964504
+    m_Key: ui.store.panel.help.saving
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964505
+    m_Key: ui.store.panel.history.day
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964506
+    m_Key: ui.store.panel.history.detail
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964507
+    m_Key: ui.store.panel.history.detail_state
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964508
+    m_Key: ui.store.panel.history.none
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964509
+    m_Key: ui.store.panel.history.receipt
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964510
+    m_Key: ui.store.panel.history.sale
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964511
+    m_Key: ui.store.panel.history.summary
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964512
+    m_Key: ui.store.panel.history.summary_sales
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964513
+    m_Key: ui.store.panel.history.title
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964514
+    m_Key: ui.store.panel.history.units
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964515
+    m_Key: ui.store.panel.history.zero_days
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964516
+    m_Key: ui.store.panel.inventory.empty
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964517
+    m_Key: ui.store.panel.inventory.on_hand
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964518
+    m_Key: ui.store.panel.inventory.stocked
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964519
+    m_Key: ui.store.panel.inventory.title
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964520
+    m_Key: ui.store.panel.overview.available_cash
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964521
+    m_Key: ui.store.panel.overview.available_cash_status
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964522
+    m_Key: ui.store.panel.overview.buyers_sales
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964523
+    m_Key: ui.store.panel.overview.buyers_sales_status
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964524
+    m_Key: ui.store.panel.overview.cash
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964525
+    m_Key: ui.store.panel.overview.cash_status
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964526
+    m_Key: ui.store.panel.overview.customers_admitted
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964527
+    m_Key: ui.store.panel.overview.day_costs
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964528
+    m_Key: ui.store.panel.overview.day_costs_status
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964529
+    m_Key: ui.store.panel.overview.day_net
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964530
+    m_Key: ui.store.panel.overview.day_revenue
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964531
+    m_Key: ui.store.panel.overview.day_revenue_status
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964532
+    m_Key: ui.store.panel.overview.day_tax
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964533
+    m_Key: ui.store.panel.overview.day_tax_status
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964534
+    m_Key: ui.store.panel.overview.pending_orders
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964535
+    m_Key: ui.store.panel.overview.title
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964536
+    m_Key: ui.store.panel.shopping.cart
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964537
+    m_Key: ui.store.panel.shopping.no_sessions
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964538
+    m_Key: ui.store.panel.shopping.reservation
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964539
+    m_Key: ui.store.panel.shopping.title
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964540
+    m_Key: ui.store.panel.suppliers.no_orders
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964541
+    m_Key: ui.store.panel.suppliers.orders
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964542
+    m_Key: ui.store.panel.suppliers.title
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964543
+    m_Key: ui.store.panel.weekly.accumulated
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964544
+    m_Key: ui.store.panel.weekly.applied_once
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964545
+    m_Key: ui.store.panel.weekly.current_costs
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964546
+    m_Key: ui.store.panel.weekly.current_gross
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964547
+    m_Key: ui.store.panel.weekly.current_revenue
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964548
+    m_Key: ui.store.panel.weekly.gross_at_settlement
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964549
+    m_Key: ui.store.panel.weekly.last_gross
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964550
+    m_Key: ui.store.panel.weekly.last_tax
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964551
+    m_Key: ui.store.panel.weekly.last_week
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964552
+    m_Key: ui.store.panel.weekly.recognized
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964553
+    m_Key: ui.store.panel.weekly.tax_base
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964554
+    m_Key: ui.store.panel.weekly.tax_formula
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964555
+    m_Key: ui.store.panel.weekly.title
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964556
+    m_Key: ui.store.pause.return_body
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964557
+    m_Key: ui.store.pause.return_title
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964558
+    m_Key: ui.store.pause.runtime_resumed
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964559
+    m_Key: ui.store.pause.runtime_status
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964560
+    m_Key: ui.store.pause.status
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964561
+    m_Key: ui.store.speed_change_blocked
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964562
+    m_Key: ui.store.tutorial.skip_body
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964563
+    m_Key: ui.store.tutorial.skip_title
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964564
+    m_Key: ui.store.tutorial.target
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964565
+    m_Key: ui.store.weekly.accept_notice
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964566
+    m_Key: ui.store.weekly.cash_after_tax
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964567
+    m_Key: ui.store.weekly.cash_before_tax
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964568
+    m_Key: ui.store.weekly.continue_next_day
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964569
+    m_Key: ui.store.weekly.customers
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964570
+    m_Key: ui.store.weekly.days
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964571
+    m_Key: ui.store.weekly.gross_result
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964572
+    m_Key: ui.store.weekly.legacy_breakdown
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964573
+    m_Key: ui.store.weekly.net_result
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964574
+    m_Key: ui.store.weekly.no_positive_result
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964575
+    m_Key: ui.store.weekly.orders_received
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964576
+    m_Key: ui.store.weekly.revenue
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964577
+    m_Key: ui.store.weekly.sales_units
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964578
+    m_Key: ui.store.weekly.supplier_costs
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964579
+    m_Key: ui.store.weekly.tax_deducted
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964580
+    m_Key: ui.store.weekly.tax_due
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964581
+    m_Key: ui.store.weekly.tax_due_non_positive
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964582
+    m_Key: ui.store.weekly.title
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964583
+    m_Key: ui.store.weekly_not_ready
+    m_Metadata:
+      m_Items: []
+  m_Metadata:
+    m_Items: []
+  m_KeyGenerator:
+    rid: 7413719049838788636
+  references:
+    version: 2
+    RefIds:
+    - rid: 7413719049838788636
+      type: {class: DistributedUIDGenerator, ns: UnityEngine.Localization.Tables, asm: Unity.Localization}
+      data:
+        m_CustomEpoch: 1783600781798

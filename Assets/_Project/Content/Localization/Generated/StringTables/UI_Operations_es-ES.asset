@@ -1,0 +1,304 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
+  m_Name: UI_Operations_es-ES
+  m_EditorClassIdentifier: Unity.Localization::UnityEngine.Localization.Tables.StringTable
+  m_LocaleId:
+    m_Code: es-ES
+  m_SharedData: {fileID: 11400000, guid: 8b66de3494122c2499588cbf75b1cff2, type: 2}
+  m_Metadata:
+    m_Items: []
+  m_TableData:
+  - m_Id: 187187200
+    m_Localized: 'Clientes activos: {count}'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770112
+    m_Localized: "Asignar {name} \xB7 recibido en almac\xE9n: {quantity}"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770113
+    m_Localized: Canales de audio
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770114
+    m_Localized: 'Caja disponible: {amount}'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770115
+    m_Localized: "Disponible: {available} \xB7 Reservado: {reserved}"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770116
+    m_Localized: "Stock recibido en almac\xE9n: {quantity}"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770117
+    m_Localized: 'Caja total: {amount}'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770118
+    m_Localized: "{count} pedidos reservados \xB7 total comprometido {amount}"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770119
+    m_Localized: 'Ventas completadas: {count}'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770120
+    m_Localized: 'Paso actual: {step}'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770121
+    m_Localized: Flujo jugable de clientes
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770122
+    m_Localized: "Un cliente entra, eval\xFAa un producto con stock, lo recoge, hace
+      cola, completa la compra y sale."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770123
+    m_Localized: Entregas
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770124
+    m_Localized: "Mueble operativo \xB7 sin producto asignado"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770125
+    m_Localized: "Cat\xE1logo de mobiliario"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770126
+    m_Localized: "{name} \xB7 {width}\xD7{depth} \xB7 {price}"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770127
+    m_Localized: "{itemId} \xB7 {quantity} disponibles"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770128
+    m_Localized: "Almac\xE9n de mobiliario"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770129
+    m_Localized: 'Resultado bruto: {amount}'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770130
+    m_Localized: 'Ocultar: DESACTIVADO'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770131
+    m_Localized: 'Ocultar: ACTIVADO'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770132
+    m_Localized: "En tr\xE1nsito \xB7 {runId} \xB7 reservado {amount}"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770133
+    m_Localized: "\xDAltima liquidaci\xF3n semanal \xB7 semana {week}"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770134
+    m_Localized: "Cat\xE1logo de mercanc\xEDa"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770135
+    m_Localized: No hay mobiliario recibido.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770136
+    m_Localized: "No hay mercanc\xEDa en el almac\xE9n."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770137
+    m_Localized: "No hay entregas reservadas ni en tr\xE1nsito."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770138
+    m_Localized: No hay entregas.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770139
+    m_Localized: "La ocultaci\xF3n autom\xE1tica de paredes no est\xE1 disponible."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770140
+    m_Localized: 'Reservado: {reserved}
+
+      Disponible: {available}'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770141
+    m_Localized: Entregas pendientes
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770142
+    m_Localized: "Coloca un expositor para asignarle mercanc\xEDa."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770143
+    m_Localized: Coloca primero un mueble.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770144
+    m_Localized: Mobiliario colocado
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770145
+    m_Localized: 'Producto: {name}'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770146
+    m_Localized: "{name} \xB7 caja de {unitsPerCase} \xB7 {caseCost}"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770147
+    m_Localized: '{itemId}: {quantity} unidades'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770148
+    m_Localized: "Almac\xE9n de productos"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770149
+    m_Localized: Capacidad de compra
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770150
+    m_Localized: Liberar reserva de {amount}
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770151
+    m_Localized: "Los cambios de stock est\xE1n limitados mientras existan reservas
+      activas de clientes."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770152
+    m_Localized: 'Reservado: {amount}'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770153
+    m_Localized: 'Reservado para pedidos: {amount}'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770154
+    m_Localized: "Reservado: {reserved} \xB7 Devuelto posible: {returnable}"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770155
+    m_Localized: "{orders} pedidos \xB7 {amount}"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770156
+    m_Localized: Atender al siguiente cliente disponible
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770157
+    m_Localized: Operaciones de la tienda
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770158
+    m_Localized: Clientes
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770159
+    m_Localized: Entrega
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770160
+    m_Localized: Expositores
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770161
+    m_Localized: "Gu\xEDa"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770162
+    m_Localized: Ajustes
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770163
+    m_Localized: Tienda
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770164
+    m_Localized: Stock
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770165
+    m_Localized: 'Impuesto (10 % del resultado bruto positivo): {amount}'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770166
+    m_Localized: "Eliminar la asignaci\xF3n de producto de este expositor vac\xEDo"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770167
+    m_Localized: "Llenar con el m\xEDnimo entre el stock recibido y la capacidad
+      libre"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770168
+    m_Localized: "Transferir una unidad recibida desde el almac\xE9n"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770169
+    m_Localized: "Devolver todas las unidades expuestas y mantener la asignaci\xF3n"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770170
+    m_Localized: "Devolver todas las unidades y dejar el expositor sin asignaci\xF3n"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770171
+    m_Localized: "Devolver una unidad no reservada al almac\xE9n"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770172
+    m_Localized: Visibilidad
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770173
+    m_Localized: 'Stock expuesto: {quantity}'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770174
+    m_Localized: "Paredes entre la c\xE1mara y el jugador"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770175
+    m_Localized: 'Resultado bruto semanal actual: {amount}'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 16629398781952
+    m_Localized: Sonido ambiente
+    m_Metadata:
+      m_Items: []
+  - m_Id: 16629407170560
+    m_Localized: Efectos
+    m_Metadata:
+      m_Items: []
+  - m_Id: 16629407170561
+    m_Localized: Interfaz
+    m_Metadata:
+      m_Items: []
+  - m_Id: 16629407170562
+    m_Localized: "M\xFAsica"
+    m_Metadata:
+      m_Items: []
+  references:
+    version: 2
+    RefIds: []

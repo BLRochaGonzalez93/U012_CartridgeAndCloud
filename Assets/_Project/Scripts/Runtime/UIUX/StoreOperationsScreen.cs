@@ -119,7 +119,7 @@ namespace VRMGames.CartridgeAndCloud.Runtime.UIUX
                 ProceduralUiFactory.Button(
                     _canvas.transform,
                     "OpenOperations",
-                    "Vertical Slice Operations",
+                    "Store Operations",
                     Open,
                     18);
 
@@ -187,7 +187,7 @@ namespace VRMGames.CartridgeAndCloud.Runtime.UIUX
                 ProceduralUiFactory.Text(
                     rect,
                     "Title",
-                    "SPRINT 16 · PLAYABLE BLOCKOUT",
+                    "Store Operations",
                     25,
                     TextAnchor.MiddleCenter,
                     new Color(
@@ -406,8 +406,6 @@ namespace VRMGames.CartridgeAndCloud.Runtime.UIUX
                 $"Completed sales: " +
                 $"{_service.State.CompletedSales}");
 
-            AddParagraph(
-                "Phase 2 remains blocked until this guide reaches Completed and the full QA gate passes.");
         }
 
         private void BuildShop()
@@ -866,7 +864,7 @@ namespace VRMGames.CartridgeAndCloud.Runtime.UIUX
             else if (!wallOcclusion.CanChangeVisibility)
             {
                 AddParagraph(
-                    "Automatic wall occlusion: Disabled for H6.");
+                    "Automatic wall occlusion is unavailable.");
             }
             else
             {

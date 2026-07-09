@@ -1,0 +1,56 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b11a58205ec3474ca216360e9fa74a8, type: 3}
+  m_Name: Formats Shared Data
+  m_EditorClassIdentifier: Unity.Localization::UnityEngine.Localization.Tables.SharedTableData
+  m_TableCollectionName: Formats
+  m_TableCollectionNameGuidString: e27d04303d560d941bbf554a7a264ddb
+  m_Entries:
+  - m_Id: 191381504
+    m_Key: format.date_time.slot
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964416
+    m_Key: format.duration.seconds
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964417
+    m_Key: format.money.default
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964418
+    m_Key: format.percent.default
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964419
+    m_Key: format.quantity.customers
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964420
+    m_Key: format.quantity.orders
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964421
+    m_Key: format.quantity.units
+    m_Metadata:
+      m_Items: []
+  m_Metadata:
+    m_Items: []
+  m_KeyGenerator:
+    rid: 7413719049838788642
+  references:
+    version: 2
+    RefIds:
+    - rid: 7413719049838788642
+      type: {class: DistributedUIDGenerator, ns: UnityEngine.Localization.Tables, asm: Unity.Localization}
+      data:
+        m_CustomEpoch: 1783600782089

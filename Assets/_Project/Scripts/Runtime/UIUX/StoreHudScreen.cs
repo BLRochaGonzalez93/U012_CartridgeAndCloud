@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 using UnityEngine.UI;
+using VRMGames.CartridgeAndCloud.Application.Localization;
 using VRMGames.CartridgeAndCloud.Application.UIUX;
 using VRMGames.CartridgeAndCloud.Application.Persistence;
 using VRMGames.CartridgeAndCloud.Domain.Persistence;
@@ -873,6 +874,13 @@ namespace VRMGames.CartridgeAndCloud.Runtime.UIUX
 
             AddSettingRow(
                 panel,
+                "Language",
+                CurrentLanguageDisplayName(),
+                ToggleLanguage,
+                ToggleLanguage);
+
+            AddSettingRow(
+                panel,
                 "UI scale",
                 settings.UiScalePercent + "%",
                 () => ApplyAccessibility(
@@ -941,6 +949,38 @@ namespace VRMGames.CartridgeAndCloud.Runtime.UIUX
             restart.gameObject
                 .GetComponent<LayoutElement>()
                 .preferredHeight = 58f;
+        }
+
+        private string CurrentLanguageDisplayName()
+        {
+            for (int index = 0;
+                 index < _root.Localization.AvailableLocales.Count;
+                 index++)
+            {
+                LocaleOption locale =
+                    _root.Localization.AvailableLocales[index];
+                if (string.Equals(
+                        locale.Code,
+                        _root.Localization.CurrentLocaleCode,
+                        StringComparison.OrdinalIgnoreCase))
+                {
+                    return locale.DisplayName;
+                }
+            }
+
+            return _root.Localization.CurrentLocaleCode;
+        }
+
+        private void ToggleLanguage()
+        {
+            string next = string.Equals(
+                _root.Localization.CurrentLocaleCode,
+                "es-ES",
+                StringComparison.OrdinalIgnoreCase)
+                ? "en-US"
+                : "es-ES";
+            _root.Localization.SelectLocale(next);
+            OpenPanel(ManagementPanelId.Accessibility);
         }
 
         private void AddSettingRow(

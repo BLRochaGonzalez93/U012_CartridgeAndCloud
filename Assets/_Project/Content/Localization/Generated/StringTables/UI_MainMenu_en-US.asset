@@ -1,0 +1,184 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
+  m_Name: UI_MainMenu_en-US
+  m_EditorClassIdentifier: Unity.Localization::UnityEngine.Localization.Tables.StringTable
+  m_LocaleId:
+    m_Code: en-US
+  m_SharedData: {fileID: 11400000, guid: 9c738ae3b1d674d4593f5c8b6943b460, type: 2}
+  m_Metadata:
+    m_Items: []
+  m_TableData:
+  - m_Id: 182992896
+    m_Localized: Destructive Confirmations
+    m_Metadata:
+      m_Items: []
+  - m_Id: 195575808
+    m_Localized: Language
+    m_Metadata:
+      m_Items: []
+  - m_Id: 195575809
+    m_Localized: Reduced Motion
+    m_Metadata:
+      m_Items: []
+  - m_Id: 195575810
+    m_Localized: Text Scale
+    m_Metadata:
+      m_Items: []
+  - m_Id: 195575811
+    m_Localized: Tutorial
+    m_Metadata:
+      m_Items: []
+  - m_Id: 195575812
+    m_Localized: UI Scale
+    m_Metadata:
+      m_Items: []
+  - m_Id: 195575813
+    m_Localized: "Three independent slots \xB7 automatic backup recovery"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 195575814
+    m_Localized: Corrupt save without valid backup
+    m_Metadata:
+      m_Items: []
+  - m_Id: 195575815
+    m_Localized: This removes the main save, backup, tutorial progress, and autosave
+      marker.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 195575816
+    m_Localized: Delete save slot?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 195575817
+    m_Localized: Empty slot
+    m_Metadata:
+      m_Items: []
+  - m_Id: 195575818
+    m_Localized: Creating a new game will replace the existing slot.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 195575819
+    m_Localized: The active slot autosaves once after a valid closed day.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 195575820
+    m_Localized: The previous valid generation remains as a backup.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 195575821
+    m_Localized: 'Enter: activate'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 195575822
+    m_Localized: 'Escape: close the top layer'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 195575823
+    m_Localized: 'Tab / Shift+Tab: move focus'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 195575824
+    m_Localized: Keyboard
+    m_Metadata:
+      m_Items: []
+  - m_Id: 195575825
+    m_Localized: Point, click, and scroll
+    m_Metadata:
+      m_Items: []
+  - m_Id: 195575826
+    m_Localized: Mouse
+    m_Metadata:
+      m_Items: []
+  - m_Id: 195575827
+    m_Localized: Saving
+    m_Metadata:
+      m_Items: []
+  - m_Id: 195575828
+    m_Localized: HUD buttons open the panels for all implemented systems.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 195575829
+    m_Localized: Store UI
+    m_Metadata:
+      m_Items: []
+  - m_Id: 195575830
+    m_Localized: The application will close.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 195575831
+    m_Localized: Quit Cartridge & Cloud?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 195575832
+    m_Localized: "\xB7 Recovered from backup"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 195575833
+    m_Localized: The existing save and tutorial progress will be deleted.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 195575834
+    m_Localized: Replace save slot?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 195575835
+    m_Localized: Select a save slot
+    m_Metadata:
+      m_Items: []
+  - m_Id: 195575836
+    m_Localized: SLOT {slotNumber}
+    m_Metadata:
+      m_Items: []
+  - m_Id: 195575837
+    m_Localized: The slot was recovered from its valid backup.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 195575838
+    m_Localized: "Day {day} \xB7 {cash} \xB7 {updated}{recoverySuffix}"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 195575839
+    m_Localized: Backup restored during slot inspection.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 195575840
+    m_Localized: Delete requires confirmation.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 195575841
+    m_Localized: New game created.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 195575842
+    m_Localized: Slot was already empty.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 195575843
+    m_Localized: Slot deleted.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 195575844
+    m_Localized: Storage unavailable
+    m_Metadata:
+      m_Items: []
+  - m_Id: 195575845
+    m_Localized: CARTRIDGE & CLOUD
+    m_Metadata:
+      m_Items: []
+  - m_Id: 195575846
+    m_Localized: Unsupported save schema
+    m_Metadata:
+      m_Items: []
+  references:
+    version: 2
+    RefIds: []

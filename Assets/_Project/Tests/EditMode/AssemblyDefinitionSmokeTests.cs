@@ -52,7 +52,8 @@ namespace VRMGames.CartridgeAndCloud.Tests.EditMode
                 new[]
                 {
                     "VRMGames.CartridgeAndCloud.Domain",
-                    "VRMGames.CartridgeAndCloud.Application"
+                    "VRMGames.CartridgeAndCloud.Application",
+                    "Unity.Localization"
                 },
                 noEngineReferences: false,
                 includePlatforms: Array.Empty<string>(),
@@ -90,7 +91,10 @@ namespace VRMGames.CartridgeAndCloud.Tests.EditMode
                     "UnityEditor.TestRunner",
                     "VRMGames.CartridgeAndCloud.Tests.Support",
                     "Unity.AI.Navigation",
-                    "VRMGames.CartridgeAndCloud.Editor.ProjectOrganization"
+                    "VRMGames.CartridgeAndCloud.Editor.ProjectOrganization",
+                    "VRMGames.CartridgeAndCloud.Editor.Localization",
+                    "Unity.Localization",
+                    "Unity.Localization.Editor"
                 },
                 noEngineReferences: false,
                 includePlatforms: new[] { "Editor" },

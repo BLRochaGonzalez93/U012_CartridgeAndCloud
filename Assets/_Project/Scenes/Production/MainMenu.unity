@@ -710,7 +710,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: QUIT
+  m_Text: ""
 --- !u!222 &1171895434
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -789,7 +789,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "Sprint 1 \u2014 Technical Main Menu"
+  m_Text: ""
 --- !u!222 &1204399474
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -868,7 +868,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: ENTER STORE
+  m_Text: ""
 --- !u!222 &1256340835
 CanvasRenderer:
   m_ObjectHideFlags: 0

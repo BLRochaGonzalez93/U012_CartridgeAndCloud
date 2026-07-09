@@ -18,5 +18,7 @@ EditorBuildSettings:
     path: Assets/_Project/Scenes/Test/TestLab.unity
     guid: 002b2ad62af3c614b91e32722c9452be
   m_configObjects:
+    com.unity.addressableassets: {fileID: 11400000, guid: a870388919d3a254e8ece9994c0da17f, type: 2}
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
+    com.unity.localization.settings: {fileID: 11400000, guid: e552facc9344cfd4baea5cc9be458c8f, type: 2}
   m_UseUCBPForAssetBundles: 0

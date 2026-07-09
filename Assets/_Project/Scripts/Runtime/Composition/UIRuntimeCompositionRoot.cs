@@ -3,6 +3,7 @@ using System.IO;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using VRMGames.CartridgeAndCloud.Application.DayCycle;
+using VRMGames.CartridgeAndCloud.Application.Localization;
 using VRMGames.CartridgeAndCloud.Application.Customers;
 using VRMGames.CartridgeAndCloud.Application.Persistence;
 using VRMGames.CartridgeAndCloud.Application.Store;
@@ -15,8 +16,10 @@ using VRMGames.CartridgeAndCloud.Domain.Persistence;
 using VRMGames.CartridgeAndCloud.Domain.Store;
 using VRMGames.CartridgeAndCloud.Domain.UIUX;
 using VRMGames.CartridgeAndCloud.Infrastructure.GameSession;
+using VRMGames.CartridgeAndCloud.Infrastructure.Localization;
 using VRMGames.CartridgeAndCloud.Infrastructure.Persistence;
 using VRMGames.CartridgeAndCloud.Infrastructure.UIUX;
+using VRMGames.CartridgeAndCloud.Runtime.Performance;
 using VRMGames.CartridgeAndCloud.Runtime.UIUX;
 
 namespace VRMGames.CartridgeAndCloud.Runtime.Composition
@@ -46,6 +49,11 @@ namespace VRMGames.CartridgeAndCloud.Runtime.Composition
 
         public AccessibilitySettingsService
             Accessibility { get; private set; }
+
+        public ILocalizationService Localization {
+            get;
+            private set;
+        }
 
         public TutorialService Tutorial {
             get;
@@ -192,6 +200,13 @@ namespace VRMGames.CartridgeAndCloud.Runtime.Composition
                             uiRoot,
                             "accessibility.json")));
 
+            Localization =
+                new UnityLocalizationService(
+                    new JsonLocalePreferenceRepository(
+                        Path.Combine(
+                            uiRoot,
+                            "localization.json")));
+
             Tutorial =
                 new TutorialService(
                     tutorialRepository);
@@ -331,8 +346,13 @@ namespace VRMGames.CartridgeAndCloud.Runtime.Composition
 
         public ManualSaveResult TryManualSave()
         {
-            ManualSaveResult result =
-                ManualSave.Save();
+            ManualSaveResult result;
+            using (Sprint17Phase3PerformanceCapture
+                       .MeasureOperation("ManualSave"))
+            {
+                result = ManualSave.Save();
+            }
+
             LastUserMessage = result.Detail;
             return result;
         }
@@ -416,6 +436,10 @@ namespace VRMGames.CartridgeAndCloud.Runtime.Composition
             PauseService.Clear();
             Time.timeScale = 1f;
 
+            Sprint17Phase3PerformanceCapture
+                .BeginAsynchronousOperation(
+                    "SceneLoad:" +
+                    Settings.StoreSceneName);
             SceneManager.LoadSceneAsync(
                 Settings.StoreSceneName,
                 LoadSceneMode.Single);
@@ -427,6 +451,10 @@ namespace VRMGames.CartridgeAndCloud.Runtime.Composition
             InputGate.ExitUiExclusive();
             Time.timeScale = 1f;
 
+            Sprint17Phase3PerformanceCapture
+                .BeginAsynchronousOperation(
+                    "SceneLoad:" +
+                    Settings.MainMenuSceneName);
             SceneManager.LoadSceneAsync(
                 Settings.MainMenuSceneName,
                 LoadSceneMode.Single);
@@ -520,8 +548,13 @@ namespace VRMGames.CartridgeAndCloud.Runtime.Composition
                     "Snapshot published.");
             }
 
-            DailyAutosaveResult result =
-                Autosave.TryAutosave();
+            DailyAutosaveResult result;
+            using (Sprint17Phase3PerformanceCapture
+                       .MeasureOperation("DailyAutosave"))
+            {
+                result = Autosave.TryAutosave();
+            }
+
             LastUserMessage = result.Detail;
             return result;
         }

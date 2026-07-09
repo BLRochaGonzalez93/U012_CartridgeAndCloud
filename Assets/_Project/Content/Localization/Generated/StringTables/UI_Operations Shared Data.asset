@@ -1,0 +1,304 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b11a58205ec3474ca216360e9fa74a8, type: 3}
+  m_Name: UI_Operations Shared Data
+  m_EditorClassIdentifier: Unity.Localization::UnityEngine.Localization.Tables.SharedTableData
+  m_TableCollectionName: UI_Operations
+  m_TableCollectionNameGuidString: 8b66de3494122c2499588cbf75b1cff2
+  m_Entries:
+  - m_Id: 187187200
+    m_Key: ui.operations.active_customers
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770112
+    m_Key: ui.operations.assign_received
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770113
+    m_Key: ui.operations.audio_channels
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770114
+    m_Key: ui.operations.available_cash
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770115
+    m_Key: ui.operations.available_reserved
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770116
+    m_Key: ui.operations.backroom_stock
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770117
+    m_Key: ui.operations.cash_total
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770118
+    m_Key: ui.operations.committed
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770119
+    m_Key: ui.operations.completed_sales
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770120
+    m_Key: ui.operations.current_step
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770121
+    m_Key: ui.operations.customer_loop
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770122
+    m_Key: ui.operations.customer_loop_body
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770123
+    m_Key: ui.operations.delivery_runs
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770124
+    m_Key: ui.operations.fixture_unassigned
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770125
+    m_Key: ui.operations.furniture_catalog
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770126
+    m_Key: ui.operations.furniture_item
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770127
+    m_Key: ui.operations.furniture_stock
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770128
+    m_Key: ui.operations.furniture_warehouse
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770129
+    m_Key: ui.operations.gross
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770130
+    m_Key: ui.operations.hide_off
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770131
+    m_Key: ui.operations.hide_on
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770132
+    m_Key: ui.operations.in_transit
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770133
+    m_Key: ui.operations.last_settlement
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770134
+    m_Key: ui.operations.merchandise_catalog
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770135
+    m_Key: ui.operations.no_furniture
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770136
+    m_Key: ui.operations.no_merchandise
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770137
+    m_Key: ui.operations.no_pending
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770138
+    m_Key: ui.operations.no_runs
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770139
+    m_Key: ui.operations.occlusion_unavailable
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770140
+    m_Key: ui.operations.order_finance
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770141
+    m_Key: ui.operations.pending_deliveries
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770142
+    m_Key: ui.operations.place_display
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770143
+    m_Key: ui.operations.place_fixture_first
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770144
+    m_Key: ui.operations.placed_fixtures
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770145
+    m_Key: ui.operations.product
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770146
+    m_Key: ui.operations.product_item
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770147
+    m_Key: ui.operations.product_stock
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770148
+    m_Key: ui.operations.product_warehouse
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770149
+    m_Key: ui.operations.purchasing_power
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770150
+    m_Key: ui.operations.release_reservation
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770151
+    m_Key: ui.operations.reservation_limit
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770152
+    m_Key: ui.operations.reserved_order
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770153
+    m_Key: ui.operations.reserved_orders
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770154
+    m_Key: ui.operations.reserved_stock
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770155
+    m_Key: ui.operations.run_summary
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770156
+    m_Key: ui.operations.spawn_tooltip
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770157
+    m_Key: ui.operations.store_title
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770158
+    m_Key: ui.operations.tab.customers
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770159
+    m_Key: ui.operations.tab.delivery
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770160
+    m_Key: ui.operations.tab.displays
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770161
+    m_Key: ui.operations.tab.guide
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770162
+    m_Key: ui.operations.tab.settings
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770163
+    m_Key: ui.operations.tab.shop
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770164
+    m_Key: ui.operations.tab.stock
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770165
+    m_Key: ui.operations.tax_positive
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770166
+    m_Key: ui.operations.tooltip.clear
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770167
+    m_Key: ui.operations.tooltip.restock_max
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770168
+    m_Key: ui.operations.tooltip.restock_one
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770169
+    m_Key: ui.operations.tooltip.return_all
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770170
+    m_Key: ui.operations.tooltip.return_clear
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770171
+    m_Key: ui.operations.tooltip.return_one
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770172
+    m_Key: ui.operations.visibility
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770173
+    m_Key: ui.operations.visible_stock
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770174
+    m_Key: ui.operations.walls_camera
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770175
+    m_Key: ui.operations.weekly_gross
+    m_Metadata:
+      m_Items: []
+  - m_Id: 16629398781952
+    m_Key: ui.operations.settings.audio.ambience
+    m_Metadata:
+      m_Items: []
+  - m_Id: 16629407170560
+    m_Key: ui.operations.settings.audio.effects
+    m_Metadata:
+      m_Items: []
+  - m_Id: 16629407170561
+    m_Key: ui.operations.settings.audio.interface
+    m_Metadata:
+      m_Items: []
+  - m_Id: 16629407170562
+    m_Key: ui.operations.settings.audio.music
+    m_Metadata:
+      m_Items: []
+  m_Metadata:
+    m_Items: []
+  m_KeyGenerator:
+    rid: 7413719049838788637
+  references:
+    version: 2
+    RefIds:
+    - rid: 7413719049838788637
+      type: {class: DistributedUIDGenerator, ns: UnityEngine.Localization.Tables, asm: Unity.Localization}
+      data:
+        m_CustomEpoch: 1783600781847

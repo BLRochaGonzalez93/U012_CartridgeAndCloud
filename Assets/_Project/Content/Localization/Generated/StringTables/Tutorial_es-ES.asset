@@ -1,0 +1,287 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
+  m_Name: Tutorial_es-ES
+  m_EditorClassIdentifier: Unity.Localization::UnityEngine.Localization.Tables.StringTable
+  m_LocaleId:
+    m_Code: es-ES
+  m_SharedData: {fileID: 11400000, guid: a575b2e493c4ae04a85932b115bb8344, type: 2}
+  m_Metadata:
+    m_Items: []
+  m_TableData:
+  - m_Id: 187187200
+    m_Localized: Selecciona un expositor colocado y asigna el producto recibido.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770112
+    m_Localized: Asignar un producto
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770113
+    m_Localized: "Abre el cat\xE1logo de la tienda y pide un mostrador de caja."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770114
+    m_Localized: Comprar un mostrador de caja
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770115
+    m_Localized: "Pide una estanter\xEDa central, una estanter\xEDa de pared, un
+      expositor bajo o un expositor destacado."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770116
+    m_Localized: Comprar un expositor
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770117
+    m_Localized: Inicia el cierre, completa las operaciones activas y finaliza la
+      jornada.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770118
+    m_Localized: Cerrar la jornada
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770119
+    m_Localized: "El bucle funcional de Phase 1 se ha completado. Contin\xFAa al
+      d\xEDa siguiente o repite el proceso."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770120
+    m_Localized: Bucle de la Vertical Slice completado
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770121
+    m_Localized: Usa Jornada para abrir la tienda.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770122
+    m_Localized: Abrir la tienda
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770123
+    m_Localized: Elige un producto ficticio y realiza un pedido al proveedor.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770124
+    m_Localized: "Pedir mercanc\xEDa"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770125
+    m_Localized: "Selecciona el mostrador recibido, col\xF3calo en la cuadr\xEDcula
+      y confirma."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770126
+    m_Localized: Colocar el mostrador de caja
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770127
+    m_Localized: Coloca el expositor recibido sin bloquear las rutas de acceso.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770128
+    m_Localized: Colocar un expositor
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770129
+    m_Localized: Abre Entregas y recibe el pedido del mostrador de caja.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770130
+    m_Localized: Recibir el mostrador de caja
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770131
+    m_Localized: "Recibe el pedido del expositor en el almac\xE9n."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770132
+    m_Localized: Recibir el expositor
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770133
+    m_Localized: Recibe y paga la entrega del producto.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770134
+    m_Localized: "Recibir mercanc\xEDa"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770135
+    m_Localized: "Transfiere unidades desde el almac\xE9n al expositor asignado."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770136
+    m_Localized: Reponer el expositor
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770137
+    m_Localized: Admite al siguiente cliente y completa una compra.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770138
+    m_Localized: Atender a un cliente
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770139
+    m_Localized: Confirma que la ranura activa indique Guardado.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770140
+    m_Localized: "Esperar al guardado autom\xE1tico"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 16629168095232
+    m_Localized: Pulsa Finalizar.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 16629176483840
+    m_Localized: "La ranura activa se guarda una vez despu\xE9s de cerrar cada jornada.
+      La generaci\xF3n v\xE1lida anterior se conserva como copia de seguridad."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 16629176483841
+    m_Localized: "Guardado autom\xE1tico"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 16629176483842
+    m_Localized: Abre Clientes o Compras.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 16629176483843
+    m_Localized: Consulta los clientes activos, las sesiones, los carritos y las
+      reservas.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 16629176483844
+    m_Localized: Clientes y compras
+    m_Metadata:
+      m_Items: []
+  - m_Id: 16629176483845
+    m_Localized: "Abre Econom\xEDa."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 16629176483846
+    m_Localized: Revisa los ingresos, los costes de proveedor recibidos y el resultado
+      bruto.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 16629176483847
+    m_Localized: Resultados diarios
+    m_Metadata:
+      m_Items: []
+  - m_Id: 16629176483848
+    m_Localized: Abre Jornada.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 16629176483849
+    m_Localized: "La jornada avanza desde Antes de abrir hasta Cerrada. El guardado
+      autom\xE1tico solo se ejecuta despu\xE9s de un cierre v\xE1lido."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 16629176483850
+    m_Localized: Jornada
+    m_Metadata:
+      m_Items: []
+  - m_Id: 16629176483851
+    m_Localized: Abre Expositores.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 16629176483852
+    m_Localized: Los expositores muestran los productos asignados y el stock disponible.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 16629176483853
+    m_Localized: Expositores
+    m_Metadata:
+      m_Items: []
+  - m_Id: 16629176483854
+    m_Localized: Revisa el panel Inventario.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 16629176483855
+    m_Localized: "Revisa el stock total, la capacidad y la ubicaci\xF3n de los productos."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 16629176483856
+    m_Localized: Inventario
+    m_Metadata:
+      m_Items: []
+  - m_Id: 16629176483857
+    m_Localized: "Prueba la c\xE1mara y despu\xE9s pulsa Siguiente."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 16629176483858
+    m_Localized: "Usa los controles del juego para moverte, girar la c\xE1mara y
+      acercar o alejar la vista de la tienda."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 16629176483859
+    m_Localized: "Movimiento y c\xE1mara"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 16629176483860
+    m_Localized: Abre Inventario.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 16629176483861
+    m_Localized: "Abre un panel desde la navegaci\xF3n izquierda. Los controles de
+      juego quedan bloqueados mientras haya un panel abierto."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 16629176483862
+    m_Localized: "Paneles de gesti\xF3n"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 16629176483863
+    m_Localized: Abre Caja.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 16629176483864
+    m_Localized: Supervisa la cola por orden de llegada, el estado de la caja y las
+      transacciones.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 16629176483865
+    m_Localized: Cola y caja
+    m_Metadata:
+      m_Items: []
+  - m_Id: 16629176483866
+    m_Localized: Abre Compras.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 16629176483867
+    m_Localized: Revisa los pedidos realizados, las unidades recibidas y los costes.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 16629176483868
+    m_Localized: Compras
+    m_Metadata:
+      m_Items: []
+  - m_Id: 16629176483869
+    m_Localized: Pulsa Siguiente para continuar.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 16629176483870
+    m_Localized: "Gestiona la tienda jornada a jornada. La interfaz mantiene visible
+      la informaci\xF3n importante."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 16629176483871
+    m_Localized: Bienvenido a Cartridge & Cloud
+    m_Metadata:
+      m_Items: []
+  references:
+    version: 2
+    RefIds: []

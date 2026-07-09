@@ -11,7 +11,10 @@
         "UnityEditor.TestRunner",
         "VRMGames.CartridgeAndCloud.Tests.Support",
         "Unity.AI.Navigation",
-        "VRMGames.CartridgeAndCloud.Editor.ProjectOrganization"
+        "VRMGames.CartridgeAndCloud.Editor.ProjectOrganization",
+        "VRMGames.CartridgeAndCloud.Editor.Localization",
+        "Unity.Localization",
+        "Unity.Localization.Editor"
     ],
     "includePlatforms": [
         "Editor"

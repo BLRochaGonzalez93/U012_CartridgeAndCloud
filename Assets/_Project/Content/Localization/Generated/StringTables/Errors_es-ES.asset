@@ -1,0 +1,312 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
+  m_Name: Errors_es-ES
+  m_EditorClassIdentifier: Unity.Localization::UnityEngine.Localization.Tables.StringTable
+  m_LocaleId:
+    m_Code: es-ES
+  m_SharedData: {fileID: 11400000, guid: 9939ecb79cc84d64e90d4d7d15b45899, type: 2}
+  m_Metadata:
+    m_Items: []
+  m_TableData:
+  - m_Id: 199770112
+    m_Localized: Resuelve las reservas activas antes de asignar un producto.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 208158720
+    m_Localized: "Quita la asignaci\xF3n actual antes de asignar otro producto."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 208158721
+    m_Localized: "El expositor no tiene ning\xFAn producto asignado."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 208158722
+    m_Localized: "Resuelve las reservas activas antes de quitar la asignaci\xF3n."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 208158723
+    m_Localized: "Este producto ya est\xE1 asignado."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 208158724
+    m_Localized: "Devuelve todo el stock expuesto antes de quitar la asignaci\xF3n."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 208158725
+    m_Localized: "La jornada no est\xE1 cerrada a las 24:00."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 208158726
+    m_Localized: "Ya hay un guardado autom\xE1tico en curso."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 208158727
+    m_Localized: "El inventario del almac\xE9n no puede aceptar el stock devuelto."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 208158728
+    m_Localized: "Falta la definici\xF3n del mueble."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 208158729
+    m_Localized: "No se ha encontrado la definici\xF3n del mueble."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 208158730
+    m_Localized: "No se ha encontrado la definici\xF3n del producto."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 208158731
+    m_Localized: "La caja a\xFAn est\xE1 procesando una venta."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 208158732
+    m_Localized: "La caja ya est\xE1 procesando a otro cliente."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 208158733
+    m_Localized: Coloca primero un mostrador de caja.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 208158734
+    m_Localized: "Se ha alcanzado el m\xE1ximo de clientes activos."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 208158735
+    m_Localized: "No hay ning\xFAn expositor con stock disponible."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 208158736
+    m_Localized: Abre la tienda antes de atender clientes.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 208158737
+    m_Localized: "La jornada a\xFAn no puede cambiar: {reason}"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 208158738
+    m_Localized: La caja ya no cubre los fondos reservados.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 208158739
+    m_Localized: No hay entregas pendientes que procesar.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 208158740
+    m_Localized: No se ha encontrado uno de los pedidos de la entrega.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 208158741
+    m_Localized: No se ha encontrado uno de los pedidos reservados.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 208158742
+    m_Localized: "Todos los pedidos deben permanecer en tr\xE1nsito hasta su recepci\xF3n
+      f\xEDsica."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 208158743
+    m_Localized: Se necesita al menos un pedido reservado.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 208158744
+    m_Localized: Se necesita un identificador de entrega.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 208158745
+    m_Localized: No se ha encontrado la entrega.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 208158746
+    m_Localized: "Todas las entregas deben estar reservadas y no encontrarse ya en
+      tr\xE1nsito."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 208158747
+    m_Localized: El expositor no contiene la cantidad solicitada.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 208158748
+    m_Localized: Las reservas activas de clientes protegen este stock expuesto.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 208158749
+    m_Localized: Este mueble no puede exponer productos.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 208158750
+    m_Localized: No se ha encontrado el mueble colocado.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 208158751
+    m_Localized: Solo se pueden cancelar entregas pendientes.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 208158752
+    m_Localized: No hay suficiente caja disponible para reservar este pedido.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 208158753
+    m_Localized: No se ha encontrado el pedido.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 208158754
+    m_Localized: La cantidad del pedido debe ser positiva.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 208158755
+    m_Localized: "La instancia de colocaci\xF3n ya existe."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 208158756
+    m_Localized: Recibe este mueble antes de colocarlo.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 208158757
+    m_Localized: Asigna un producto antes de reponer.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 208158758
+    m_Localized: "Falta la definici\xF3n del expositor."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 208158759
+    m_Localized: "El expositor ya est\xE1 lleno."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 208158760
+    m_Localized: "No hay stock recibido disponible en el almac\xE9n."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 208158761
+    m_Localized: La cantidad a reponer debe ser positiva.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 208158762
+    m_Localized: La cantidad a devolver debe ser positiva.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 208158763
+    m_Localized: Se requiere una ranura de guardado activa.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 208158764
+    m_Localized: Espera a que termine el procesamiento en caja.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 208158765
+    m_Localized: Espera a que salgan los clientes activos.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 208158766
+    m_Localized: "No hay ninguna sesi\xF3n activa que guardar."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 208158767
+    m_Localized: "Abre el men\xFA de pausa antes de guardar."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 208158768
+    m_Localized: "La persistencia de la tienda a\xFAn se est\xE1 inicializando."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 208158769
+    m_Localized: "Espera a que se vac\xEDe la cola de caja."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 208158770
+    m_Localized: Resuelve las reservas activas de productos antes de guardar.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 208158771
+    m_Localized: Ya hay un guardado manual en curso.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 208158772
+    m_Localized: "El estado de la tienda a\xFAn no est\xE1 listo para guardarse."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 208158773
+    m_Localized: "El guardado manual solo est\xE1 disponible antes de abrir, despu\xE9s
+      de cerrar o en las pantallas de resultados."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 208158774
+    m_Localized: "No hay ninguna sesi\xF3n activa de la tienda."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 208158775
+    m_Localized: "No hay ninguna sesi\xF3n activa."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 208158776
+    m_Localized: "Las operaciones de la tienda a\xFAn se est\xE1n inicializando."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 208158777
+    m_Localized: No se puede pasar de {currentState} a {targetState}.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 208158778
+    m_Localized: 'La tienda solo puede abrir entre las 08:00 y las 22:00. Hora actual:
+      {time}.'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 208158779
+    m_Localized: "La tienda a\xFAn se est\xE1 inicializando. Int\xE9ntalo de nuevo
+      dentro de unos instantes."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 208158780
+    m_Localized: "Las operaciones de la tienda no coinciden con la sesi\xF3n activa."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 208158781
+    m_Localized: Debes aceptar el resumen semanal antes de continuar.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 208158782
+    m_Localized: La jornada actual debe estar cerrada a las 24:00.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 208158783
+    m_Localized: "El resumen semanal a\xFAn no est\xE1 listo para aceptarse."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 208158784
+    m_Localized: "Esta jornada ya se ha guardado autom\xE1ticamente."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 208158785
+    m_Localized: "La compra del cliente est\xE1 lista."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 208158786
+    m_Localized: "Esta entrega ya se hab\xEDa recibido."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 208158787
+    m_Localized: Pedido cancelado y fondos reservados liberados.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 208158788
+    m_Localized: "El expositor ya est\xE1 vac\xEDo y mantiene su asignaci\xF3n."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 208158789
+    m_Localized: El estado actual se puede guardar de forma segura.
+    m_Metadata:
+      m_Items: []
+  references:
+    version: 2
+    RefIds: []

@@ -1,0 +1,281 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
+  m_Name: Tutorial_en-US
+  m_EditorClassIdentifier: Unity.Localization::UnityEngine.Localization.Tables.StringTable
+  m_LocaleId:
+    m_Code: en-US
+  m_SharedData: {fileID: 11400000, guid: a575b2e493c4ae04a85932b115bb8344, type: 2}
+  m_Metadata:
+    m_Items: []
+  m_TableData:
+  - m_Id: 187187200
+    m_Localized: Select a placed display and assign the received product.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770112
+    m_Localized: Assign a Product
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770113
+    m_Localized: Open the Shop catalog and order one checkout counter.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770114
+    m_Localized: Buy a Checkout Counter
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770115
+    m_Localized: Order a central shelf, wall shelf, low display, or featured display.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770116
+    m_Localized: Buy a Product Display
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770117
+    m_Localized: Begin Closing, clear active operations, and complete the close.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770118
+    m_Localized: Close the Day
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770119
+    m_Localized: The functional Phase 1 loop is complete. Continue to the next day
+      or repeat the loop.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770120
+    m_Localized: Vertical Slice Loop Complete
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770121
+    m_Localized: Use Day Cycle to open the store.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770122
+    m_Localized: Open the Store
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770123
+    m_Localized: Choose a fictional product and place a supplier order.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770124
+    m_Localized: Order Merchandise
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770125
+    m_Localized: Select the received counter, position it on the grid, and confirm.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770126
+    m_Localized: Place the Checkout Counter
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770127
+    m_Localized: Place the received display without blocking access routes.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770128
+    m_Localized: Place a Display
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770129
+    m_Localized: Open Deliveries and receive the checkout order.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770130
+    m_Localized: Receive Checkout Furniture
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770131
+    m_Localized: Receive the display order in the backroom.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770132
+    m_Localized: Receive Display Furniture
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770133
+    m_Localized: Receive and pay for the product delivery.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770134
+    m_Localized: Receive Merchandise
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770135
+    m_Localized: Transfer units from the backroom to the assigned display.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770136
+    m_Localized: Restock the Display
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770137
+    m_Localized: Admit the next customer and complete one purchase.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770138
+    m_Localized: Serve a Customer
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770139
+    m_Localized: Confirm that the active slot reports Saved.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770140
+    m_Localized: Wait for Autosave
+    m_Metadata:
+      m_Items: []
+  - m_Id: 16629168095232
+    m_Localized: Press Finish.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 16629176483840
+    m_Localized: The active slot is saved once after each closed day. The previous
+      valid generation remains as backup.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 16629176483841
+    m_Localized: Autosave
+    m_Metadata:
+      m_Items: []
+  - m_Id: 16629176483842
+    m_Localized: Open Customers or Shopping.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 16629176483843
+    m_Localized: Track active customers, sessions, carts and reservations.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 16629176483844
+    m_Localized: Customers and shopping
+    m_Metadata:
+      m_Items: []
+  - m_Id: 16629176483845
+    m_Localized: Open Economy.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 16629176483846
+    m_Localized: Review revenue, received supplier costs and gross result.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 16629176483847
+    m_Localized: Daily results
+    m_Metadata:
+      m_Items: []
+  - m_Id: 16629176483848
+    m_Localized: Open Day Cycle.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 16629176483849
+    m_Localized: A day progresses from Before Open to Closed. Autosave only runs
+      after a valid Closed state.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 16629176483850
+    m_Localized: Day cycle
+    m_Metadata:
+      m_Items: []
+  - m_Id: 16629176483851
+    m_Localized: Open Displays.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 16629176483852
+    m_Localized: Displays show assigned products and available stock.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 16629176483853
+    m_Localized: Displays
+    m_Metadata:
+      m_Items: []
+  - m_Id: 16629176483854
+    m_Localized: Check the Inventory panel.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 16629176483855
+    m_Localized: Review total stock, capacity and product locations.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 16629176483856
+    m_Localized: Inventory
+    m_Metadata:
+      m_Items: []
+  - m_Id: 16629176483857
+    m_Localized: Try the camera, then press Next.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 16629176483858
+    m_Localized: Use the existing gameplay controls to move, orbit and zoom around
+      the store.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 16629176483859
+    m_Localized: Movement and camera
+    m_Metadata:
+      m_Items: []
+  - m_Id: 16629176483860
+    m_Localized: Open Inventory.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 16629176483861
+    m_Localized: Open a panel from the left navigation. Gameplay input is blocked
+      while a panel is open.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 16629176483862
+    m_Localized: Management panels
+    m_Metadata:
+      m_Items: []
+  - m_Id: 16629176483863
+    m_Localized: Open Checkout.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 16629176483864
+    m_Localized: Monitor the FIFO queue, station state and transactions.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 16629176483865
+    m_Localized: Queue and checkout
+    m_Metadata:
+      m_Items: []
+  - m_Id: 16629176483866
+    m_Localized: Open Suppliers.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 16629176483867
+    m_Localized: Review placed orders, received units and costs.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 16629176483868
+    m_Localized: Suppliers
+    m_Metadata:
+      m_Items: []
+  - m_Id: 16629176483869
+    m_Localized: Press Next to continue.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 16629176483870
+    m_Localized: Run the store one day at a time. The HUD keeps the important state
+      visible.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 16629176483871
+    m_Localized: Welcome to Cartridge & Cloud
+    m_Metadata:
+      m_Items: []
+  references:
+    version: 2
+    RefIds: []

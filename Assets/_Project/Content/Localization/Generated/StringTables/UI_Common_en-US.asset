@@ -1,0 +1,403 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
+  m_Name: UI_Common_en-US
+  m_EditorClassIdentifier: Unity.Localization::UnityEngine.Localization.Tables.StringTable
+  m_LocaleId:
+    m_Code: en-US
+  m_SharedData: {fileID: 11400000, guid: 650cb39a79510804abe85f7e9fbbffe5, type: 2}
+  m_Metadata:
+    m_Items: []
+  m_TableData:
+  - m_Id: 694697984
+    m_Localized: Accept and Continue
+    m_Metadata:
+      m_Items: []
+  - m_Id: 728252416
+    m_Localized: Accessibility
+    m_Metadata:
+      m_Items: []
+  - m_Id: 732446720
+    m_Localized: Active customers
+    m_Metadata:
+      m_Items: []
+  - m_Id: 732446721
+    m_Localized: AlreadySaved
+    m_Metadata:
+      m_Items: []
+  - m_Id: 732446722
+    m_Localized: Assign
+    m_Metadata:
+      m_Items: []
+  - m_Id: 732446723
+    m_Localized: Automatic
+    m_Metadata:
+      m_Items: []
+  - m_Id: 732446724
+    m_Localized: Available
+    m_Metadata:
+      m_Items: []
+  - m_Id: 732446725
+    m_Localized: Before Open
+    m_Metadata:
+      m_Items: []
+  - m_Id: 732446726
+    m_Localized: BeforeOpen
+    m_Metadata:
+      m_Items: []
+  - m_Id: 732446727
+    m_Localized: Begin Closing
+    m_Metadata:
+      m_Items: []
+  - m_Id: 732446728
+    m_Localized: Browsing
+    m_Metadata:
+      m_Items: []
+  - m_Id: 732446729
+    m_Localized: Busy
+    m_Metadata:
+      m_Items: []
+  - m_Id: 732446730
+    m_Localized: Called
+    m_Metadata:
+      m_Items: []
+  - m_Id: 732446731
+    m_Localized: Cancel
+    m_Metadata:
+      m_Items: []
+  - m_Id: 732446732
+    m_Localized: Cancel Order
+    m_Metadata:
+      m_Items: []
+  - m_Id: 732446733
+    m_Localized: Cancelled
+    m_Metadata:
+      m_Items: []
+  - m_Id: 732446734
+    m_Localized: CheckingOut
+    m_Metadata:
+      m_Items: []
+  - m_Id: 732446735
+    m_Localized: Clear Assignment
+    m_Metadata:
+      m_Items: []
+  - m_Id: 732446736
+    m_Localized: Close
+    m_Metadata:
+      m_Items: []
+  - m_Id: 732446737
+    m_Localized: Closed
+    m_Metadata:
+      m_Items: []
+  - m_Id: 732446738
+    m_Localized: Closing
+    m_Metadata:
+      m_Items: []
+  - m_Id: 732446739
+    m_Localized: Complete Close
+    m_Metadata:
+      m_Items: []
+  - m_Id: 732446740
+    m_Localized: Completed
+    m_Metadata:
+      m_Items: []
+  - m_Id: 732446741
+    m_Localized: Confirm
+    m_Metadata:
+      m_Items: []
+  - m_Id: 732446742
+    m_Localized: Continue
+    m_Metadata:
+      m_Items: []
+  - m_Id: 732446743
+    m_Localized: Current
+    m_Metadata:
+      m_Items: []
+  - m_Id: 732446744
+    m_Localized: Current step
+    m_Metadata:
+      m_Items: []
+  - m_Id: 732446745
+    m_Localized: Cycle
+    m_Metadata:
+      m_Items: []
+  - m_Id: 732446746
+    m_Localized: Delete
+    m_Metadata:
+      m_Items: []
+  - m_Id: 732446747
+    m_Localized: Despawned
+    m_Metadata:
+      m_Items: []
+  - m_Id: 732446748
+    m_Localized: Dispatch All in One Run
+    m_Metadata:
+      m_Items: []
+  - m_Id: 732446749
+    m_Localized: Dispatch Delivery
+    m_Metadata:
+      m_Items: []
+  - m_Id: 732446750
+    m_Localized: each
+    m_Metadata:
+      m_Items: []
+  - m_Id: 732446751
+    m_Localized: Empty
+    m_Metadata:
+      m_Items: []
+  - m_Id: 732446752
+    m_Localized: Entering
+    m_Metadata:
+      m_Items: []
+  - m_Id: 732446753
+    m_Localized: Failed
+    m_Metadata:
+      m_Items: []
+  - m_Id: 732446754
+    m_Localized: Final
+    m_Metadata:
+      m_Items: []
+  - m_Id: 732446755
+    m_Localized: Help
+    m_Metadata:
+      m_Items: []
+  - m_Id: 732446756
+    m_Localized: In Progress
+    m_Metadata:
+      m_Items: []
+  - m_Id: 732446757
+    m_Localized: In Transit
+    m_Metadata:
+      m_Items: []
+  - m_Id: 732446758
+    m_Localized: Language
+    m_Metadata:
+      m_Items: []
+  - m_Id: 732446759
+    m_Localized: English
+    m_Metadata:
+      m_Items: []
+  - m_Id: 732446760
+    m_Localized: "Espa\xF1ol"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 732446761
+    m_Localized: Leaving
+    m_Metadata:
+      m_Items: []
+  - m_Id: 732446762
+    m_Localized: Manual
+    m_Metadata:
+      m_Items: []
+  - m_Id: 732446763
+    m_Localized: New Game
+    m_Metadata:
+      m_Items: []
+  - m_Id: 732446764
+    m_Localized: Next
+    m_Metadata:
+      m_Items: []
+  - m_Id: 732446765
+    m_Localized: No
+    m_Metadata:
+      m_Items: []
+  - m_Id: 732446766
+    m_Localized: NotClosed
+    m_Metadata:
+      m_Items: []
+  - m_Id: 732446767
+    m_Localized: Off
+    m_Metadata:
+      m_Items: []
+  - m_Id: 732446768
+    m_Localized: On
+    m_Metadata:
+      m_Items: []
+  - m_Id: 732446769
+    m_Localized: Open
+    m_Metadata:
+      m_Items: []
+  - m_Id: 732446770
+    m_Localized: Open Store
+    m_Metadata:
+      m_Items: []
+  - m_Id: 732446771
+    m_Localized: Order
+    m_Metadata:
+      m_Items: []
+  - m_Id: 732446772
+    m_Localized: Order Case
+    m_Metadata:
+      m_Items: []
+  - m_Id: 732446773
+    m_Localized: order(s)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 732446774
+    m_Localized: Pause
+    m_Metadata:
+      m_Items: []
+  - m_Id: 732446775
+    m_Localized: Paused
+    m_Metadata:
+      m_Items: []
+  - m_Id: 732446776
+    m_Localized: Place
+    m_Metadata:
+      m_Items: []
+  - m_Id: 732446777
+    m_Localized: Processing
+    m_Metadata:
+      m_Items: []
+  - m_Id: 732446778
+    m_Localized: Queue
+    m_Metadata:
+      m_Items: []
+  - m_Id: 732446779
+    m_Localized: Queueing
+    m_Metadata:
+      m_Items: []
+  - m_Id: 732446780
+    m_Localized: Quit
+    m_Metadata:
+      m_Items: []
+  - m_Id: 732446781
+    m_Localized: Received
+    m_Metadata:
+      m_Items: []
+  - m_Id: 732446782
+    m_Localized: Replace
+    m_Metadata:
+      m_Items: []
+  - m_Id: 732446783
+    m_Localized: Reserved
+    m_Metadata:
+      m_Items: []
+  - m_Id: 732446784
+    m_Localized: Restart Tutorial
+    m_Metadata:
+      m_Items: []
+  - m_Id: 732446785
+    m_Localized: Restock Max
+    m_Metadata:
+      m_Items: []
+  - m_Id: 732446786
+    m_Localized: Restock 1
+    m_Metadata:
+      m_Items: []
+  - m_Id: 732446787
+    m_Localized: Resume
+    m_Metadata:
+      m_Items: []
+  - m_Id: 732446788
+    m_Localized: Return
+    m_Metadata:
+      m_Items: []
+  - m_Id: 732446789
+    m_Localized: Return All
+    m_Metadata:
+      m_Items: []
+  - m_Id: 732446790
+    m_Localized: Return & Clear
+    m_Metadata:
+      m_Items: []
+  - m_Id: 732446791
+    m_Localized: Return to Main Menu
+    m_Metadata:
+      m_Items: []
+  - m_Id: 732446792
+    m_Localized: Return 1
+    m_Metadata:
+      m_Items: []
+  - m_Id: 732446793
+    m_Localized: Returnable
+    m_Metadata:
+      m_Items: []
+  - m_Id: 732446794
+    m_Localized: Run
+    m_Metadata:
+      m_Items: []
+  - m_Id: 732446795
+    m_Localized: sales
+    m_Metadata:
+      m_Items: []
+  - m_Id: 732446796
+    m_Localized: Save
+    m_Metadata:
+      m_Items: []
+  - m_Id: 732446797
+    m_Localized: Save Game
+    m_Metadata:
+      m_Items: []
+  - m_Id: 732446798
+    m_Localized: Saved
+    m_Metadata:
+      m_Items: []
+  - m_Id: 732446799
+    m_Localized: Saving
+    m_Metadata:
+      m_Items: []
+  - m_Id: 732446800
+    m_Localized: Skip
+    m_Metadata:
+      m_Items: []
+  - m_Id: 732446801
+    m_Localized: Skip Tutorial
+    m_Metadata:
+      m_Items: []
+  - m_Id: 732446802
+    m_Localized: Spawn Customer
+    m_Metadata:
+      m_Items: []
+  - m_Id: 732446803
+    m_Localized: Stocked
+    m_Metadata:
+      m_Items: []
+  - m_Id: 732446804
+    m_Localized: Unassigned
+    m_Metadata:
+      m_Items: []
+  - m_Id: 732446805
+    m_Localized: unit(s)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 732446806
+    m_Localized: units
+    m_Metadata:
+      m_Items: []
+  - m_Id: 732446807
+    m_Localized: Unknown Time
+    m_Metadata:
+      m_Items: []
+  - m_Id: 732446808
+    m_Localized: Waiting
+    m_Metadata:
+      m_Items: []
+  - m_Id: 732446809
+    m_Localized: WaitingToEnter
+    m_Metadata:
+      m_Items: []
+  - m_Id: 732446810
+    m_Localized: Yes
+    m_Metadata:
+      m_Items: []
+  - m_Id: 16630518661120
+    m_Localized: Receipt
+    m_Metadata:
+      m_Items: []
+  - m_Id: 16630527049728
+    m_Localized: Sale
+    m_Metadata:
+      m_Items: []
+  references:
+    version: 2
+    RefIds: []

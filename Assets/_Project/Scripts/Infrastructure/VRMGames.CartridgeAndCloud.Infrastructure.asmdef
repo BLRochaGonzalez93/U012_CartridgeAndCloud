@@ -3,7 +3,8 @@
     "rootNamespace": "VRMGames.CartridgeAndCloud.Infrastructure",
     "references": [
         "VRMGames.CartridgeAndCloud.Domain",
-        "VRMGames.CartridgeAndCloud.Application"
+        "VRMGames.CartridgeAndCloud.Application",
+        "Unity.Localization"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

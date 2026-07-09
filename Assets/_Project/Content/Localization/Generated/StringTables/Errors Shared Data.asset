@@ -1,0 +1,312 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b11a58205ec3474ca216360e9fa74a8, type: 3}
+  m_Name: Errors Shared Data
+  m_EditorClassIdentifier: Unity.Localization::UnityEngine.Localization.Tables.SharedTableData
+  m_TableCollectionName: Errors
+  m_TableCollectionNameGuidString: 9939ecb79cc84d64e90d4d7d15b45899
+  m_Entries:
+  - m_Id: 199770112
+    m_Key: error.assignment.active_reservations
+    m_Metadata:
+      m_Items: []
+  - m_Id: 208158720
+    m_Key: error.assignment.clear_first
+    m_Metadata:
+      m_Items: []
+  - m_Id: 208158721
+    m_Key: error.assignment.none
+    m_Metadata:
+      m_Items: []
+  - m_Id: 208158722
+    m_Key: error.assignment.reservations
+    m_Metadata:
+      m_Items: []
+  - m_Id: 208158723
+    m_Key: error.assignment.same_product
+    m_Metadata:
+      m_Items: []
+  - m_Id: 208158724
+    m_Key: error.assignment.stock_visible
+    m_Metadata:
+      m_Items: []
+  - m_Id: 208158725
+    m_Key: error.autosave.day_not_closed
+    m_Metadata:
+      m_Items: []
+  - m_Id: 208158726
+    m_Key: error.autosave.running
+    m_Metadata:
+      m_Items: []
+  - m_Id: 208158727
+    m_Key: error.backroom.capacity
+    m_Metadata:
+      m_Items: []
+  - m_Id: 208158728
+    m_Key: error.catalog.furniture_definition_missing
+    m_Metadata:
+      m_Items: []
+  - m_Id: 208158729
+    m_Key: error.catalog.furniture_missing
+    m_Metadata:
+      m_Items: []
+  - m_Id: 208158730
+    m_Key: error.catalog.product_missing
+    m_Metadata:
+      m_Items: []
+  - m_Id: 208158731
+    m_Key: error.checkout.busy
+    m_Metadata:
+      m_Items: []
+  - m_Id: 208158732
+    m_Key: error.customer.checkout_busy
+    m_Metadata:
+      m_Items: []
+  - m_Id: 208158733
+    m_Key: error.customer.checkout_required
+    m_Metadata:
+      m_Items: []
+  - m_Id: 208158734
+    m_Key: error.customer.max_capacity
+    m_Metadata:
+      m_Items: []
+  - m_Id: 208158735
+    m_Key: error.customer.no_stocked_display
+    m_Metadata:
+      m_Items: []
+  - m_Id: 208158736
+    m_Key: error.customer.open_store
+    m_Metadata:
+      m_Items: []
+  - m_Id: 208158737
+    m_Key: error.day.transition
+    m_Metadata:
+      m_Items: []
+  - m_Id: 208158738
+    m_Key: error.delivery.cash_uncovered
+    m_Metadata:
+      m_Items: []
+  - m_Id: 208158739
+    m_Key: error.delivery.none_pending
+    m_Metadata:
+      m_Items: []
+  - m_Id: 208158740
+    m_Key: error.delivery.order_missing
+    m_Metadata:
+      m_Items: []
+  - m_Id: 208158741
+    m_Key: error.delivery.order_reserved_missing
+    m_Metadata:
+      m_Items: []
+  - m_Id: 208158742
+    m_Key: error.delivery.order_state
+    m_Metadata:
+      m_Items: []
+  - m_Id: 208158743
+    m_Key: error.delivery.reserved_required
+    m_Metadata:
+      m_Items: []
+  - m_Id: 208158744
+    m_Key: error.delivery.run_id_required
+    m_Metadata:
+      m_Items: []
+  - m_Id: 208158745
+    m_Key: error.delivery.run_missing
+    m_Metadata:
+      m_Items: []
+  - m_Id: 208158746
+    m_Key: error.delivery.state_invalid
+    m_Metadata:
+      m_Items: []
+  - m_Id: 208158747
+    m_Key: error.display.quantity_missing
+    m_Metadata:
+      m_Items: []
+  - m_Id: 208158748
+    m_Key: error.display.reserved_stock
+    m_Metadata:
+      m_Items: []
+  - m_Id: 208158749
+    m_Key: error.fixture.not_display
+    m_Metadata:
+      m_Items: []
+  - m_Id: 208158750
+    m_Key: error.fixture.not_found
+    m_Metadata:
+      m_Items: []
+  - m_Id: 208158751
+    m_Key: error.order.cancel_state
+    m_Metadata:
+      m_Items: []
+  - m_Id: 208158752
+    m_Key: error.order.cash_insufficient
+    m_Metadata:
+      m_Items: []
+  - m_Id: 208158753
+    m_Key: error.order.not_found
+    m_Metadata:
+      m_Items: []
+  - m_Id: 208158754
+    m_Key: error.order.quantity_positive
+    m_Metadata:
+      m_Items: []
+  - m_Id: 208158755
+    m_Key: error.placement.instance_exists
+    m_Metadata:
+      m_Items: []
+  - m_Id: 208158756
+    m_Key: error.placement.receive_first
+    m_Metadata:
+      m_Items: []
+  - m_Id: 208158757
+    m_Key: error.restock.assign_first
+    m_Metadata:
+      m_Items: []
+  - m_Id: 208158758
+    m_Key: error.restock.display_missing
+    m_Metadata:
+      m_Items: []
+  - m_Id: 208158759
+    m_Key: error.restock.full
+    m_Metadata:
+      m_Items: []
+  - m_Id: 208158760
+    m_Key: error.restock.no_backroom
+    m_Metadata:
+      m_Items: []
+  - m_Id: 208158761
+    m_Key: error.restock.quantity_positive
+    m_Metadata:
+      m_Items: []
+  - m_Id: 208158762
+    m_Key: error.return.quantity_positive
+    m_Metadata:
+      m_Items: []
+  - m_Id: 208158763
+    m_Key: error.save.active_slot_required
+    m_Metadata:
+      m_Items: []
+  - m_Id: 208158764
+    m_Key: error.save.checkout_busy
+    m_Metadata:
+      m_Items: []
+  - m_Id: 208158765
+    m_Key: error.save.customers_active
+    m_Metadata:
+      m_Items: []
+  - m_Id: 208158766
+    m_Key: error.save.no_session
+    m_Metadata:
+      m_Items: []
+  - m_Id: 208158767
+    m_Key: error.save.pause_required
+    m_Metadata:
+      m_Items: []
+  - m_Id: 208158768
+    m_Key: error.save.persistence_initializing
+    m_Metadata:
+      m_Items: []
+  - m_Id: 208158769
+    m_Key: error.save.queue_active
+    m_Metadata:
+      m_Items: []
+  - m_Id: 208158770
+    m_Key: error.save.reservations_active
+    m_Metadata:
+      m_Items: []
+  - m_Id: 208158771
+    m_Key: error.save.running
+    m_Metadata:
+      m_Items: []
+  - m_Id: 208158772
+    m_Key: error.save.state_not_ready
+    m_Metadata:
+      m_Items: []
+  - m_Id: 208158773
+    m_Key: error.save.unsafe_state
+    m_Metadata:
+      m_Items: []
+  - m_Id: 208158774
+    m_Key: error.session.no_store
+    m_Metadata:
+      m_Items: []
+  - m_Id: 208158775
+    m_Key: error.session.none
+    m_Metadata:
+      m_Items: []
+  - m_Id: 208158776
+    m_Key: error.store.initializing
+    m_Metadata:
+      m_Items: []
+  - m_Id: 208158777
+    m_Key: error.store.invalid_transition
+    m_Metadata:
+      m_Items: []
+  - m_Id: 208158778
+    m_Key: error.store.open_hours
+    m_Metadata:
+      m_Items: []
+  - m_Id: 208158779
+    m_Key: error.store.runtime_initializing
+    m_Metadata:
+      m_Items: []
+  - m_Id: 208158780
+    m_Key: error.store.session_mismatch
+    m_Metadata:
+      m_Items: []
+  - m_Id: 208158781
+    m_Key: error.weekly.accept_required
+    m_Metadata:
+      m_Items: []
+  - m_Id: 208158782
+    m_Key: error.weekly.day_not_closed
+    m_Metadata:
+      m_Items: []
+  - m_Id: 208158783
+    m_Key: error.weekly.not_ready
+    m_Metadata:
+      m_Items: []
+  - m_Id: 208158784
+    m_Key: status.autosave.already_done
+    m_Metadata:
+      m_Items: []
+  - m_Id: 208158785
+    m_Key: status.customer.purchase_ready
+    m_Metadata:
+      m_Items: []
+  - m_Id: 208158786
+    m_Key: status.delivery.already_received
+    m_Metadata:
+      m_Items: []
+  - m_Id: 208158787
+    m_Key: status.order.cancelled
+    m_Metadata:
+      m_Items: []
+  - m_Id: 208158788
+    m_Key: status.return.empty
+    m_Metadata:
+      m_Items: []
+  - m_Id: 208158789
+    m_Key: status.save.safe
+    m_Metadata:
+      m_Items: []
+  m_Metadata:
+    m_Items: []
+  m_KeyGenerator:
+    rid: 7413719049838788641
+  references:
+    version: 2
+    RefIds:
+    - rid: 7413719049838788641
+      type: {class: DistributedUIDGenerator, ns: UnityEngine.Localization.Tables, asm: Unity.Localization}
+      data:
+        m_CustomEpoch: 1783600782039

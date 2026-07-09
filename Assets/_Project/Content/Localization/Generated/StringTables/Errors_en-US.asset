@@ -1,0 +1,311 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
+  m_Name: Errors_en-US
+  m_EditorClassIdentifier: Unity.Localization::UnityEngine.Localization.Tables.StringTable
+  m_LocaleId:
+    m_Code: en-US
+  m_SharedData: {fileID: 11400000, guid: 9939ecb79cc84d64e90d4d7d15b45899, type: 2}
+  m_Metadata:
+    m_Items: []
+  m_TableData:
+  - m_Id: 199770112
+    m_Localized: Resolve active reservations before assigning a product.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 208158720
+    m_Localized: Clear the current product assignment before assigning a different
+      product.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 208158721
+    m_Localized: The display has no product assignment.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 208158722
+    m_Localized: Resolve active reservations before clearing the assignment.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 208158723
+    m_Localized: This product is already assigned.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 208158724
+    m_Localized: Return all visible stock before clearing the assignment.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 208158725
+    m_Localized: The store day is not closed at 24:00.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 208158726
+    m_Localized: Autosave is already running.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 208158727
+    m_Localized: The backroom inventory cannot accept the returned stock.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 208158728
+    m_Localized: Furniture definition is missing.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 208158729
+    m_Localized: Furniture definition was not found.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 208158730
+    m_Localized: Product definition was not found.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 208158731
+    m_Localized: Checkout is still processing.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 208158732
+    m_Localized: Checkout is already processing another customer.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 208158733
+    m_Localized: Place a checkout counter first.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 208158734
+    m_Localized: Maximum active customer capacity reached.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 208158735
+    m_Localized: No stocked display is available.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 208158736
+    m_Localized: Open the store before serving customers.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 208158737
+    m_Localized: 'The day cannot transition yet: {reason}'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 208158738
+    m_Localized: Reserved funds are no longer covered by cash.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 208158739
+    m_Localized: There are no pending deliveries to process.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 208158740
+    m_Localized: A delivery order was not found.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 208158741
+    m_Localized: A reserved order was not found.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 208158742
+    m_Localized: Every order must remain in transit until physical receipt.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 208158743
+    m_Localized: At least one reserved order is required.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 208158744
+    m_Localized: A delivery run ID is required.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 208158745
+    m_Localized: Delivery run was not found.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 208158746
+    m_Localized: Every delivery must be reserved and not already in transit.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 208158747
+    m_Localized: The display does not contain the requested quantity.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 208158748
+    m_Localized: Active customer reservations protect this display stock.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 208158749
+    m_Localized: This fixture cannot display products.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 208158750
+    m_Localized: Placed fixture was not found.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 208158751
+    m_Localized: Only pending deliveries can be cancelled.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 208158752
+    m_Localized: Not enough available cash to reserve this order.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 208158753
+    m_Localized: Order was not found.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 208158754
+    m_Localized: Order quantity must be positive.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 208158755
+    m_Localized: Placement instance already exists.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 208158756
+    m_Localized: Receive this furniture before placing it.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 208158757
+    m_Localized: Assign a product before restocking.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 208158758
+    m_Localized: Product display definition is missing.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 208158759
+    m_Localized: Display is already full.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 208158760
+    m_Localized: No received stock is available in the backroom.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 208158761
+    m_Localized: Restock quantity must be positive.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 208158762
+    m_Localized: Return quantity must be positive.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 208158763
+    m_Localized: An active save slot is required.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 208158764
+    m_Localized: Wait for checkout processing to finish.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 208158765
+    m_Localized: Wait for active customers to leave.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 208158766
+    m_Localized: No active session can be saved.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 208158767
+    m_Localized: Open the pause menu before saving.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 208158768
+    m_Localized: Store persistence is still initializing.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 208158769
+    m_Localized: Wait for the checkout queue to clear.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 208158770
+    m_Localized: Resolve active product reservations before saving.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 208158771
+    m_Localized: A manual save is already running.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 208158772
+    m_Localized: Store state is not ready to save.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 208158773
+    m_Localized: Manual saving is available only before opening, after closing, or
+      on results screens.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 208158774
+    m_Localized: No active store session exists.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 208158775
+    m_Localized: No active session.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 208158776
+    m_Localized: Store operations are still initializing.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 208158777
+    m_Localized: Cannot transition from {currentState} to {targetState}.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 208158778
+    m_Localized: 'The store can only open between 08:00 and 22:00. Current time:
+      {time}.'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 208158779
+    m_Localized: The store runtime is still initializing. Try opening again in a
+      moment.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 208158780
+    m_Localized: Store operations do not match the active session.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 208158781
+    m_Localized: The weekly summary must be accepted before continuing.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 208158782
+    m_Localized: The current day must be closed at 24:00.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 208158783
+    m_Localized: The weekly summary is not ready to acknowledge.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 208158784
+    m_Localized: This day has already been autosaved.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 208158785
+    m_Localized: Customer purchase is ready.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 208158786
+    m_Localized: This delivery was already received.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 208158787
+    m_Localized: Order cancelled and reserved funds released.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 208158788
+    m_Localized: The display is already empty and keeps its assignment.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 208158789
+    m_Localized: The current state can be saved safely.
+    m_Metadata:
+      m_Items: []
+  references:
+    version: 2
+    RefIds: []

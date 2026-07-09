@@ -1,0 +1,156 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b11a58205ec3474ca216360e9fa74a8, type: 3}
+  m_Name: Content Shared Data
+  m_EditorClassIdentifier: Unity.Localization::UnityEngine.Localization.Tables.SharedTableData
+  m_TableCollectionName: Content
+  m_TableCollectionNameGuidString: 3e1a78b1dae1bb94cb842b7c2de6a5f9
+  m_Entries:
+  - m_Id: 187187200
+    m_Key: content.furniture.backroom_storage.name
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770112
+    m_Key: content.furniture.central_shelf.name
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770113
+    m_Key: content.furniture.checkout_counter.name
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770114
+    m_Key: content.furniture.decorative_plant.name
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770115
+    m_Key: content.furniture.featured_display.name
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770116
+    m_Key: content.furniture.low_display.name
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770117
+    m_Key: content.furniture.receiving_crate.name
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770118
+    m_Key: content.furniture.wall_shelf.name
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770119
+    m_Key: content.product.cloud_runner_case.name
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770120
+    m_Key: content.product.memory_core_accessory.name
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770121
+    m_Key: content.product.neon_drift.name
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770122
+    m_Key: content.product.orbit_pad_controller.name
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770123
+    m_Key: content.product.signal_pro_headset.name
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770124
+    m_Key: content.product.vertex_one_console.name
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770125
+    m_Key: customer.casual_browser.name
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770126
+    m_Key: customer.collector.name
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770127
+    m_Key: customer.focused_buyer.name
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770128
+    m_Key: customer.impatient_visitor.name
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770129
+    m_Key: display.countertop_rack.name
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770130
+    m_Key: display.floor_stand.name
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770131
+    m_Key: display.single_shelf.name
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770132
+    m_Key: products.cartridge_cloud_racers.name
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770133
+    m_Key: products.cartridge_pixel_quest.name
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770134
+    m_Key: products.collectible_cloud_hero.name
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770135
+    m_Key: products.console_nebula_8.name
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770136
+    m_Key: products.controller_orbit_pad.name
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770137
+    m_Key: products.memory_card_64.name
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770138
+    m_Key: suppliers.nebula_distribution.name
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770139
+    m_Key: suppliers.pixel_parcel.name
+    m_Metadata:
+      m_Items: []
+  - m_Id: 16628706721792
+    m_Key: technical.checkout.main
+    m_Metadata:
+      m_Items: []
+  - m_Id: 16628731887616
+    m_Key: technical.inventory.backroom
+    m_Metadata:
+      m_Items: []
+  - m_Id: 16628731887617
+    m_Key: technical.inventory.store
+    m_Metadata:
+      m_Items: []
+  m_Metadata:
+    m_Items: []
+  m_KeyGenerator:
+    rid: 7413719049838788640
+  references:
+    version: 2
+    RefIds:
+    - rid: 7413719049838788640
+      type: {class: DistributedUIDGenerator, ns: UnityEngine.Localization.Tables, asm: Unity.Localization}
+      data:
+        m_CustomEpoch: 1783600781991

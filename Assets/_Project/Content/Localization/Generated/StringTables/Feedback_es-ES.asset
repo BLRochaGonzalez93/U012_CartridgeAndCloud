@@ -1,0 +1,168 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
+  m_Name: Feedback_es-ES
+  m_EditorClassIdentifier: Unity.Localization::UnityEngine.Localization.Tables.StringTable
+  m_LocaleId:
+    m_Code: es-ES
+  m_SharedData: {fileID: 11400000, guid: c2f4a1cb9c9595244b0cdf63faeb913e, type: 2}
+  m_Metadata:
+    m_Items: []
+  m_TableData:
+  - m_Id: 191381504
+    m_Localized: "Guardado autom\xE1tico completado."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964416
+    m_Localized: Cliente admitido.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964417
+    m_Localized: "El cliente est\xE1 evaluando un producto."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964418
+    m_Localized: El cliente no ha encontrado productos expuestos y se marcha sin
+      comprar.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964419
+    m_Localized: El cliente se ha unido a la cola de caja.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964420
+    m_Localized: Producto reservado para el carrito del cliente.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964421
+    m_Localized: Cliente satisfecho.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964422
+    m_Localized: Visita de cliente registrada.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964423
+    m_Localized: Entrega recibida y pagada con los fondos reservados.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964424
+    m_Localized: "Una entrega conjunta est\xE1 en camino."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964425
+    m_Localized: "Una entrega est\xE1 en camino."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964426
+    m_Localized: "Puerta autom\xE1tica cerrada."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964427
+    m_Localized: "Puerta autom\xE1tica abierta."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964428
+    m_Localized: '{itemName} colocado.'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964429
+    m_Localized: Mueble retirado y devuelto.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964430
+    m_Localized: "{itemName} devuelto al almac\xE9n."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964431
+    m_Localized: Guardado manual completado.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964432
+    m_Localized: Pedido {orderId} realizado.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964433
+    m_Localized: "Colocaci\xF3n bloqueada: {reason}"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964434
+    m_Localized: "Colocaci\xF3n confirmada."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964435
+    m_Localized: Mueble retirado.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964436
+    m_Localized: '{itemName} seleccionado.'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964437
+    m_Localized: "Colocaci\xF3n v\xE1lida."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964438
+    m_Localized: Producto asignado.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964439
+    m_Localized: "Asignaci\xF3n de producto eliminada."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964440
+    m_Localized: Se han repuesto {quantity} unidades.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964441
+    m_Localized: "Se han devuelto {quantity} unidades al almac\xE9n."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964442
+    m_Localized: "Se han devuelto {quantity} unidades y se ha eliminado la asignaci\xF3n."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964443
+    m_Localized: Venta completada.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964444
+    m_Localized: '{productName} vendido.'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964445
+    m_Localized: Jornada cerrada a las 24:00.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964446
+    m_Localized: Tienda cerrada. Puede volver a abrir antes de las 22:00.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964447
+    m_Localized: "La tienda est\xE1 cerrando."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964448
+    m_Localized: Compra del cliente completada.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964449
+    m_Localized: El mueble se puede retirar.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 16628949991424
+    m_Localized: "La caja est\xE1 colocada, activa y disponible."
+    m_Metadata:
+      m_Items: []
+  references:
+    version: 2
+    RefIds: []

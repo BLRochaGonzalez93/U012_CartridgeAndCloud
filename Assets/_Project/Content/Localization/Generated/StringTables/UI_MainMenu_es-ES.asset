@@ -1,0 +1,186 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
+  m_Name: UI_MainMenu_es-ES
+  m_EditorClassIdentifier: Unity.Localization::UnityEngine.Localization.Tables.StringTable
+  m_LocaleId:
+    m_Code: es-ES
+  m_SharedData: {fileID: 11400000, guid: 9c738ae3b1d674d4593f5c8b6943b460, type: 2}
+  m_Metadata:
+    m_Items: []
+  m_TableData:
+  - m_Id: 182992896
+    m_Localized: Confirmaciones de acciones destructivas
+    m_Metadata:
+      m_Items: []
+  - m_Id: 195575808
+    m_Localized: Idioma
+    m_Metadata:
+      m_Items: []
+  - m_Id: 195575809
+    m_Localized: Movimiento reducido
+    m_Metadata:
+      m_Items: []
+  - m_Id: 195575810
+    m_Localized: Escala del texto
+    m_Metadata:
+      m_Items: []
+  - m_Id: 195575811
+    m_Localized: Tutorial
+    m_Metadata:
+      m_Items: []
+  - m_Id: 195575812
+    m_Localized: Escala de la interfaz
+    m_Metadata:
+      m_Items: []
+  - m_Id: 195575813
+    m_Localized: "Tres ranuras independientes \xB7 recuperaci\xF3n autom\xE1tica
+      de copias de seguridad"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 195575814
+    m_Localized: "Guardado da\xF1ado sin copia de seguridad v\xE1lida"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 195575815
+    m_Localized: "Esto elimina el guardado principal, la copia de seguridad, el progreso
+      del tutorial y el registro de guardado autom\xE1tico."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 195575816
+    m_Localized: "\xBFEliminar la ranura de guardado?"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 195575817
+    m_Localized: "Ranura vac\xEDa"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 195575818
+    m_Localized: "Crear una nueva partida reemplazar\xE1 la ranura existente."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 195575819
+    m_Localized: "La ranura activa se guarda autom\xE1ticamente una vez tras cerrar
+      correctamente una jornada."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 195575820
+    m_Localized: "La versi\xF3n v\xE1lida anterior se conserva como copia de seguridad."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 195575821
+    m_Localized: 'Intro: activar'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 195575822
+    m_Localized: 'Escape: cerrar la capa superior'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 195575823
+    m_Localized: "Tab / May\xFAs+Tab: mover el foco"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 195575824
+    m_Localized: Teclado
+    m_Metadata:
+      m_Items: []
+  - m_Id: 195575825
+    m_Localized: "Apunta, haz clic y despl\xE1zate"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 195575826
+    m_Localized: "Rat\xF3n"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 195575827
+    m_Localized: Guardado
+    m_Metadata:
+      m_Items: []
+  - m_Id: 195575828
+    m_Localized: Los botones del HUD abren los paneles de todos los sistemas implementados.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 195575829
+    m_Localized: Interfaz de la tienda
+    m_Metadata:
+      m_Items: []
+  - m_Id: 195575830
+    m_Localized: "La aplicaci\xF3n se cerrar\xE1."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 195575831
+    m_Localized: "\xBFSalir de Cartridge & Cloud?"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 195575832
+    m_Localized: "\xB7 Recuperada desde la copia de seguridad"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 195575833
+    m_Localized: "Se eliminar\xE1n la partida existente y el progreso del tutorial."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 195575834
+    m_Localized: "\xBFReemplazar la ranura de guardado?"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 195575835
+    m_Localized: Selecciona una ranura de guardado
+    m_Metadata:
+      m_Items: []
+  - m_Id: 195575836
+    m_Localized: RANURA {slotNumber}
+    m_Metadata:
+      m_Items: []
+  - m_Id: 195575837
+    m_Localized: "La ranura se ha recuperado desde una copia de seguridad v\xE1lida."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 195575838
+    m_Localized: "D\xEDa {day} \xB7 {cash} \xB7 {updated}{recoverySuffix}"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 195575839
+    m_Localized: Se ha restaurado una copia de seguridad al revisar la ranura.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 195575840
+    m_Localized: "La eliminaci\xF3n requiere confirmaci\xF3n."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 195575841
+    m_Localized: Nueva partida creada.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 195575842
+    m_Localized: "La ranura ya estaba vac\xEDa."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 195575843
+    m_Localized: Ranura eliminada.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 195575844
+    m_Localized: Almacenamiento no disponible
+    m_Metadata:
+      m_Items: []
+  - m_Id: 195575845
+    m_Localized: CARTRIDGE & CLOUD
+    m_Metadata:
+      m_Items: []
+  - m_Id: 195575846
+    m_Localized: Esquema de guardado no compatible
+    m_Metadata:
+      m_Items: []
+  references:
+    version: 2
+    RefIds: []

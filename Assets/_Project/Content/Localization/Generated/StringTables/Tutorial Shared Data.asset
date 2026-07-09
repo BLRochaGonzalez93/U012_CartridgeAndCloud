@@ -1,0 +1,280 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b11a58205ec3474ca216360e9fa74a8, type: 3}
+  m_Name: Tutorial Shared Data
+  m_EditorClassIdentifier: Unity.Localization::UnityEngine.Localization.Tables.SharedTableData
+  m_TableCollectionName: Tutorial
+  m_TableCollectionNameGuidString: a575b2e493c4ae04a85932b115bb8344
+  m_Entries:
+  - m_Id: 187187200
+    m_Key: tutorial.assign_product.body
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770112
+    m_Key: tutorial.assign_product.title
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770113
+    m_Key: tutorial.buy_checkout.body
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770114
+    m_Key: tutorial.buy_checkout.title
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770115
+    m_Key: tutorial.buy_display.body
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770116
+    m_Key: tutorial.buy_display.title
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770117
+    m_Key: tutorial.close_day.body
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770118
+    m_Key: tutorial.close_day.title
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770119
+    m_Key: tutorial.loop_complete.body
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770120
+    m_Key: tutorial.loop_complete.title
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770121
+    m_Key: tutorial.open_store.body
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770122
+    m_Key: tutorial.open_store.title
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770123
+    m_Key: tutorial.order_merchandise.body
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770124
+    m_Key: tutorial.order_merchandise.title
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770125
+    m_Key: tutorial.place_checkout.body
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770126
+    m_Key: tutorial.place_checkout.title
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770127
+    m_Key: tutorial.place_display.body
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770128
+    m_Key: tutorial.place_display.title
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770129
+    m_Key: tutorial.receive_checkout.body
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770130
+    m_Key: tutorial.receive_checkout.title
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770131
+    m_Key: tutorial.receive_display.body
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770132
+    m_Key: tutorial.receive_display.title
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770133
+    m_Key: tutorial.receive_merchandise.body
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770134
+    m_Key: tutorial.receive_merchandise.title
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770135
+    m_Key: tutorial.restock_display.body
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770136
+    m_Key: tutorial.restock_display.title
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770137
+    m_Key: tutorial.serve_customer.body
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770138
+    m_Key: tutorial.serve_customer.title
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770139
+    m_Key: tutorial.wait_autosave.body
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770140
+    m_Key: tutorial.wait_autosave.title
+    m_Metadata:
+      m_Items: []
+  - m_Id: 16629168095232
+    m_Key: tutorial.runtime.autosave_complete.action
+    m_Metadata:
+      m_Items: []
+  - m_Id: 16629176483840
+    m_Key: tutorial.runtime.autosave_complete.body
+    m_Metadata:
+      m_Items: []
+  - m_Id: 16629176483841
+    m_Key: tutorial.runtime.autosave_complete.title
+    m_Metadata:
+      m_Items: []
+  - m_Id: 16629176483842
+    m_Key: tutorial.runtime.customers_shopping.action
+    m_Metadata:
+      m_Items: []
+  - m_Id: 16629176483843
+    m_Key: tutorial.runtime.customers_shopping.body
+    m_Metadata:
+      m_Items: []
+  - m_Id: 16629176483844
+    m_Key: tutorial.runtime.customers_shopping.title
+    m_Metadata:
+      m_Items: []
+  - m_Id: 16629176483845
+    m_Key: tutorial.runtime.daily_results.action
+    m_Metadata:
+      m_Items: []
+  - m_Id: 16629176483846
+    m_Key: tutorial.runtime.daily_results.body
+    m_Metadata:
+      m_Items: []
+  - m_Id: 16629176483847
+    m_Key: tutorial.runtime.daily_results.title
+    m_Metadata:
+      m_Items: []
+  - m_Id: 16629176483848
+    m_Key: tutorial.runtime.day_cycle.action
+    m_Metadata:
+      m_Items: []
+  - m_Id: 16629176483849
+    m_Key: tutorial.runtime.day_cycle.body
+    m_Metadata:
+      m_Items: []
+  - m_Id: 16629176483850
+    m_Key: tutorial.runtime.day_cycle.title
+    m_Metadata:
+      m_Items: []
+  - m_Id: 16629176483851
+    m_Key: tutorial.runtime.displays.action
+    m_Metadata:
+      m_Items: []
+  - m_Id: 16629176483852
+    m_Key: tutorial.runtime.displays.body
+    m_Metadata:
+      m_Items: []
+  - m_Id: 16629176483853
+    m_Key: tutorial.runtime.displays.title
+    m_Metadata:
+      m_Items: []
+  - m_Id: 16629176483854
+    m_Key: tutorial.runtime.inventory.action
+    m_Metadata:
+      m_Items: []
+  - m_Id: 16629176483855
+    m_Key: tutorial.runtime.inventory.body
+    m_Metadata:
+      m_Items: []
+  - m_Id: 16629176483856
+    m_Key: tutorial.runtime.inventory.title
+    m_Metadata:
+      m_Items: []
+  - m_Id: 16629176483857
+    m_Key: tutorial.runtime.movement_camera.action
+    m_Metadata:
+      m_Items: []
+  - m_Id: 16629176483858
+    m_Key: tutorial.runtime.movement_camera.body
+    m_Metadata:
+      m_Items: []
+  - m_Id: 16629176483859
+    m_Key: tutorial.runtime.movement_camera.title
+    m_Metadata:
+      m_Items: []
+  - m_Id: 16629176483860
+    m_Key: tutorial.runtime.open_management.action
+    m_Metadata:
+      m_Items: []
+  - m_Id: 16629176483861
+    m_Key: tutorial.runtime.open_management.body
+    m_Metadata:
+      m_Items: []
+  - m_Id: 16629176483862
+    m_Key: tutorial.runtime.open_management.title
+    m_Metadata:
+      m_Items: []
+  - m_Id: 16629176483863
+    m_Key: tutorial.runtime.queue_checkout.action
+    m_Metadata:
+      m_Items: []
+  - m_Id: 16629176483864
+    m_Key: tutorial.runtime.queue_checkout.body
+    m_Metadata:
+      m_Items: []
+  - m_Id: 16629176483865
+    m_Key: tutorial.runtime.queue_checkout.title
+    m_Metadata:
+      m_Items: []
+  - m_Id: 16629176483866
+    m_Key: tutorial.runtime.suppliers.action
+    m_Metadata:
+      m_Items: []
+  - m_Id: 16629176483867
+    m_Key: tutorial.runtime.suppliers.body
+    m_Metadata:
+      m_Items: []
+  - m_Id: 16629176483868
+    m_Key: tutorial.runtime.suppliers.title
+    m_Metadata:
+      m_Items: []
+  - m_Id: 16629176483869
+    m_Key: tutorial.runtime.welcome.action
+    m_Metadata:
+      m_Items: []
+  - m_Id: 16629176483870
+    m_Key: tutorial.runtime.welcome.body
+    m_Metadata:
+      m_Items: []
+  - m_Id: 16629176483871
+    m_Key: tutorial.runtime.welcome.title
+    m_Metadata:
+      m_Items: []
+  m_Metadata:
+    m_Items: []
+  m_KeyGenerator:
+    rid: 7413719049838788638
+  references:
+    version: 2
+    RefIds:
+    - rid: 7413719049838788638
+      type: {class: DistributedUIDGenerator, ns: UnityEngine.Localization.Tables, asm: Unity.Localization}
+      data:
+        m_CustomEpoch: 1783600781895

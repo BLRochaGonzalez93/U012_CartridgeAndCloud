@@ -2,6 +2,7 @@ using System;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using VRMGames.CartridgeAndCloud.Infrastructure.Localization;
 
 namespace VRMGames.CartridgeAndCloud.Infrastructure.UIUX
 {
@@ -93,6 +94,7 @@ namespace VRMGames.CartridgeAndCloud.Infrastructure.UIUX
             text.horizontalOverflow = HorizontalWrapMode.Wrap;
             text.verticalOverflow = VerticalWrapMode.Overflow;
             text.raycastTarget = false;
+            gameObject.AddComponent<LocalizedTextWatcher>();
             return text;
         }
 

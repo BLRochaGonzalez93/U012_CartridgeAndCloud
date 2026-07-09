@@ -1,0 +1,4258 @@
+{
+  "schemaVersion": 1,
+  "documentId": "CC_LOC_CATALOG_PHASE5_ES_EN",
+  "entries": [
+    {
+      "table": "Content",
+      "key": "content.furniture.backroom_storage.name",
+      "enUS": "Backroom Storage",
+      "esES": "Almacenamiento de almacén",
+      "status": "PROPOSED",
+      "sourceAliases": [
+        "backroom-storage"
+      ]
+    },
+    {
+      "table": "Content",
+      "key": "content.furniture.central_shelf.name",
+      "enUS": "Central Shelf",
+      "esES": "Estantería central",
+      "status": "PROPOSED",
+      "sourceAliases": [
+        "central-shelf"
+      ]
+    },
+    {
+      "table": "Content",
+      "key": "content.furniture.checkout_counter.name",
+      "enUS": "Checkout Counter",
+      "esES": "Mostrador de caja",
+      "status": "PROPOSED",
+      "sourceAliases": [
+        "checkout-counter"
+      ]
+    },
+    {
+      "table": "Content",
+      "key": "content.furniture.decorative_plant.name",
+      "enUS": "Decorative Plant",
+      "esES": "Planta decorativa",
+      "status": "PROPOSED",
+      "sourceAliases": [
+        "decoration-plant"
+      ]
+    },
+    {
+      "table": "Content",
+      "key": "content.furniture.featured_display.name",
+      "enUS": "Featured Display",
+      "esES": "Expositor destacado",
+      "status": "PROPOSED",
+      "sourceAliases": [
+        "featured-display"
+      ]
+    },
+    {
+      "table": "Content",
+      "key": "content.furniture.low_display.name",
+      "enUS": "Low Display",
+      "esES": "Expositor bajo",
+      "status": "PROPOSED",
+      "sourceAliases": [
+        "low-display"
+      ]
+    },
+    {
+      "table": "Content",
+      "key": "content.furniture.receiving_crate.name",
+      "enUS": "Receiving Crate",
+      "esES": "Caja de recepción",
+      "status": "PROPOSED",
+      "sourceAliases": [
+        "receiving-crate"
+      ]
+    },
+    {
+      "table": "Content",
+      "key": "content.furniture.wall_shelf.name",
+      "enUS": "Wall Shelf",
+      "esES": "Estantería de pared",
+      "status": "PROPOSED",
+      "sourceAliases": [
+        "wall-shelf"
+      ]
+    },
+    {
+      "table": "Content",
+      "key": "content.product.cloud_runner_case.name",
+      "enUS": "Cloud Runner Case",
+      "esES": "Funda Cloud Runner",
+      "status": "PROPOSED",
+      "sourceAliases": [
+        "case-cloud-runner"
+      ]
+    },
+    {
+      "table": "Content",
+      "key": "content.product.memory_core_accessory.name",
+      "enUS": "Memory Core Accessory",
+      "esES": "Accesorio Memory Core",
+      "status": "PROPOSED",
+      "sourceAliases": [
+        "accessory-memory-core"
+      ]
+    },
+    {
+      "table": "Content",
+      "key": "content.product.neon_drift.name",
+      "enUS": "Neon Drift",
+      "esES": "Neon Drift",
+      "status": "PROPOSED",
+      "sourceAliases": [
+        "game-neon-drift"
+      ]
+    },
+    {
+      "table": "Content",
+      "key": "content.product.orbit_pad_controller.name",
+      "enUS": "Orbit Pad Controller",
+      "esES": "Mando Orbit Pad",
+      "status": "PROPOSED",
+      "sourceAliases": [
+        "controller-orbit-pad"
+      ]
+    },
+    {
+      "table": "Content",
+      "key": "content.product.signal_pro_headset.name",
+      "enUS": "Signal Pro Headset",
+      "esES": "Auriculares Signal Pro",
+      "status": "PROPOSED",
+      "sourceAliases": [
+        "headset-signal-pro"
+      ]
+    },
+    {
+      "table": "Content",
+      "key": "content.product.vertex_one_console.name",
+      "enUS": "Vertex One Console",
+      "esES": "Consola Vertex One",
+      "status": "PROPOSED",
+      "sourceAliases": [
+        "console-vertex-one"
+      ]
+    },
+    {
+      "table": "Content",
+      "key": "customer.casual_browser.name",
+      "enUS": "Casual Browser",
+      "esES": "Visitante ocasional",
+      "status": "PROPOSED_DEFERRED_UNLESS_VISIBLE"
+    },
+    {
+      "table": "Content",
+      "key": "customer.collector.name",
+      "enUS": "Collector",
+      "esES": "Coleccionista",
+      "status": "PROPOSED_DEFERRED_UNLESS_VISIBLE"
+    },
+    {
+      "table": "Content",
+      "key": "customer.focused_buyer.name",
+      "enUS": "Focused Buyer",
+      "esES": "Comprador decidido",
+      "status": "PROPOSED_DEFERRED_UNLESS_VISIBLE"
+    },
+    {
+      "table": "Content",
+      "key": "customer.impatient_visitor.name",
+      "enUS": "Impatient Visitor",
+      "esES": "Visitante impaciente",
+      "status": "PROPOSED_DEFERRED_UNLESS_VISIBLE"
+    },
+    {
+      "table": "Content",
+      "key": "display.countertop_rack.name",
+      "enUS": "Countertop Rack",
+      "esES": "Expositor de mostrador",
+      "status": "PROPOSED_DEFERRED_UNLESS_VISIBLE"
+    },
+    {
+      "table": "Content",
+      "key": "display.floor_stand.name",
+      "enUS": "Floor Stand",
+      "esES": "Expositor de suelo",
+      "status": "PROPOSED_DEFERRED_UNLESS_VISIBLE"
+    },
+    {
+      "table": "Content",
+      "key": "display.single_shelf.name",
+      "enUS": "Single Shelf",
+      "esES": "Estantería individual",
+      "status": "PROPOSED_DEFERRED_UNLESS_VISIBLE"
+    },
+    {
+      "table": "Content",
+      "key": "products.cartridge_cloud_racers.name",
+      "enUS": "Cloud Racers",
+      "esES": "Cloud Racers",
+      "status": "PROPOSED_DEFERRED_UNLESS_VISIBLE"
+    },
+    {
+      "table": "Content",
+      "key": "products.cartridge_pixel_quest.name",
+      "enUS": "Pixel Quest",
+      "esES": "Pixel Quest",
+      "status": "PROPOSED_DEFERRED_UNLESS_VISIBLE"
+    },
+    {
+      "table": "Content",
+      "key": "products.collectible_cloud_hero.name",
+      "enUS": "Cloud Hero Collectible",
+      "esES": "Figura coleccionable Cloud Hero",
+      "status": "PROPOSED_DEFERRED_UNLESS_VISIBLE"
+    },
+    {
+      "table": "Content",
+      "key": "products.console_nebula_8.name",
+      "enUS": "Nebula 8 Console",
+      "esES": "Consola Nebula 8",
+      "status": "PROPOSED_DEFERRED_UNLESS_VISIBLE"
+    },
+    {
+      "table": "Content",
+      "key": "products.controller_orbit_pad.name",
+      "enUS": "Orbit Pad Controller",
+      "esES": "Mando Orbit Pad",
+      "status": "PROPOSED_DEFERRED_UNLESS_VISIBLE"
+    },
+    {
+      "table": "Content",
+      "key": "products.memory_card_64.name",
+      "enUS": "Memory Card 64",
+      "esES": "Tarjeta de memoria 64",
+      "status": "PROPOSED_DEFERRED_UNLESS_VISIBLE"
+    },
+    {
+      "table": "Content",
+      "key": "suppliers.nebula_distribution.name",
+      "enUS": "Nebula Distribution",
+      "esES": "Nebula Distribution",
+      "status": "PROPOSED_DEFERRED_UNLESS_VISIBLE"
+    },
+    {
+      "table": "Content",
+      "key": "suppliers.pixel_parcel.name",
+      "enUS": "Pixel Parcel",
+      "esES": "Pixel Parcel",
+      "status": "PROPOSED_DEFERRED_UNLESS_VISIBLE"
+    },
+    {
+      "table": "Content",
+      "key": "technical.checkout.main",
+      "enUS": "Main Checkout",
+      "esES": "Caja principal",
+      "status": "PROPOSED",
+      "sourceAliases": [
+        "checkout-station-main",
+        "checkout-station-technical"
+      ]
+    },
+    {
+      "table": "Content",
+      "key": "technical.inventory.backroom",
+      "enUS": "Backroom Inventory",
+      "esES": "Inventario del almacén",
+      "status": "PROPOSED",
+      "sourceAliases": [
+        "backroom-inventory"
+      ]
+    },
+    {
+      "table": "Content",
+      "key": "technical.inventory.store",
+      "enUS": "Store Inventory",
+      "esES": "Inventario de la tienda",
+      "status": "PROPOSED",
+      "sourceAliases": [
+        "store-inventory"
+      ]
+    },
+    {
+      "table": "Errors",
+      "key": "error.assignment.active_reservations",
+      "enUS": "Resolve active reservations before assigning a product.",
+      "esES": "Resuelve las reservas activas antes de asignar un producto.",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "Errors",
+      "key": "error.assignment.clear_first",
+      "enUS": "Clear the current product assignment before assigning a different product.",
+      "esES": "Quita la asignación actual antes de asignar otro producto.",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "Errors",
+      "key": "error.assignment.none",
+      "enUS": "The display has no product assignment.",
+      "esES": "El expositor no tiene ningún producto asignado.",
+      "status": "PROPOSED",
+      "sourceAliases": [
+        "Display has no product assignment."
+      ]
+    },
+    {
+      "table": "Errors",
+      "key": "error.assignment.reservations",
+      "enUS": "Resolve active reservations before clearing the assignment.",
+      "esES": "Resuelve las reservas activas antes de quitar la asignación.",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "Errors",
+      "key": "error.assignment.same_product",
+      "enUS": "This product is already assigned.",
+      "esES": "Este producto ya está asignado.",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "Errors",
+      "key": "error.assignment.stock_visible",
+      "enUS": "Return all visible stock before clearing the assignment.",
+      "esES": "Devuelve todo el stock expuesto antes de quitar la asignación.",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "Errors",
+      "key": "error.autosave.day_not_closed",
+      "enUS": "The store day is not closed at 24:00.",
+      "esES": "La jornada no está cerrada a las 24:00.",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "Errors",
+      "key": "error.autosave.running",
+      "enUS": "Autosave is already running.",
+      "esES": "Ya hay un guardado automático en curso.",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "Errors",
+      "key": "error.backroom.capacity",
+      "enUS": "The backroom inventory cannot accept the returned stock.",
+      "esES": "El inventario del almacén no puede aceptar el stock devuelto.",
+      "status": "PROPOSED",
+      "sourceAliases": [
+        "Backroom inventory cannot accept the returned stock.",
+        "Backroom inventory cannot accept the display stock."
+      ]
+    },
+    {
+      "table": "Errors",
+      "key": "error.catalog.furniture_definition_missing",
+      "enUS": "Furniture definition is missing.",
+      "esES": "Falta la definición del mueble.",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "Errors",
+      "key": "error.catalog.furniture_missing",
+      "enUS": "Furniture definition was not found.",
+      "esES": "No se ha encontrado la definición del mueble.",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "Errors",
+      "key": "error.catalog.product_missing",
+      "enUS": "Product definition was not found.",
+      "esES": "No se ha encontrado la definición del producto.",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "Errors",
+      "key": "error.checkout.busy",
+      "enUS": "Checkout is still processing.",
+      "esES": "La caja aún está procesando una venta.",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "Errors",
+      "key": "error.customer.checkout_busy",
+      "enUS": "Checkout is already processing another customer.",
+      "esES": "La caja ya está procesando a otro cliente.",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "Errors",
+      "key": "error.customer.checkout_required",
+      "enUS": "Place a checkout counter first.",
+      "esES": "Coloca primero un mostrador de caja.",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "Errors",
+      "key": "error.customer.max_capacity",
+      "enUS": "Maximum active customer capacity reached.",
+      "esES": "Se ha alcanzado el máximo de clientes activos.",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "Errors",
+      "key": "error.customer.no_stocked_display",
+      "enUS": "No stocked display is available.",
+      "esES": "No hay ningún expositor con stock disponible.",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "Errors",
+      "key": "error.customer.open_store",
+      "enUS": "Open the store before serving customers.",
+      "esES": "Abre la tienda antes de atender clientes.",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "Errors",
+      "key": "error.day.transition",
+      "enUS": "The day cannot transition yet: {reason}",
+      "esES": "La jornada aún no puede cambiar: {reason}",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "Errors",
+      "key": "error.delivery.cash_uncovered",
+      "enUS": "Reserved funds are no longer covered by cash.",
+      "esES": "La caja ya no cubre los fondos reservados.",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "Errors",
+      "key": "error.delivery.none_pending",
+      "enUS": "There are no pending deliveries to process.",
+      "esES": "No hay entregas pendientes que procesar.",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "Errors",
+      "key": "error.delivery.order_missing",
+      "enUS": "A delivery order was not found.",
+      "esES": "No se ha encontrado uno de los pedidos de la entrega.",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "Errors",
+      "key": "error.delivery.order_reserved_missing",
+      "enUS": "A reserved order was not found.",
+      "esES": "No se ha encontrado uno de los pedidos reservados.",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "Errors",
+      "key": "error.delivery.order_state",
+      "enUS": "Every order must remain in transit until physical receipt.",
+      "esES": "Todos los pedidos deben permanecer en tránsito hasta su recepción física.",
+      "status": "PROPOSED",
+      "sourceAliases": [
+        "Every run order must remain in transit until physical receipt."
+      ]
+    },
+    {
+      "table": "Errors",
+      "key": "error.delivery.reserved_required",
+      "enUS": "At least one reserved order is required.",
+      "esES": "Se necesita al menos un pedido reservado.",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "Errors",
+      "key": "error.delivery.run_id_required",
+      "enUS": "A delivery run ID is required.",
+      "esES": "Se necesita un identificador de entrega.",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "Errors",
+      "key": "error.delivery.run_missing",
+      "enUS": "Delivery run was not found.",
+      "esES": "No se ha encontrado la entrega.",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "Errors",
+      "key": "error.delivery.state_invalid",
+      "enUS": "Every delivery must be reserved and not already in transit.",
+      "esES": "Todas las entregas deben estar reservadas y no encontrarse ya en tránsito.",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "Errors",
+      "key": "error.display.quantity_missing",
+      "enUS": "The display does not contain the requested quantity.",
+      "esES": "El expositor no contiene la cantidad solicitada.",
+      "status": "PROPOSED",
+      "sourceAliases": [
+        "Display does not contain the requested quantity."
+      ]
+    },
+    {
+      "table": "Errors",
+      "key": "error.display.reserved_stock",
+      "enUS": "Active customer reservations protect this display stock.",
+      "esES": "Las reservas activas de clientes protegen este stock expuesto.",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "Errors",
+      "key": "error.fixture.not_display",
+      "enUS": "This fixture cannot display products.",
+      "esES": "Este mueble no puede exponer productos.",
+      "status": "PROPOSED",
+      "sourceAliases": [
+        "This fixture cannot store display products."
+      ]
+    },
+    {
+      "table": "Errors",
+      "key": "error.fixture.not_found",
+      "enUS": "Placed fixture was not found.",
+      "esES": "No se ha encontrado el mueble colocado.",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "Errors",
+      "key": "error.order.cancel_state",
+      "enUS": "Only pending deliveries can be cancelled.",
+      "esES": "Solo se pueden cancelar entregas pendientes.",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "Errors",
+      "key": "error.order.cash_insufficient",
+      "enUS": "Not enough available cash to reserve this order.",
+      "esES": "No hay suficiente caja disponible para reservar este pedido.",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "Errors",
+      "key": "error.order.not_found",
+      "enUS": "Order was not found.",
+      "esES": "No se ha encontrado el pedido.",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "Errors",
+      "key": "error.order.quantity_positive",
+      "enUS": "Order quantity must be positive.",
+      "esES": "La cantidad del pedido debe ser positiva.",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "Errors",
+      "key": "error.placement.instance_exists",
+      "enUS": "Placement instance already exists.",
+      "esES": "La instancia de colocación ya existe.",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "Errors",
+      "key": "error.placement.receive_first",
+      "enUS": "Receive this furniture before placing it.",
+      "esES": "Recibe este mueble antes de colocarlo.",
+      "status": "PROPOSED",
+      "sourceAliases": [
+        "Receive the furniture before placing it."
+      ]
+    },
+    {
+      "table": "Errors",
+      "key": "error.restock.assign_first",
+      "enUS": "Assign a product before restocking.",
+      "esES": "Asigna un producto antes de reponer.",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "Errors",
+      "key": "error.restock.display_missing",
+      "enUS": "Product display definition is missing.",
+      "esES": "Falta la definición del expositor.",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "Errors",
+      "key": "error.restock.full",
+      "enUS": "Display is already full.",
+      "esES": "El expositor ya está lleno.",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "Errors",
+      "key": "error.restock.no_backroom",
+      "enUS": "No received stock is available in the backroom.",
+      "esES": "No hay stock recibido disponible en el almacén.",
+      "status": "PROPOSED",
+      "sourceAliases": [
+        "No received backroom stock is available."
+      ]
+    },
+    {
+      "table": "Errors",
+      "key": "error.restock.quantity_positive",
+      "enUS": "Restock quantity must be positive.",
+      "esES": "La cantidad a reponer debe ser positiva.",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "Errors",
+      "key": "error.return.quantity_positive",
+      "enUS": "Return quantity must be positive.",
+      "esES": "La cantidad a devolver debe ser positiva.",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "Errors",
+      "key": "error.save.active_slot_required",
+      "enUS": "An active save slot is required.",
+      "esES": "Se requiere una ranura de guardado activa.",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "Errors",
+      "key": "error.save.checkout_busy",
+      "enUS": "Wait for checkout processing to finish.",
+      "esES": "Espera a que termine el procesamiento en caja.",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "Errors",
+      "key": "error.save.customers_active",
+      "enUS": "Wait for active customers to leave.",
+      "esES": "Espera a que salgan los clientes activos.",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "Errors",
+      "key": "error.save.no_session",
+      "enUS": "No active session can be saved.",
+      "esES": "No hay ninguna sesión activa que guardar.",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "Errors",
+      "key": "error.save.pause_required",
+      "enUS": "Open the pause menu before saving.",
+      "esES": "Abre el menú de pausa antes de guardar.",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "Errors",
+      "key": "error.save.persistence_initializing",
+      "enUS": "Store persistence is still initializing.",
+      "esES": "La persistencia de la tienda aún se está inicializando.",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "Errors",
+      "key": "error.save.queue_active",
+      "enUS": "Wait for the checkout queue to clear.",
+      "esES": "Espera a que se vacíe la cola de caja.",
+      "status": "PROPOSED",
+      "sourceAliases": [
+        "Wait for the checkout queue to drain."
+      ]
+    },
+    {
+      "table": "Errors",
+      "key": "error.save.reservations_active",
+      "enUS": "Resolve active product reservations before saving.",
+      "esES": "Resuelve las reservas activas de productos antes de guardar.",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "Errors",
+      "key": "error.save.running",
+      "enUS": "A manual save is already running.",
+      "esES": "Ya hay un guardado manual en curso.",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "Errors",
+      "key": "error.save.state_not_ready",
+      "enUS": "Store state is not ready to save.",
+      "esES": "El estado de la tienda aún no está listo para guardarse.",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "Errors",
+      "key": "error.save.unsafe_state",
+      "enUS": "Manual saving is available only before opening, after closing, or on results screens.",
+      "esES": "El guardado manual solo está disponible antes de abrir, después de cerrar o en las pantallas de resultados.",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "Errors",
+      "key": "error.session.no_store",
+      "enUS": "No active store session exists.",
+      "esES": "No hay ninguna sesión activa de la tienda.",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "Errors",
+      "key": "error.session.none",
+      "enUS": "No active session.",
+      "esES": "No hay ninguna sesión activa.",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "Errors",
+      "key": "error.store.initializing",
+      "enUS": "Store operations are still initializing.",
+      "esES": "Las operaciones de la tienda aún se están inicializando.",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "Errors",
+      "key": "error.store.invalid_transition",
+      "enUS": "Cannot transition from {currentState} to {targetState}.",
+      "esES": "No se puede pasar de {currentState} a {targetState}.",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "Errors",
+      "key": "error.store.open_hours",
+      "enUS": "The store can only open between 08:00 and 22:00. Current time: {time}.",
+      "esES": "La tienda solo puede abrir entre las 08:00 y las 22:00. Hora actual: {time}.",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "Errors",
+      "key": "error.store.runtime_initializing",
+      "enUS": "The store runtime is still initializing. Try opening again in a moment.",
+      "esES": "La tienda aún se está inicializando. Inténtalo de nuevo dentro de unos instantes.",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "Errors",
+      "key": "error.store.session_mismatch",
+      "enUS": "Store operations do not match the active session.",
+      "esES": "Las operaciones de la tienda no coinciden con la sesión activa.",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "Errors",
+      "key": "error.weekly.accept_required",
+      "enUS": "The weekly summary must be accepted before continuing.",
+      "esES": "Debes aceptar el resumen semanal antes de continuar.",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "Errors",
+      "key": "error.weekly.day_not_closed",
+      "enUS": "The current day must be closed at 24:00.",
+      "esES": "La jornada actual debe estar cerrada a las 24:00.",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "Errors",
+      "key": "error.weekly.not_ready",
+      "enUS": "The weekly summary is not ready to acknowledge.",
+      "esES": "El resumen semanal aún no está listo para aceptarse.",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "Errors",
+      "key": "status.autosave.already_done",
+      "enUS": "This day has already been autosaved.",
+      "esES": "Esta jornada ya se ha guardado automáticamente.",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "Errors",
+      "key": "status.customer.purchase_ready",
+      "enUS": "Customer purchase is ready.",
+      "esES": "La compra del cliente está lista.",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "Errors",
+      "key": "status.delivery.already_received",
+      "enUS": "This delivery was already received.",
+      "esES": "Esta entrega ya se había recibido.",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "Errors",
+      "key": "status.order.cancelled",
+      "enUS": "Order cancelled and reserved funds released.",
+      "esES": "Pedido cancelado y fondos reservados liberados.",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "Errors",
+      "key": "status.return.empty",
+      "enUS": "The display is already empty and keeps its assignment.",
+      "esES": "El expositor ya está vacío y mantiene su asignación.",
+      "status": "PROPOSED",
+      "sourceAliases": [
+        "Display is already empty and keeps its assignment."
+      ]
+    },
+    {
+      "table": "Errors",
+      "key": "status.save.safe",
+      "enUS": "The current state can be saved safely.",
+      "esES": "El estado actual se puede guardar de forma segura.",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "Feedback",
+      "key": "feedback.autosave.success",
+      "enUS": "Autosave completed.",
+      "esES": "Guardado automático completado.",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "Feedback",
+      "key": "feedback.checkout.operational",
+      "enUS": "Checkout is placed, active and reachable.",
+      "esES": "La caja está colocada, activa y disponible.",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "Feedback",
+      "key": "feedback.customer.admitted_single",
+      "enUS": "Customer admitted.",
+      "esES": "Cliente admitido.",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "Feedback",
+      "key": "feedback.customer.evaluating",
+      "enUS": "Customer is evaluating a product.",
+      "esES": "El cliente está evaluando un producto.",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "Feedback",
+      "key": "feedback.customer.no_products",
+      "enUS": "Customer found no visible products and is leaving without a purchase.",
+      "esES": "El cliente no ha encontrado productos expuestos y se marcha sin comprar.",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "Feedback",
+      "key": "feedback.customer.queue_joined",
+      "enUS": "Customer joined the checkout queue.",
+      "esES": "El cliente se ha unido a la cola de caja.",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "Feedback",
+      "key": "feedback.customer.reserved",
+      "enUS": "Product reserved for customer cart.",
+      "esES": "Producto reservado para el carrito del cliente.",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "Feedback",
+      "key": "feedback.customer.satisfied",
+      "enUS": "Customer satisfied.",
+      "esES": "Cliente satisfecho.",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "Feedback",
+      "key": "feedback.customer.visit_recorded",
+      "enUS": "Customer visit recorded.",
+      "esES": "Visita de cliente registrada.",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "Feedback",
+      "key": "feedback.delivery.received",
+      "enUS": "Received delivery paid from reserved funds.",
+      "esES": "Entrega recibida y pagada con los fondos reservados.",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "Feedback",
+      "key": "feedback.delivery.run_consolidated",
+      "enUS": "A consolidated delivery run is on its way.",
+      "esES": "Una entrega conjunta está en camino.",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "Feedback",
+      "key": "feedback.delivery.run_single",
+      "enUS": "A delivery run is on its way.",
+      "esES": "Una entrega está en camino.",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "Feedback",
+      "key": "feedback.door.closed",
+      "enUS": "Automatic door closed.",
+      "esES": "Puerta automática cerrada.",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "Feedback",
+      "key": "feedback.door.opened",
+      "enUS": "Automatic door opened.",
+      "esES": "Puerta automática abierta.",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "Feedback",
+      "key": "feedback.furniture.placed",
+      "enUS": "{itemName} placed.",
+      "esES": "{itemName} colocado.",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "Feedback",
+      "key": "feedback.furniture.removed_returned",
+      "enUS": "Furniture removed and returned.",
+      "esES": "Mueble retirado y devuelto.",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "Feedback",
+      "key": "feedback.furniture.warehouse",
+      "enUS": "{itemName} returned to the warehouse.",
+      "esES": "{itemName} devuelto al almacén.",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "Feedback",
+      "key": "feedback.manual_save.success",
+      "enUS": "Manual save completed.",
+      "esES": "Guardado manual completado.",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "Feedback",
+      "key": "feedback.order.placed",
+      "enUS": "Order {orderId} placed.",
+      "esES": "Pedido {orderId} realizado.",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "Feedback",
+      "key": "feedback.placement.blocked",
+      "enUS": "Placement blocked: {reason}",
+      "esES": "Colocación bloqueada: {reason}",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "Feedback",
+      "key": "feedback.placement.confirmed",
+      "enUS": "Placement confirmed.",
+      "esES": "Colocación confirmada.",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "Feedback",
+      "key": "feedback.placement.removed",
+      "enUS": "Furniture removed.",
+      "esES": "Mueble retirado.",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "Feedback",
+      "key": "feedback.placement.selected",
+      "enUS": "{itemName} selected.",
+      "esES": "{itemName} seleccionado.",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "Feedback",
+      "key": "feedback.placement.valid",
+      "enUS": "Placement valid.",
+      "esES": "Colocación válida.",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "Feedback",
+      "key": "feedback.product.assigned",
+      "enUS": "Product assigned.",
+      "esES": "Producto asignado.",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "Feedback",
+      "key": "feedback.product.assignment_cleared",
+      "enUS": "Product assignment cleared.",
+      "esES": "Asignación de producto eliminada.",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "Feedback",
+      "key": "feedback.product.restocked",
+      "enUS": "Restocked {quantity} units.",
+      "esES": "Se han repuesto {quantity} unidades.",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "Feedback",
+      "key": "feedback.product.returned",
+      "enUS": "Returned {quantity} units to the backroom.",
+      "esES": "Se han devuelto {quantity} unidades al almacén.",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "Feedback",
+      "key": "feedback.product.returned_cleared",
+      "enUS": "Returned {quantity} units and cleared the assignment.",
+      "esES": "Se han devuelto {quantity} unidades y se ha eliminado la asignación.",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "Feedback",
+      "key": "feedback.sale.completed",
+      "enUS": "Sale completed.",
+      "esES": "Venta completada.",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "Feedback",
+      "key": "feedback.sale.product_sold",
+      "enUS": "{productName} sold.",
+      "esES": "{productName} vendido.",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "Feedback",
+      "key": "feedback.store.closed_midnight",
+      "enUS": "Day closed at 24:00.",
+      "esES": "Jornada cerrada a las 24:00.",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "Feedback",
+      "key": "feedback.store.closed_reopen",
+      "enUS": "Store closed. It may reopen before 22:00.",
+      "esES": "Tienda cerrada. Puede volver a abrir antes de las 22:00.",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "Feedback",
+      "key": "feedback.store.closing",
+      "enUS": "Store is closing.",
+      "esES": "La tienda está cerrando.",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "Feedback",
+      "key": "status.customer.purchase_completed",
+      "enUS": "Customer purchase completed.",
+      "esES": "Compra del cliente completada.",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "Feedback",
+      "key": "status.furniture.can_remove",
+      "enUS": "Furniture can be removed.",
+      "esES": "El mueble se puede retirar.",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "Formats",
+      "key": "format.date_time.slot",
+      "enUS": "{date} {time}",
+      "esES": "{date} {time}",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "Formats",
+      "key": "format.duration.seconds",
+      "enUS": "{count} s",
+      "esES": "{count} s",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "Formats",
+      "key": "format.money.default",
+      "enUS": "{amount} {currencySymbol}",
+      "esES": "{amount} {currencySymbol}",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "Formats",
+      "key": "format.percent.default",
+      "enUS": "{value}%",
+      "esES": "{value} %",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "Formats",
+      "key": "format.quantity.customers",
+      "enUS": "{count} customer(s)",
+      "esES": "{count} cliente(s)",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "Formats",
+      "key": "format.quantity.orders",
+      "enUS": "{count} order(s)",
+      "esES": "{count} pedido(s)",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "Formats",
+      "key": "format.quantity.units",
+      "enUS": "{count} unit(s)",
+      "esES": "{count} unidad(es)",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "Tutorial",
+      "key": "tutorial.assign_product.body",
+      "enUS": "Select a placed display and assign the received product.",
+      "esES": "Selecciona un expositor colocado y asigna el producto recibido.",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "Tutorial",
+      "key": "tutorial.assign_product.title",
+      "enUS": "Assign a Product",
+      "esES": "Asignar un producto",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "Tutorial",
+      "key": "tutorial.buy_checkout.body",
+      "enUS": "Open the Shop catalog and order one checkout counter.",
+      "esES": "Abre el catálogo de la tienda y pide un mostrador de caja.",
+      "status": "PROPOSED",
+      "sourceAliases": [
+        "Open Shop Catalog and order one checkout counter."
+      ]
+    },
+    {
+      "table": "Tutorial",
+      "key": "tutorial.buy_checkout.title",
+      "enUS": "Buy a Checkout Counter",
+      "esES": "Comprar un mostrador de caja",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "Tutorial",
+      "key": "tutorial.buy_display.body",
+      "enUS": "Order a central shelf, wall shelf, low display, or featured display.",
+      "esES": "Pide una estantería central, una estantería de pared, un expositor bajo o un expositor destacado.",
+      "status": "PROPOSED",
+      "sourceAliases": [
+        "Order a central shelf, wall shelf, low display or featured display."
+      ]
+    },
+    {
+      "table": "Tutorial",
+      "key": "tutorial.buy_display.title",
+      "enUS": "Buy a Product Display",
+      "esES": "Comprar un expositor",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "Tutorial",
+      "key": "tutorial.close_day.body",
+      "enUS": "Begin Closing, clear active operations, and complete the close.",
+      "esES": "Inicia el cierre, completa las operaciones activas y finaliza la jornada.",
+      "status": "PROPOSED",
+      "sourceAliases": [
+        "Begin Closing, clear operations and complete the close."
+      ]
+    },
+    {
+      "table": "Tutorial",
+      "key": "tutorial.close_day.title",
+      "enUS": "Close the Day",
+      "esES": "Cerrar la jornada",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "Tutorial",
+      "key": "tutorial.loop_complete.body",
+      "enUS": "The functional Phase 1 loop is complete. Continue to the next day or repeat the loop.",
+      "esES": "El bucle funcional de Phase 1 se ha completado. Continúa al día siguiente o repite el proceso.",
+      "status": "PROPOSED",
+      "sourceAliases": [
+        "The functional Phase 1 gate is complete. Continue to the next day or repeat the loop."
+      ]
+    },
+    {
+      "table": "Tutorial",
+      "key": "tutorial.loop_complete.title",
+      "enUS": "Vertical Slice Loop Complete",
+      "esES": "Bucle de la Vertical Slice completado",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "Tutorial",
+      "key": "tutorial.open_store.body",
+      "enUS": "Use Day Cycle to open the store.",
+      "esES": "Usa Jornada para abrir la tienda.",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "Tutorial",
+      "key": "tutorial.open_store.title",
+      "enUS": "Open the Store",
+      "esES": "Abrir la tienda",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "Tutorial",
+      "key": "tutorial.order_merchandise.body",
+      "enUS": "Choose a fictional product and place a supplier order.",
+      "esES": "Elige un producto ficticio y realiza un pedido al proveedor.",
+      "status": "PROPOSED",
+      "sourceAliases": [
+        "Choose a fictitious product and place a supplier order."
+      ]
+    },
+    {
+      "table": "Tutorial",
+      "key": "tutorial.order_merchandise.title",
+      "enUS": "Order Merchandise",
+      "esES": "Pedir mercancía",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "Tutorial",
+      "key": "tutorial.place_checkout.body",
+      "enUS": "Select the received counter, position it on the grid, and confirm.",
+      "esES": "Selecciona el mostrador recibido, colócalo en la cuadrícula y confirma.",
+      "status": "PROPOSED",
+      "sourceAliases": [
+        "Select the received counter, position it on the grid and confirm."
+      ]
+    },
+    {
+      "table": "Tutorial",
+      "key": "tutorial.place_checkout.title",
+      "enUS": "Place the Checkout Counter",
+      "esES": "Colocar el mostrador de caja",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "Tutorial",
+      "key": "tutorial.place_display.body",
+      "enUS": "Place the received display without blocking access routes.",
+      "esES": "Coloca el expositor recibido sin bloquear las rutas de acceso.",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "Tutorial",
+      "key": "tutorial.place_display.title",
+      "enUS": "Place a Display",
+      "esES": "Colocar un expositor",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "Tutorial",
+      "key": "tutorial.receive_checkout.body",
+      "enUS": "Open Deliveries and receive the checkout order.",
+      "esES": "Abre Entregas y recibe el pedido del mostrador de caja.",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "Tutorial",
+      "key": "tutorial.receive_checkout.title",
+      "enUS": "Receive Checkout Furniture",
+      "esES": "Recibir el mostrador de caja",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "Tutorial",
+      "key": "tutorial.receive_display.body",
+      "enUS": "Receive the display order in the backroom.",
+      "esES": "Recibe el pedido del expositor en el almacén.",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "Tutorial",
+      "key": "tutorial.receive_display.title",
+      "enUS": "Receive Display Furniture",
+      "esES": "Recibir el expositor",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "Tutorial",
+      "key": "tutorial.receive_merchandise.body",
+      "enUS": "Receive and pay for the product delivery.",
+      "esES": "Recibe y paga la entrega del producto.",
+      "status": "PROPOSED",
+      "sourceAliases": [
+        "Receive and pay the product delivery."
+      ]
+    },
+    {
+      "table": "Tutorial",
+      "key": "tutorial.receive_merchandise.title",
+      "enUS": "Receive Merchandise",
+      "esES": "Recibir mercancía",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "Tutorial",
+      "key": "tutorial.restock_display.body",
+      "enUS": "Transfer units from the backroom to the assigned display.",
+      "esES": "Transfiere unidades desde el almacén al expositor asignado.",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "Tutorial",
+      "key": "tutorial.restock_display.title",
+      "enUS": "Restock the Display",
+      "esES": "Reponer el expositor",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "Tutorial",
+      "key": "tutorial.runtime.autosave_complete.action",
+      "enUS": "Press Finish.",
+      "esES": "Pulsa Finalizar.",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "Tutorial",
+      "key": "tutorial.runtime.autosave_complete.body",
+      "enUS": "The active slot is saved once after each closed day. The previous valid generation remains as backup.",
+      "esES": "La ranura activa se guarda una vez después de cerrar cada jornada. La generación válida anterior se conserva como copia de seguridad.",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "Tutorial",
+      "key": "tutorial.runtime.autosave_complete.title",
+      "enUS": "Autosave",
+      "esES": "Guardado automático",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "Tutorial",
+      "key": "tutorial.runtime.customers_shopping.action",
+      "enUS": "Open Customers or Shopping.",
+      "esES": "Abre Clientes o Compras.",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "Tutorial",
+      "key": "tutorial.runtime.customers_shopping.body",
+      "enUS": "Track active customers, sessions, carts and reservations.",
+      "esES": "Consulta los clientes activos, las sesiones, los carritos y las reservas.",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "Tutorial",
+      "key": "tutorial.runtime.customers_shopping.title",
+      "enUS": "Customers and shopping",
+      "esES": "Clientes y compras",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "Tutorial",
+      "key": "tutorial.runtime.daily_results.action",
+      "enUS": "Open Economy.",
+      "esES": "Abre Economía.",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "Tutorial",
+      "key": "tutorial.runtime.daily_results.body",
+      "enUS": "Review revenue, received supplier costs and gross result.",
+      "esES": "Revisa los ingresos, los costes de proveedor recibidos y el resultado bruto.",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "Tutorial",
+      "key": "tutorial.runtime.daily_results.title",
+      "enUS": "Daily results",
+      "esES": "Resultados diarios",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "Tutorial",
+      "key": "tutorial.runtime.day_cycle.action",
+      "enUS": "Open Day Cycle.",
+      "esES": "Abre Jornada.",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "Tutorial",
+      "key": "tutorial.runtime.day_cycle.body",
+      "enUS": "A day progresses from Before Open to Closed. Autosave only runs after a valid Closed state.",
+      "esES": "La jornada avanza desde Antes de abrir hasta Cerrada. El guardado automático solo se ejecuta después de un cierre válido.",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "Tutorial",
+      "key": "tutorial.runtime.day_cycle.title",
+      "enUS": "Day cycle",
+      "esES": "Jornada",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "Tutorial",
+      "key": "tutorial.runtime.displays.action",
+      "enUS": "Open Displays.",
+      "esES": "Abre Expositores.",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "Tutorial",
+      "key": "tutorial.runtime.displays.body",
+      "enUS": "Displays show assigned products and available stock.",
+      "esES": "Los expositores muestran los productos asignados y el stock disponible.",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "Tutorial",
+      "key": "tutorial.runtime.displays.title",
+      "enUS": "Displays",
+      "esES": "Expositores",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "Tutorial",
+      "key": "tutorial.runtime.inventory.action",
+      "enUS": "Check the Inventory panel.",
+      "esES": "Revisa el panel Inventario.",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "Tutorial",
+      "key": "tutorial.runtime.inventory.body",
+      "enUS": "Review total stock, capacity and product locations.",
+      "esES": "Revisa el stock total, la capacidad y la ubicación de los productos.",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "Tutorial",
+      "key": "tutorial.runtime.inventory.title",
+      "enUS": "Inventory",
+      "esES": "Inventario",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "Tutorial",
+      "key": "tutorial.runtime.movement_camera.action",
+      "enUS": "Try the camera, then press Next.",
+      "esES": "Prueba la cámara y después pulsa Siguiente.",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "Tutorial",
+      "key": "tutorial.runtime.movement_camera.body",
+      "enUS": "Use the existing gameplay controls to move, orbit and zoom around the store.",
+      "esES": "Usa los controles del juego para moverte, girar la cámara y acercar o alejar la vista de la tienda.",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "Tutorial",
+      "key": "tutorial.runtime.movement_camera.title",
+      "enUS": "Movement and camera",
+      "esES": "Movimiento y cámara",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "Tutorial",
+      "key": "tutorial.runtime.open_management.action",
+      "enUS": "Open Inventory.",
+      "esES": "Abre Inventario.",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "Tutorial",
+      "key": "tutorial.runtime.open_management.body",
+      "enUS": "Open a panel from the left navigation. Gameplay input is blocked while a panel is open.",
+      "esES": "Abre un panel desde la navegación izquierda. Los controles de juego quedan bloqueados mientras haya un panel abierto.",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "Tutorial",
+      "key": "tutorial.runtime.open_management.title",
+      "enUS": "Management panels",
+      "esES": "Paneles de gestión",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "Tutorial",
+      "key": "tutorial.runtime.queue_checkout.action",
+      "enUS": "Open Checkout.",
+      "esES": "Abre Caja.",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "Tutorial",
+      "key": "tutorial.runtime.queue_checkout.body",
+      "enUS": "Monitor the FIFO queue, station state and transactions.",
+      "esES": "Supervisa la cola por orden de llegada, el estado de la caja y las transacciones.",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "Tutorial",
+      "key": "tutorial.runtime.queue_checkout.title",
+      "enUS": "Queue and checkout",
+      "esES": "Cola y caja",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "Tutorial",
+      "key": "tutorial.runtime.suppliers.action",
+      "enUS": "Open Suppliers.",
+      "esES": "Abre Compras.",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "Tutorial",
+      "key": "tutorial.runtime.suppliers.body",
+      "enUS": "Review placed orders, received units and costs.",
+      "esES": "Revisa los pedidos realizados, las unidades recibidas y los costes.",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "Tutorial",
+      "key": "tutorial.runtime.suppliers.title",
+      "enUS": "Suppliers",
+      "esES": "Compras",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "Tutorial",
+      "key": "tutorial.runtime.welcome.action",
+      "enUS": "Press Next to continue.",
+      "esES": "Pulsa Siguiente para continuar.",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "Tutorial",
+      "key": "tutorial.runtime.welcome.body",
+      "enUS": "Run the store one day at a time. The HUD keeps the important state visible.",
+      "esES": "Gestiona la tienda jornada a jornada. La interfaz mantiene visible la información importante.",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "Tutorial",
+      "key": "tutorial.runtime.welcome.title",
+      "enUS": "Welcome to Cartridge & Cloud",
+      "esES": "Bienvenido a Cartridge & Cloud",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "Tutorial",
+      "key": "tutorial.serve_customer.body",
+      "enUS": "Admit the next customer and complete one purchase.",
+      "esES": "Admite al siguiente cliente y completa una compra.",
+      "status": "PROPOSED",
+      "sourceAliases": [
+        "Spawn the next customer and complete one purchase."
+      ]
+    },
+    {
+      "table": "Tutorial",
+      "key": "tutorial.serve_customer.title",
+      "enUS": "Serve a Customer",
+      "esES": "Atender a un cliente",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "Tutorial",
+      "key": "tutorial.wait_autosave.body",
+      "enUS": "Confirm that the active slot reports Saved.",
+      "esES": "Confirma que la ranura activa indique Guardado.",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "Tutorial",
+      "key": "tutorial.wait_autosave.title",
+      "enUS": "Wait for Autosave",
+      "esES": "Esperar al guardado automático",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Common",
+      "key": "ui.common.accept_continue",
+      "enUS": "Accept and Continue",
+      "esES": "Aceptar y continuar",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Common",
+      "key": "ui.common.accessibility",
+      "enUS": "Accessibility",
+      "esES": "Accesibilidad",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Common",
+      "key": "ui.common.active_customers",
+      "enUS": "Active customers",
+      "esES": "Clientes activos",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Common",
+      "key": "ui.common.already_saved",
+      "enUS": "AlreadySaved",
+      "esES": "Ya guardado",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Common",
+      "key": "ui.common.assign",
+      "enUS": "Assign",
+      "esES": "Asignar",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Common",
+      "key": "ui.common.automatic",
+      "enUS": "Automatic",
+      "esES": "Automático",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Common",
+      "key": "ui.common.available",
+      "enUS": "Available",
+      "esES": "Disponible",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Common",
+      "key": "ui.common.before_open",
+      "enUS": "Before Open",
+      "esES": "Antes de abrir",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Common",
+      "key": "ui.common.before_open_runtime",
+      "enUS": "BeforeOpen",
+      "esES": "Antes de abrir",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Common",
+      "key": "ui.common.begin_closing",
+      "enUS": "Begin Closing",
+      "esES": "Iniciar cierre",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Common",
+      "key": "ui.common.browsing",
+      "enUS": "Browsing",
+      "esES": "Explorando",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Common",
+      "key": "ui.common.busy",
+      "enUS": "Busy",
+      "esES": "Ocupada",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Common",
+      "key": "ui.common.called",
+      "enUS": "Called",
+      "esES": "Llamado",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Common",
+      "key": "ui.common.cancel",
+      "enUS": "Cancel",
+      "esES": "Cancelar",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Common",
+      "key": "ui.common.cancel_order",
+      "enUS": "Cancel Order",
+      "esES": "Cancelar pedido",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Common",
+      "key": "ui.common.cancelled",
+      "enUS": "Cancelled",
+      "esES": "Cancelado",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Common",
+      "key": "ui.common.checking_out",
+      "enUS": "CheckingOut",
+      "esES": "Pagando",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Common",
+      "key": "ui.common.clear_assignment",
+      "enUS": "Clear Assignment",
+      "esES": "Quitar asignación",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Common",
+      "key": "ui.common.close",
+      "enUS": "Close",
+      "esES": "Cerrar",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Common",
+      "key": "ui.common.closed",
+      "enUS": "Closed",
+      "esES": "Cerrada",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Common",
+      "key": "ui.common.closing",
+      "enUS": "Closing",
+      "esES": "Cerrando",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Common",
+      "key": "ui.common.complete_close",
+      "enUS": "Complete Close",
+      "esES": "Completar cierre",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Common",
+      "key": "ui.common.completed",
+      "enUS": "Completed",
+      "esES": "Completado",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Common",
+      "key": "ui.common.confirm",
+      "enUS": "Confirm",
+      "esES": "Confirmar",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Common",
+      "key": "ui.common.continue",
+      "enUS": "Continue",
+      "esES": "Continuar",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Common",
+      "key": "ui.common.current",
+      "enUS": "Current",
+      "esES": "Actual",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Common",
+      "key": "ui.common.current_step",
+      "enUS": "Current step",
+      "esES": "Paso actual",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Common",
+      "key": "ui.common.cycle",
+      "enUS": "Cycle",
+      "esES": "Cambiar",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Common",
+      "key": "ui.common.delete",
+      "enUS": "Delete",
+      "esES": "Eliminar",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Common",
+      "key": "ui.common.despawned",
+      "enUS": "Despawned",
+      "esES": "Retirado",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Common",
+      "key": "ui.common.dispatch_all",
+      "enUS": "Dispatch All in One Run",
+      "esES": "Enviar todo en una entrega",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Common",
+      "key": "ui.common.dispatch_delivery",
+      "enUS": "Dispatch Delivery",
+      "esES": "Enviar entrega",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Common",
+      "key": "ui.common.each",
+      "enUS": "each",
+      "esES": "por unidad",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Common",
+      "key": "ui.common.empty",
+      "enUS": "Empty",
+      "esES": "Vacío",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Common",
+      "key": "ui.common.entering",
+      "enUS": "Entering",
+      "esES": "Entrando",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Common",
+      "key": "ui.common.failed_state",
+      "enUS": "Failed",
+      "esES": "Error",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Common",
+      "key": "ui.common.final",
+      "enUS": "Final",
+      "esES": "Final",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Common",
+      "key": "ui.common.help",
+      "enUS": "Help",
+      "esES": "Ayuda",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Common",
+      "key": "ui.common.in_progress",
+      "enUS": "In Progress",
+      "esES": "En curso",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Common",
+      "key": "ui.common.in_transit",
+      "enUS": "In Transit",
+      "esES": "En tránsito",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Common",
+      "key": "ui.common.language",
+      "enUS": "Language",
+      "esES": "Idioma",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Common",
+      "key": "ui.common.language_en",
+      "enUS": "English",
+      "esES": "English",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Common",
+      "key": "ui.common.language_es",
+      "enUS": "Español",
+      "esES": "Español",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Common",
+      "key": "ui.common.leaving",
+      "enUS": "Leaving",
+      "esES": "Saliendo",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Common",
+      "key": "ui.common.manual",
+      "enUS": "Manual",
+      "esES": "Manual",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Common",
+      "key": "ui.common.new_game",
+      "enUS": "New Game",
+      "esES": "Nueva partida",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Common",
+      "key": "ui.common.next",
+      "enUS": "Next",
+      "esES": "Siguiente",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Common",
+      "key": "ui.common.no",
+      "enUS": "No",
+      "esES": "No",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Common",
+      "key": "ui.common.not_closed",
+      "enUS": "NotClosed",
+      "esES": "Jornada no cerrada",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Common",
+      "key": "ui.common.off",
+      "enUS": "Off",
+      "esES": "Desactivado",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Common",
+      "key": "ui.common.on",
+      "enUS": "On",
+      "esES": "Activado",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Common",
+      "key": "ui.common.open",
+      "enUS": "Open",
+      "esES": "Abierta",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Common",
+      "key": "ui.common.open_store",
+      "enUS": "Open Store",
+      "esES": "Abrir tienda",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Common",
+      "key": "ui.common.order",
+      "enUS": "Order",
+      "esES": "Pedir",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Common",
+      "key": "ui.common.order_case",
+      "enUS": "Order Case",
+      "esES": "Pedir caja",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Common",
+      "key": "ui.common.orders_parenthetical",
+      "enUS": "order(s)",
+      "esES": "pedido(s)",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Common",
+      "key": "ui.common.pause",
+      "enUS": "Pause",
+      "esES": "Pausar",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Common",
+      "key": "ui.common.paused",
+      "enUS": "Paused",
+      "esES": "En pausa",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Common",
+      "key": "ui.common.place",
+      "enUS": "Place",
+      "esES": "Colocar",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Common",
+      "key": "ui.common.processing",
+      "enUS": "Processing",
+      "esES": "Procesando",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Common",
+      "key": "ui.common.queue",
+      "enUS": "Queue",
+      "esES": "Cola",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Common",
+      "key": "ui.common.queueing",
+      "enUS": "Queueing",
+      "esES": "En cola",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Common",
+      "key": "ui.common.quit",
+      "enUS": "Quit",
+      "esES": "Salir",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Common",
+      "key": "ui.common.receipt",
+      "enUS": "Receipt",
+      "esES": "Recepción",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Common",
+      "key": "ui.common.received",
+      "enUS": "Received",
+      "esES": "Recibido",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Common",
+      "key": "ui.common.replace",
+      "enUS": "Replace",
+      "esES": "Reemplazar",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Common",
+      "key": "ui.common.reserved",
+      "enUS": "Reserved",
+      "esES": "Reservado",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Common",
+      "key": "ui.common.restart_tutorial",
+      "enUS": "Restart Tutorial",
+      "esES": "Reiniciar tutorial",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Common",
+      "key": "ui.common.restock_max",
+      "enUS": "Restock Max",
+      "esES": "Reponer al máximo",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Common",
+      "key": "ui.common.restock_one",
+      "enUS": "Restock 1",
+      "esES": "Reponer 1",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Common",
+      "key": "ui.common.resume",
+      "enUS": "Resume",
+      "esES": "Reanudar",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Common",
+      "key": "ui.common.return",
+      "enUS": "Return",
+      "esES": "Volver",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Common",
+      "key": "ui.common.return_all",
+      "enUS": "Return All",
+      "esES": "Devolver todo",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Common",
+      "key": "ui.common.return_clear",
+      "enUS": "Return & Clear",
+      "esES": "Devolver y desasignar",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Common",
+      "key": "ui.common.return_main_menu",
+      "enUS": "Return to Main Menu",
+      "esES": "Volver al menú principal",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Common",
+      "key": "ui.common.return_one",
+      "enUS": "Return 1",
+      "esES": "Devolver 1",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Common",
+      "key": "ui.common.returnable",
+      "enUS": "Returnable",
+      "esES": "Devuelto posible",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Common",
+      "key": "ui.common.run",
+      "enUS": "Run",
+      "esES": "Entrega",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Common",
+      "key": "ui.common.sale",
+      "enUS": "Sale",
+      "esES": "Venta",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Common",
+      "key": "ui.common.sales_word",
+      "enUS": "sales",
+      "esES": "ventas",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Common",
+      "key": "ui.common.save",
+      "enUS": "Save",
+      "esES": "Guardado",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Common",
+      "key": "ui.common.save_game",
+      "enUS": "Save Game",
+      "esES": "Guardar partida",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Common",
+      "key": "ui.common.saved_state",
+      "enUS": "Saved",
+      "esES": "Guardado",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Common",
+      "key": "ui.common.saving_state",
+      "enUS": "Saving",
+      "esES": "Guardando",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Common",
+      "key": "ui.common.skip",
+      "enUS": "Skip",
+      "esES": "Omitir",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Common",
+      "key": "ui.common.skip_tutorial",
+      "enUS": "Skip Tutorial",
+      "esES": "Omitir tutorial",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Common",
+      "key": "ui.common.spawn_customer",
+      "enUS": "Spawn Customer",
+      "esES": "Generar cliente",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Common",
+      "key": "ui.common.stocked",
+      "enUS": "Stocked",
+      "esES": "Con stock",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Common",
+      "key": "ui.common.unassigned",
+      "enUS": "Unassigned",
+      "esES": "Sin asignar",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Common",
+      "key": "ui.common.units_parenthetical",
+      "enUS": "unit(s)",
+      "esES": "unidad(es)",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Common",
+      "key": "ui.common.units_word",
+      "enUS": "units",
+      "esES": "unidades",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Common",
+      "key": "ui.common.unknown_time",
+      "enUS": "Unknown Time",
+      "esES": "Hora desconocida",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Common",
+      "key": "ui.common.waiting",
+      "enUS": "Waiting",
+      "esES": "En espera",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Common",
+      "key": "ui.common.waiting_to_enter",
+      "enUS": "WaitingToEnter",
+      "esES": "Esperando para entrar",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Common",
+      "key": "ui.common.yes",
+      "enUS": "Yes",
+      "esES": "Sí",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_MainMenu",
+      "key": "ui.main_menu.accessibility.confirmations",
+      "enUS": "Destructive Confirmations",
+      "esES": "Confirmaciones de acciones destructivas",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_MainMenu",
+      "key": "ui.main_menu.accessibility.language",
+      "enUS": "Language",
+      "esES": "Idioma",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_MainMenu",
+      "key": "ui.main_menu.accessibility.reduced_motion",
+      "enUS": "Reduced Motion",
+      "esES": "Movimiento reducido",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_MainMenu",
+      "key": "ui.main_menu.accessibility.text_scale",
+      "enUS": "Text Scale",
+      "esES": "Escala del texto",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_MainMenu",
+      "key": "ui.main_menu.accessibility.tutorial",
+      "enUS": "Tutorial",
+      "esES": "Tutorial",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_MainMenu",
+      "key": "ui.main_menu.accessibility.ui_scale",
+      "enUS": "UI Scale",
+      "esES": "Escala de la interfaz",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_MainMenu",
+      "key": "ui.main_menu.backup_status",
+      "enUS": "Three independent slots · automatic backup recovery",
+      "esES": "Tres ranuras independientes · recuperación automática de copias de seguridad",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_MainMenu",
+      "key": "ui.main_menu.corrupt_no_backup",
+      "enUS": "Corrupt save without valid backup",
+      "esES": "Guardado dañado sin copia de seguridad válida",
+      "status": "PROPOSED",
+      "sourceAliases": [
+        "Corrupt save without valid backup",
+        "Corrupt save with no valid backup"
+      ]
+    },
+    {
+      "table": "UI_MainMenu",
+      "key": "ui.main_menu.delete_body",
+      "enUS": "This removes the main save, backup, tutorial progress, and autosave marker.",
+      "esES": "Esto elimina el guardado principal, la copia de seguridad, el progreso del tutorial y el registro de guardado automático.",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_MainMenu",
+      "key": "ui.main_menu.delete_title",
+      "enUS": "Delete save slot?",
+      "esES": "¿Eliminar la ranura de guardado?",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_MainMenu",
+      "key": "ui.main_menu.empty_slot",
+      "enUS": "Empty slot",
+      "esES": "Ranura vacía",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_MainMenu",
+      "key": "ui.main_menu.error.replace_confirmation_required",
+      "enUS": "Creating a new game will replace the existing slot.",
+      "esES": "Crear una nueva partida reemplazará la ranura existente.",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_MainMenu",
+      "key": "ui.main_menu.help.autosave",
+      "enUS": "The active slot autosaves once after a valid closed day.",
+      "esES": "La ranura activa se guarda automáticamente una vez tras cerrar correctamente una jornada.",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_MainMenu",
+      "key": "ui.main_menu.help.backup",
+      "enUS": "The previous valid generation remains as a backup.",
+      "esES": "La versión válida anterior se conserva como copia de seguridad.",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_MainMenu",
+      "key": "ui.main_menu.help.keyboard_activate",
+      "enUS": "Enter: activate",
+      "esES": "Intro: activar",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_MainMenu",
+      "key": "ui.main_menu.help.keyboard_escape",
+      "enUS": "Escape: close the top layer",
+      "esES": "Escape: cerrar la capa superior",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_MainMenu",
+      "key": "ui.main_menu.help.keyboard_focus",
+      "enUS": "Tab / Shift+Tab: move focus",
+      "esES": "Tab / Mayús+Tab: mover el foco",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_MainMenu",
+      "key": "ui.main_menu.help.keyboard_heading",
+      "enUS": "Keyboard",
+      "esES": "Teclado",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_MainMenu",
+      "key": "ui.main_menu.help.mouse_body",
+      "enUS": "Point, click, and scroll",
+      "esES": "Apunta, haz clic y desplázate",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_MainMenu",
+      "key": "ui.main_menu.help.mouse_heading",
+      "enUS": "Mouse",
+      "esES": "Ratón",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_MainMenu",
+      "key": "ui.main_menu.help.saving_heading",
+      "enUS": "Saving",
+      "esES": "Guardado",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_MainMenu",
+      "key": "ui.main_menu.help.store_ui_body",
+      "enUS": "HUD buttons open the panels for all implemented systems.",
+      "esES": "Los botones del HUD abren los paneles de todos los sistemas implementados.",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_MainMenu",
+      "key": "ui.main_menu.help.store_ui_heading",
+      "enUS": "Store UI",
+      "esES": "Interfaz de la tienda",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_MainMenu",
+      "key": "ui.main_menu.quit_body",
+      "enUS": "The application will close.",
+      "esES": "La aplicación se cerrará.",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_MainMenu",
+      "key": "ui.main_menu.quit_title",
+      "enUS": "Quit Cartridge & Cloud?",
+      "esES": "¿Salir de Cartridge & Cloud?",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_MainMenu",
+      "key": "ui.main_menu.recovered_suffix",
+      "enUS": "· Recovered from backup",
+      "esES": "· Recuperada desde la copia de seguridad",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_MainMenu",
+      "key": "ui.main_menu.replace_body",
+      "enUS": "The existing save and tutorial progress will be deleted.",
+      "esES": "Se eliminarán la partida existente y el progreso del tutorial.",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_MainMenu",
+      "key": "ui.main_menu.replace_title",
+      "enUS": "Replace save slot?",
+      "esES": "¿Reemplazar la ranura de guardado?",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_MainMenu",
+      "key": "ui.main_menu.select_slot",
+      "enUS": "Select a save slot",
+      "esES": "Selecciona una ranura de guardado",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_MainMenu",
+      "key": "ui.main_menu.slot_heading",
+      "enUS": "SLOT {slotNumber}",
+      "esES": "RANURA {slotNumber}",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_MainMenu",
+      "key": "ui.main_menu.slot_recovered",
+      "enUS": "The slot was recovered from its valid backup.",
+      "esES": "La ranura se ha recuperado desde una copia de seguridad válida.",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_MainMenu",
+      "key": "ui.main_menu.slot_summary",
+      "enUS": "Day {day} · {cash} · {updated}{recoverySuffix}",
+      "esES": "Día {day} · {cash} · {updated}{recoverySuffix}",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_MainMenu",
+      "key": "ui.main_menu.status.backup_restored",
+      "enUS": "Backup restored during slot inspection.",
+      "esES": "Se ha restaurado una copia de seguridad al revisar la ranura.",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_MainMenu",
+      "key": "ui.main_menu.status.delete_confirmation_required",
+      "enUS": "Delete requires confirmation.",
+      "esES": "La eliminación requiere confirmación.",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_MainMenu",
+      "key": "ui.main_menu.status.new_game_created",
+      "enUS": "New game created.",
+      "esES": "Nueva partida creada.",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_MainMenu",
+      "key": "ui.main_menu.status.slot_already_empty",
+      "enUS": "Slot was already empty.",
+      "esES": "La ranura ya estaba vacía.",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_MainMenu",
+      "key": "ui.main_menu.status.slot_deleted",
+      "enUS": "Slot deleted.",
+      "esES": "Ranura eliminada.",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_MainMenu",
+      "key": "ui.main_menu.storage_unavailable",
+      "enUS": "Storage unavailable",
+      "esES": "Almacenamiento no disponible",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_MainMenu",
+      "key": "ui.main_menu.title",
+      "enUS": "CARTRIDGE & CLOUD",
+      "esES": "CARTRIDGE & CLOUD",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_MainMenu",
+      "key": "ui.main_menu.unsupported_schema",
+      "enUS": "Unsupported save schema",
+      "esES": "Esquema de guardado no compatible",
+      "status": "PROPOSED",
+      "sourceAliases": [
+        "Unsupported save schema",
+        "Unsupported save version"
+      ]
+    },
+    {
+      "table": "UI_Operations",
+      "key": "ui.operations.active_customers",
+      "enUS": "Active customers: {count}",
+      "esES": "Clientes activos: {count}",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Operations",
+      "key": "ui.operations.assign_received",
+      "enUS": "Assign {name} · received backroom {quantity}",
+      "esES": "Asignar {name} · recibido en almacén: {quantity}",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Operations",
+      "key": "ui.operations.audio_channels",
+      "enUS": "Audio Channels",
+      "esES": "Canales de audio",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Operations",
+      "key": "ui.operations.available_cash",
+      "enUS": "Available cash: {amount}",
+      "esES": "Caja disponible: {amount}",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Operations",
+      "key": "ui.operations.available_reserved",
+      "enUS": "Available: {available} · Reserved: {reserved}",
+      "esES": "Disponible: {available} · Reservado: {reserved}",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Operations",
+      "key": "ui.operations.backroom_stock",
+      "enUS": "Received backroom stock: {quantity}",
+      "esES": "Stock recibido en almacén: {quantity}",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Operations",
+      "key": "ui.operations.cash_total",
+      "enUS": "Cash total: {amount}",
+      "esES": "Caja total: {amount}",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Operations",
+      "key": "ui.operations.committed",
+      "enUS": "{count} reserved orders · total committed {amount}",
+      "esES": "{count} pedidos reservados · total comprometido {amount}",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Operations",
+      "key": "ui.operations.completed_sales",
+      "enUS": "Completed sales: {count}",
+      "esES": "Ventas completadas: {count}",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Operations",
+      "key": "ui.operations.current_step",
+      "enUS": "Current step: {step}",
+      "esES": "Paso actual: {step}",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Operations",
+      "key": "ui.operations.customer_loop",
+      "enUS": "Playable Customer Loop",
+      "esES": "Flujo jugable de clientes",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Operations",
+      "key": "ui.operations.customer_loop_body",
+      "enUS": "A customer enters, evaluates a stocked product, picks it up, queues, completes checkout, and exits.",
+      "esES": "Un cliente entra, evalúa un producto con stock, lo recoge, hace cola, completa la compra y sale.",
+      "status": "PROPOSED",
+      "sourceAliases": [
+        "A customer walks through entrance, evaluates a stocked product, picks it, queues, completes checkout and exits."
+      ]
+    },
+    {
+      "table": "UI_Operations",
+      "key": "ui.operations.delivery_runs",
+      "enUS": "Delivery Runs",
+      "esES": "Entregas",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Operations",
+      "key": "ui.operations.fixture_unassigned",
+      "enUS": "Operational fixture · no product assignment",
+      "esES": "Mueble operativo · sin producto asignado",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Operations",
+      "key": "ui.operations.furniture_catalog",
+      "enUS": "Furniture Catalog",
+      "esES": "Catálogo de mobiliario",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Operations",
+      "key": "ui.operations.furniture_item",
+      "enUS": "{name} · {width}×{depth} · {price}",
+      "esES": "{name} · {width}×{depth} · {price}",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Operations",
+      "key": "ui.operations.furniture_stock",
+      "enUS": "{itemId} · {quantity} available",
+      "esES": "{itemId} · {quantity} disponibles",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Operations",
+      "key": "ui.operations.furniture_warehouse",
+      "enUS": "Furniture Warehouse",
+      "esES": "Almacén de mobiliario",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Operations",
+      "key": "ui.operations.gross",
+      "enUS": "Gross: {amount}",
+      "esES": "Resultado bruto: {amount}",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Operations",
+      "key": "ui.operations.hide_off",
+      "enUS": "Hide: OFF",
+      "esES": "Ocultar: DESACTIVADO",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Operations",
+      "key": "ui.operations.hide_on",
+      "enUS": "Hide: ON",
+      "esES": "Ocultar: ACTIVADO",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Operations",
+      "key": "ui.operations.in_transit",
+      "enUS": "In transit · {runId} · reserved {amount}",
+      "esES": "En tránsito · {runId} · reservado {amount}",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Operations",
+      "key": "ui.operations.last_settlement",
+      "enUS": "Last weekly settlement · week {week}",
+      "esES": "Última liquidación semanal · semana {week}",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Operations",
+      "key": "ui.operations.merchandise_catalog",
+      "enUS": "Merchandise Catalog",
+      "esES": "Catálogo de mercancía",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Operations",
+      "key": "ui.operations.no_furniture",
+      "enUS": "No received furniture.",
+      "esES": "No hay mobiliario recibido.",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Operations",
+      "key": "ui.operations.no_merchandise",
+      "enUS": "No merchandise in the backroom.",
+      "esES": "No hay mercancía en el almacén.",
+      "status": "PROPOSED",
+      "sourceAliases": [
+        "No merchandise in backroom."
+      ]
+    },
+    {
+      "table": "UI_Operations",
+      "key": "ui.operations.no_pending",
+      "enUS": "No reserved or in-transit deliveries.",
+      "esES": "No hay entregas reservadas ni en tránsito.",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Operations",
+      "key": "ui.operations.no_runs",
+      "enUS": "No delivery runs.",
+      "esES": "No hay entregas.",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Operations",
+      "key": "ui.operations.occlusion_disabled",
+      "enUS": "Automatic wall occlusion: Disabled for H6.",
+      "esES": "Ocultación automática de paredes: desactivada para H6.",
+      "status": "REMOVED_FROM_PLAYER_UI"
+    },
+    {
+      "table": "UI_Operations",
+      "key": "ui.operations.occlusion_unavailable",
+      "enUS": "Automatic wall occlusion is unavailable.",
+      "esES": "La ocultación automática de paredes no está disponible.",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Operations",
+      "key": "ui.operations.order_finance",
+      "enUS": "Reserved: {reserved}\nAvailable: {available}",
+      "esES": "Reservado: {reserved}\nDisponible: {available}",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Operations",
+      "key": "ui.operations.pending_deliveries",
+      "enUS": "Pending Deliveries",
+      "esES": "Entregas pendientes",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Operations",
+      "key": "ui.operations.phase2_debug",
+      "enUS": "Phase 2 remains blocked until this guide reaches Completed and the full QA gate passes.",
+      "esES": "La Phase 2 permanece bloqueada hasta que esta guía llegue a Completado y se supere el gate completo de QA.",
+      "status": "REMOVED_FROM_PLAYER_UI"
+    },
+    {
+      "table": "UI_Operations",
+      "key": "ui.operations.place_display",
+      "enUS": "Place a product display to assign merchandise.",
+      "esES": "Coloca un expositor para asignarle mercancía.",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Operations",
+      "key": "ui.operations.place_fixture_first",
+      "enUS": "Place a fixture first.",
+      "esES": "Coloca primero un mueble.",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Operations",
+      "key": "ui.operations.placed_fixtures",
+      "enUS": "Placed Fixtures",
+      "esES": "Mobiliario colocado",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Operations",
+      "key": "ui.operations.product",
+      "enUS": "Product: {name}",
+      "esES": "Producto: {name}",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Operations",
+      "key": "ui.operations.product_item",
+      "enUS": "{name} · case {unitsPerCase} · {caseCost}",
+      "esES": "{name} · caja de {unitsPerCase} · {caseCost}",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Operations",
+      "key": "ui.operations.product_stock",
+      "enUS": "{itemId}: {quantity} units",
+      "esES": "{itemId}: {quantity} unidades",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Operations",
+      "key": "ui.operations.product_warehouse",
+      "enUS": "Product Backroom",
+      "esES": "Almacén de productos",
+      "status": "PROPOSED",
+      "sourceAliases": [
+        "Product warehouse"
+      ]
+    },
+    {
+      "table": "UI_Operations",
+      "key": "ui.operations.purchasing_power",
+      "enUS": "Purchasing Power",
+      "esES": "Capacidad de compra",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Operations",
+      "key": "ui.operations.release_reservation",
+      "enUS": "Release reservation for {amount}",
+      "esES": "Liberar reserva de {amount}",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Operations",
+      "key": "ui.operations.reservation_limit",
+      "enUS": "Stock changes are limited while active customer reservations exist.",
+      "esES": "Los cambios de stock están limitados mientras existan reservas activas de clientes.",
+      "status": "PROPOSED",
+      "sourceAliases": [
+        "Stock mutation is limited while active customer reservations exist."
+      ]
+    },
+    {
+      "table": "UI_Operations",
+      "key": "ui.operations.reserved_order",
+      "enUS": "Reserved {amount}",
+      "esES": "Reservado: {amount}",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Operations",
+      "key": "ui.operations.reserved_orders",
+      "enUS": "Reserved for orders: {amount}",
+      "esES": "Reservado para pedidos: {amount}",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Operations",
+      "key": "ui.operations.reserved_stock",
+      "enUS": "Reserved: {reserved} · Returnable: {returnable}",
+      "esES": "Reservado: {reserved} · Devuelto posible: {returnable}",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Operations",
+      "key": "ui.operations.run_summary",
+      "enUS": "{orders} orders · {amount}",
+      "esES": "{orders} pedidos · {amount}",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Operations",
+      "key": "ui.operations.settings.audio.ambience",
+      "enUS": "Ambience",
+      "esES": "Sonido ambiente",
+      "status": "PROPOSED",
+      "sourceAliases": [
+        "Ambience"
+      ]
+    },
+    {
+      "table": "UI_Operations",
+      "key": "ui.operations.settings.audio.effects",
+      "enUS": "Effects",
+      "esES": "Efectos",
+      "status": "PROPOSED",
+      "sourceAliases": [
+        "Effects"
+      ]
+    },
+    {
+      "table": "UI_Operations",
+      "key": "ui.operations.settings.audio.interface",
+      "enUS": "Interface",
+      "esES": "Interfaz",
+      "status": "PROPOSED",
+      "sourceAliases": [
+        "Ui"
+      ]
+    },
+    {
+      "table": "UI_Operations",
+      "key": "ui.operations.settings.audio.music",
+      "enUS": "Music",
+      "esES": "Música",
+      "status": "PROPOSED",
+      "sourceAliases": [
+        "Music"
+      ]
+    },
+    {
+      "table": "UI_Operations",
+      "key": "ui.operations.spawn_tooltip",
+      "enUS": "Serve the next available customer",
+      "esES": "Atender al siguiente cliente disponible",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Operations",
+      "key": "ui.operations.store_title",
+      "enUS": "Store Operations",
+      "esES": "Operaciones de la tienda",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Operations",
+      "key": "ui.operations.subtitle",
+      "enUS": "SPRINT 16 · PLAYABLE BLOCKOUT",
+      "esES": "SPRINT 16 · BLOCKOUT JUGABLE",
+      "status": "REMOVED_FROM_PLAYER_UI"
+    },
+    {
+      "table": "UI_Operations",
+      "key": "ui.operations.tab.customers",
+      "enUS": "Customer",
+      "esES": "Clientes",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Operations",
+      "key": "ui.operations.tab.delivery",
+      "enUS": "Delivery",
+      "esES": "Entrega",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Operations",
+      "key": "ui.operations.tab.displays",
+      "enUS": "Displays",
+      "esES": "Expositores",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Operations",
+      "key": "ui.operations.tab.guide",
+      "enUS": "Guide",
+      "esES": "Guía",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Operations",
+      "key": "ui.operations.tab.settings",
+      "enUS": "Settings",
+      "esES": "Ajustes",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Operations",
+      "key": "ui.operations.tab.shop",
+      "enUS": "Shop",
+      "esES": "Tienda",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Operations",
+      "key": "ui.operations.tab.stock",
+      "enUS": "Stock",
+      "esES": "Stock",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Operations",
+      "key": "ui.operations.tax_positive",
+      "enUS": "Tax (10% positive gross): {amount}",
+      "esES": "Impuesto (10 % del resultado bruto positivo): {amount}",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Operations",
+      "key": "ui.operations.title",
+      "enUS": "Vertical Slice Operations",
+      "esES": "Operaciones de la Vertical Slice",
+      "status": "REMOVED_FROM_PLAYER_UI"
+    },
+    {
+      "table": "UI_Operations",
+      "key": "ui.operations.tooltip.clear",
+      "enUS": "Remove the product assignment from this empty display",
+      "esES": "Eliminar la asignación de producto de este expositor vacío",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Operations",
+      "key": "ui.operations.tooltip.restock_max",
+      "enUS": "Fill with the minimum of received stock and free capacity",
+      "esES": "Llenar con el mínimo entre el stock recibido y la capacidad libre",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Operations",
+      "key": "ui.operations.tooltip.restock_one",
+      "enUS": "Transfer one received unit from the backroom",
+      "esES": "Transferir una unidad recibida desde el almacén",
+      "status": "PROPOSED",
+      "sourceAliases": [
+        "Transfer one received unit from backroom"
+      ]
+    },
+    {
+      "table": "UI_Operations",
+      "key": "ui.operations.tooltip.return_all",
+      "enUS": "Return every visible unit and keep the assignment",
+      "esES": "Devolver todas las unidades expuestas y mantener la asignación",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Operations",
+      "key": "ui.operations.tooltip.return_clear",
+      "enUS": "Return every unit and leave the display unassigned",
+      "esES": "Devolver todas las unidades y dejar el expositor sin asignación",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Operations",
+      "key": "ui.operations.tooltip.return_one",
+      "enUS": "Return one unreserved unit to the backroom",
+      "esES": "Devolver una unidad no reservada al almacén",
+      "status": "PROPOSED",
+      "sourceAliases": [
+        "Return one unreserved unit to backroom"
+      ]
+    },
+    {
+      "table": "UI_Operations",
+      "key": "ui.operations.visibility",
+      "enUS": "Visibility",
+      "esES": "Visibilidad",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Operations",
+      "key": "ui.operations.visible_stock",
+      "enUS": "Visible stock: {quantity}",
+      "esES": "Stock expuesto: {quantity}",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Operations",
+      "key": "ui.operations.walls_camera",
+      "enUS": "Walls between camera and player",
+      "esES": "Paredes entre la cámara y el jugador",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Operations",
+      "key": "ui.operations.weekly_gross",
+      "enUS": "Current weekly gross: {amount}",
+      "esES": "Resultado bruto semanal actual: {amount}",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Store",
+      "key": "ui.store.accessibility.tutorial_enabled",
+      "enUS": "Tutorial Enabled",
+      "esES": "Tutorial activado",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Store",
+      "key": "ui.store.closed_for_day",
+      "enUS": "Closed for the Day",
+      "esES": "Cerrada por hoy",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Store",
+      "key": "ui.store.day_transition_blocked",
+      "enUS": "Day Transition Blocked",
+      "esES": "Transición de jornada bloqueada",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Store",
+      "key": "ui.store.hud.admission_blocked",
+      "enUS": "· Admission blocked",
+      "esES": "· Acceso bloqueado",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Store",
+      "key": "ui.store.hud.cash",
+      "enUS": "Cash: {cash}",
+      "esES": "Caja: {cash}",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Store",
+      "key": "ui.store.hud.cash_empty",
+      "enUS": "Cash --",
+      "esES": "Caja --",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Store",
+      "key": "ui.store.hud.checkout_ready",
+      "enUS": "· Checkout ready",
+      "esES": "· Caja disponible",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Store",
+      "key": "ui.store.hud.checkout_unavailable",
+      "enUS": "· Checkout unavailable",
+      "esES": "· Caja no disponible",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Store",
+      "key": "ui.store.hud.customers",
+      "enUS": "Customers: {count}",
+      "esES": "Clientes: {count}",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Store",
+      "key": "ui.store.hud.customers_capacity",
+      "enUS": "Customers {count}/{maximum}",
+      "esES": "Clientes {count}/{maximum}",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Store",
+      "key": "ui.store.hud.customers_count",
+      "enUS": "Customers {count}",
+      "esES": "Clientes {count}",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Store",
+      "key": "ui.store.hud.customers_empty",
+      "enUS": "Customers --",
+      "esES": "Clientes --",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Store",
+      "key": "ui.store.hud.day",
+      "enUS": "Day {day}",
+      "esES": "Día {day}",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Store",
+      "key": "ui.store.hud.day_empty",
+      "enUS": "Day --",
+      "esES": "Día --",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Store",
+      "key": "ui.store.hud.paused_runtime",
+      "enUS": "Paused · {speed}",
+      "esES": "En pausa · {speed}",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Store",
+      "key": "ui.store.hud.paused_speed",
+      "enUS": "Paused · selected speed ×{speed}",
+      "esES": "En pausa · velocidad seleccionada ×{speed}",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Store",
+      "key": "ui.store.hud.queue",
+      "enUS": "Queue: {count}",
+      "esES": "Cola: {count}",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Store",
+      "key": "ui.store.hud.queue_count",
+      "enUS": "Queue {count}",
+      "esES": "Cola {count}",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Store",
+      "key": "ui.store.hud.queue_empty",
+      "enUS": "Queue --",
+      "esES": "Cola --",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Store",
+      "key": "ui.store.hud.save",
+      "enUS": "Save: {status}",
+      "esES": "Guardado: {status}",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Store",
+      "key": "ui.store.hud.save_empty",
+      "enUS": "Save --",
+      "esES": "Guardado --",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Store",
+      "key": "ui.store.hud.save_status",
+      "enUS": "Save {status}",
+      "esES": "Guardado {status}",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Store",
+      "key": "ui.store.hud.speed",
+      "enUS": "Speed ×{speed}",
+      "esES": "Velocidad ×{speed}",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Store",
+      "key": "ui.store.hud.speed_runtime",
+      "enUS": "Speed {speed}",
+      "esES": "Velocidad {speed}",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Store",
+      "key": "ui.store.hud.state",
+      "enUS": "State: {state}",
+      "esES": "Estado: {state}",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Store",
+      "key": "ui.store.hud.state_empty",
+      "enUS": "State --",
+      "esES": "Estado --",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Store",
+      "key": "ui.store.management.checkout",
+      "enUS": "Checkout",
+      "esES": "Caja",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Store",
+      "key": "ui.store.management.customers",
+      "enUS": "Customers",
+      "esES": "Clientes",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Store",
+      "key": "ui.store.management.day_cycle",
+      "enUS": "Day Cycle",
+      "esES": "Jornada",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Store",
+      "key": "ui.store.management.displays",
+      "enUS": "Displays",
+      "esES": "Expositores",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Store",
+      "key": "ui.store.management.economy",
+      "enUS": "Economy",
+      "esES": "Economía",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Store",
+      "key": "ui.store.management.heading",
+      "enUS": "MANAGEMENT",
+      "esES": "GESTIÓN",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Store",
+      "key": "ui.store.management.history",
+      "enUS": "History",
+      "esES": "Historial",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Store",
+      "key": "ui.store.management.inventory",
+      "enUS": "Inventory",
+      "esES": "Inventario",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Store",
+      "key": "ui.store.management.overview",
+      "enUS": "Overview",
+      "esES": "Resumen",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Store",
+      "key": "ui.store.management.shopping",
+      "enUS": "Shopping",
+      "esES": "Compras",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Store",
+      "key": "ui.store.management.suppliers",
+      "enUS": "Suppliers",
+      "esES": "Proveedores",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Store",
+      "key": "ui.store.management.weekly",
+      "enUS": "Weekly",
+      "esES": "Semanal",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Store",
+      "key": "ui.store.no_session.body",
+      "enUS": "Return to the Main Menu and select New Game or Continue.",
+      "esES": "Vuelve al menú principal y selecciona Nueva partida o Continuar.",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Store",
+      "key": "ui.store.no_session.title",
+      "enUS": "No Active Save Slot",
+      "esES": "No hay ninguna ranura activa",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Store",
+      "key": "ui.store.opens_at",
+      "enUS": "Opens at {time}",
+      "esES": "Abre a las {time}",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Store",
+      "key": "ui.store.panel.accessibility.confirmations",
+      "enUS": "Confirmations",
+      "esES": "Confirmaciones",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Store",
+      "key": "ui.store.panel.accessibility.destructive",
+      "enUS": "Destructive actions",
+      "esES": "Acciones destructivas",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Store",
+      "key": "ui.store.panel.accessibility.global_preference",
+      "enUS": "Global preference",
+      "esES": "Preferencia global",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Store",
+      "key": "ui.store.panel.accessibility.reduce_motion_status",
+      "enUS": "Disables non-essential transitions",
+      "esES": "Desactiva transiciones no esenciales",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Store",
+      "key": "ui.store.panel.accessibility.tutorial_status",
+      "enUS": "Progress is saved per slot",
+      "esES": "El progreso se guarda por ranura",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Store",
+      "key": "ui.store.panel.checkout.no_entry",
+      "enUS": "No current entry",
+      "esES": "No hay ninguna entrada actual",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Store",
+      "key": "ui.store.panel.checkout.persisted",
+      "enUS": "Completed and persisted",
+      "esES": "Completadas y guardadas",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Store",
+      "key": "ui.store.panel.checkout.title",
+      "enUS": "Queue & Checkout",
+      "esES": "Cola y caja",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Store",
+      "key": "ui.store.panel.checkout.transactions",
+      "enUS": "Transactions",
+      "esES": "Transacciones",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Store",
+      "key": "ui.store.panel.customers.abandoned",
+      "enUS": "Abandoned",
+      "esES": "Abandonos",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Store",
+      "key": "ui.store.panel.customers.abandoned_status",
+      "enUS": "Visits ending without purchase",
+      "esES": "Visitas finalizadas sin compra",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Store",
+      "key": "ui.store.panel.customers.buyers",
+      "enUS": "Buyers",
+      "esES": "Compradores",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Store",
+      "key": "ui.store.panel.customers.buyers_status",
+      "enUS": "Visits ending in purchase",
+      "esES": "Visitas finalizadas con compra",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Store",
+      "key": "ui.store.panel.customers.no_activity",
+      "enUS": "No customer activity",
+      "esES": "No hay actividad de clientes",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Store",
+      "key": "ui.store.panel.customers.patience",
+      "enUS": "Patience {seconds}s",
+      "esES": "Paciencia: {seconds} s",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Store",
+      "key": "ui.store.panel.customers.title",
+      "enUS": "Customers",
+      "esES": "Clientes",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Store",
+      "key": "ui.store.panel.customers.visitors",
+      "enUS": "Visitors",
+      "esES": "Visitantes",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Store",
+      "key": "ui.store.panel.customers.visitors_status",
+      "enUS": "Admitted today",
+      "esES": "Admitidos hoy",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Store",
+      "key": "ui.store.panel.day_cycle.authority",
+      "enUS": "24-hour SimulationClock authority · Open 08:00–22:00",
+      "esES": "Autoridad de SimulationClock de 24 horas · Abierta de 08:00 a 22:00",
+      "status": "PROPOSED",
+      "sourceAliases": [
+        "24-hour SimulationClock authority · Open 08:00–22:00",
+        "24-hour simulation clock · Open 08:00–22:00"
+      ]
+    },
+    {
+      "table": "UI_Store",
+      "key": "ui.store.panel.day_cycle.auto_closing",
+      "enUS": "Automatic closing enabled",
+      "esES": "Cierre automático activado",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Store",
+      "key": "ui.store.panel.day_cycle.day",
+      "enUS": "Day",
+      "esES": "Día",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Store",
+      "key": "ui.store.panel.day_cycle.manual_closing",
+      "enUS": "Manual closing",
+      "esES": "Cierre manual",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Store",
+      "key": "ui.store.panel.day_cycle.pause_independent",
+      "enUS": "Pause is independent from speed",
+      "esES": "La pausa es independiente de la velocidad",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Store",
+      "key": "ui.store.panel.day_cycle.speed",
+      "enUS": "Speed",
+      "esES": "Velocidad",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Store",
+      "key": "ui.store.panel.day_cycle.state",
+      "enUS": "State",
+      "esES": "Estado",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Store",
+      "key": "ui.store.panel.day_cycle.time",
+      "enUS": "Time",
+      "esES": "Hora",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Store",
+      "key": "ui.store.panel.day_cycle.title",
+      "enUS": "Day Cycle",
+      "esES": "Jornada",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Store",
+      "key": "ui.store.panel.displays.no_displays",
+      "enUS": "No displays registered",
+      "esES": "No hay expositores registrados",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Store",
+      "key": "ui.store.panel.displays.title",
+      "enUS": "Displays & Restocking",
+      "esES": "Expositores y reposición",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Store",
+      "key": "ui.store.panel.economy.current_cash",
+      "enUS": "Current session cash",
+      "esES": "Caja de la sesión actual",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Store",
+      "key": "ui.store.panel.economy.gross",
+      "enUS": "Gross result",
+      "esES": "Resultado bruto",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Store",
+      "key": "ui.store.panel.economy.gross_status",
+      "enUS": "Revenue minus received costs",
+      "esES": "Ingresos menos costes recibidos",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Store",
+      "key": "ui.store.panel.economy.net",
+      "enUS": "Net result",
+      "esES": "Resultado neto",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Store",
+      "key": "ui.store.panel.economy.revenue",
+      "enUS": "Revenue",
+      "esES": "Ingresos",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Store",
+      "key": "ui.store.panel.economy.revenue_status",
+      "enUS": "Checkout revenue",
+      "esES": "Ingresos de caja",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Store",
+      "key": "ui.store.panel.economy.supplier_costs",
+      "enUS": "Supplier costs",
+      "esES": "Costes de proveedores",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Store",
+      "key": "ui.store.panel.economy.supplier_costs_status",
+      "enUS": "Received costs",
+      "esES": "Costes recibidos",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Store",
+      "key": "ui.store.panel.economy.tax",
+      "enUS": "Tax",
+      "esES": "Impuestos",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Store",
+      "key": "ui.store.panel.economy.tax_status",
+      "enUS": "Weekly tax recognized once",
+      "esES": "Impuesto semanal contabilizado una sola vez",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Store",
+      "key": "ui.store.panel.economy.title",
+      "enUS": "Economy & Daily Results",
+      "esES": "Economía y resultados diarios",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Store",
+      "key": "ui.store.panel.help.activate",
+      "enUS": "Activate focused control",
+      "esES": "Activar el control con foco",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Store",
+      "key": "ui.store.panel.help.autosave_once",
+      "enUS": "Runs once after a valid closed day",
+      "esES": "Se ejecuta una vez tras cerrar correctamente una jornada",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Store",
+      "key": "ui.store.panel.help.back",
+      "enUS": "Back",
+      "esES": "Atrás",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Store",
+      "key": "ui.store.panel.help.close_layer",
+      "enUS": "Close the top layer",
+      "esES": "Cerrar la capa superior",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Store",
+      "key": "ui.store.panel.help.management",
+      "enUS": "Management",
+      "esES": "Gestión",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Store",
+      "key": "ui.store.panel.help.move_focus",
+      "enUS": "Move focus",
+      "esES": "Mover el foco",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Store",
+      "key": "ui.store.panel.help.navigation",
+      "enUS": "Navigation",
+      "esES": "Navegación",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Store",
+      "key": "ui.store.panel.help.open_panels",
+      "enUS": "Open system panels",
+      "esES": "Abrir paneles del sistema",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Store",
+      "key": "ui.store.panel.help.saving",
+      "enUS": "Saving",
+      "esES": "Guardado",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Store",
+      "key": "ui.store.panel.history.day",
+      "enUS": "Day {day}",
+      "esES": "Día {day}",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Store",
+      "key": "ui.store.panel.history.detail",
+      "enUS": "Detailed · {sales} sales · {visitors} visitors",
+      "esES": "Detallado · {sales} ventas · {visitors} visitantes",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Store",
+      "key": "ui.store.panel.history.detail_state",
+      "enUS": "Detailed · {sales} sales · {visitors} visitors · {state}",
+      "esES": "Detallado · {sales} ventas · {visitors} visitantes · {state}",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Store",
+      "key": "ui.store.panel.history.none",
+      "enUS": "No management history recorded",
+      "esES": "No hay historial de gestión registrado",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Store",
+      "key": "ui.store.panel.history.receipt",
+      "enUS": "Receipt {orderId}",
+      "esES": "Recepción {orderId}",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Store",
+      "key": "ui.store.panel.history.sale",
+      "enUS": "Sale {transactionId}",
+      "esES": "Venta {transactionId}",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Store",
+      "key": "ui.store.panel.history.summary",
+      "enUS": "Summary · {visitors} visitors",
+      "esES": "Resumen · {visitors} visitantes",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Store",
+      "key": "ui.store.panel.history.summary_sales",
+      "enUS": "Summary · {sales} sales · {visitors} visitors",
+      "esES": "Resumen · {sales} ventas · {visitors} visitantes",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Store",
+      "key": "ui.store.panel.history.title",
+      "enUS": "Recent Detail & Daily Summaries",
+      "esES": "Detalle reciente y resúmenes diarios",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Store",
+      "key": "ui.store.panel.history.units",
+      "enUS": "{units} unit(s)",
+      "esES": "{units} unidad(es)",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Store",
+      "key": "ui.store.panel.history.zero_days",
+      "enUS": "0 days",
+      "esES": "0 días",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Store",
+      "key": "ui.store.panel.inventory.empty",
+      "enUS": "Empty",
+      "esES": "Vacío",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Store",
+      "key": "ui.store.panel.inventory.on_hand",
+      "enUS": "On Hand",
+      "esES": "Existencias",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Store",
+      "key": "ui.store.panel.inventory.stocked",
+      "enUS": "Stocked",
+      "esES": "Con stock",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Store",
+      "key": "ui.store.panel.inventory.title",
+      "enUS": "Inventory",
+      "esES": "Inventario",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Store",
+      "key": "ui.store.panel.overview.available_cash",
+      "enUS": "Available cash",
+      "esES": "Caja disponible",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Store",
+      "key": "ui.store.panel.overview.available_cash_status",
+      "enUS": "Cash minus reservations",
+      "esES": "Caja menos reservas",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Store",
+      "key": "ui.store.panel.overview.buyers_sales",
+      "enUS": "Buyers / Sales",
+      "esES": "Compradores / Ventas",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Store",
+      "key": "ui.store.panel.overview.buyers_sales_status",
+      "enUS": "Purchased visits and transactions",
+      "esES": "Visitas con compra y transacciones",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Store",
+      "key": "ui.store.panel.overview.cash",
+      "enUS": "Cash",
+      "esES": "Caja",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Store",
+      "key": "ui.store.panel.overview.cash_status",
+      "enUS": "Current balance",
+      "esES": "Saldo actual",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Store",
+      "key": "ui.store.panel.overview.customers_admitted",
+      "enUS": "Customers admitted",
+      "esES": "Clientes admitidos",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Store",
+      "key": "ui.store.panel.overview.day_costs",
+      "enUS": "Day costs",
+      "esES": "Costes del día",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Store",
+      "key": "ui.store.panel.overview.day_costs_status",
+      "enUS": "Received supplier costs",
+      "esES": "Costes de proveedores recibidos",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Store",
+      "key": "ui.store.panel.overview.day_net",
+      "enUS": "Day net",
+      "esES": "Resultado neto del día",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Store",
+      "key": "ui.store.panel.overview.day_revenue",
+      "enUS": "Day revenue",
+      "esES": "Ingresos del día",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Store",
+      "key": "ui.store.panel.overview.day_revenue_status",
+      "enUS": "Confirmed checkout revenue",
+      "esES": "Ingresos confirmados en caja",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Store",
+      "key": "ui.store.panel.overview.day_tax",
+      "enUS": "Day tax",
+      "esES": "Impuestos del día",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Store",
+      "key": "ui.store.panel.overview.day_tax_status",
+      "enUS": "Weekly tax posted on this day",
+      "esES": "Impuesto semanal contabilizado este día",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Store",
+      "key": "ui.store.panel.overview.pending_orders",
+      "enUS": "Pending supplier orders",
+      "esES": "Pedidos pendientes a proveedores",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Store",
+      "key": "ui.store.panel.overview.title",
+      "enUS": "Management Overview",
+      "esES": "Resumen de gestión",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Store",
+      "key": "ui.store.panel.shopping.cart",
+      "enUS": "Cart {quantity}",
+      "esES": "Carrito: {quantity}",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Store",
+      "key": "ui.store.panel.shopping.no_sessions",
+      "enUS": "No sessions or reservations",
+      "esES": "No hay sesiones ni reservas",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Store",
+      "key": "ui.store.panel.shopping.reservation",
+      "enUS": "Reservation {quantity}",
+      "esES": "Reserva: {quantity}",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Store",
+      "key": "ui.store.panel.shopping.title",
+      "enUS": "Shopping & Reservations",
+      "esES": "Compras y reservas",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Store",
+      "key": "ui.store.panel.suppliers.no_orders",
+      "enUS": "No supplier orders",
+      "esES": "No hay pedidos a proveedores",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Store",
+      "key": "ui.store.panel.suppliers.orders",
+      "enUS": "Orders",
+      "esES": "Pedidos",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Store",
+      "key": "ui.store.panel.suppliers.title",
+      "enUS": "Suppliers, Orders & Delivery Runs",
+      "esES": "Proveedores, pedidos y entregas",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Store",
+      "key": "ui.store.panel.weekly.accumulated",
+      "enUS": "Accumulated this week",
+      "esES": "Acumulados esta semana",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Store",
+      "key": "ui.store.panel.weekly.applied_once",
+      "enUS": "Applied exactly once",
+      "esES": "Aplicado una sola vez",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Store",
+      "key": "ui.store.panel.weekly.current_costs",
+      "enUS": "Current supplier costs",
+      "esES": "Costes actuales de proveedores",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Store",
+      "key": "ui.store.panel.weekly.current_gross",
+      "enUS": "Current gross",
+      "esES": "Resultado bruto actual",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Store",
+      "key": "ui.store.panel.weekly.current_revenue",
+      "enUS": "Current revenue",
+      "esES": "Ingresos actuales",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Store",
+      "key": "ui.store.panel.weekly.gross_at_settlement",
+      "enUS": "Gross result at settlement",
+      "esES": "Resultado bruto al liquidar",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Store",
+      "key": "ui.store.panel.weekly.last_gross",
+      "enUS": "Last gross",
+      "esES": "Último resultado bruto",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Store",
+      "key": "ui.store.panel.weekly.last_tax",
+      "enUS": "Last tax",
+      "esES": "Último impuesto",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Store",
+      "key": "ui.store.panel.weekly.last_week",
+      "enUS": "Last settled week",
+      "esES": "Última semana liquidada",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Store",
+      "key": "ui.store.panel.weekly.recognized",
+      "enUS": "Recognized this week",
+      "esES": "Contabilizados esta semana",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Store",
+      "key": "ui.store.panel.weekly.tax_base",
+      "enUS": "Tax base candidate",
+      "esES": "Base imponible estimada",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Store",
+      "key": "ui.store.panel.weekly.tax_formula",
+      "enUS": "10% of positive gross result",
+      "esES": "10 % del resultado bruto positivo",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Store",
+      "key": "ui.store.panel.weekly.title",
+      "enUS": "Weekly Economy",
+      "esES": "Economía semanal",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Store",
+      "key": "ui.store.pause.return_body",
+      "enUS": "Manual saves are available from pause only in safe store states. Unsaved progress may be lost.",
+      "esES": "El guardado manual desde la pausa solo está disponible en estados seguros de la tienda. El progreso no guardado podría perderse.",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Store",
+      "key": "ui.store.pause.return_title",
+      "enUS": "Return to Main Menu?",
+      "esES": "¿Volver al menú principal?",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Store",
+      "key": "ui.store.pause.runtime_resumed",
+      "enUS": "Simulation resumed at {speed}.",
+      "esES": "Simulación reanudada a {speed}.",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Store",
+      "key": "ui.store.pause.runtime_status",
+      "enUS": "Simulation paused. Selected speed: {speed}.",
+      "esES": "Simulación en pausa. Velocidad seleccionada: {speed}.",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Store",
+      "key": "ui.store.pause.status",
+      "enUS": "Simulation paused. Selected speed: ×{speed}",
+      "esES": "Simulación en pausa. Velocidad seleccionada: ×{speed}",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Store",
+      "key": "ui.store.speed_change_blocked",
+      "enUS": "Speed Change Blocked",
+      "esES": "Cambio de velocidad bloqueado",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Store",
+      "key": "ui.store.tutorial.skip_body",
+      "enUS": "You can restart it later from Accessibility.",
+      "esES": "Puedes reiniciarlo más tarde desde Accesibilidad.",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Store",
+      "key": "ui.store.tutorial.skip_title",
+      "enUS": "Skip tutorial?",
+      "esES": "¿Omitir el tutorial?",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Store",
+      "key": "ui.store.tutorial.target",
+      "enUS": "Target: {target}",
+      "esES": "Objetivo: {target}",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Store",
+      "key": "ui.store.weekly.accept_notice",
+      "enUS": "Accept this summary to continue.",
+      "esES": "Acepta este resumen para continuar.",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Store",
+      "key": "ui.store.weekly.cash_after_tax",
+      "enUS": "Cash after tax: {amount}",
+      "esES": "Caja después de impuestos: {amount}",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Store",
+      "key": "ui.store.weekly.cash_before_tax",
+      "enUS": "Cash before tax: {amount}",
+      "esES": "Caja antes de impuestos: {amount}",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Store",
+      "key": "ui.store.weekly.continue_next_day",
+      "enUS": "Continue to Next Day",
+      "esES": "Continuar al día siguiente",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Store",
+      "key": "ui.store.weekly.customers",
+      "enUS": "Customers: {visitors} · Buyers: {buyers} · Abandoned: {abandoned}",
+      "esES": "Clientes: {visitors} · Compradores: {buyers} · Abandonos: {abandoned}",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Store",
+      "key": "ui.store.weekly.days",
+      "enUS": "Days {firstDay}–{lastDay}",
+      "esES": "Días {firstDay}–{lastDay}",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Store",
+      "key": "ui.store.weekly.gross_result",
+      "enUS": "Gross result: {amount}",
+      "esES": "Resultado bruto: {amount}",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Store",
+      "key": "ui.store.weekly.legacy_breakdown",
+      "enUS": "Detailed day breakdown is unavailable for this legacy save.",
+      "esES": "El desglose detallado por jornadas no está disponible para este guardado antiguo.",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Store",
+      "key": "ui.store.weekly.net_result",
+      "enUS": "Net result: {amount}",
+      "esES": "Resultado neto: {amount}",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Store",
+      "key": "ui.store.weekly.no_positive_result",
+      "enUS": "(weekly result was not positive)",
+      "esES": "(el resultado semanal no fue positivo)",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Store",
+      "key": "ui.store.weekly.orders_received",
+      "enUS": "Orders received: {count}",
+      "esES": "Pedidos recibidos: {count}",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Store",
+      "key": "ui.store.weekly.revenue",
+      "enUS": "Revenue: {amount}",
+      "esES": "Ingresos: {amount}",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Store",
+      "key": "ui.store.weekly.sales_units",
+      "enUS": "Sales: {sales} · Units sold: {units}",
+      "esES": "Ventas: {sales} · Unidades vendidas: {units}",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Store",
+      "key": "ui.store.weekly.supplier_costs",
+      "enUS": "Supplier costs: {amount}",
+      "esES": "Costes de proveedores: {amount}",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Store",
+      "key": "ui.store.weekly.tax_deducted",
+      "enUS": "Tax deducted now: -{amount}",
+      "esES": "Impuestos descontados ahora: -{amount}",
+      "status": "PROPOSED",
+      "sourceAliases": [
+        "Tax deducted now: -{amount}",
+        "Tax deducted now: −{amount}"
+      ]
+    },
+    {
+      "table": "UI_Store",
+      "key": "ui.store.weekly.tax_due",
+      "enUS": "Tax due: {amount}",
+      "esES": "Impuestos: {amount}",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Store",
+      "key": "ui.store.weekly.tax_due_non_positive",
+      "enUS": "Tax due: {amount} (weekly result was not positive)",
+      "esES": "Impuestos: {amount} (el resultado semanal no fue positivo)",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Store",
+      "key": "ui.store.weekly.title",
+      "enUS": "Week {week} Complete",
+      "esES": "Semana {week} completada",
+      "status": "PROPOSED"
+    },
+    {
+      "table": "UI_Store",
+      "key": "ui.store.weekly_not_ready",
+      "enUS": "The weekly summary cannot be accepted yet: {reason}",
+      "esES": "El resumen semanal aún no se puede aceptar: {reason}",
+      "status": "PROPOSED"
+    }
+  ]
+}

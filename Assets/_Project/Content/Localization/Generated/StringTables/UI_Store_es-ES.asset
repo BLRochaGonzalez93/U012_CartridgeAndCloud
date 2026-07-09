@@ -1,0 +1,703 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
+  m_Name: UI_Store_es-ES
+  m_EditorClassIdentifier: Unity.Localization::UnityEngine.Localization.Tables.StringTable
+  m_LocaleId:
+    m_Code: es-ES
+  m_SharedData: {fileID: 11400000, guid: 400c434cda26c744881d66f459e46286, type: 2}
+  m_Metadata:
+    m_Items: []
+  m_TableData:
+  - m_Id: 191381504
+    m_Localized: Tutorial activado
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964416
+    m_Localized: Cerrada por hoy
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964417
+    m_Localized: "Transici\xF3n de jornada bloqueada"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964418
+    m_Localized: "\xB7 Acceso bloqueado"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964419
+    m_Localized: 'Caja: {cash}'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964420
+    m_Localized: Caja --
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964421
+    m_Localized: "\xB7 Caja disponible"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964422
+    m_Localized: "\xB7 Caja no disponible"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964423
+    m_Localized: 'Clientes: {count}'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964424
+    m_Localized: Clientes {count}/{maximum}
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964425
+    m_Localized: Clientes {count}
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964426
+    m_Localized: Clientes --
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964427
+    m_Localized: "D\xEDa {day}"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964428
+    m_Localized: "D\xEDa --"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964429
+    m_Localized: "En pausa \xB7 {speed}"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964430
+    m_Localized: "En pausa \xB7 velocidad seleccionada \xD7{speed}"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964431
+    m_Localized: 'Cola: {count}'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964432
+    m_Localized: Cola {count}
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964433
+    m_Localized: Cola --
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964434
+    m_Localized: 'Guardado: {status}'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964435
+    m_Localized: Guardado --
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964436
+    m_Localized: Guardado {status}
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964437
+    m_Localized: "Velocidad \xD7{speed}"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964438
+    m_Localized: Velocidad {speed}
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964439
+    m_Localized: 'Estado: {state}'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964440
+    m_Localized: Estado --
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964441
+    m_Localized: Caja
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964442
+    m_Localized: Clientes
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964443
+    m_Localized: Jornada
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964444
+    m_Localized: Expositores
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964445
+    m_Localized: "Econom\xEDa"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964446
+    m_Localized: "GESTI\xD3N"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964447
+    m_Localized: Historial
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964448
+    m_Localized: Inventario
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964449
+    m_Localized: Resumen
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964450
+    m_Localized: Compras
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964451
+    m_Localized: Proveedores
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964452
+    m_Localized: Semanal
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964453
+    m_Localized: "Vuelve al men\xFA principal y selecciona Nueva partida o Continuar."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964454
+    m_Localized: No hay ninguna ranura activa
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964455
+    m_Localized: Abre a las {time}
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964456
+    m_Localized: Confirmaciones
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964457
+    m_Localized: Acciones destructivas
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964458
+    m_Localized: Preferencia global
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964459
+    m_Localized: Desactiva transiciones no esenciales
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964460
+    m_Localized: El progreso se guarda por ranura
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964461
+    m_Localized: No hay ninguna entrada actual
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964462
+    m_Localized: Completadas y guardadas
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964463
+    m_Localized: Cola y caja
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964464
+    m_Localized: Transacciones
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964465
+    m_Localized: Abandonos
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964466
+    m_Localized: Visitas finalizadas sin compra
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964467
+    m_Localized: Compradores
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964468
+    m_Localized: Visitas finalizadas con compra
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964469
+    m_Localized: No hay actividad de clientes
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964470
+    m_Localized: 'Paciencia: {seconds} s'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964471
+    m_Localized: Clientes
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964472
+    m_Localized: Visitantes
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964473
+    m_Localized: Admitidos hoy
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964474
+    m_Localized: "Autoridad de SimulationClock de 24 horas \xB7 Abierta de 08:00
+      a 22:00"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964475
+    m_Localized: "Cierre autom\xE1tico activado"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964476
+    m_Localized: "D\xEDa"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964477
+    m_Localized: Cierre manual
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964478
+    m_Localized: La pausa es independiente de la velocidad
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964479
+    m_Localized: Velocidad
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964480
+    m_Localized: Estado
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964481
+    m_Localized: Hora
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964482
+    m_Localized: Jornada
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964483
+    m_Localized: No hay expositores registrados
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964484
+    m_Localized: "Expositores y reposici\xF3n"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964485
+    m_Localized: "Caja de la sesi\xF3n actual"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964486
+    m_Localized: Resultado bruto
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964487
+    m_Localized: Ingresos menos costes recibidos
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964488
+    m_Localized: Resultado neto
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964489
+    m_Localized: Ingresos
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964490
+    m_Localized: Ingresos de caja
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964491
+    m_Localized: Costes de proveedores
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964492
+    m_Localized: Costes recibidos
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964493
+    m_Localized: Impuestos
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964494
+    m_Localized: Impuesto semanal contabilizado una sola vez
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964495
+    m_Localized: "Econom\xEDa y resultados diarios"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964496
+    m_Localized: Activar el control con foco
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964497
+    m_Localized: Se ejecuta una vez tras cerrar correctamente una jornada
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964498
+    m_Localized: "Atr\xE1s"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964499
+    m_Localized: Cerrar la capa superior
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964500
+    m_Localized: "Gesti\xF3n"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964501
+    m_Localized: Mover el foco
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964502
+    m_Localized: "Navegaci\xF3n"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964503
+    m_Localized: Abrir paneles del sistema
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964504
+    m_Localized: Guardado
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964505
+    m_Localized: "D\xEDa {day}"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964506
+    m_Localized: "Detallado \xB7 {sales} ventas \xB7 {visitors} visitantes"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964507
+    m_Localized: "Detallado \xB7 {sales} ventas \xB7 {visitors} visitantes \xB7 {state}"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964508
+    m_Localized: "No hay historial de gesti\xF3n registrado"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964509
+    m_Localized: "Recepci\xF3n {orderId}"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964510
+    m_Localized: Venta {transactionId}
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964511
+    m_Localized: "Resumen \xB7 {visitors} visitantes"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964512
+    m_Localized: "Resumen \xB7 {sales} ventas \xB7 {visitors} visitantes"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964513
+    m_Localized: "Detalle reciente y res\xFAmenes diarios"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964514
+    m_Localized: '{units} unidad(es)'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964515
+    m_Localized: "0 d\xEDas"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964516
+    m_Localized: "Vac\xEDo"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964517
+    m_Localized: Existencias
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964518
+    m_Localized: Con stock
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964519
+    m_Localized: Inventario
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964520
+    m_Localized: Caja disponible
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964521
+    m_Localized: Caja menos reservas
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964522
+    m_Localized: Compradores / Ventas
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964523
+    m_Localized: Visitas con compra y transacciones
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964524
+    m_Localized: Caja
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964525
+    m_Localized: Saldo actual
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964526
+    m_Localized: Clientes admitidos
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964527
+    m_Localized: "Costes del d\xEDa"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964528
+    m_Localized: Costes de proveedores recibidos
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964529
+    m_Localized: "Resultado neto del d\xEDa"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964530
+    m_Localized: "Ingresos del d\xEDa"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964531
+    m_Localized: Ingresos confirmados en caja
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964532
+    m_Localized: "Impuestos del d\xEDa"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964533
+    m_Localized: "Impuesto semanal contabilizado este d\xEDa"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964534
+    m_Localized: Pedidos pendientes a proveedores
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964535
+    m_Localized: "Resumen de gesti\xF3n"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964536
+    m_Localized: 'Carrito: {quantity}'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964537
+    m_Localized: No hay sesiones ni reservas
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964538
+    m_Localized: 'Reserva: {quantity}'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964539
+    m_Localized: Compras y reservas
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964540
+    m_Localized: No hay pedidos a proveedores
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964541
+    m_Localized: Pedidos
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964542
+    m_Localized: Proveedores, pedidos y entregas
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964543
+    m_Localized: Acumulados esta semana
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964544
+    m_Localized: Aplicado una sola vez
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964545
+    m_Localized: Costes actuales de proveedores
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964546
+    m_Localized: Resultado bruto actual
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964547
+    m_Localized: Ingresos actuales
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964548
+    m_Localized: Resultado bruto al liquidar
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964549
+    m_Localized: "\xDAltimo resultado bruto"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964550
+    m_Localized: "\xDAltimo impuesto"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964551
+    m_Localized: "\xDAltima semana liquidada"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964552
+    m_Localized: Contabilizados esta semana
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964553
+    m_Localized: Base imponible estimada
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964554
+    m_Localized: 10 % del resultado bruto positivo
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964555
+    m_Localized: "Econom\xEDa semanal"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964556
+    m_Localized: "El guardado manual desde la pausa solo est\xE1 disponible en estados
+      seguros de la tienda. El progreso no guardado podr\xEDa perderse."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964557
+    m_Localized: "\xBFVolver al men\xFA principal?"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964558
+    m_Localized: "Simulaci\xF3n reanudada a {speed}."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964559
+    m_Localized: "Simulaci\xF3n en pausa. Velocidad seleccionada: {speed}."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964560
+    m_Localized: "Simulaci\xF3n en pausa. Velocidad seleccionada: \xD7{speed}"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964561
+    m_Localized: Cambio de velocidad bloqueado
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964562
+    m_Localized: "Puedes reiniciarlo m\xE1s tarde desde Accesibilidad."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964563
+    m_Localized: "\xBFOmitir el tutorial?"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964564
+    m_Localized: 'Objetivo: {target}'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964565
+    m_Localized: Acepta este resumen para continuar.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964566
+    m_Localized: "Caja despu\xE9s de impuestos: {amount}"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964567
+    m_Localized: 'Caja antes de impuestos: {amount}'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964568
+    m_Localized: "Continuar al d\xEDa siguiente"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964569
+    m_Localized: "Clientes: {visitors} \xB7 Compradores: {buyers} \xB7 Abandonos:
+      {abandoned}"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964570
+    m_Localized: "D\xEDas {firstDay}\u2013{lastDay}"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964571
+    m_Localized: 'Resultado bruto: {amount}'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964572
+    m_Localized: "El desglose detallado por jornadas no est\xE1 disponible para este
+      guardado antiguo."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964573
+    m_Localized: 'Resultado neto: {amount}'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964574
+    m_Localized: (el resultado semanal no fue positivo)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964575
+    m_Localized: 'Pedidos recibidos: {count}'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964576
+    m_Localized: 'Ingresos: {amount}'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964577
+    m_Localized: "Ventas: {sales} \xB7 Unidades vendidas: {units}"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964578
+    m_Localized: 'Costes de proveedores: {amount}'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964579
+    m_Localized: 'Impuestos descontados ahora: -{amount}'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964580
+    m_Localized: 'Impuestos: {amount}'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964581
+    m_Localized: 'Impuestos: {amount} (el resultado semanal no fue positivo)'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964582
+    m_Localized: Semana {week} completada
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964583
+    m_Localized: "El resumen semanal a\xFAn no se puede aceptar: {reason}"
+    m_Metadata:
+      m_Items: []
+  references:
+    version: 2
+    RefIds: []

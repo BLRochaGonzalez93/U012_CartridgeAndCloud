@@ -1,0 +1,167 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
+  m_Name: Feedback_en-US
+  m_EditorClassIdentifier: Unity.Localization::UnityEngine.Localization.Tables.StringTable
+  m_LocaleId:
+    m_Code: en-US
+  m_SharedData: {fileID: 11400000, guid: c2f4a1cb9c9595244b0cdf63faeb913e, type: 2}
+  m_Metadata:
+    m_Items: []
+  m_TableData:
+  - m_Id: 191381504
+    m_Localized: Autosave completed.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964416
+    m_Localized: Customer admitted.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964417
+    m_Localized: Customer is evaluating a product.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964418
+    m_Localized: Customer found no visible products and is leaving without a purchase.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964419
+    m_Localized: Customer joined the checkout queue.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964420
+    m_Localized: Product reserved for customer cart.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964421
+    m_Localized: Customer satisfied.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964422
+    m_Localized: Customer visit recorded.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964423
+    m_Localized: Received delivery paid from reserved funds.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964424
+    m_Localized: A consolidated delivery run is on its way.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964425
+    m_Localized: A delivery run is on its way.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964426
+    m_Localized: Automatic door closed.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964427
+    m_Localized: Automatic door opened.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964428
+    m_Localized: '{itemName} placed.'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964429
+    m_Localized: Furniture removed and returned.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964430
+    m_Localized: '{itemName} returned to the warehouse.'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964431
+    m_Localized: Manual save completed.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964432
+    m_Localized: Order {orderId} placed.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964433
+    m_Localized: 'Placement blocked: {reason}'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964434
+    m_Localized: Placement confirmed.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964435
+    m_Localized: Furniture removed.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964436
+    m_Localized: '{itemName} selected.'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964437
+    m_Localized: Placement valid.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964438
+    m_Localized: Product assigned.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964439
+    m_Localized: Product assignment cleared.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964440
+    m_Localized: Restocked {quantity} units.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964441
+    m_Localized: Returned {quantity} units to the backroom.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964442
+    m_Localized: Returned {quantity} units and cleared the assignment.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964443
+    m_Localized: Sale completed.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964444
+    m_Localized: '{productName} sold.'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964445
+    m_Localized: Day closed at 24:00.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964446
+    m_Localized: Store closed. It may reopen before 22:00.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964447
+    m_Localized: Store is closing.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964448
+    m_Localized: Customer purchase completed.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964449
+    m_Localized: Furniture can be removed.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 16628949991424
+    m_Localized: Checkout is placed, active and reachable.
+    m_Metadata:
+      m_Items: []
+  references:
+    version: 2
+    RefIds: []

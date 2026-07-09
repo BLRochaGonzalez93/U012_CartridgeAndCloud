@@ -1,0 +1,188 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b11a58205ec3474ca216360e9fa74a8, type: 3}
+  m_Name: UI_MainMenu Shared Data
+  m_EditorClassIdentifier: Unity.Localization::UnityEngine.Localization.Tables.SharedTableData
+  m_TableCollectionName: UI_MainMenu
+  m_TableCollectionNameGuidString: 9c738ae3b1d674d4593f5c8b6943b460
+  m_Entries:
+  - m_Id: 182992896
+    m_Key: ui.main_menu.accessibility.confirmations
+    m_Metadata:
+      m_Items: []
+  - m_Id: 195575808
+    m_Key: ui.main_menu.accessibility.language
+    m_Metadata:
+      m_Items: []
+  - m_Id: 195575809
+    m_Key: ui.main_menu.accessibility.reduced_motion
+    m_Metadata:
+      m_Items: []
+  - m_Id: 195575810
+    m_Key: ui.main_menu.accessibility.text_scale
+    m_Metadata:
+      m_Items: []
+  - m_Id: 195575811
+    m_Key: ui.main_menu.accessibility.tutorial
+    m_Metadata:
+      m_Items: []
+  - m_Id: 195575812
+    m_Key: ui.main_menu.accessibility.ui_scale
+    m_Metadata:
+      m_Items: []
+  - m_Id: 195575813
+    m_Key: ui.main_menu.backup_status
+    m_Metadata:
+      m_Items: []
+  - m_Id: 195575814
+    m_Key: ui.main_menu.corrupt_no_backup
+    m_Metadata:
+      m_Items: []
+  - m_Id: 195575815
+    m_Key: ui.main_menu.delete_body
+    m_Metadata:
+      m_Items: []
+  - m_Id: 195575816
+    m_Key: ui.main_menu.delete_title
+    m_Metadata:
+      m_Items: []
+  - m_Id: 195575817
+    m_Key: ui.main_menu.empty_slot
+    m_Metadata:
+      m_Items: []
+  - m_Id: 195575818
+    m_Key: ui.main_menu.error.replace_confirmation_required
+    m_Metadata:
+      m_Items: []
+  - m_Id: 195575819
+    m_Key: ui.main_menu.help.autosave
+    m_Metadata:
+      m_Items: []
+  - m_Id: 195575820
+    m_Key: ui.main_menu.help.backup
+    m_Metadata:
+      m_Items: []
+  - m_Id: 195575821
+    m_Key: ui.main_menu.help.keyboard_activate
+    m_Metadata:
+      m_Items: []
+  - m_Id: 195575822
+    m_Key: ui.main_menu.help.keyboard_escape
+    m_Metadata:
+      m_Items: []
+  - m_Id: 195575823
+    m_Key: ui.main_menu.help.keyboard_focus
+    m_Metadata:
+      m_Items: []
+  - m_Id: 195575824
+    m_Key: ui.main_menu.help.keyboard_heading
+    m_Metadata:
+      m_Items: []
+  - m_Id: 195575825
+    m_Key: ui.main_menu.help.mouse_body
+    m_Metadata:
+      m_Items: []
+  - m_Id: 195575826
+    m_Key: ui.main_menu.help.mouse_heading
+    m_Metadata:
+      m_Items: []
+  - m_Id: 195575827
+    m_Key: ui.main_menu.help.saving_heading
+    m_Metadata:
+      m_Items: []
+  - m_Id: 195575828
+    m_Key: ui.main_menu.help.store_ui_body
+    m_Metadata:
+      m_Items: []
+  - m_Id: 195575829
+    m_Key: ui.main_menu.help.store_ui_heading
+    m_Metadata:
+      m_Items: []
+  - m_Id: 195575830
+    m_Key: ui.main_menu.quit_body
+    m_Metadata:
+      m_Items: []
+  - m_Id: 195575831
+    m_Key: ui.main_menu.quit_title
+    m_Metadata:
+      m_Items: []
+  - m_Id: 195575832
+    m_Key: ui.main_menu.recovered_suffix
+    m_Metadata:
+      m_Items: []
+  - m_Id: 195575833
+    m_Key: ui.main_menu.replace_body
+    m_Metadata:
+      m_Items: []
+  - m_Id: 195575834
+    m_Key: ui.main_menu.replace_title
+    m_Metadata:
+      m_Items: []
+  - m_Id: 195575835
+    m_Key: ui.main_menu.select_slot
+    m_Metadata:
+      m_Items: []
+  - m_Id: 195575836
+    m_Key: ui.main_menu.slot_heading
+    m_Metadata:
+      m_Items: []
+  - m_Id: 195575837
+    m_Key: ui.main_menu.slot_recovered
+    m_Metadata:
+      m_Items: []
+  - m_Id: 195575838
+    m_Key: ui.main_menu.slot_summary
+    m_Metadata:
+      m_Items: []
+  - m_Id: 195575839
+    m_Key: ui.main_menu.status.backup_restored
+    m_Metadata:
+      m_Items: []
+  - m_Id: 195575840
+    m_Key: ui.main_menu.status.delete_confirmation_required
+    m_Metadata:
+      m_Items: []
+  - m_Id: 195575841
+    m_Key: ui.main_menu.status.new_game_created
+    m_Metadata:
+      m_Items: []
+  - m_Id: 195575842
+    m_Key: ui.main_menu.status.slot_already_empty
+    m_Metadata:
+      m_Items: []
+  - m_Id: 195575843
+    m_Key: ui.main_menu.status.slot_deleted
+    m_Metadata:
+      m_Items: []
+  - m_Id: 195575844
+    m_Key: ui.main_menu.storage_unavailable
+    m_Metadata:
+      m_Items: []
+  - m_Id: 195575845
+    m_Key: ui.main_menu.title
+    m_Metadata:
+      m_Items: []
+  - m_Id: 195575846
+    m_Key: ui.main_menu.unsupported_schema
+    m_Metadata:
+      m_Items: []
+  m_Metadata:
+    m_Items: []
+  m_KeyGenerator:
+    rid: 7413719049838788635
+  references:
+    version: 2
+    RefIds:
+    - rid: 7413719049838788635
+      type: {class: DistributedUIDGenerator, ns: UnityEngine.Localization.Tables, asm: Unity.Localization}
+      data:
+        m_CustomEpoch: 1783600781751

@@ -1,0 +1,151 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
+  m_Name: Content_es-ES
+  m_EditorClassIdentifier: Unity.Localization::UnityEngine.Localization.Tables.StringTable
+  m_LocaleId:
+    m_Code: es-ES
+  m_SharedData: {fileID: 11400000, guid: 3e1a78b1dae1bb94cb842b7c2de6a5f9, type: 2}
+  m_Metadata:
+    m_Items: []
+  m_TableData:
+  - m_Id: 187187200
+    m_Localized: "Almacenamiento de almac\xE9n"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770112
+    m_Localized: "Estanter\xEDa central"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770113
+    m_Localized: Mostrador de caja
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770114
+    m_Localized: Planta decorativa
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770115
+    m_Localized: Expositor destacado
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770116
+    m_Localized: Expositor bajo
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770117
+    m_Localized: "Caja de recepci\xF3n"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770118
+    m_Localized: "Estanter\xEDa de pared"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770119
+    m_Localized: Funda Cloud Runner
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770120
+    m_Localized: Accesorio Memory Core
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770121
+    m_Localized: Neon Drift
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770122
+    m_Localized: Mando Orbit Pad
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770123
+    m_Localized: Auriculares Signal Pro
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770124
+    m_Localized: Consola Vertex One
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770125
+    m_Localized: Visitante ocasional
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770126
+    m_Localized: Coleccionista
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770127
+    m_Localized: Comprador decidido
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770128
+    m_Localized: Visitante impaciente
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770129
+    m_Localized: Expositor de mostrador
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770130
+    m_Localized: Expositor de suelo
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770131
+    m_Localized: "Estanter\xEDa individual"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770132
+    m_Localized: Cloud Racers
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770133
+    m_Localized: Pixel Quest
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770134
+    m_Localized: Figura coleccionable Cloud Hero
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770135
+    m_Localized: Consola Nebula 8
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770136
+    m_Localized: Mando Orbit Pad
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770137
+    m_Localized: Tarjeta de memoria 64
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770138
+    m_Localized: Nebula Distribution
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770139
+    m_Localized: Pixel Parcel
+    m_Metadata:
+      m_Items: []
+  - m_Id: 16628706721792
+    m_Localized: Caja principal
+    m_Metadata:
+      m_Items: []
+  - m_Id: 16628731887616
+    m_Localized: "Inventario del almac\xE9n"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 16628731887617
+    m_Localized: Inventario de la tienda
+    m_Metadata:
+      m_Items: []
+  references:
+    version: 2
+    RefIds: []

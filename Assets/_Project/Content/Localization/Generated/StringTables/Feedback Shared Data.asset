@@ -1,0 +1,172 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b11a58205ec3474ca216360e9fa74a8, type: 3}
+  m_Name: Feedback Shared Data
+  m_EditorClassIdentifier: Unity.Localization::UnityEngine.Localization.Tables.SharedTableData
+  m_TableCollectionName: Feedback
+  m_TableCollectionNameGuidString: c2f4a1cb9c9595244b0cdf63faeb913e
+  m_Entries:
+  - m_Id: 191381504
+    m_Key: feedback.autosave.success
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964416
+    m_Key: feedback.customer.admitted_single
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964417
+    m_Key: feedback.customer.evaluating
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964418
+    m_Key: feedback.customer.no_products
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964419
+    m_Key: feedback.customer.queue_joined
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964420
+    m_Key: feedback.customer.reserved
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964421
+    m_Key: feedback.customer.satisfied
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964422
+    m_Key: feedback.customer.visit_recorded
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964423
+    m_Key: feedback.delivery.received
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964424
+    m_Key: feedback.delivery.run_consolidated
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964425
+    m_Key: feedback.delivery.run_single
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964426
+    m_Key: feedback.door.closed
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964427
+    m_Key: feedback.door.opened
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964428
+    m_Key: feedback.furniture.placed
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964429
+    m_Key: feedback.furniture.removed_returned
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964430
+    m_Key: feedback.furniture.warehouse
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964431
+    m_Key: feedback.manual_save.success
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964432
+    m_Key: feedback.order.placed
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964433
+    m_Key: feedback.placement.blocked
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964434
+    m_Key: feedback.placement.confirmed
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964435
+    m_Key: feedback.placement.removed
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964436
+    m_Key: feedback.placement.selected
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964437
+    m_Key: feedback.placement.valid
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964438
+    m_Key: feedback.product.assigned
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964439
+    m_Key: feedback.product.assignment_cleared
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964440
+    m_Key: feedback.product.restocked
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964441
+    m_Key: feedback.product.returned
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964442
+    m_Key: feedback.product.returned_cleared
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964443
+    m_Key: feedback.sale.completed
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964444
+    m_Key: feedback.sale.product_sold
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964445
+    m_Key: feedback.store.closed_midnight
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964446
+    m_Key: feedback.store.closed_reopen
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964447
+    m_Key: feedback.store.closing
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964448
+    m_Key: status.customer.purchase_completed
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203964449
+    m_Key: status.furniture.can_remove
+    m_Metadata:
+      m_Items: []
+  - m_Id: 16628949991424
+    m_Key: feedback.checkout.operational
+    m_Metadata:
+      m_Items: []
+  m_Metadata:
+    m_Items: []
+  m_KeyGenerator:
+    rid: 7413719049838788639
+  references:
+    version: 2
+    RefIds:
+    - rid: 7413719049838788639
+      type: {class: DistributedUIDGenerator, ns: UnityEngine.Localization.Tables, asm: Unity.Localization}
+      data:
+        m_CustomEpoch: 1783600781943

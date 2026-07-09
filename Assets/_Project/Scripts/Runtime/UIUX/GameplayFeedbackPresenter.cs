@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using VRMGames.CartridgeAndCloud.Application.UIUX;
 using VRMGames.CartridgeAndCloud.Domain.Economy;
+using VRMGames.CartridgeAndCloud.Infrastructure.Localization;
 using VRMGames.CartridgeAndCloud.Infrastructure.Store;
 using VRMGames.CartridgeAndCloud.Runtime.Audio;
 using VRMGames.CartridgeAndCloud.Runtime.Placement;
@@ -240,6 +241,7 @@ namespace VRMGames.CartridgeAndCloud.Runtime.UIUX
                 TextAnchor.MiddleCenter;
             _message.color = Color.white;
             _message.raycastTarget = false;
+            textObject.AddComponent<LocalizedTextWatcher>();
 
             _panel.gameObject.SetActive(false);
             _message.gameObject.SetActive(false);

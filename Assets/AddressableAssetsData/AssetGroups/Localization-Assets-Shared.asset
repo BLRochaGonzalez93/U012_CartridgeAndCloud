@@ -1,0 +1,77 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: Localization-Assets-Shared
+  m_EditorClassIdentifier: Unity.Addressables.Editor::UnityEditor.AddressableAssets.Settings.AddressableAssetGroup
+  m_GroupName: Localization-Assets-Shared
+  m_GUID: 2cdb143ac00e54a47b6187587bfb386e
+  m_SerializeEntries:
+  - m_GUID: 3e1a78b1dae1bb94cb842b7c2de6a5f9
+    m_Address: Assets/_Project/Content/Localization/Generated/StringTables/Content
+      Shared Data.asset
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 400c434cda26c744881d66f459e46286
+    m_Address: Assets/_Project/Content/Localization/Generated/StringTables/UI_Store
+      Shared Data.asset
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 650cb39a79510804abe85f7e9fbbffe5
+    m_Address: Assets/_Project/Content/Localization/Generated/StringTables/UI_Common
+      Shared Data.asset
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 8b66de3494122c2499588cbf75b1cff2
+    m_Address: Assets/_Project/Content/Localization/Generated/StringTables/UI_Operations
+      Shared Data.asset
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 9939ecb79cc84d64e90d4d7d15b45899
+    m_Address: Assets/_Project/Content/Localization/Generated/StringTables/Errors
+      Shared Data.asset
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 9c738ae3b1d674d4593f5c8b6943b460
+    m_Address: Assets/_Project/Content/Localization/Generated/StringTables/UI_MainMenu
+      Shared Data.asset
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: a575b2e493c4ae04a85932b115bb8344
+    m_Address: Assets/_Project/Content/Localization/Generated/StringTables/Tutorial
+      Shared Data.asset
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: c2f4a1cb9c9595244b0cdf63faeb913e
+    m_Address: Assets/_Project/Content/Localization/Generated/StringTables/Feedback
+      Shared Data.asset
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: e27d04303d560d941bbf554a7a264ddb
+    m_Address: Assets/_Project/Content/Localization/Generated/StringTables/Formats
+      Shared Data.asset
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  m_ReadOnly: 1
+  m_Settings: {fileID: 11400000, guid: d9a0e166850f8c64fad84c385a6ccc99, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: 39fabda2b4ac3ef45862da03641dd8e8, type: 2}
+    - {fileID: 11400000, guid: 5226d043dba00754a84b1654a03f39a9, type: 2}

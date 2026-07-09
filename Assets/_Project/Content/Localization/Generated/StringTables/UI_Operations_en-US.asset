@@ -1,0 +1,302 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
+  m_Name: UI_Operations_en-US
+  m_EditorClassIdentifier: Unity.Localization::UnityEngine.Localization.Tables.StringTable
+  m_LocaleId:
+    m_Code: en-US
+  m_SharedData: {fileID: 11400000, guid: 8b66de3494122c2499588cbf75b1cff2, type: 2}
+  m_Metadata:
+    m_Items: []
+  m_TableData:
+  - m_Id: 187187200
+    m_Localized: 'Active customers: {count}'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770112
+    m_Localized: "Assign {name} \xB7 received backroom {quantity}"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770113
+    m_Localized: Audio Channels
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770114
+    m_Localized: 'Available cash: {amount}'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770115
+    m_Localized: "Available: {available} \xB7 Reserved: {reserved}"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770116
+    m_Localized: 'Received backroom stock: {quantity}'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770117
+    m_Localized: 'Cash total: {amount}'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770118
+    m_Localized: "{count} reserved orders \xB7 total committed {amount}"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770119
+    m_Localized: 'Completed sales: {count}'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770120
+    m_Localized: 'Current step: {step}'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770121
+    m_Localized: Playable Customer Loop
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770122
+    m_Localized: A customer enters, evaluates a stocked product, picks it up, queues,
+      completes checkout, and exits.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770123
+    m_Localized: Delivery Runs
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770124
+    m_Localized: "Operational fixture \xB7 no product assignment"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770125
+    m_Localized: Furniture Catalog
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770126
+    m_Localized: "{name} \xB7 {width}\xD7{depth} \xB7 {price}"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770127
+    m_Localized: "{itemId} \xB7 {quantity} available"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770128
+    m_Localized: Furniture Warehouse
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770129
+    m_Localized: 'Gross: {amount}'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770130
+    m_Localized: 'Hide: OFF'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770131
+    m_Localized: 'Hide: ON'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770132
+    m_Localized: "In transit \xB7 {runId} \xB7 reserved {amount}"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770133
+    m_Localized: "Last weekly settlement \xB7 week {week}"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770134
+    m_Localized: Merchandise Catalog
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770135
+    m_Localized: No received furniture.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770136
+    m_Localized: No merchandise in the backroom.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770137
+    m_Localized: No reserved or in-transit deliveries.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770138
+    m_Localized: No delivery runs.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770139
+    m_Localized: Automatic wall occlusion is unavailable.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770140
+    m_Localized: 'Reserved: {reserved}
+
+      Available: {available}'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770141
+    m_Localized: Pending Deliveries
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770142
+    m_Localized: Place a product display to assign merchandise.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770143
+    m_Localized: Place a fixture first.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770144
+    m_Localized: Placed Fixtures
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770145
+    m_Localized: 'Product: {name}'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770146
+    m_Localized: "{name} \xB7 case {unitsPerCase} \xB7 {caseCost}"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770147
+    m_Localized: '{itemId}: {quantity} units'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770148
+    m_Localized: Product Backroom
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770149
+    m_Localized: Purchasing Power
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770150
+    m_Localized: Release reservation for {amount}
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770151
+    m_Localized: Stock changes are limited while active customer reservations exist.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770152
+    m_Localized: Reserved {amount}
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770153
+    m_Localized: 'Reserved for orders: {amount}'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770154
+    m_Localized: "Reserved: {reserved} \xB7 Returnable: {returnable}"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770155
+    m_Localized: "{orders} orders \xB7 {amount}"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770156
+    m_Localized: Serve the next available customer
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770157
+    m_Localized: Store Operations
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770158
+    m_Localized: Customer
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770159
+    m_Localized: Delivery
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770160
+    m_Localized: Displays
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770161
+    m_Localized: Guide
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770162
+    m_Localized: Settings
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770163
+    m_Localized: Shop
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770164
+    m_Localized: Stock
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770165
+    m_Localized: 'Tax (10% positive gross): {amount}'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770166
+    m_Localized: Remove the product assignment from this empty display
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770167
+    m_Localized: Fill with the minimum of received stock and free capacity
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770168
+    m_Localized: Transfer one received unit from the backroom
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770169
+    m_Localized: Return every visible unit and keep the assignment
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770170
+    m_Localized: Return every unit and leave the display unassigned
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770171
+    m_Localized: Return one unreserved unit to the backroom
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770172
+    m_Localized: Visibility
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770173
+    m_Localized: 'Visible stock: {quantity}'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770174
+    m_Localized: Walls between camera and player
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199770175
+    m_Localized: 'Current weekly gross: {amount}'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 16629398781952
+    m_Localized: Ambience
+    m_Metadata:
+      m_Items: []
+  - m_Id: 16629407170560
+    m_Localized: Effects
+    m_Metadata:
+      m_Items: []
+  - m_Id: 16629407170561
+    m_Localized: Interface
+    m_Metadata:
+      m_Items: []
+  - m_Id: 16629407170562
+    m_Localized: Music
+    m_Metadata:
+      m_Items: []
+  references:
+    version: 2
+    RefIds: []

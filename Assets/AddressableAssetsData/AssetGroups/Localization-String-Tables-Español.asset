@@ -1,0 +1,77 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: "Localization-String-Tables-Espa\xF1ol"
+  m_EditorClassIdentifier: Unity.Addressables.Editor::UnityEditor.AddressableAssets.Settings.AddressableAssetGroup
+  m_GroupName: "Localization-String-Tables-Espa\xF1ol"
+  m_GUID: f96f19804de78b740bd2151df413ced1
+  m_SerializeEntries:
+  - m_GUID: 28317510ab61ac140a38367e0d04d4f2
+    m_Address: UI_Common_es-ES
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-es-ES
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 5262c125391c7a049b0c0aef49ca7dc8
+    m_Address: Errors_es-ES
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-es-ES
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 58145c3901a3a0348a168a6a2023cf6b
+    m_Address: Formats_es-ES
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-es-ES
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 6ade642415b97e34fb02f147ab9479b4
+    m_Address: UI_MainMenu_es-ES
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-es-ES
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 83c05ebcc5c77f14ca91d14806b19b0f
+    m_Address: Content_es-ES
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-es-ES
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: dc7ff2736344f8f42914f69fae7b26bb
+    m_Address: UI_Operations_es-ES
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-es-ES
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: dff7c88e13c68df488e3bb387c56475c
+    m_Address: Tutorial_es-ES
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-es-ES
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: e90d062dfd561794b96c157b6b100f04
+    m_Address: UI_Store_es-ES
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-es-ES
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: ef7f8bff70258064f890273500c39210
+    m_Address: Feedback_es-ES
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-es-ES
+    FlaggedDuringContentUpdateRestriction: 0
+  m_ReadOnly: 1
+  m_Settings: {fileID: 11400000, guid: d9a0e166850f8c64fad84c385a6ccc99, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: 31eaaff74ef72574191139b1961ecb01, type: 2}
+    - {fileID: 11400000, guid: 6fe549139bc673b459c43ada900bc268, type: 2}

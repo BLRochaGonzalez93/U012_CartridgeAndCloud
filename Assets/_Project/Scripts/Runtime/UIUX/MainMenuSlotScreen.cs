@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using VRMGames.CartridgeAndCloud.Application.Localization;
 using VRMGames.CartridgeAndCloud.Application.UIUX;
 using VRMGames.CartridgeAndCloud.Domain.Identifiers;
 using VRMGames.CartridgeAndCloud.Domain.UIUX;
@@ -10,6 +11,7 @@ using VRMGames.CartridgeAndCloud.Domain.UIUX;
 using VRMGames.CartridgeAndCloud.Domain.Economy;
 using VRMGames.CartridgeAndCloud.Infrastructure.UIUX;
 using VRMGames.CartridgeAndCloud.Runtime.Composition;
+using VRMGames.CartridgeAndCloud.Runtime.Performance;
 namespace VRMGames.CartridgeAndCloud.Runtime.UIUX
 {
     public sealed class MainMenuSlotScreen :
@@ -352,8 +354,12 @@ namespace VRMGames.CartridgeAndCloud.Runtime.UIUX
         private void ContinueSlot(
             SaveSlotId slotId)
         {
-            SlotOperationResult result =
-                _root.Slots.Continue(slotId);
+            SlotOperationResult result;
+            using (Sprint17Phase3PerformanceCapture
+                       .MeasureOperation("LoadSlot"))
+            {
+                result = _root.Slots.Continue(slotId);
+            }
             _root.SetUserMessage(
                 result.RecoveredFromBackup
                     ? "The slot was recovered from " +
@@ -401,10 +407,14 @@ namespace VRMGames.CartridgeAndCloud.Runtime.UIUX
             SaveSlotId slotId,
             bool confirmed)
         {
-            SlotOperationResult result =
-                _root.Slots.CreateNew(
+            SlotOperationResult result;
+            using (Sprint17Phase3PerformanceCapture
+                       .MeasureOperation("CreateNewSlot"))
+            {
+                result = _root.Slots.CreateNew(
                     slotId,
                     confirmed);
+            }
             _root.SetUserMessage(result.Detail);
 
             if (result.Succeeded)
@@ -477,6 +487,13 @@ namespace VRMGames.CartridgeAndCloud.Runtime.UIUX
 
             AddSettingRow(
                 panel,
+                "Language",
+                CurrentLanguageDisplayName(),
+                ToggleLanguage,
+                ToggleLanguage);
+
+            AddSettingRow(
+                panel,
                 "UI scale",
                 settings.UiScalePercent + "%",
                 () => Apply(
@@ -537,6 +554,38 @@ namespace VRMGames.CartridgeAndCloud.Runtime.UIUX
                         .WithDestructiveConfirmations(
                             !settings
                                 .ConfirmDestructiveActions)));
+        }
+
+        private string CurrentLanguageDisplayName()
+        {
+            for (int index = 0;
+                 index < _root.Localization.AvailableLocales.Count;
+                 index++)
+            {
+                LocaleOption locale =
+                    _root.Localization.AvailableLocales[index];
+                if (string.Equals(
+                        locale.Code,
+                        _root.Localization.CurrentLocaleCode,
+                        StringComparison.OrdinalIgnoreCase))
+                {
+                    return locale.DisplayName;
+                }
+            }
+
+            return _root.Localization.CurrentLocaleCode;
+        }
+
+        private void ToggleLanguage()
+        {
+            string next = string.Equals(
+                _root.Localization.CurrentLocaleCode,
+                "es-ES",
+                StringComparison.OrdinalIgnoreCase)
+                ? "en-US"
+                : "es-ES";
+            _root.Localization.SelectLocale(next);
+            OpenAccessibility();
         }
 
         private void OpenHelp()
