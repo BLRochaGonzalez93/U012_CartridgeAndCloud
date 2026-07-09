@@ -1,0 +1,92 @@
+{
+  "schemaVersion": 1,
+  "unityVersion": "6000.3.18f1",
+  "globalPlayerSettings": {
+    "defaultWidth": 1920,
+    "defaultHeight": 1080,
+    "fullscreenMode": "FullScreenWindow",
+    "resizableWindow": true,
+    "runInBackground": false,
+    "usePlayerLog": true,
+    "frameTimingStats": false,
+    "scriptingBackend": "Mono"
+  },
+  "profiles": [
+    {
+      "name": "Windows_Development",
+      "purpose": "Daily development, smoke tests and isolated technical validation.",
+      "assetPath": "Assets/_Project/Settings/BuildProfiles/Windows_Development.asset",
+      "developmentBuild": true,
+      "testLabIncluded": true,
+      "diagnosticData": "Disabled",
+      "autoconnectProfiler": false,
+      "deepProfiling": false,
+      "scriptDebugging": false,
+      "waitForManagedDebugger": false,
+      "copyPdbFiles": false,
+      "compression": "LZ4",
+      "scriptingDefines": [
+        "CC_BUILD_DEVELOPMENT"
+      ],
+      "scenes": [
+        "Assets/_Project/Scenes/Production/Bootstrap.unity",
+        "Assets/_Project/Scenes/Production/MainMenu.unity",
+        "Assets/_Project/Scenes/Production/StoreInitial.unity",
+        "Assets/_Project/Scenes/Test/TestLab.unity"
+      ],
+      "buildOutput": "Builds/Windows_Development/CartridgeAndCloud_Development.exe"
+    },
+    {
+      "name": "Windows_QA",
+      "purpose": "Formal internal QA and regression campaigns with TestLab available.",
+      "assetPath": "Assets/_Project/Settings/BuildProfiles/Windows_QA.asset",
+      "developmentBuild": true,
+      "testLabIncluded": true,
+      "diagnosticData": "Disabled",
+      "autoconnectProfiler": false,
+      "deepProfiling": false,
+      "scriptDebugging": false,
+      "waitForManagedDebugger": false,
+      "copyPdbFiles": false,
+      "compression": "LZ4",
+      "scriptingDefines": [
+        "CC_BUILD_QA"
+      ],
+      "scenes": [
+        "Assets/_Project/Scenes/Production/Bootstrap.unity",
+        "Assets/_Project/Scenes/Production/MainMenu.unity",
+        "Assets/_Project/Scenes/Production/StoreInitial.unity",
+        "Assets/_Project/Scenes/Test/TestLab.unity"
+      ],
+      "buildOutput": "Builds/Windows_QA/CartridgeAndCloud_QA.exe"
+    },
+    {
+      "name": "Windows_H6_Candidate",
+      "purpose": "Release-like H6 candidate profile prepared for Phase 7.",
+      "assetPath": "Assets/_Project/Settings/BuildProfiles/Windows_H6_Candidate.asset",
+      "developmentBuild": false,
+      "testLabIncluded": false,
+      "diagnosticData": "Disabled",
+      "autoconnectProfiler": false,
+      "deepProfiling": false,
+      "scriptDebugging": false,
+      "waitForManagedDebugger": false,
+      "copyPdbFiles": false,
+      "compression": "LZ4",
+      "scriptingDefines": [
+        "CC_BUILD_H6_CANDIDATE"
+      ],
+      "scenes": [
+        "Assets/_Project/Scenes/Production/Bootstrap.unity",
+        "Assets/_Project/Scenes/Production/MainMenu.unity",
+        "Assets/_Project/Scenes/Production/StoreInitial.unity"
+      ],
+      "buildOutput": "Builds/Windows_H6_Candidate/CartridgeAndCloud_H6_Candidate.exe"
+    }
+  ],
+  "notes": [
+    "The Phase 3 performance build remains a separate specialist QA build and is not inherited by Windows_QA.",
+    "Windows_H6_Candidate is configured and validated in Phase 6 but the immutable candidate artifact is produced in Phase 7.",
+    "TestLab is available only in Development and QA profiles and is excluded from H6 Candidate."
+  ]
+}
