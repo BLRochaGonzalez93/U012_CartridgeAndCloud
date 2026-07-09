@@ -50,6 +50,161 @@ namespace VRMGames.CartridgeAndCloud.Application.UIUX
                 saveStatus.ToString());
         }
 
+        public static bool
+            RequiresWeeklySummaryAcknowledgement(
+                IntegratedGameStateSnapshot snapshot)
+        {
+            return snapshot != null &&
+                snapshot.CurrentDay % 7 == 0 &&
+                string.Equals(
+                    snapshot.DayCycle.State,
+                    "Closed",
+                    StringComparison.Ordinal) &&
+                StoreTradingHoursPolicy.IsDayComplete(
+                    snapshot.DayCycle.ElapsedDaySeconds,
+                    snapshot.DayCycle.DayDurationSeconds);
+        }
+
+        public WeeklySummarySnapshot BuildWeeklySummary(
+            IntegratedGameStateSnapshot snapshot,
+            StoreOperationsState operationsState)
+        {
+            if (snapshot == null)
+            {
+                throw new ArgumentNullException(
+                    nameof(snapshot));
+            }
+
+            if (operationsState == null)
+            {
+                throw new ArgumentNullException(
+                    nameof(operationsState));
+            }
+
+            if (!RequiresWeeklySummaryAcknowledgement(
+                    snapshot))
+            {
+                throw new InvalidOperationException(
+                    "A weekly summary requires a closed seventh day at 24:00.");
+            }
+
+            int weekNumber = snapshot.CurrentDay / 7;
+            if (operationsState.LastSettledWeek !=
+                weekNumber)
+            {
+                throw new InvalidOperationException(
+                    "Weekly economy must be settled before building the summary.");
+            }
+
+            int firstDay = checked(
+                (weekNumber - 1) * 7 + 1);
+            int lastDay = checked(
+                weekNumber * 7);
+            int historyDays = 0;
+            long revenue = 0;
+            long supplierCosts = 0;
+            int visitors = 0;
+            int buyers = 0;
+            int abandonedCustomers = 0;
+            int completedSales = 0;
+            int unitsSold = 0;
+            int ordersReceived = 0;
+
+            for (int day = firstDay;
+                 day <= lastDay;
+                 day++)
+            {
+                StoreManagementDayDetailRecord detail =
+                    operationsState.ManagementHistory
+                        .FindDetailedDay(day);
+
+                if (detail != null)
+                {
+                    historyDays++;
+                    revenue = checked(
+                        revenue + detail.RevenueCents);
+                    supplierCosts = checked(
+                        supplierCosts +
+                        detail.SupplierCostCents);
+                    visitors = checked(
+                        visitors + detail.VisitorCount);
+                    buyers = checked(
+                        buyers + detail.BuyerCount);
+                    abandonedCustomers = checked(
+                        abandonedCustomers +
+                        detail.AbandonedCustomerCount);
+                    completedSales = checked(
+                        completedSales +
+                        detail.CompletedSales);
+                    unitsSold = checked(
+                        unitsSold + detail.UnitsSold);
+                    ordersReceived = checked(
+                        ordersReceived +
+                        detail.OrdersReceived);
+                    continue;
+                }
+
+                StoreDailySummaryRecord summary =
+                    operationsState.ManagementHistory
+                        .FindSummary(day);
+
+                if (summary == null)
+                {
+                    continue;
+                }
+
+                historyDays++;
+                revenue = checked(
+                    revenue + summary.RevenueCents);
+                supplierCosts = checked(
+                    supplierCosts +
+                    summary.SupplierCostCents);
+                visitors = checked(
+                    visitors + summary.Visitors);
+                buyers = checked(
+                    buyers + summary.Buyers);
+                abandonedCustomers = checked(
+                    abandonedCustomers +
+                    summary.AbandonedCustomers);
+                completedSales = checked(
+                    completedSales +
+                    summary.CompletedSales);
+                unitsSold = checked(
+                    unitsSold + summary.UnitsSold);
+                ordersReceived = checked(
+                    ordersReceived +
+                    summary.OrdersReceived);
+            }
+
+            bool completeHistory =
+                historyDays == 7 &&
+                checked(revenue - supplierCosts) ==
+                    operationsState
+                        .LastWeeklyGrossResultCents;
+            long tax =
+                operationsState.LastWeeklyTaxCents;
+
+            return new WeeklySummarySnapshot(
+                weekNumber,
+                firstDay,
+                lastDay,
+                revenue,
+                supplierCosts,
+                operationsState
+                    .LastWeeklyGrossResultCents,
+                tax,
+                checked(snapshot.CashCents + tax),
+                snapshot.CashCents,
+                visitors,
+                buyers,
+                abandonedCustomers,
+                completedSales,
+                unitsSold,
+                ordersReceived,
+                snapshot.CurrencyCode,
+                completeHistory);
+        }
+
         public ManagementPanelSnapshot BuildPanel(
             IntegratedGameStateSnapshot snapshot,
             ManagementPanelId panelId,

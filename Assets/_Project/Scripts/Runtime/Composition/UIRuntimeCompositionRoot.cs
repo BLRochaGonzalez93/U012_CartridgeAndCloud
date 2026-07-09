@@ -13,6 +13,7 @@ using VRMGames.CartridgeAndCloud.Domain.Economy;
 using VRMGames.CartridgeAndCloud.Domain.GameSession;
 using VRMGames.CartridgeAndCloud.Domain.Persistence;
 using VRMGames.CartridgeAndCloud.Domain.Store;
+using VRMGames.CartridgeAndCloud.Domain.UIUX;
 using VRMGames.CartridgeAndCloud.Infrastructure.GameSession;
 using VRMGames.CartridgeAndCloud.Infrastructure.Persistence;
 using VRMGames.CartridgeAndCloud.Infrastructure.UIUX;
@@ -711,7 +712,60 @@ namespace VRMGames.CartridgeAndCloud.Runtime.Composition
             }
         }
 
+        public bool RequiresWeeklySummaryAcknowledgement =>
+            ActiveSession.HasActiveSession &&
+            StoreUiProjectionService
+                .RequiresWeeklySummaryAcknowledgement(
+                    ActiveSession.Snapshot);
+
+        public bool TryBuildPendingWeeklySummary(
+            out WeeklySummarySnapshot summary)
+        {
+            summary = null;
+
+            if (!RequiresWeeklySummaryAcknowledgement ||
+                StoreManagementStateProvider == null)
+            {
+                return false;
+            }
+
+            StoreOperationsState state =
+                StoreManagementStateProvider
+                    .ManagementState;
+            int expectedWeek =
+                ActiveSession.Snapshot.CurrentDay / 7;
+
+            if (state == null ||
+                state.LastSettledWeek != expectedWeek)
+            {
+                return false;
+            }
+
+            summary = Projection.BuildWeeklySummary(
+                ActiveSession.Snapshot,
+                state);
+            return true;
+        }
+
         public void BeginNextDay()
+        {
+            BeginNextDay(false);
+        }
+
+        public void AcknowledgeWeeklySummaryAndBeginNextDay()
+        {
+            if (!TryBuildPendingWeeklySummary(
+                    out _))
+            {
+                throw new InvalidOperationException(
+                    "The weekly summary is not ready to acknowledge.");
+            }
+
+            BeginNextDay(true);
+        }
+
+        private void BeginNextDay(
+            bool weeklySummaryAcknowledged)
         {
             if (!ActiveSession.HasActiveSession)
             {
@@ -734,6 +788,15 @@ namespace VRMGames.CartridgeAndCloud.Runtime.Composition
                     "The current day must be closed at 24:00.");
             }
 
+            if (StoreUiProjectionService
+                    .RequiresWeeklySummaryAcknowledgement(
+                        current) &&
+                !weeklySummaryAcknowledged)
+            {
+                throw new InvalidOperationException(
+                    "The weekly summary must be accepted before continuing.");
+            }
+
             int nextDay = checked(
                 current.CurrentDay + 1);
             string dayId =
@@ -746,7 +809,7 @@ namespace VRMGames.CartridgeAndCloud.Runtime.Composition
                     current.SessionId,
                     current.SlotId,
                     current.CreatedUtc,
-                    DateTime.UtcNow,
+                    ResolveUpdatedUtc(current),
                     nextDay,
                     current.CashCents,
                     current.CurrencyCode,
@@ -905,6 +968,15 @@ namespace VRMGames.CartridgeAndCloud.Runtime.Composition
             }
         }
 
+        private static DateTime ResolveUpdatedUtc(
+            IntegratedGameStateSnapshot source)
+        {
+            DateTime now = DateTime.UtcNow;
+            return now >= source.UpdatedUtc
+                ? now
+                : source.UpdatedUtc;
+        }
+
         private static IntegratedGameStateSnapshot
             CloneWithDayCycle(
                 IntegratedGameStateSnapshot source,
@@ -916,7 +988,7 @@ namespace VRMGames.CartridgeAndCloud.Runtime.Composition
                 source.SessionId,
                 source.SlotId,
                 source.CreatedUtc,
-                DateTime.UtcNow,
+                ResolveUpdatedUtc(source),
                 source.CurrentDay,
                 source.CashCents,
                 source.CurrencyCode,

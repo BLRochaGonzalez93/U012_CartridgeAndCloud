@@ -4,6 +4,7 @@ using VRMGames.CartridgeAndCloud.Application.GameSession;
 using VRMGames.CartridgeAndCloud.Application.UIUX;
 using VRMGames.CartridgeAndCloud.Domain.Identifiers;
 using VRMGames.CartridgeAndCloud.Domain.Persistence;
+using VRMGames.CartridgeAndCloud.Domain.Store;
 
 using VRMGames.CartridgeAndCloud.Domain.GameSession;
 namespace VRMGames.CartridgeAndCloud.Tests.EditMode.UIUX
@@ -214,6 +215,116 @@ namespace VRMGames.CartridgeAndCloud.Tests.EditMode.UIUX
                     cash);
 
             return source;
+        }
+
+        public static IntegratedGameStateSnapshot
+            ClosedWeekSnapshot(
+                long cash = 106300)
+        {
+            return new IntegratedGameStateSnapshot(
+                IntegratedGameStateSnapshot
+                    .CurrentSchemaVersion,
+                StableId.Parse(
+                    "77777777777777777777777777777777"),
+                Slot(),
+                Utc(),
+                Utc(2),
+                7,
+                cash,
+                "EUR",
+                new[]
+                {
+                    new InventoryContainerSaveRecord(
+                        "store-inventory",
+                        100,
+                        new ProductQuantitySaveRecord[0]),
+                    new InventoryContainerSaveRecord(
+                        "backroom-inventory",
+                        200,
+                        new ProductQuantitySaveRecord[0])
+                },
+                new SupplierOrderSaveRecord[0],
+                new DisplaySaveRecord[0],
+                new CustomerSaveRecord[0],
+                new ShoppingSessionSaveRecord[0],
+                new ReservationSaveRecord[0],
+                new CheckoutQueueEntrySaveRecord[0],
+                new CheckoutStationSaveRecord(
+                    "station",
+                    "Closed",
+                    string.Empty),
+                new CheckoutTransactionSaveRecord[0],
+                new DayCycleSaveRecord(
+                    "day-007",
+                    "Closed",
+                    300,
+                    300,
+                    true),
+                new EconomyLedgerSaveRecord[0]);
+        }
+
+        public static StoreOperationsState
+            SettledWeekState(
+                bool completeHistory = true)
+        {
+            StoreManagementHistory history =
+                StoreManagementHistory.Empty();
+
+            if (completeHistory)
+            {
+                StoreDailySummaryRecord[] days =
+                    new StoreDailySummaryRecord[7];
+
+                for (int index = 0;
+                     index < days.Length;
+                     index++)
+                {
+                    int day = index + 1;
+                    days[index] =
+                        new StoreDailySummaryRecord(
+                            day,
+                            "day-" + day.ToString("000"),
+                            100000 + index * 1000,
+                            101000 + index * 1000,
+                            2,
+                            1,
+                            1,
+                            1,
+                            1,
+                            1,
+                            2000,
+                            1000,
+                            day == 7 ? 700 : 0);
+                }
+
+                history = new StoreManagementHistory(
+                    new StoreManagementDayDetailRecord[0],
+                    days);
+            }
+
+            return new StoreOperationsState(
+                Slot(),
+                "weekly-session",
+                1,
+                1,
+                1,
+                1,
+                1,
+                7,
+                14000,
+                7700,
+                700,
+                0,
+                0,
+                1,
+                7000,
+                700,
+                new StoreOrderRecord[0],
+                new StoreDeliveryRunRecord[0],
+                new StoreStockRecord[0],
+                new StoreStockRecord[0],
+                new PlacedStoreFixtureRecord[0],
+                history);
         }
 
         public static string TempDirectory()

@@ -15,6 +15,6 @@ MonoBehaviour:
   _mainMenuSceneName: MainMenu
   _storeSceneName: StoreInitial
   _currencyCode: EUR
-  _initialCashCents: 100000
+  _initialCashCents: 110000
   _dayDurationSeconds: 300
   _showTutorialOnNewGame: 1

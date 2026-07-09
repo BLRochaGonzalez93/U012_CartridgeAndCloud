@@ -29,6 +29,7 @@ namespace VRMGames.CartridgeAndCloud.Runtime.UIUX
         private Text _speedText;
         private GameObject _panelOverlay;
         private GameObject _confirmationOverlay;
+        private GameObject _weeklySummaryOverlay;
         private GameObject _pauseOverlay;
         private GameObject _tutorialBubble;
         private Button _firstHudButton;
@@ -96,6 +97,7 @@ namespace VRMGames.CartridgeAndCloud.Runtime.UIUX
 
             _panelOverlay = null;
             _confirmationOverlay = null;
+            _weeklySummaryOverlay = null;
             _pauseOverlay = null;
             _tutorialBubble = null;
             _firstHudButton = null;
@@ -471,6 +473,7 @@ namespace VRMGames.CartridgeAndCloud.Runtime.UIUX
                               .SelectedSpeedMultiplier);
 
             TryClosedDayAutosave(snapshot);
+            TryPresentWeeklySummary(snapshot);
         }
 
         private void TryClosedDayAutosave(
@@ -502,6 +505,120 @@ namespace VRMGames.CartridgeAndCloud.Runtime.UIUX
             {
                 RebuildCurrentPanelIfNeeded();
             }
+        }
+
+        private void TryPresentWeeklySummary(
+            IntegratedGameStateSnapshot snapshot)
+        {
+            if (_weeklySummaryOverlay != null ||
+                !StoreUiProjectionService
+                    .RequiresWeeklySummaryAcknowledgement(
+                        snapshot))
+            {
+                return;
+            }
+
+            bool saveReady =
+                _root.Autosave.CurrentStatus ==
+                    DailyAutosaveStatus.Saved ||
+                _root.Autosave.CurrentStatus ==
+                    DailyAutosaveStatus.AlreadySaved;
+
+            if (!saveReady ||
+                !_root.TryBuildPendingWeeklySummary(
+                    out WeeklySummarySnapshot summary))
+            {
+                return;
+            }
+
+            ClosePanel();
+            CloseConfirmation();
+            _root.InputGate.EnterUiExclusive();
+
+            string currency = summary.CurrencyCode;
+            string history = summary.HasCompleteHistory
+                ? "Revenue: " +
+                  StoreUiProjectionService.FormatMoney(
+                      summary.RevenueCents,
+                      currency) +
+                  "\nSupplier costs: " +
+                  StoreUiProjectionService.FormatMoney(
+                      summary.SupplierCostCents,
+                      currency) +
+                  "\nSales: " + summary.CompletedSales +
+                  " · Units sold: " + summary.UnitsSold +
+                  "\nCustomers: " + summary.Visitors +
+                  " · Buyers: " + summary.Buyers +
+                  " · Abandoned: " +
+                  summary.AbandonedCustomers +
+                  "\nOrders received: " +
+                  summary.OrdersReceived + "\n\n"
+                : "Detailed day breakdown is unavailable " +
+                  "for this legacy save.\n\n";
+            string taxLine = summary.TaxWasApplied
+                ? "Tax deducted now: -" +
+                  StoreUiProjectionService.FormatMoney(
+                      summary.TaxCents,
+                      currency)
+                : "Tax due: " +
+                  StoreUiProjectionService.FormatMoney(
+                      0,
+                      currency) +
+                  " (weekly result was not positive)";
+            string body =
+                "Days " + summary.FirstDayNumber +
+                "–" + summary.LastDayNumber +
+                "\n\n" + history +
+                "Gross result: " +
+                StoreUiProjectionService.FormatMoney(
+                    summary.GrossResultCents,
+                    currency) +
+                "\n" + taxLine +
+                "\nNet result: " +
+                StoreUiProjectionService.FormatMoney(
+                    summary.NetResultCents,
+                    currency) +
+                "\n\nCash before tax: " +
+                StoreUiProjectionService.FormatMoney(
+                    summary.CashBeforeTaxCents,
+                    currency) +
+                "\nCash after tax: " +
+                StoreUiProjectionService.FormatMoney(
+                    summary.CashAfterTaxCents,
+                    currency) +
+                "\n\nAccept this summary to continue.";
+
+            _weeklySummaryOverlay = BuildModal(
+                "Week " + summary.WeekNumber +
+                " Complete",
+                body);
+            _weeklySummaryOverlay.name =
+                "WeeklySummaryOverlay";
+
+            RectTransform panel =
+                _weeklySummaryOverlay.transform
+                    .Find("ModalPanel")
+                    .GetComponent<RectTransform>();
+            ProceduralUiFactory.SetRect(
+                panel,
+                new Vector2(0.27f, 0.08f),
+                new Vector2(0.73f, 0.92f),
+                Vector2.zero,
+                Vector2.zero);
+
+            LayoutElement bodyLayout =
+                panel.Find("Body")
+                    .GetComponent<LayoutElement>();
+            bodyLayout.preferredHeight = 430f;
+
+            Button accept =
+                ProceduralUiFactory.CreateButton(
+                    panel,
+                    "AcceptWeeklySummary",
+                    "Accept and Continue",
+                    AcceptWeeklySummaryAndContinue,
+                    ScaleText(20));
+            ProceduralUiFactory.Select(accept);
         }
 
         private void OpenPanel(
@@ -603,6 +720,7 @@ namespace VRMGames.CartridgeAndCloud.Runtime.UIUX
                 StoreTradingHoursPolicy.IsDayComplete(
                     _root.ActiveSession.Snapshot.DayCycle.ElapsedDaySeconds,
                     _root.ActiveSession.Snapshot.DayCycle.DayDurationSeconds) &&
+                !_root.RequiresWeeklySummaryAcknowledgement &&
                 (panelId ==
                     ManagementPanelId.DayCycle ||
                  panelId ==
@@ -1044,6 +1162,25 @@ namespace VRMGames.CartridgeAndCloud.Runtime.UIUX
                     "Day transition blocked",
                     reason,
                     CloseConfirmation);
+            }
+        }
+
+        private void AcceptWeeklySummaryAndContinue()
+        {
+            try
+            {
+                _root.AcknowledgeWeeklySummaryAndBeginNextDay();
+                _autosaveAttemptedDay = string.Empty;
+                CloseWeeklySummary();
+                ClosePanel();
+                EnsureTutorial();
+                Refresh();
+            }
+            catch (Exception exception)
+            {
+                _root.SetUserMessage(
+                    "The weekly summary cannot be accepted yet: " +
+                    exception.Message);
             }
         }
 
@@ -1570,6 +1707,17 @@ namespace VRMGames.CartridgeAndCloud.Runtime.UIUX
                 _firstHudButton);
         }
 
+        private void CloseWeeklySummary()
+        {
+            if (_weeklySummaryOverlay != null)
+            {
+                Destroy(_weeklySummaryOverlay);
+                _weeklySummaryOverlay = null;
+            }
+
+            RestoreGameplayIfNoModal();
+        }
+
         private void CloseConfirmation()
         {
             if (_confirmationOverlay != null)
@@ -1585,7 +1733,8 @@ namespace VRMGames.CartridgeAndCloud.Runtime.UIUX
         {
             if (_panelOverlay == null &&
                 _pauseOverlay == null &&
-                _confirmationOverlay == null)
+                _confirmationOverlay == null &&
+                _weeklySummaryOverlay == null)
             {
                 _root.InputGate.ExitUiExclusive();
             }
@@ -1598,6 +1747,11 @@ namespace VRMGames.CartridgeAndCloud.Runtime.UIUX
 
         private void HandleCancel()
         {
+            if (_weeklySummaryOverlay != null)
+            {
+                return;
+            }
+
             if (_confirmationOverlay != null)
             {
                 CloseConfirmation();

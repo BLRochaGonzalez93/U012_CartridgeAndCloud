@@ -221,6 +221,63 @@ namespace VRMGames.CartridgeAndCloud.Tests.EditMode.UIUX
                         .EmptySnapshot(),
                     ManagementPanelId.None));
 
+        [Test]
+        public void WeeklySummary_IsRequiredOnlyAtClosedWeekEnd()
+        {
+            Assert.That(
+                StoreUiProjectionService
+                    .RequiresWeeklySummaryAcknowledgement(
+                        UIUXTestFactory.EmptySnapshot()),
+                Is.False);
+            Assert.That(
+                StoreUiProjectionService
+                    .RequiresWeeklySummaryAcknowledgement(
+                        UIUXTestFactory
+                            .ClosedWeekSnapshot()),
+                Is.True);
+        }
+
+        [Test]
+        public void WeeklySummary_AggregatesSevenDaysAndTaxImpact()
+        {
+            WeeklySummarySnapshot summary =
+                _service.BuildWeeklySummary(
+                    UIUXTestFactory
+                        .ClosedWeekSnapshot(),
+                    UIUXTestFactory
+                        .SettledWeekState());
+
+            Assert.That(summary.WeekNumber, Is.EqualTo(1));
+            Assert.That(summary.FirstDayNumber, Is.EqualTo(1));
+            Assert.That(summary.LastDayNumber, Is.EqualTo(7));
+            Assert.That(summary.RevenueCents, Is.EqualTo(14000));
+            Assert.That(summary.SupplierCostCents, Is.EqualTo(7000));
+            Assert.That(summary.GrossResultCents, Is.EqualTo(7000));
+            Assert.That(summary.TaxCents, Is.EqualTo(700));
+            Assert.That(summary.NetResultCents, Is.EqualTo(6300));
+            Assert.That(summary.CashBeforeTaxCents, Is.EqualTo(107000));
+            Assert.That(summary.CashAfterTaxCents, Is.EqualTo(106300));
+            Assert.That(summary.CompletedSales, Is.EqualTo(7));
+            Assert.That(summary.UnitsSold, Is.EqualTo(7));
+            Assert.That(summary.HasCompleteHistory, Is.True);
+        }
+
+        [Test]
+        public void WeeklySummary_LegacyHistoryStillShowsSettlement()
+        {
+            WeeklySummarySnapshot summary =
+                _service.BuildWeeklySummary(
+                    UIUXTestFactory
+                        .ClosedWeekSnapshot(),
+                    UIUXTestFactory
+                        .SettledWeekState(false));
+
+            Assert.That(summary.HasCompleteHistory, Is.False);
+            Assert.That(summary.GrossResultCents, Is.EqualTo(7000));
+            Assert.That(summary.TaxCents, Is.EqualTo(700));
+            Assert.That(summary.CashAfterTaxCents, Is.EqualTo(106300));
+        }
+
         [Test] public void FormatMoney_FormatsNegative()
         {
             Assert.That(

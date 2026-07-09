@@ -122,6 +122,126 @@ namespace VRMGames.CartridgeAndCloud.Domain.UIUX
         }
     }
 
+    public sealed class WeeklySummarySnapshot
+    {
+        public int WeekNumber { get; }
+        public int FirstDayNumber { get; }
+        public int LastDayNumber { get; }
+        public long RevenueCents { get; }
+        public long SupplierCostCents { get; }
+        public long GrossResultCents { get; }
+        public long TaxCents { get; }
+        public long NetResultCents => checked(
+            GrossResultCents - TaxCents);
+        public long CashBeforeTaxCents { get; }
+        public long CashAfterTaxCents { get; }
+        public int Visitors { get; }
+        public int Buyers { get; }
+        public int AbandonedCustomers { get; }
+        public int CompletedSales { get; }
+        public int UnitsSold { get; }
+        public int OrdersReceived { get; }
+        public string CurrencyCode { get; }
+        public bool HasCompleteHistory { get; }
+        public bool TaxWasApplied => TaxCents > 0;
+
+        public WeeklySummarySnapshot(
+            int weekNumber,
+            int firstDayNumber,
+            int lastDayNumber,
+            long revenueCents,
+            long supplierCostCents,
+            long grossResultCents,
+            long taxCents,
+            long cashBeforeTaxCents,
+            long cashAfterTaxCents,
+            int visitors,
+            int buyers,
+            int abandonedCustomers,
+            int completedSales,
+            int unitsSold,
+            int ordersReceived,
+            string currencyCode,
+            bool hasCompleteHistory)
+        {
+            if (weekNumber < 1)
+            {
+                throw new ArgumentOutOfRangeException(
+                    nameof(weekNumber));
+            }
+
+            if (firstDayNumber < 1 ||
+                lastDayNumber < firstDayNumber)
+            {
+                throw new ArgumentOutOfRangeException(
+                    nameof(firstDayNumber));
+            }
+
+            if (revenueCents < 0 ||
+                supplierCostCents < 0 ||
+                taxCents < 0 ||
+                cashBeforeTaxCents < 0 ||
+                cashAfterTaxCents < 0)
+            {
+                throw new ArgumentOutOfRangeException(
+                    nameof(revenueCents));
+            }
+
+            if (visitors < 0 ||
+                buyers < 0 ||
+                abandonedCustomers < 0 ||
+                completedSales < 0 ||
+                unitsSold < 0 ||
+                ordersReceived < 0)
+            {
+                throw new ArgumentOutOfRangeException(
+                    nameof(visitors));
+            }
+
+            if (buyers > visitors ||
+                abandonedCustomers > visitors ||
+                checked(buyers + abandonedCustomers) > visitors)
+            {
+                throw new ArgumentException(
+                    "Resolved customer outcomes cannot exceed visitors.");
+            }
+
+            WeekNumber = weekNumber;
+            FirstDayNumber = firstDayNumber;
+            LastDayNumber = lastDayNumber;
+            RevenueCents = revenueCents;
+            SupplierCostCents = supplierCostCents;
+            GrossResultCents = grossResultCents;
+            TaxCents = taxCents;
+            CashBeforeTaxCents = cashBeforeTaxCents;
+            CashAfterTaxCents = cashAfterTaxCents;
+            Visitors = visitors;
+            Buyers = buyers;
+            AbandonedCustomers = abandonedCustomers;
+            CompletedSales = completedSales;
+            UnitsSold = unitsSold;
+            OrdersReceived = ordersReceived;
+            CurrencyCode = Required(
+                currencyCode,
+                nameof(currencyCode));
+            HasCompleteHistory = hasCompleteHistory;
+        }
+
+        private static string Required(
+            string value,
+            string parameterName)
+        {
+            if (string.IsNullOrWhiteSpace(value))
+            {
+                throw new ArgumentException(
+                    "Value cannot be empty.",
+                    parameterName);
+            }
+
+            return value;
+        }
+    }
+
     public sealed class ManagementPanelSnapshot
     {
         private readonly ReadOnlyCollection<

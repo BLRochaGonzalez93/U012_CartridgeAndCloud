@@ -24,7 +24,7 @@ namespace VRMGames.CartridgeAndCloud.Infrastructure.UIUX
 
         [SerializeField]
         private long _initialCashCents =
-            100000;
+            110000;
 
         [SerializeField, Min(1)]
         private int _dayDurationSeconds =
