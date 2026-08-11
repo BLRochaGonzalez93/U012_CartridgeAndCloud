@@ -1,0 +1,73 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2693ac0e9d08487d8f1bad74fd1cd8ad, type: 3}
+  m_Name: EmployeeHiringCatalog
+  m_EditorClassIdentifier: VRMGames.CartridgeAndCloud.Infrastructure::VRMGames.CartridgeAndCloud.Infrastructure.Employees.EmployeeHiringCatalogAsset
+  _minimumBusinessLevel: 2
+  _minimumReputation: 50
+  _minimumOperatingDays: 7
+  _candidateWindowDays: 5
+  _channels:
+  - channelId: local-board
+    displayName: Local board
+    postingCostCents: 0
+    candidateCount: 3
+    minimumDelayDays: 2
+    maximumDelayDays: 2
+    minimumSeniority: 0
+    maximumSeniority: 1
+  - channelId: specialist-portal
+    displayName: Specialist portal
+    postingCostCents: 25000
+    candidateCount: 4
+    minimumDelayDays: 1
+    maximumDelayDays: 1
+    minimumSeniority: 0
+    maximumSeniority: 1
+  - channelId: recruitment-agency
+    displayName: Recruitment agency
+    postingCostCents: 75000
+    candidateCount: 5
+    minimumDelayDays: 1
+    maximumDelayDays: 1
+    minimumSeniority: 1
+    maximumSeniority: 2
+  - channelId: executive-search
+    displayName: Executive search
+    postingCostCents: 250000
+    candidateCount: 3
+    minimumDelayDays: 2
+    maximumDelayDays: 3
+    minimumSeniority: 2
+    maximumSeniority: 3
+  _candidateNames:
+  - Alex Mercer
+  - Casey Rowan
+  - Jordan Vale
+  - Morgan Ellis
+  - Riley Hart
+  - Taylor Quinn
+  - Jamie Stone
+  - Avery Cole
+  - Cameron Reed
+  - Robin Hayes
+  - Sam Parker
+  - Dana Brooks
+  _traits:
+  - Friendly
+  - Organized
+  - Reliable
+  - Methodical
+  - Adaptable
+  - Customer-focused
+  - Efficient
+  - Versatile

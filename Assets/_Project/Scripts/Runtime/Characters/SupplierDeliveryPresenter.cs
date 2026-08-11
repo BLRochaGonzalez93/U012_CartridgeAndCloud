@@ -130,6 +130,7 @@ namespace VRMGames.CartridgeAndCloud.Runtime.Characters
                 }
 
                 view.ValidateOrThrow();
+                view.ConfigureInteraction(deliveryId);
                 string actorId = ComputeDeterministicParity(deliveryId) == 0
                     ? "supplier-female-01"
                     : "supplier-male-01";

@@ -52,7 +52,7 @@ namespace VRMGames.CartridgeAndCloud.Application.UIUX
             _tutorialRepository;
         private readonly IAutosaveMarkerRepository
             _autosaveMarkerRepository;
-        private readonly ActiveGameSessionService
+        private readonly IActiveGameSession
             _activeSession;
         private readonly DefaultIntegratedGameStateFactory
             _factory;
@@ -69,7 +69,7 @@ namespace VRMGames.CartridgeAndCloud.Application.UIUX
             IIntegratedSaveRepository repository,
             ITutorialProgressRepository tutorialRepository,
             IAutosaveMarkerRepository autosaveMarkerRepository,
-            ActiveGameSessionService activeSession,
+            IActiveGameSession activeSession,
             DefaultIntegratedGameStateFactory factory,
             IUtcClock clock)
         {

@@ -20,6 +20,10 @@ namespace VRMGames.CartridgeAndCloud.Infrastructure.InputSystem.Actions
         public InputActionMap Gameplay { get; }
         public InputAction PointerPosition { get; }
         public InputAction SetDestination { get; }
+        public InputAction Sprint { get; }
+        public InputAction Interact { get; }
+        public InputAction ToolWheel { get; }
+        public InputAction ToolWheelNavigate { get; }
         public InputAction OrbitDelta { get; }
         public InputAction OrbitHold { get; }
         public InputAction Zoom { get; }
@@ -76,6 +80,36 @@ namespace VRMGames.CartridgeAndCloud.Infrastructure.InputSystem.Actions
                 InputActionType.Button);
             SetDestination.AddBinding(
                 "<Mouse>/leftButton");
+
+            Sprint = Gameplay.AddAction(
+                "Sprint",
+                InputActionType.Button);
+            Sprint.AddBinding(
+                "<Keyboard>/leftShift");
+            Sprint.AddBinding(
+                "<Gamepad>/leftStickPress");
+
+            Interact = Gameplay.AddAction(
+                "Interact",
+                InputActionType.Button);
+            Interact.AddBinding(
+                "<Keyboard>/e");
+            Interact.AddBinding(
+                "<Gamepad>/buttonNorth");
+
+            ToolWheel = Gameplay.AddAction(
+                "ToolWheel",
+                InputActionType.Button);
+            ToolWheel.AddBinding(
+                "<Keyboard>/tab");
+            ToolWheel.AddBinding(
+                "<Gamepad>/leftShoulder");
+
+            ToolWheelNavigate = Gameplay.AddAction(
+                "ToolWheelNavigate",
+                InputActionType.PassThrough);
+            ToolWheelNavigate.AddBinding(
+                "<Gamepad>/rightStick");
 
             OrbitDelta = Gameplay.AddAction(
                 "OrbitDelta",

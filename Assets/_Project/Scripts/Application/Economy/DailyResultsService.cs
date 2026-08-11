@@ -100,11 +100,17 @@ namespace VRMGames.CartridgeAndCloud.Application.Economy
                     EconomyPostingType
                         .SupplierReceivingCost);
 
+            Money employeeSalaryCost =
+                ledger.GetTotal(
+                    activity.DayId,
+                    EconomyPostingType.EmployeeSalaryCost);
+
             return DailyResultsCreationResult.Success(
                 new DailyEconomicResult(
                     activity.DayId,
                     revenue,
                     supplierCost,
+                    employeeSalaryCost,
                     checkoutPostingCount,
                     supplierReceiptCount,
                     activity.CustomerArrivals,

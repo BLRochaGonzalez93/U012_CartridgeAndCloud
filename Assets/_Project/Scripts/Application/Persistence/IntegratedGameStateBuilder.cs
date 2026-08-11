@@ -27,7 +27,8 @@ namespace VRMGames.CartridgeAndCloud.Application.Persistence
                 transactions,
             DayCycleSaveRecord dayCycle,
             IEnumerable<EconomyLedgerSaveRecord>
-                ledgerEntries)
+                ledgerEntries,
+            EmployeeSystemSaveRecord employeeSystem = null)
         {
             if (session == null)
             {
@@ -54,7 +55,8 @@ namespace VRMGames.CartridgeAndCloud.Application.Persistence
                 checkoutStation,
                 transactions,
                 dayCycle,
-                ledgerEntries);
+                ledgerEntries,
+                employeeSystem);
         }
 
         public GameSessionSnapshot ExtractGameSession(

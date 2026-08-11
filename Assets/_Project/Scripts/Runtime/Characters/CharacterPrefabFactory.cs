@@ -18,9 +18,42 @@ namespace VRMGames.CartridgeAndCloud.Runtime.Characters
             CharacterRole role,
             Vector3 worldPosition)
         {
+            return Instantiate(
+                catalog,
+                actorId,
+                parent,
+                instanceName,
+                instanceName,
+                role,
+                worldPosition);
+        }
+
+        public static GameObject Instantiate(
+            StorePresentationCatalogAsset catalog,
+            string actorId,
+            Transform parent,
+            string instanceName,
+            string characterId,
+            CharacterRole role,
+            Vector3 worldPosition)
+        {
             if (catalog == null)
             {
                 throw new ArgumentNullException(nameof(catalog));
+            }
+
+            if (string.IsNullOrWhiteSpace(instanceName))
+            {
+                throw new ArgumentException(
+                    "Character instance name is required.",
+                    nameof(instanceName));
+            }
+
+            if (string.IsNullOrWhiteSpace(characterId))
+            {
+                throw new ArgumentException(
+                    "Character identity is required.",
+                    nameof(characterId));
             }
 
             GameObject prefab = catalog.FindActorPrefab(actorId, role);
@@ -43,7 +76,7 @@ namespace VRMGames.CartridgeAndCloud.Runtime.Characters
                 throw new InvalidOperationException(
                     $"Actor prefab '{prefab.name}' is missing CharacterPresence.");
             }
-            presence.Configure(instanceName, role);
+            presence.Configure(characterId, role);
 
             CharacterLocomotionAnimator locomotion =
                 instance.GetComponent<CharacterLocomotionAnimator>();

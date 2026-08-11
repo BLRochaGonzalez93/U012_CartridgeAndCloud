@@ -22,6 +22,7 @@ namespace VRMGames.CartridgeAndCloud.Presentation.PlayerMovement
         private CharacterController _characterController;
         private Vector3 _destination;
         private float _verticalVelocity;
+        private float _speedMultiplier = 1f;
         private bool _hasDestination;
 
         public bool HasDestination => _hasDestination;
@@ -29,6 +30,11 @@ namespace VRMGames.CartridgeAndCloud.Presentation.PlayerMovement
         public Vector3 Destination => _destination;
 
         public float MoveSpeed => _moveSpeed;
+
+        public float SpeedMultiplier => _speedMultiplier;
+
+        public float EffectiveMoveSpeed =>
+            _moveSpeed * _speedMultiplier;
 
         private void Awake()
         {
@@ -71,6 +77,19 @@ namespace VRMGames.CartridgeAndCloud.Presentation.PlayerMovement
             _gravity = gravity;
         }
 
+        public void SetSpeedMultiplier(float multiplier)
+        {
+            if (float.IsNaN(multiplier) ||
+                float.IsInfinity(multiplier) ||
+                multiplier < 0f)
+            {
+                throw new ArgumentOutOfRangeException(
+                    nameof(multiplier));
+            }
+
+            _speedMultiplier = multiplier;
+        }
+
         public void SetDestination(Vector3 worldPosition)
         {
             _destination = new Vector3(
@@ -107,7 +126,7 @@ namespace VRMGames.CartridgeAndCloud.Presentation.PlayerMovement
                         currentPosition.z,
                         _destination.x,
                         _destination.z,
-                        _moveSpeed,
+                        EffectiveMoveSpeed,
                         deltaTime,
                         _stoppingDistance);
 

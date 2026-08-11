@@ -2,9 +2,9 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 using VRMGames.CartridgeAndCloud.Application.Store;
-using VRMGames.CartridgeAndCloud.Infrastructure.Products;
-using VRMGames.CartridgeAndCloud.Domain.Store;
 using VRMGames.CartridgeAndCloud.Domain.Products;
+using VRMGames.CartridgeAndCloud.Domain.Store;
+using VRMGames.CartridgeAndCloud.Infrastructure.Products;
 
 namespace VRMGames.CartridgeAndCloud.Infrastructure.Store
 {
@@ -19,109 +19,29 @@ namespace VRMGames.CartridgeAndCloud.Infrastructure.Store
         [SerializeField]
         private RetailProductCatalogAsset _productCatalog;
 
-        // Embedded legacy-compatible data. Keeping these field names preserves
-        // the existing ContentCatalog.asset without an editor migration.
-        [SerializeField]
-        private StoreFixtureCatalogAsset.StoreFixtureEntry[] _furniture =
-            Array.Empty<StoreFixtureCatalogAsset.StoreFixtureEntry>();
+        public StoreFixtureCatalogAsset FixtureCatalog =>
+            _fixtureCatalog;
 
-        [SerializeField]
-        private RetailProductCatalogAsset.RetailProductEntry[] _products =
-            Array.Empty<RetailProductCatalogAsset.RetailProductEntry>();
+        public RetailProductCatalogAsset ProductCatalog =>
+            _productCatalog;
 
-        public StoreFixtureCatalogAsset FixtureCatalog => _fixtureCatalog;
+        public IReadOnlyList<StoreFixtureCatalogAsset.StoreFixtureEntry>
+            Furniture => RequireFixtureCatalog().Entries;
 
-        public RetailProductCatalogAsset ProductCatalog => _productCatalog;
-
-        public IReadOnlyList<StoreFixtureCatalogAsset.StoreFixtureEntry> Furniture
-        {
-            get
-            {
-                if (_fixtureCatalog != null)
-                {
-                    return _fixtureCatalog.Entries;
-                }
-
-                EnsureEmbeddedDefaults();
-                return _furniture;
-            }
-        }
-
-        public IReadOnlyList<RetailProductCatalogAsset.RetailProductEntry> Products
-        {
-            get
-            {
-                if (_productCatalog != null)
-                {
-                    return _productCatalog.Entries;
-                }
-
-                EnsureEmbeddedDefaults();
-                return _products;
-            }
-        }
-
-        private void OnEnable()
-        {
-            EnsureEmbeddedDefaults();
-        }
+        public IReadOnlyList<RetailProductCatalogAsset.RetailProductEntry>
+            Products => RequireProductCatalog().Entries;
 
         public StoreContentCatalog BuildCatalog()
         {
-            IReadOnlyList<StoreFixtureCatalogAsset.StoreFixtureEntry> furniture =
-                Furniture;
-            IReadOnlyList<RetailProductCatalogAsset.RetailProductEntry> products =
-                Products;
+            StoreFixtureCatalogAsset fixtureCatalog =
+                RequireFixtureCatalog();
+            RetailProductCatalogAsset productCatalog =
+                RequireProductCatalog();
 
-            List<StoreFixtureDefinition> fixtureDefinitions =
-                new List<StoreFixtureDefinition>(furniture.Count);
-            foreach (StoreFixtureCatalogAsset.StoreFixtureEntry entry in furniture)
-            {
-                if (entry == null)
-                {
-                    continue;
-                }
-
-                fixtureDefinitions.Add(
-                    new StoreFixtureDefinition(
-                        entry.definitionId,
-                        entry.displayName,
-                        entry.kind,
-                        entry.widthCells,
-                        entry.depthCells,
-                        entry.heightMeters,
-                        entry.capacity,
-                        entry.unitCostCents,
-                        entry.isInteractive,
-                        entry.isPurchasable,
-                        entry.supportsProducts,
-                        entry.materialVariantId,
-                        entry.prefabResourcePath));
-            }
-
-            List<RetailProductDefinition> productDefinitions =
-                new List<RetailProductDefinition>(products.Count);
-            foreach (RetailProductCatalogAsset.RetailProductEntry entry in products)
-            {
-                if (entry == null)
-                {
-                    continue;
-                }
-
-                productDefinitions.Add(
-                    new RetailProductDefinition(
-                        entry.productId,
-                        entry.displayName,
-                        entry.kind,
-                        entry.wholesalePriceCents,
-                        entry.salePriceCents,
-                        entry.unitsPerCase,
-                        entry.materialVariantId,
-                        entry.labelId,
-                        entry.iconResourcePath,
-                        entry.coverResourcePath,
-                        entry.prefabResourcePath));
-            }
+            IReadOnlyList<StoreFixtureDefinition> fixtureDefinitions =
+                fixtureCatalog.BuildDefinitions();
+            IReadOnlyList<RetailProductDefinition> productDefinitions =
+                productCatalog.BuildDefinitions();
 
             return new StoreContentCatalog(
                 fixtureDefinitions,
@@ -132,53 +52,32 @@ namespace VRMGames.CartridgeAndCloud.Infrastructure.Store
             StoreFixtureCatalogAsset fixtureCatalog,
             RetailProductCatalogAsset productCatalog)
         {
-            _fixtureCatalog = fixtureCatalog;
-            _productCatalog = productCatalog;
+            _fixtureCatalog = fixtureCatalog ??
+                throw new ArgumentNullException(nameof(fixtureCatalog));
+            _productCatalog = productCatalog ??
+                throw new ArgumentNullException(nameof(productCatalog));
         }
 
-        public void Configure(
-            StoreFixtureCatalogAsset.StoreFixtureEntry[] furniture,
-            RetailProductCatalogAsset.RetailProductEntry[] products)
+        private StoreFixtureCatalogAsset RequireFixtureCatalog()
         {
-            _fixtureCatalog = null;
-            _productCatalog = null;
-            _furniture = furniture ??
-                Array.Empty<StoreFixtureCatalogAsset.StoreFixtureEntry>();
-            _products = products ??
-                Array.Empty<RetailProductCatalogAsset.RetailProductEntry>();
-            EnsureEmbeddedDefaults();
+            if (_fixtureCatalog == null)
+            {
+                throw new InvalidOperationException(
+                    "Store content catalog has no fixture catalog assigned.");
+            }
+
+            return _fixtureCatalog;
         }
 
-        private void EnsureEmbeddedDefaults()
+        private RetailProductCatalogAsset RequireProductCatalog()
         {
-            if (_fixtureCatalog == null &&
-                (_furniture == null || _furniture.Length == 0))
+            if (_productCatalog == null)
             {
-                StoreFixtureCatalogAsset defaults =
-                    CreateInstance<StoreFixtureCatalogAsset>();
-                _furniture = Copy(defaults.Entries);
-                DestroyImmediate(defaults);
+                throw new InvalidOperationException(
+                    "Store content catalog has no retail product catalog assigned.");
             }
 
-            if (_productCatalog == null &&
-                (_products == null || _products.Length == 0))
-            {
-                RetailProductCatalogAsset defaults =
-                    CreateInstance<RetailProductCatalogAsset>();
-                _products = Copy(defaults.Entries);
-                DestroyImmediate(defaults);
-            }
-        }
-
-        private static T[] Copy<T>(IReadOnlyList<T> source)
-        {
-            T[] result = new T[source.Count];
-            for (int index = 0; index < source.Count; index++)
-            {
-                result[index] = source[index];
-            }
-
-            return result;
+            return _productCatalog;
         }
     }
 }

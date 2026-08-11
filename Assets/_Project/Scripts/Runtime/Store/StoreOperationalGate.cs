@@ -2,12 +2,12 @@ using System;
 using UnityEngine;
 using UnityEngine.AI;
 using VRMGames.CartridgeAndCloud.Application.Customers;
+using VRMGames.CartridgeAndCloud.Application.GameSession;
 using VRMGames.CartridgeAndCloud.Application.Store;
 using VRMGames.CartridgeAndCloud.Domain.Customers;
 using VRMGames.CartridgeAndCloud.Domain.Placement;
 using VRMGames.CartridgeAndCloud.Domain.Store;
 using VRMGames.CartridgeAndCloud.Presentation.Placement;
-using VRMGames.CartridgeAndCloud.Runtime.Composition;
 using VRMGames.CartridgeAndCloud.Runtime.Placement;
 
 namespace VRMGames.CartridgeAndCloud.Runtime.Store
@@ -22,6 +22,8 @@ namespace VRMGames.CartridgeAndCloud.Runtime.Store
         private readonly ActiveCustomerRegistry _customers;
         private readonly StoreCustomerAdmissionPolicy _policy;
         private readonly int _maximumCustomers;
+        private readonly IActiveGameSession
+            _activeSession;
 
         private float _invalidCheckoutSeconds;
         private bool _controlledClosingRequested;
@@ -47,7 +49,8 @@ namespace VRMGames.CartridgeAndCloud.Runtime.Store
         public StoreOperationalGate(
             StoreOperationsFacade service,
             IStoreContentCatalog catalog,
-            int maximumCustomers)
+            int maximumCustomers,
+            IActiveGameSession activeSession)
         {
             _service = service ??
                 throw new ArgumentNullException(
@@ -63,6 +66,9 @@ namespace VRMGames.CartridgeAndCloud.Runtime.Store
             }
 
             _maximumCustomers = maximumCustomers;
+            _activeSession = activeSession ??
+                throw new ArgumentNullException(
+                    nameof(activeSession));
             _customers = new ActiveCustomerRegistry();
             _policy = new StoreCustomerAdmissionPolicy();
             RefreshCheckoutStatus();
@@ -342,39 +348,29 @@ namespace VRMGames.CartridgeAndCloud.Runtime.Store
             return null;
         }
 
-        private static string CurrentStoreState()
+        private string CurrentStoreState()
         {
-            UIRuntimeCompositionRoot root =
-                UIRuntimeCompositionRoot.Instance;
-
-            if (root == null ||
-                root.ActiveSession == null ||
-                !root.ActiveSession.HasActiveSession)
+            if (!_activeSession.HasActiveSession)
             {
                 return "BeforeOpen";
             }
 
-            return root.ActiveSession.Snapshot
+            return _activeSession.Snapshot
                 .DayCycle.State;
         }
 
-        private static string CurrentCheckoutStationState()
+        private string CurrentCheckoutStationState()
         {
-            UIRuntimeCompositionRoot root =
-                UIRuntimeCompositionRoot.Instance;
-
-            if (root == null ||
-                root.ActiveSession == null ||
-                !root.ActiveSession.HasActiveSession)
+            if (!_activeSession.HasActiveSession)
             {
                 return "Closed";
             }
 
-            return root.ActiveSession.Snapshot
+            return _activeSession.Snapshot
                 .CheckoutStation.State;
         }
 
-        private static bool IsState(string state)
+        private bool IsState(string state)
         {
             return string.Equals(
                 CurrentStoreState(),

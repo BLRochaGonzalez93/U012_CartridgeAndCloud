@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.Serialization;
 using VRMGames.CartridgeAndCloud.Infrastructure.Audio;
+using VRMGames.CartridgeAndCloud.Infrastructure.Employees;
 
 namespace VRMGames.CartridgeAndCloud.Infrastructure.Store
 {
@@ -29,6 +30,9 @@ namespace VRMGames.CartridgeAndCloud.Infrastructure.Store
         private AudioEventCatalogAsset _audioCatalog;
 
         [SerializeField]
+        private EmployeeHiringCatalogAsset _employeeHiringCatalog;
+
+        [SerializeField]
         [FormerlySerializedAs("_representativePrefabs")]
         private StoreVisualPrefabCatalogAsset _visualPrefabs;
 
@@ -49,6 +53,9 @@ namespace VRMGames.CartridgeAndCloud.Infrastructure.Store
             _presentationCatalog;
 
         public AudioEventCatalogAsset AudioCatalog => _audioCatalog;
+
+        public EmployeeHiringCatalogAsset EmployeeHiringCatalog =>
+            _employeeHiringCatalog;
 
         public StoreVisualPrefabCatalogAsset VisualPrefabs =>
             _visualPrefabs;
@@ -87,14 +94,8 @@ namespace VRMGames.CartridgeAndCloud.Infrastructure.Store
 
         public static StoreRuntimeAssetRegistry FindLoaded()
         {
-            StoreRuntimeAssetRegistry[] registries =
-                Resources.FindObjectsOfTypeAll<
-                    StoreRuntimeAssetRegistry>();
-
-            return registries == null ||
-                   registries.Length == 0
-                ? null
-                : registries[0];
+            return Resources.Load<StoreRuntimeAssetRegistry>(
+                "RuntimeAssetRegistry");
         }
     }
 }

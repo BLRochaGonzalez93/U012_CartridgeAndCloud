@@ -2,7 +2,10 @@ using System;
 using System.IO;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using VRMGames.CartridgeAndCloud.Application.Composition;
 using VRMGames.CartridgeAndCloud.Application.DayCycle;
+using VRMGames.CartridgeAndCloud.Application.Employees;
+using VRMGames.CartridgeAndCloud.Application.GameSession;
 using VRMGames.CartridgeAndCloud.Application.Localization;
 using VRMGames.CartridgeAndCloud.Application.Customers;
 using VRMGames.CartridgeAndCloud.Application.Persistence;
@@ -60,10 +63,16 @@ namespace VRMGames.CartridgeAndCloud.Runtime.Composition
             private set;
         }
 
-        public ActiveGameSessionService ActiveSession {
+        public IActiveGameSession ActiveSession {
             get;
             private set;
         }
+
+        public IGameApplicationContext
+            ApplicationContext {
+                get;
+                private set;
+            }
 
         public SlotSelectionService Slots {
             get;
@@ -112,6 +121,12 @@ namespace VRMGames.CartridgeAndCloud.Runtime.Composition
 
         public IStoreClosingEconomyService
             StoreClosingEconomyService {
+                get;
+                private set;
+            }
+
+        public IEmployeePayrollClosingService
+            EmployeePayrollClosingService {
                 get;
                 private set;
             }
@@ -223,6 +238,14 @@ namespace VRMGames.CartridgeAndCloud.Runtime.Composition
             PauseService =
                 new PauseService();
 
+            ApplicationContext =
+                new GameApplicationContext(
+                    ActiveSession,
+                    SaveMutations,
+                    SimulationClock,
+                    PauseService,
+                    utcClock);
+
             DefaultIntegratedGameStateFactory
                 factory =
                     new DefaultIntegratedGameStateFactory(
@@ -328,7 +351,9 @@ namespace VRMGames.CartridgeAndCloud.Runtime.Composition
             InputGate?.ExitUiExclusive();
             StoreOperationalGate = null;
             StoreClosingEconomyService = null;
+            EmployeePayrollClosingService = null;
             StoreManagementStateProvider = null;
+            ApplicationContext = null;
             Time.timeScale = 1f;
             Instance = null;
         }
@@ -410,6 +435,24 @@ namespace VRMGames.CartridgeAndCloud.Runtime.Composition
                     service))
             {
                 StoreClosingEconomyService = null;
+            }
+        }
+
+        public void RegisterEmployeePayrollClosingService(
+            IEmployeePayrollClosingService service)
+        {
+            EmployeePayrollClosingService = service ??
+                throw new ArgumentNullException(nameof(service));
+        }
+
+        public void UnregisterEmployeePayrollClosingService(
+            IEmployeePayrollClosingService service)
+        {
+            if (ReferenceEquals(
+                    EmployeePayrollClosingService,
+                    service))
+            {
+                EmployeePayrollClosingService = null;
             }
         }
 
@@ -657,6 +700,29 @@ namespace VRMGames.CartridgeAndCloud.Runtime.Composition
 
             if (targetState == "Closed" &&
                 dayComplete &&
+                EmployeePayrollClosingService != null)
+            {
+                EmployeePayrollOperationResult payroll =
+                    EmployeePayrollClosingService
+                        .SettleDailyPayroll();
+
+                if (!payroll.Succeeded)
+                {
+                    reason = payroll.Detail;
+                    LastUserMessage = reason;
+                    return false;
+                }
+
+                if (payroll.HasOutstandingSalaryObligations)
+                {
+                    LastUserMessage = payroll.Detail;
+                }
+
+                current = ActiveSession.Snapshot;
+            }
+
+            if (targetState == "Closed" &&
+                dayComplete &&
                 StoreClosingEconomyService != null)
             {
                 StoreOperationResult settlement =
@@ -868,7 +934,8 @@ namespace VRMGames.CartridgeAndCloud.Runtime.Composition
                             .AutoBeginClosing,
                         current.DayCycle
                             .SimulationSpeedMultiplier),
-                    new EconomyLedgerSaveRecord[0]);
+                    new EconomyLedgerSaveRecord[0],
+                    current.EmployeeSystem);
 
             PauseService.Clear();
             _midnightFinalizedDayId = string.Empty;
@@ -984,6 +1051,24 @@ namespace VRMGames.CartridgeAndCloud.Runtime.Composition
 
             if (string.Equals(snapshot.DayCycle.State, "Closed", StringComparison.Ordinal))
             {
+                if (EmployeePayrollClosingService != null)
+                {
+                    EmployeePayrollOperationResult payroll =
+                        EmployeePayrollClosingService.SettleDailyPayroll();
+                    if (!payroll.Succeeded)
+                    {
+                        LastUserMessage = payroll.Detail;
+                        return;
+                    }
+
+                    if (payroll.HasOutstandingSalaryObligations)
+                    {
+                        LastUserMessage = payroll.Detail;
+                    }
+
+                    snapshot = ActiveSession.Snapshot;
+                }
+
                 if (StoreClosingEconomyService != null)
                 {
                     StoreOperationResult settlement =
@@ -1035,7 +1120,8 @@ namespace VRMGames.CartridgeAndCloud.Runtime.Composition
                 checkoutStation,
                 source.Transactions,
                 dayCycle,
-                source.LedgerEntries);
+                source.LedgerEntries,
+                source.EmployeeSystem);
         }
 
         private void HandleSnapshotChanged(

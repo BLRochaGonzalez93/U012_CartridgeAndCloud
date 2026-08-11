@@ -1,4 +1,5 @@
 using System;
+using VRMGames.CartridgeAndCloud.Application.GameSession;
 using VRMGames.CartridgeAndCloud.Application.Persistence;
 using VRMGames.CartridgeAndCloud.Domain.DayCycle;
 using VRMGames.CartridgeAndCloud.Domain.Persistence;
@@ -42,7 +43,7 @@ namespace VRMGames.CartridgeAndCloud.Application.UIUX
             _repository;
         private readonly IAutosaveMarkerRepository
             _markerRepository;
-        private readonly ActiveGameSessionService
+        private readonly IActiveGameSession
             _activeSession;
 
         private IManualSaveCheckpointParticipant
@@ -60,7 +61,7 @@ namespace VRMGames.CartridgeAndCloud.Application.UIUX
         public DailyAutosaveService(
             IIntegratedSaveRepository repository,
             IAutosaveMarkerRepository markerRepository,
-            ActiveGameSessionService activeSession)
+            IActiveGameSession activeSession)
         {
             _repository = repository ??
                 throw new ArgumentNullException(

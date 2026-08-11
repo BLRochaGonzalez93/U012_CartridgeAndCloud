@@ -13,7 +13,11 @@ namespace VRMGames.CartridgeAndCloud.Domain.Economy
 
         public Money SupplierReceivingCost { get; }
 
+        public Money EmployeeSalaryCost { get; }
+
         public Money GrossResult { get; }
+
+        public Money OperatingResult { get; }
 
         public int CheckoutPostingCount { get; }
 
@@ -29,6 +33,7 @@ namespace VRMGames.CartridgeAndCloud.Domain.Economy
             StoreDayId dayId,
             Money checkoutRevenue,
             Money supplierReceivingCost,
+            Money employeeSalaryCost,
             int checkoutPostingCount,
             int supplierReceiptPostingCount,
             int customerArrivals,
@@ -36,7 +41,9 @@ namespace VRMGames.CartridgeAndCloud.Domain.Economy
             int elapsedOpenSeconds)
         {
             if (checkoutRevenue.Currency !=
-                supplierReceivingCost.Currency)
+                    supplierReceivingCost.Currency ||
+                checkoutRevenue.Currency !=
+                    employeeSalaryCost.Currency)
             {
                 throw new ArgumentException(
                     "Daily-result amounts must use the same currency.");
@@ -62,9 +69,12 @@ namespace VRMGames.CartridgeAndCloud.Domain.Economy
             Currency = checkoutRevenue.Currency;
             CheckoutRevenue = checkoutRevenue;
             SupplierReceivingCost = supplierReceivingCost;
+            EmployeeSalaryCost = employeeSalaryCost;
             GrossResult =
                 checkoutRevenue.Subtract(
                     supplierReceivingCost);
+            OperatingResult =
+                GrossResult.Subtract(employeeSalaryCost);
             CheckoutPostingCount = checkoutPostingCount;
             SupplierReceiptPostingCount =
                 supplierReceiptPostingCount;

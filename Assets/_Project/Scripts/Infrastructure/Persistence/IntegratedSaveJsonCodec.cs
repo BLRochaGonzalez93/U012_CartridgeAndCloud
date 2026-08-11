@@ -10,6 +10,7 @@ using VRMGames.CartridgeAndCloud.Domain.Persistence;
 using VRMGames.CartridgeAndCloud.Domain.Checkout;
 using VRMGames.CartridgeAndCloud.Domain.DayCycle;
 using VRMGames.CartridgeAndCloud.Domain.Economy;
+using VRMGames.CartridgeAndCloud.Domain.Employees;
 using VRMGames.CartridgeAndCloud.Domain.Inventory;
 using VRMGames.CartridgeAndCloud.Domain.Suppliers;
 namespace VRMGames.CartridgeAndCloud.Infrastructure.Persistence
@@ -30,6 +31,7 @@ namespace VRMGames.CartridgeAndCloud.Infrastructure.Persistence
 
     public sealed class IntegratedSaveJsonCodec
     {
+        private const int MinimumSupportedSchemaVersion = 2;
         public string Encode(
             IntegratedGameStateSnapshot snapshot,
             long generation)
@@ -107,15 +109,16 @@ namespace VRMGames.CartridgeAndCloud.Infrastructure.Persistence
                     "Save envelope is null.");
             }
 
-            if (envelope.schemaVersion !=
-                IntegratedGameStateSnapshot
-                    .CurrentSchemaVersion)
+            if (envelope.schemaVersion < MinimumSupportedSchemaVersion ||
+                envelope.schemaVersion >
+                    IntegratedGameStateSnapshot.CurrentSchemaVersion)
             {
                 throw new IntegratedSaveFormatException(
                     IntegratedSaveRepositoryStatus
                         .UnsupportedSchema,
-                    $"Unsupported schema " +
-                    $"{envelope.schemaVersion}.");
+                    $"Unsupported schema {envelope.schemaVersion}. " +
+                    $"Supported range is {MinimumSupportedSchemaVersion}-" +
+                    $"{IntegratedGameStateSnapshot.CurrentSchemaVersion}.");
             }
 
             if (envelope.slot != expectedSlot.Value)
@@ -190,7 +193,7 @@ namespace VRMGames.CartridgeAndCloud.Infrastructure.Persistence
 
             try
             {
-                snapshot = payload.ToSnapshot();
+                snapshot = payload.ToSnapshot(envelope.schemaVersion);
             }
             catch (Exception exception)
             {
@@ -299,6 +302,7 @@ namespace VRMGames.CartridgeAndCloud.Infrastructure.Persistence
             public DayCycleDto dayCycle;
             public List<LedgerEntryDto> ledgerEntries =
                 new List<LedgerEntryDto>();
+            public EmployeeSystemDto employeeSystem;
 
             public static SnapshotDto FromSnapshot(
                 IntegratedGameStateSnapshot snapshot)
@@ -326,7 +330,10 @@ namespace VRMGames.CartridgeAndCloud.Infrastructure.Persistence
                                 snapshot.CheckoutStation),
                         dayCycle =
                             DayCycleDto.FromRecord(
-                                snapshot.DayCycle)
+                                snapshot.DayCycle),
+                        employeeSystem =
+                            EmployeeSystemDto.FromRecord(
+                                snapshot.EmployeeSystem)
                     };
 
                 foreach (InventoryContainerSaveRecord item
@@ -395,8 +402,14 @@ namespace VRMGames.CartridgeAndCloud.Infrastructure.Persistence
                 return dto;
             }
 
-            public IntegratedGameStateSnapshot ToSnapshot()
+            public IntegratedGameStateSnapshot ToSnapshot(
+                int sourceSchemaVersion)
             {
+                if (sourceSchemaVersion != schemaVersion)
+                {
+                    throw new InvalidOperationException(
+                        "Envelope and payload schema versions do not match.");
+                }
                 List<InventoryContainerSaveRecord>
                     inventoryRecords =
                         new List<
@@ -500,7 +513,7 @@ namespace VRMGames.CartridgeAndCloud.Infrastructure.Persistence
                 }
 
                 return new IntegratedGameStateSnapshot(
-                    schemaVersion,
+                    IntegratedGameStateSnapshot.CurrentSchemaVersion,
                     StableId.Parse(sessionId),
                     new SaveSlotId(slot),
                     new DateTime(
@@ -522,7 +535,21 @@ namespace VRMGames.CartridgeAndCloud.Infrastructure.Persistence
                     checkoutStation.ToRecord(),
                     transactionRecords,
                     dayCycle.ToRecord(),
-                    ledgerRecords);
+                    ledgerRecords,
+                    sourceSchemaVersion >= 3
+                        ? RequireEmployeeSystem().ToRecord()
+                        : EmployeeSystemSaveRecord.Empty());
+            }
+
+            private EmployeeSystemDto RequireEmployeeSystem()
+            {
+                if (employeeSystem == null)
+                {
+                    throw new InvalidOperationException(
+                        "Employee system data is missing.");
+                }
+
+                return employeeSystem;
             }
 
             private static List<T> Require<T>(
@@ -535,6 +562,446 @@ namespace VRMGames.CartridgeAndCloud.Infrastructure.Persistence
                 }
 
                 return values;
+            }
+        }
+
+        [Serializable]
+        private sealed class EmployeeSystemDto
+        {
+            public int postingSequence;
+            public bool hasPublishedAnyPosting;
+            public List<RecruitmentPostingDto> postings =
+                new List<RecruitmentPostingDto>();
+            public List<HiredEmployeeDto> employees =
+                new List<HiredEmployeeDto>();
+            public List<EmployeeScheduleDto> schedules =
+                new List<EmployeeScheduleDto>();
+            public List<EmployeeSalaryObligationDto> outstandingSalaries =
+                new List<EmployeeSalaryObligationDto>();
+
+            public static EmployeeSystemDto FromRecord(
+                EmployeeSystemSaveRecord record)
+            {
+                if (record == null)
+                {
+                    throw new ArgumentNullException(nameof(record));
+                }
+
+                EmployeeSystemDto dto = new EmployeeSystemDto
+                {
+                    postingSequence = record.PostingSequence,
+                    hasPublishedAnyPosting = record.HasPublishedAnyPosting
+                };
+
+                foreach (RecruitmentPostingSaveRecord item in record.Postings)
+                {
+                    dto.postings.Add(RecruitmentPostingDto.FromRecord(item));
+                }
+
+                foreach (HiredEmployeeSaveRecord item in record.Employees)
+                {
+                    dto.employees.Add(HiredEmployeeDto.FromRecord(item));
+                }
+
+                foreach (EmployeeScheduleSaveRecord item in record.Schedules)
+                {
+                    dto.schedules.Add(EmployeeScheduleDto.FromRecord(item));
+                }
+
+                foreach (EmployeeSalaryObligationSaveRecord item
+                         in record.OutstandingSalaries)
+                {
+                    dto.outstandingSalaries.Add(
+                        EmployeeSalaryObligationDto.FromRecord(item));
+                }
+
+                return dto;
+            }
+
+            public EmployeeSystemSaveRecord ToRecord()
+            {
+                List<RecruitmentPostingSaveRecord> postingRecords =
+                    new List<RecruitmentPostingSaveRecord>();
+                List<HiredEmployeeSaveRecord> employeeRecords =
+                    new List<HiredEmployeeSaveRecord>();
+                List<EmployeeScheduleSaveRecord> scheduleRecords =
+                    new List<EmployeeScheduleSaveRecord>();
+                List<EmployeeSalaryObligationSaveRecord> salaryRecords =
+                    new List<EmployeeSalaryObligationSaveRecord>();
+
+                foreach (RecruitmentPostingDto item in Require(postings))
+                {
+                    postingRecords.Add(item.ToRecord());
+                }
+
+                foreach (HiredEmployeeDto item in Require(employees))
+                {
+                    employeeRecords.Add(item.ToRecord());
+                }
+
+                foreach (EmployeeScheduleDto item in Require(schedules))
+                {
+                    scheduleRecords.Add(item.ToRecord());
+                }
+
+                foreach (EmployeeSalaryObligationDto item
+                         in Require(outstandingSalaries))
+                {
+                    salaryRecords.Add(item.ToRecord());
+                }
+
+                return new EmployeeSystemSaveRecord(
+                    postingSequence,
+                    hasPublishedAnyPosting,
+                    postingRecords,
+                    employeeRecords,
+                    scheduleRecords,
+                    salaryRecords);
+            }
+
+            private static List<T> Require<T>(List<T> values)
+            {
+                if (values == null)
+                {
+                    throw new InvalidOperationException(
+                        "Employee save collection is missing.");
+                }
+
+                foreach (T item in values)
+                {
+                    if (item == null)
+                    {
+                        throw new InvalidOperationException(
+                            "Employee save collection contains null.");
+                    }
+                }
+
+                return values;
+            }
+        }
+
+        [Serializable]
+        private sealed class EmployeeCandidateDto
+        {
+            public string candidateId;
+            public string displayName;
+            public int profile;
+            public int seniority;
+            public int clerkSkill;
+            public int restockingSkill;
+            public int orderPickingSkill;
+            public string workSpeed;
+            public string experience;
+            public long requestedDailySalaryCents;
+            public string trait;
+            public int availableFromDay;
+            public string state;
+
+            public static EmployeeCandidateDto FromRecord(
+                EmployeeCandidateSaveRecord record)
+            {
+                return new EmployeeCandidateDto
+                {
+                    candidateId = record.CandidateId,
+                    displayName = record.DisplayName,
+                    profile = (int)record.Profile,
+                    seniority = (int)record.Seniority,
+                    clerkSkill = record.ClerkSkill,
+                    restockingSkill = record.RestockingSkill,
+                    orderPickingSkill = record.OrderPickingSkill,
+                    workSpeed = record.WorkSpeed,
+                    experience = record.Experience,
+                    requestedDailySalaryCents =
+                        record.RequestedDailySalaryCents,
+                    trait = record.Trait,
+                    availableFromDay = record.AvailableFromDay,
+                    state = record.State
+                };
+            }
+
+            public EmployeeCandidateSaveRecord ToRecord()
+            {
+                return new EmployeeCandidateSaveRecord(
+                    candidateId,
+                    displayName,
+                    (EmployeeProfile)profile,
+                    (EmployeeSeniority)seniority,
+                    clerkSkill,
+                    restockingSkill,
+                    orderPickingSkill,
+                    workSpeed,
+                    experience,
+                    requestedDailySalaryCents,
+                    trait,
+                    availableFromDay,
+                    state);
+            }
+        }
+
+        [Serializable]
+        private sealed class RecruitmentPostingDto
+        {
+            public string postingId;
+            public string channelId;
+            public int publishedDay;
+            public int readyDay;
+            public int expiryDayExclusive;
+            public long paidCostCents;
+            public bool usedFirstPublicationBenefit;
+            public List<EmployeeCandidateDto> candidates =
+                new List<EmployeeCandidateDto>();
+
+            public static RecruitmentPostingDto FromRecord(
+                RecruitmentPostingSaveRecord record)
+            {
+                RecruitmentPostingDto dto = new RecruitmentPostingDto
+                {
+                    postingId = record.PostingId,
+                    channelId = record.ChannelId,
+                    publishedDay = record.PublishedDay,
+                    readyDay = record.ReadyDay,
+                    expiryDayExclusive = record.ExpiryDayExclusive,
+                    paidCostCents = record.PaidCostCents,
+                    usedFirstPublicationBenefit =
+                        record.UsedFirstPublicationBenefit
+                };
+
+                foreach (EmployeeCandidateSaveRecord candidate
+                         in record.Candidates)
+                {
+                    dto.candidates.Add(
+                        EmployeeCandidateDto.FromRecord(candidate));
+                }
+
+                return dto;
+            }
+
+            public RecruitmentPostingSaveRecord ToRecord()
+            {
+                if (candidates == null)
+                {
+                    throw new InvalidOperationException(
+                        "Recruitment candidates are missing.");
+                }
+
+                List<EmployeeCandidateSaveRecord> records =
+                    new List<EmployeeCandidateSaveRecord>();
+                foreach (EmployeeCandidateDto candidate in candidates)
+                {
+                    if (candidate == null)
+                    {
+                        throw new InvalidOperationException(
+                            "Recruitment candidate is null.");
+                    }
+
+                    records.Add(candidate.ToRecord());
+                }
+
+                return new RecruitmentPostingSaveRecord(
+                    postingId,
+                    channelId,
+                    publishedDay,
+                    readyDay,
+                    expiryDayExclusive,
+                    paidCostCents,
+                    usedFirstPublicationBenefit,
+                    records);
+            }
+        }
+
+        [Serializable]
+        private sealed class HiredEmployeeDto
+        {
+            public string employeeId;
+            public string sourceCandidateId;
+            public string displayName;
+            public int profile;
+            public int seniority;
+            public int clerkSkill;
+            public int restockingSkill;
+            public int orderPickingSkill;
+            public long contractedDailySalaryCents;
+            public string trait;
+            public int hiredDay;
+            public int startDay;
+
+            public static HiredEmployeeDto FromRecord(
+                HiredEmployeeSaveRecord record)
+            {
+                return new HiredEmployeeDto
+                {
+                    employeeId = record.EmployeeId,
+                    sourceCandidateId = record.SourceCandidateId,
+                    displayName = record.DisplayName,
+                    profile = (int)record.Profile,
+                    seniority = (int)record.Seniority,
+                    clerkSkill = record.ClerkSkill,
+                    restockingSkill = record.RestockingSkill,
+                    orderPickingSkill = record.OrderPickingSkill,
+                    contractedDailySalaryCents =
+                        record.ContractedDailySalaryCents,
+                    trait = record.Trait,
+                    hiredDay = record.HiredDay,
+                    startDay = record.StartDay
+                };
+            }
+
+            public HiredEmployeeSaveRecord ToRecord()
+            {
+                return new HiredEmployeeSaveRecord(
+                    employeeId,
+                    sourceCandidateId,
+                    displayName,
+                    (EmployeeProfile)profile,
+                    (EmployeeSeniority)seniority,
+                    clerkSkill,
+                    restockingSkill,
+                    orderPickingSkill,
+                    contractedDailySalaryCents,
+                    trait,
+                    hiredDay,
+                    startDay);
+            }
+        }
+
+        [Serializable]
+        private sealed class EmployeeScheduleExceptionDto
+        {
+            public int day;
+            public int kind;
+
+            public static EmployeeScheduleExceptionDto FromRecord(
+                EmployeeScheduleExceptionSaveRecord record)
+            {
+                return new EmployeeScheduleExceptionDto
+                {
+                    day = record.Day,
+                    kind = (int)record.Kind
+                };
+            }
+
+            public EmployeeScheduleExceptionSaveRecord ToRecord()
+            {
+                return new EmployeeScheduleExceptionSaveRecord(
+                    day,
+                    (EmployeeScheduleExceptionKind)kind);
+            }
+        }
+
+        [Serializable]
+        private sealed class EmployeeScheduleDto
+        {
+            public string employeeId;
+            public string shiftId;
+            public bool day1Working;
+            public bool day2Working;
+            public bool day3Working;
+            public bool day4Working;
+            public bool day5Working;
+            public bool day6Working;
+            public bool day7Working;
+            public List<EmployeeScheduleExceptionDto> exceptions =
+                new List<EmployeeScheduleExceptionDto>();
+            public int lockedDay;
+            public bool lockedDayWorking;
+            public string lockedShiftId;
+            public int lockedExceptionKind;
+
+            public static EmployeeScheduleDto FromRecord(
+                EmployeeScheduleSaveRecord record)
+            {
+                EmployeeScheduleDto dto = new EmployeeScheduleDto
+                {
+                    employeeId = record.EmployeeId,
+                    shiftId = record.ShiftId,
+                    day1Working = record.Day1Working,
+                    day2Working = record.Day2Working,
+                    day3Working = record.Day3Working,
+                    day4Working = record.Day4Working,
+                    day5Working = record.Day5Working,
+                    day6Working = record.Day6Working,
+                    day7Working = record.Day7Working,
+                    lockedDay = record.LockedDay,
+                    lockedDayWorking = record.LockedDayWorking,
+                    lockedShiftId = record.LockedShiftId,
+                    lockedExceptionKind = (int)record.LockedExceptionKind
+                };
+
+                foreach (EmployeeScheduleExceptionSaveRecord item
+                         in record.Exceptions)
+                {
+                    dto.exceptions.Add(
+                        EmployeeScheduleExceptionDto.FromRecord(item));
+                }
+
+                return dto;
+            }
+
+            public EmployeeScheduleSaveRecord ToRecord()
+            {
+                if (exceptions == null)
+                {
+                    throw new InvalidOperationException(
+                        "Employee schedule exceptions are missing.");
+                }
+
+                List<EmployeeScheduleExceptionSaveRecord> records =
+                    new List<EmployeeScheduleExceptionSaveRecord>();
+                foreach (EmployeeScheduleExceptionDto item in exceptions)
+                {
+                    if (item == null)
+                    {
+                        throw new InvalidOperationException(
+                            "Employee schedule exception is null.");
+                    }
+                    records.Add(item.ToRecord());
+                }
+
+                return new EmployeeScheduleSaveRecord(
+                    employeeId,
+                    shiftId,
+                    day1Working,
+                    day2Working,
+                    day3Working,
+                    day4Working,
+                    day5Working,
+                    day6Working,
+                    day7Working,
+                    records,
+                    lockedDay,
+                    lockedDayWorking,
+                    lockedShiftId,
+                    (EmployeeScheduleExceptionKind)lockedExceptionKind);
+            }
+        }
+
+        [Serializable]
+        private sealed class EmployeeSalaryObligationDto
+        {
+            public string employeeId;
+            public string employeeName;
+            public int dueDay;
+            public long amountCents;
+
+            public static EmployeeSalaryObligationDto FromRecord(
+                EmployeeSalaryObligationSaveRecord record)
+            {
+                return new EmployeeSalaryObligationDto
+                {
+                    employeeId = record.EmployeeId,
+                    employeeName = record.EmployeeName,
+                    dueDay = record.DueDay,
+                    amountCents = record.AmountCents
+                };
+            }
+
+            public EmployeeSalaryObligationSaveRecord ToRecord()
+            {
+                return new EmployeeSalaryObligationSaveRecord(
+                    employeeId,
+                    employeeName,
+                    dueDay,
+                    amountCents);
             }
         }
 

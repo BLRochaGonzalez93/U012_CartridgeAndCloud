@@ -579,7 +579,9 @@ namespace VRMGames.CartridgeAndCloud.Runtime.Placement
 
                 marker.Configure(
                     fixture.DefinitionId,
-                    fixture.InstanceId);
+                    fixture.InstanceId,
+                    definition.Kind,
+                    definition.IsInteractive);
             }
 
             _lastPlacedCount = _runtime.PlacedCount;
@@ -733,7 +735,9 @@ namespace VRMGames.CartridgeAndCloud.Runtime.Placement
 
                 marker.Configure(
                     definition.DefinitionId,
-                    id.Value);
+                    id.Value,
+                    definition.Kind,
+                    definition.IsInteractive);
                 return;
             }
         }

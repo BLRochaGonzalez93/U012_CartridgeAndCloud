@@ -1,9 +1,11 @@
 using System;
 using UnityEngine;
+using VRMGames.CartridgeAndCloud.Presentation.Interaction;
 namespace VRMGames.CartridgeAndCloud.Presentation.Store.Doors
 {
     public sealed class AutomaticSlidingDoorController :
-        MonoBehaviour
+        MonoBehaviour,
+        IWorldInteractionTarget
     {
         [SerializeField]
         private AutomaticDoorParts _parts;
@@ -29,6 +31,29 @@ namespace VRMGames.CartridgeAndCloud.Presentation.Store.Doors
         private Collider[] _panelColliders = Array.Empty<Collider>();
 
         public bool IsOpen => _isOpen;
+
+        public string InteractionId =>
+            "store-entrance-door";
+
+        public WorldInteractionKind InteractionKind =>
+            WorldInteractionKind.Door;
+
+        public Transform InteractionTransform =>
+            transform;
+
+        public float InteractionRange => 2f;
+
+        public int InteractionPriority => 80;
+
+        public bool IsInteractionAvailable => true;
+
+        public Vector3 GetInteractionPoint(
+            Vector3 actorPosition)
+        {
+            return WorldInteractionGeometry.ResolveClosestPoint(
+                transform,
+                actorPosition);
+        }
 
         public event Action<bool> OpenStateChanged;
 

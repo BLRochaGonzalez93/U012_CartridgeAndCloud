@@ -5,8 +5,10 @@ using VRMGames.CartridgeAndCloud.Application.UIUX;
 using VRMGames.CartridgeAndCloud.Infrastructure.UIUX;
 
 using VRMGames.CartridgeAndCloud.Application.Audio;
+using VRMGames.CartridgeAndCloud.Application.Employees;
 using VRMGames.CartridgeAndCloud.Application.Store;
 using VRMGames.CartridgeAndCloud.Domain.Products;
+using VRMGames.CartridgeAndCloud.Domain.Employees;
 using VRMGames.CartridgeAndCloud.Domain.Store;
 using VRMGames.CartridgeAndCloud.Runtime.Audio;
 using VRMGames.CartridgeAndCloud.Runtime.Characters;
@@ -27,6 +29,7 @@ namespace VRMGames.CartridgeAndCloud.Runtime.UIUX
             Warehouse,
             Displays,
             Customers,
+            Employees,
             Settings
         }
 
@@ -39,6 +42,17 @@ namespace VRMGames.CartridgeAndCloud.Runtime.UIUX
             _placement;
         private StoreCharacterLoopController
             _characters;
+        private EmployeeHiringService
+            _employeeHiring;
+        private EmployeePayrollService
+            _employeePayroll;
+        private EmployeeScheduleService
+            _employeeSchedule;
+        private EmployeeStateService
+            _employeeState;
+        private EmployeePresenceService
+            _employeePresence;
+        private CandidateId _pendingHireCandidateId;
         private AuthoredStoreRuntimeBinder
             _binder;
         private StoreAudioRouter _audio;
@@ -56,6 +70,11 @@ namespace VRMGames.CartridgeAndCloud.Runtime.UIUX
             StoreOpeningProcedure procedure,
             StorePlacementCoordinator placement,
             StoreCharacterLoopController characters,
+            EmployeeHiringService employeeHiring,
+            EmployeePayrollService employeePayroll,
+            EmployeeScheduleService employeeSchedule,
+            EmployeeStateService employeeState,
+            EmployeePresenceService employeePresence,
             AuthoredStoreRuntimeBinder binder,
             StoreAudioRouter audio)
         {
@@ -74,6 +93,21 @@ namespace VRMGames.CartridgeAndCloud.Runtime.UIUX
             _characters = characters ??
                 throw new ArgumentNullException(
                     nameof(characters));
+            _employeeHiring = employeeHiring ??
+                throw new ArgumentNullException(
+                    nameof(employeeHiring));
+            _employeePayroll = employeePayroll ??
+                throw new ArgumentNullException(
+                    nameof(employeePayroll));
+            _employeeSchedule = employeeSchedule ??
+                throw new ArgumentNullException(
+                    nameof(employeeSchedule));
+            _employeeState = employeeState ??
+                throw new ArgumentNullException(
+                    nameof(employeeState));
+            _employeePresence = employeePresence ??
+                throw new ArgumentNullException(
+                    nameof(employeePresence));
             _binder = binder ??
                 throw new ArgumentNullException(
                     nameof(binder));
@@ -83,6 +117,12 @@ namespace VRMGames.CartridgeAndCloud.Runtime.UIUX
 
             _service.StateChanged +=
                 HandleStateChanged;
+            _employeeHiring.StateChanged +=
+                HandleHiringStateChanged;
+            _employeePayroll.StateChanged +=
+                HandlePayrollStateChanged;
+            _employeeSchedule.StateChanged +=
+                HandleScheduleStateChanged;
 
             BuildCanvas();
         }
@@ -100,6 +140,24 @@ namespace VRMGames.CartridgeAndCloud.Runtime.UIUX
             {
                 _service.StateChanged -=
                     HandleStateChanged;
+            }
+
+            if (_employeeHiring != null)
+            {
+                _employeeHiring.StateChanged -=
+                    HandleHiringStateChanged;
+            }
+
+            if (_employeePayroll != null)
+            {
+                _employeePayroll.StateChanged -=
+                    HandlePayrollStateChanged;
+            }
+
+            if (_employeeSchedule != null)
+            {
+                _employeeSchedule.StateChanged -=
+                    HandleScheduleStateChanged;
             }
         }
 
@@ -241,6 +299,10 @@ namespace VRMGames.CartridgeAndCloud.Runtime.UIUX
                 "Customer");
             AddTab(
                 tabs,
+                Tab.Employees,
+                "Employees");
+            AddTab(
+                tabs,
                 Tab.Settings,
                 "Settings");
 
@@ -329,6 +391,9 @@ namespace VRMGames.CartridgeAndCloud.Runtime.UIUX
                     break;
                 case Tab.Customers:
                     BuildCustomers();
+                    break;
+                case Tab.Employees:
+                    BuildEmployees();
                     break;
                 case Tab.Settings:
                     BuildSettings();
@@ -848,6 +913,334 @@ namespace VRMGames.CartridgeAndCloud.Runtime.UIUX
                 _characters.CanServeNextCustomer;
         }
 
+        private void BuildEmployees()
+        {
+            EmployeeHiringEligibility eligibility =
+                _employeeHiring.EvaluateEligibility();
+            string currency =
+                UIRuntimeCompositionRoot
+                    .Instance.ActiveSession
+                    .Snapshot.CurrencyCode;
+
+            AddHeading("Hiring requirements");
+            AddParagraph(
+                "Operating day: " +
+                eligibility.CurrentDay +
+                " / " +
+                eligibility.MinimumOperatingDays +
+                (eligibility.MeetsOperatingDayRequirement
+                    ? " · ready"
+                    : " · locked"));
+            AddParagraph(
+                "Work area: " +
+                (eligibility.HasValidWorkArea
+                    ? "valid checkout/work area available"
+                    : "place a valid checkout/work area"));
+            AddParagraph(
+                "Salary obligations: " +
+                (eligibility.HasNoOutstandingSalaryObligations
+                    ? "clear"
+                    : "OUTSTANDING · recruiting is blocked"));
+            AddParagraph(
+                "Business level " +
+                eligibility.MinimumBusinessLevel +
+                " and reputation " +
+                eligibility.MinimumReputation +
+                " are defined progression gates. " +
+                "They are not enforced until a progression authority exists.");
+
+            AddHeading("Recruitment channels");
+            foreach (RecruitmentChannelDefinition channel
+                     in _employeeHiring.Catalog.Channels)
+            {
+                RecruitmentChannelDefinition captured = channel;
+                long effectiveCost =
+                    _employeeHiring.GetEffectivePostingCost(captured);
+                string delay = captured.MinimumDelayDays ==
+                               captured.MaximumDelayDays
+                    ? captured.MinimumDelayDays + " day(s)"
+                    : captured.MinimumDelayDays + "-" +
+                      captured.MaximumDelayDays + " days";
+
+                Button publish = AddAction(
+                    captured.DisplayName +
+                    " · " + captured.CandidateCount +
+                    " candidates · " + delay +
+                    " · " +
+                    (effectiveCost == 0
+                        ? "FREE"
+                        : StoreUiProjectionService.FormatMoney(
+                            effectiveCost,
+                            currency)),
+                    "Publish",
+                    () => ExecuteHiring(
+                        _employeeHiring.Publish(
+                            captured.ChannelId)));
+                publish.interactable = eligibility.CanRecruit;
+            }
+
+            AddHeading("Candidate groups");
+            if (_employeeHiring.Postings.Count == 0)
+            {
+                AddParagraph("No recruitment postings yet.");
+            }
+
+            int currentDay = eligibility.CurrentDay;
+            foreach (RecruitmentPosting posting
+                     in _employeeHiring.Postings)
+            {
+                RecruitmentPostingState state =
+                    posting.GetState(currentDay);
+
+                AddParagraph(
+                    posting.Channel.DisplayName +
+                    " · " + state +
+                    " · published day " +
+                    posting.PublishedDay +
+                    " · candidates day " +
+                    posting.ReadyDay +
+                    " · available through day " +
+                    (posting.ExpiryDayExclusive - 1));
+
+                if (state == RecruitmentPostingState.Pending)
+                {
+                    continue;
+                }
+
+                if (state == RecruitmentPostingState.Expired)
+                {
+                    AddParagraph(
+                        "This candidate group has expired.");
+                    continue;
+                }
+
+                bool anyAvailable = false;
+                foreach (RecruitmentCandidateEntry entry
+                         in posting.Candidates)
+                {
+                    if (entry.State !=
+                        RecruitmentCandidateState.Available)
+                    {
+                        continue;
+                    }
+
+                    anyAvailable = true;
+                    EmployeeCandidate candidate = entry.Candidate;
+                    string detail =
+                        candidate.DisplayName +
+                        " · " + FormatProfile(candidate.Profile) +
+                        " · " + candidate.Seniority +
+                        "\nSkills C/R/P: " +
+                        candidate.Skills.Clerk + "/" +
+                        candidate.Skills.Restocking + "/" +
+                        candidate.Skills.OrderPicking +
+                        " · speed " + candidate.WorkSpeed +
+                        " · " + candidate.Experience +
+                        "\nSalary request: " +
+                        StoreUiProjectionService.FormatMoney(
+                            candidate.RequestedDailySalaryCents,
+                            currency) +
+                        "/day · trait: " + candidate.Trait +
+                        " · next-day availability";
+
+                    CandidateId candidateId = candidate.CandidateId;
+                    bool selected =
+                        _pendingHireCandidateId.IsInitialized &&
+                        _pendingHireCandidateId == candidateId;
+
+                    AddAction(
+                        detail,
+                        selected ? "Selected" : "Review",
+                        () =>
+                        {
+                            _pendingHireCandidateId = candidateId;
+                            RebuildContent();
+                        });
+
+                    if (selected)
+                    {
+                        AddAction(
+                            "Confirm " + candidate.DisplayName +
+                            " at " +
+                            StoreUiProjectionService.FormatMoney(
+                                candidate.RequestedDailySalaryCents,
+                                currency) +
+                            "/day. Employment starts next day at 08:00.",
+                            "Confirm hire",
+                            () =>
+                            {
+                                EmployeeHiringOperationResult result =
+                                    _employeeHiring.Hire(candidateId);
+                                if (result.Succeeded)
+                                {
+                                    _pendingHireCandidateId = default;
+                                }
+
+                                ExecuteHiring(result);
+                            });
+
+                        AddAction(
+                            "Return to the candidate list without hiring.",
+                            "Cancel",
+                            () =>
+                            {
+                                _pendingHireCandidateId = default;
+                                RebuildContent();
+                            });
+                    }
+
+                    AddAction(
+                        "Remove " + candidate.DisplayName +
+                        " from this candidate group.",
+                        "Discard",
+                        () => ExecuteHiring(
+                            _employeeHiring.Discard(candidateId)));
+                }
+
+                if (!anyAvailable &&
+                    state == RecruitmentPostingState.Closed)
+                {
+                    AddParagraph(
+                        "All candidates in this group have been resolved.");
+                }
+            }
+
+            AddHeading("Payroll");
+            EmployeePayrollSummary payroll =
+                _employeePayroll.GetSummary();
+            AddParagraph(
+                "Active employees today: " +
+                payroll.ActiveEmployeeCount +
+                " · daily payroll " +
+                StoreUiProjectionService.FormatMoney(
+                    payroll.DailyPayrollCents,
+                    currency) +
+                " · paid today " +
+                StoreUiProjectionService.FormatMoney(
+                    payroll.PaidTodayCents,
+                    currency));
+            AddParagraph(
+                "Outstanding: " +
+                payroll.OutstandingObligationCount +
+                " obligation(s) · " +
+                StoreUiProjectionService.FormatMoney(
+                    payroll.OutstandingSalaryCents,
+                    currency));
+
+            if (payroll.OutstandingObligationCount > 0)
+            {
+                foreach (EmployeeSalaryObligation obligation
+                         in _employeePayroll.OutstandingObligations)
+                {
+                    AddParagraph(
+                        obligation.EmployeeName +
+                        " · due day " + obligation.DueDay +
+                        " · " +
+                        StoreUiProjectionService.FormatMoney(
+                            obligation.AmountCents,
+                            currency));
+                }
+
+                AddAction(
+                    "Pay all outstanding salary obligations atomically. " +
+                    "Partial payroll is not allowed.",
+                    "Pay outstanding",
+                    () => ExecutePayroll(
+                        _employeePayroll.TrySettleOutstanding()));
+            }
+
+            AddHeading("Operational state");
+            AddParagraph(
+                "Physically present: " +
+                _employeePresence.CountPresent() + "/" +
+                _employeeHiring.Employees.Count +
+                " · task-ready: " +
+                _employeeState.CountAvailable() + ". " +
+                "State is derived from contractual start, schedule and " +
+                "store closing; it is not controlled by UI flags.");
+
+            AddHeading("Hired employees");
+            if (_employeeHiring.Employees.Count == 0)
+            {
+                AddParagraph("No employees hired yet.");
+                return;
+            }
+
+            foreach (HiredEmployee employee
+                     in _employeeHiring.Employees)
+            {
+                EmployeeId employeeId = employee.EmployeeId;
+                EmployeePresenceStatus presenceStatus =
+                    _employeePresence.GetStatus(employee);
+                EmployeeStateSnapshot operationalState =
+                    _employeeState.GetState(employee);
+                EmployeeShiftDefinition shift =
+                    _employeeSchedule.GetConfiguredShift(employeeId);
+                int nextDay = Math.Max(1, _employeeSchedule.CurrentDay + 1);
+                EmployeeScheduleExceptionKind nextException =
+                    _employeeSchedule.GetException(employeeId, nextDay);
+
+                AddParagraph(
+                    employee.DisplayName +
+                    " · " + FormatProfile(employee.Profile) +
+                    " · " + employee.Seniority +
+                    "\nEmployee ID: " + employee.EmployeeId +
+                    "\nSalary: " +
+                    StoreUiProjectionService.FormatMoney(
+                        employee.ContractedDailySalaryCents,
+                        currency) +
+                    "/scheduled day · starts day " +
+                    employee.StartDay + " at 08:00" +
+                    "\nState: " +
+                    FormatOperationalState(operationalState.State) +
+                    " · task-ready " +
+                    (operationalState.CanAcceptTasks ? "YES" : "NO") +
+                    "\nPresence: " + FormatPresence(presenceStatus) +
+                    " · current time " +
+                    FormatScheduleMinute(_employeeSchedule.CurrentVirtualMinute));
+
+                AddAction(
+                    "Shift: " + shift.DisplayName + " " +
+                    FormatScheduleMinute(shift.StartMinute) + "-" +
+                    FormatScheduleMinute(shift.EndMinute) +
+                    " · paid break " +
+                    FormatScheduleMinute(shift.BreakStartMinute) + "-" +
+                    FormatScheduleMinute(shift.BreakEndMinute) +
+                    ". Schedule edits apply from the next game day.",
+                    "Next shift",
+                    () => ExecuteSchedule(
+                        _employeeSchedule.CycleShiftPreset(employeeId)));
+
+                AddParagraph(
+                    "7-day work cycle: " +
+                    FormatWorkCycle(employeeId));
+
+                for (int cycleDay = 1; cycleDay <= 7; cycleDay++)
+                {
+                    int capturedCycleDay = cycleDay;
+                    bool working = _employeeSchedule.IsRecurringWorkDay(
+                        employeeId,
+                        capturedCycleDay);
+                    AddAction(
+                        "Recurring cycle day " + capturedCycleDay +
+                        " is " + (working ? "WORK" : "OFF") +
+                        ". Current day remains locked.",
+                        working ? "Set OFF" : "Set WORK",
+                        () => ExecuteSchedule(
+                            _employeeSchedule.ToggleRecurringWorkDay(
+                                employeeId,
+                                capturedCycleDay)));
+                }
+
+                AddAction(
+                    "Day " + nextDay + " exception: " + nextException +
+                    ". Cycle None → DayOff → ForceWork.",
+                    "Next exception",
+                    () => ExecuteSchedule(
+                        _employeeSchedule.CycleNextDayException(employeeId)));
+            }
+        }
+
         private void BuildSettings()
         {
             AddHeading(
@@ -933,6 +1326,127 @@ namespace VRMGames.CartridgeAndCloud.Runtime.UIUX
             }
 
             Refresh();
+        }
+
+        private void ExecuteHiring(
+            EmployeeHiringOperationResult result)
+        {
+            UIRuntimeCompositionRoot
+                .Instance
+                ?.SetUserMessage(
+                    result.Detail);
+
+            Refresh();
+        }
+
+        private void ExecutePayroll(
+            EmployeePayrollOperationResult result)
+        {
+            UIRuntimeCompositionRoot
+                .Instance
+                ?.SetUserMessage(
+                    result.Detail);
+
+            Refresh();
+        }
+
+        private void ExecuteSchedule(
+            EmployeeScheduleOperationResult result)
+        {
+            UIRuntimeCompositionRoot
+                .Instance
+                ?.SetUserMessage(result.Detail);
+
+            Refresh();
+        }
+
+        private static string FormatProfile(
+            EmployeeProfile profile)
+        {
+            switch (profile)
+            {
+                case EmployeeProfile.Clerk:
+                    return "Clerk";
+                case EmployeeProfile.Restocker:
+                    return "Restocker";
+                case EmployeeProfile.OrderPicker:
+                    return "Order picker";
+                case EmployeeProfile.Generalist:
+                    return "Generalist";
+                default:
+                    return profile.ToString();
+            }
+        }
+
+        private string FormatWorkCycle(EmployeeId employeeId)
+        {
+            string result = string.Empty;
+            for (int day = 1; day <= 7; day++)
+            {
+                if (day > 1)
+                {
+                    result += " · ";
+                }
+
+                result += "D" + day + " " +
+                    (_employeeSchedule.IsRecurringWorkDay(employeeId, day)
+                        ? "ON"
+                        : "OFF");
+            }
+
+            return result;
+        }
+
+        private static string FormatOperationalState(
+            EmployeeOperationalState state)
+        {
+            switch (state)
+            {
+                case EmployeeOperationalState.Available:
+                    return "AVAILABLE";
+                case EmployeeOperationalState.OnBreak:
+                    return "ON BREAK";
+                case EmployeeOperationalState.Closing:
+                    return "CLOSING";
+                case EmployeeOperationalState.OffDuty:
+                    return "OFF DUTY";
+                default:
+                    return "AWAITING START";
+            }
+        }
+
+        private static string FormatPresence(
+            EmployeePresenceStatus status)
+        {
+            switch (status)
+            {
+                case EmployeePresenceStatus.Present:
+                    return "PRESENT / WORKING";
+                case EmployeePresenceStatus.OnBreak:
+                    return "PRESENT / ON BREAK";
+                case EmployeePresenceStatus.Closing:
+                    return "PRESENT / CLOSING";
+                case EmployeePresenceStatus.OffDuty:
+                    return "OFF DUTY";
+                default:
+                    return "AWAITING START DAY";
+            }
+        }
+
+        private static string FormatScheduleMinute(int minute)
+        {
+            if (minute < 0 || minute > 24 * 60)
+            {
+                return "--:--";
+            }
+
+            if (minute == 24 * 60)
+            {
+                return "24:00";
+            }
+
+            return (minute / 60).ToString("00") + ":" +
+                   (minute % 60).ToString("00");
         }
 
         private Button AddAction(
@@ -1061,6 +1575,21 @@ namespace VRMGames.CartridgeAndCloud.Runtime.UIUX
 
         private void HandleStateChanged(
             StoreOperationsState state)
+        {
+            Refresh();
+        }
+
+        private void HandleHiringStateChanged()
+        {
+            Refresh();
+        }
+
+        private void HandlePayrollStateChanged()
+        {
+            Refresh();
+        }
+
+        private void HandleScheduleStateChanged()
         {
             Refresh();
         }

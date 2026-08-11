@@ -3,16 +3,21 @@ using System.Collections;
 using System.IO;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using VRMGames.CartridgeAndCloud.Application.Composition;
+using VRMGames.CartridgeAndCloud.Application.Employees;
+using VRMGames.CartridgeAndCloud.Application.PlayerAgency;
 using VRMGames.CartridgeAndCloud.Application.UIUX;
 using VRMGames.CartridgeAndCloud.Domain.Persistence;
+using VRMGames.CartridgeAndCloud.Domain.PlayerAgency;
 using VRMGames.CartridgeAndCloud.Domain.Store;
 using VRMGames.CartridgeAndCloud.Infrastructure.UIUX;
 using VRMGames.CartridgeAndCloud.Application.Store;
 using VRMGames.CartridgeAndCloud.Infrastructure.Audio;
-using VRMGames.CartridgeAndCloud.Infrastructure.GameSession;
+using VRMGames.CartridgeAndCloud.Infrastructure.Employees;
 using VRMGames.CartridgeAndCloud.Infrastructure.Persistence;
 using VRMGames.CartridgeAndCloud.Infrastructure.Store;
 using VRMGames.CartridgeAndCloud.Runtime.Audio;
+using VRMGames.CartridgeAndCloud.Runtime.Employees;
 using VRMGames.CartridgeAndCloud.Runtime.Characters;
 using VRMGames.CartridgeAndCloud.Runtime.Store;
 using VRMGames.CartridgeAndCloud.Runtime.Inventory;
@@ -22,6 +27,9 @@ using VRMGames.CartridgeAndCloud.Runtime.UIUX;
 using VRMGames.CartridgeAndCloud.Domain.DayCycle;
 using VRMGames.CartridgeAndCloud.Domain.GameSession;
 using VRMGames.CartridgeAndCloud.Presentation.Store.Authoring;
+using VRMGames.CartridgeAndCloud.Presentation.Interaction;
+using VRMGames.CartridgeAndCloud.Presentation.PlayerAgency;
+using VRMGames.CartridgeAndCloud.Presentation.PlayerMovement;
 namespace VRMGames.CartridgeAndCloud.Runtime.Composition
 {
     [DefaultExecutionOrder(-9900)]
@@ -39,6 +47,8 @@ public static StoreRuntimeCompositionRoot
             _presentationAsset;
         private AudioEventCatalogAsset
             _audioAsset;
+        private EmployeeHiringCatalogAsset
+            _employeeHiringAsset;
 
         private GameObject _storeRuntime;
         private Coroutine _initialization;
@@ -60,6 +70,38 @@ public static StoreRuntimeCompositionRoot
             _supplierDeliveries;
         private StoreOperationalGate
             _operationalGate;
+        private EmployeeHiringService
+            _employeeHiring;
+        private EmployeePayrollService
+            _employeePayroll;
+        private EmployeeScheduleService
+            _employeeSchedule;
+        private EmployeeStateService
+            _employeeState;
+        private EmployeePresenceService
+            _employeePresence;
+        private EmployeePersistenceService
+            _employeePersistence;
+        private EmployeePresencePresenter
+            _employeePresencePresenter;
+        private PlayerWorldInteractionController
+            _playerInteraction;
+        private ContextInspectionPanel
+            _contextInspection;
+        private ContextualWorldFeedbackPresenter
+            _contextualWorldFeedback;
+        private PlayerToolSelectionService
+            _playerToolSelection;
+        private PlayerToolWheelInputBridge
+            _playerToolWheelInput;
+        private PlayerToolWheelPresenter
+            _playerToolWheelPresenter;
+        private PlayerCarryLoadService
+            _playerCarryLoad;
+        private PlayerMovementInputBridge
+            _playerMovementInput;
+        private PhysicalWorkExecutionService
+            _physicalWork;
         private string _lastObservedDayState = string.Empty;
 
         [RuntimeInitializeOnLoadMethod(
@@ -161,6 +203,8 @@ public static StoreRuntimeCompositionRoot
             SceneManager.sceneLoaded -=
                 HandleSceneLoaded;
             CleanupStoreRuntime();
+            _employeePersistence?.Dispose();
+            _employeePersistence = null;
             Instance = null;
         }
 
@@ -185,6 +229,8 @@ public static StoreRuntimeCompositionRoot
             _presentationAsset =
                 registry.PresentationCatalog;
             _audioAsset = registry.AudioCatalog;
+            _employeeHiringAsset =
+                registry.EmployeeHiringCatalog;
         }
 
         private void HandleSceneLoaded(
@@ -216,7 +262,15 @@ public static StoreRuntimeCompositionRoot
                 UIRuntimeCompositionRoot
                     .Instance;
 
-            while (!s15.ActiveSession
+            while (s15.ApplicationContext == null)
+            {
+                yield return null;
+            }
+
+            IGameApplicationContext application =
+                s15.ApplicationContext;
+
+            while (!application.ActiveSession
                         .HasActiveSession)
             {
                 yield return null;
@@ -248,12 +302,92 @@ public static StoreRuntimeCompositionRoot
                 new StoreOperationsFacade(
                     catalog,
                     repository,
-                    s15.ActiveSession,
-                    new SystemUtcClock(),
-                    s15.SaveMutations);
+                    application.ActiveSession,
+                    application.UtcClock,
+                    application.SaveMutations);
 
             _service.InitializeForActiveSlot(
                 s15.Slots.LastLoadRecoveredFromBackup);
+
+            StoreEmployeeHiringAccess hiringAccess =
+                new StoreEmployeeHiringAccess(
+                    _service,
+                    catalog);
+
+            if (_employeeHiring == null)
+            {
+                _employeeHiring =
+                    new EmployeeHiringService(
+                        _employeeHiringAsset.BuildCatalog(),
+                        application.ActiveSession,
+                        application.SaveMutations,
+                        application.UtcClock,
+                        hiringAccess);
+            }
+            else
+            {
+                _employeeHiring.BindStoreAccess(
+                    hiringAccess);
+            }
+
+            if (_employeeSchedule == null)
+            {
+                _employeeSchedule =
+                    new EmployeeScheduleService(
+                        _employeeHiring,
+                        application.ActiveSession);
+            }
+
+            if (_employeeState == null)
+            {
+                _employeeState =
+                    new EmployeeStateService(
+                        _employeeHiring,
+                        application.ActiveSession,
+                        _employeeSchedule);
+            }
+
+            if (_employeePayroll == null)
+            {
+                _employeePayroll =
+                    new EmployeePayrollService(
+                        _employeeHiring,
+                        application.ActiveSession,
+                        application.SaveMutations,
+                        application.UtcClock,
+                        _employeeSchedule,
+                        hiringAccess);
+            }
+            else
+            {
+                _employeePayroll.BindStoreAccess(
+                    hiringAccess);
+            }
+
+            _employeeHiring.BindPayrollStatus(
+                _employeePayroll);
+
+            if (_employeePersistence == null)
+            {
+                _employeePersistence =
+                    new EmployeePersistenceService(
+                        _employeeHiring,
+                        _employeeSchedule,
+                        _employeePayroll,
+                        application.ActiveSession,
+                        application.SaveMutations,
+                        application.UtcClock);
+            }
+
+            _employeePersistence.RestoreFromActiveSnapshot();
+
+            if (_employeePresence == null)
+            {
+                _employeePresence =
+                    new EmployeePresenceService(
+                        _employeeHiring,
+                        _employeeState);
+            }
 
             _audio =
                 _storeRuntime.AddComponent<
@@ -303,6 +437,101 @@ public static StoreRuntimeCompositionRoot
                 yield break;
             }
 
+            _playerInteraction =
+                sceneContext.TechnicalPlayer
+                    .GetComponent<
+                        PlayerWorldInteractionController>();
+
+            if (_playerInteraction == null)
+            {
+                _playerInteraction =
+                    sceneContext.TechnicalPlayer
+                        .gameObject.AddComponent<
+                            PlayerWorldInteractionController>();
+            }
+
+            _playerInteraction.Configure(
+                sceneContext.GameplayCamera,
+                Physics.DefaultRaycastLayers,
+                500f);
+
+            _playerInteraction.InteractionAttempted +=
+                HandlePlayerInteractionAttempted;
+
+            _playerToolWheelInput =
+                sceneContext.TechnicalPlayer
+                    .GetComponent<
+                        PlayerToolWheelInputBridge>();
+
+            if (_playerToolWheelInput == null)
+            {
+                _playerToolWheelInput =
+                    sceneContext.TechnicalPlayer
+                        .gameObject.AddComponent<
+                            PlayerToolWheelInputBridge>();
+            }
+
+            _playerToolSelection =
+                new PlayerToolSelectionService();
+
+            _playerCarryLoad =
+                new PlayerCarryLoadService();
+
+            _physicalWork =
+                new PhysicalWorkExecutionService();
+            _physicalWork.RegisterHandler(
+                new DelegatePhysicalWorkHandler(
+                    PhysicalWorkKind.InspectTarget));
+
+            _playerMovementInput =
+                sceneContext.TechnicalPlayer
+                    .GetComponent<
+                        PlayerMovementInputBridge>();
+
+            if (_playerMovementInput == null)
+            {
+                _playerMovementInput =
+                    sceneContext.TechnicalPlayer
+                        .gameObject.AddComponent<
+                            PlayerMovementInputBridge>();
+            }
+
+            _playerMovementInput.Configure(
+                _playerCarryLoad);
+
+            _playerToolWheelPresenter =
+                _storeRuntime.AddComponent<
+                    PlayerToolWheelPresenter>();
+            _playerToolWheelPresenter.Configure(
+                _playerToolSelection,
+                _playerToolWheelInput,
+                s15.InputGate);
+
+            _contextInspection =
+                _storeRuntime.AddComponent<
+                    ContextInspectionPanel>();
+            _contextInspection.Configure(
+                _service,
+                catalog,
+                application.ActiveSession,
+                _employeeHiring,
+                _employeeSchedule,
+                _employeeState,
+                s15.InputGate);
+
+            _contextualWorldFeedback =
+                _storeRuntime.AddComponent<
+                    ContextualWorldFeedbackPresenter>();
+            _contextualWorldFeedback.Configure(
+                _service,
+                catalog,
+                application.ActiveSession,
+                _employeeState,
+                _playerInteraction,
+                s15.InputGate,
+                _playerToolWheelInput,
+                sceneContext.GameplayCamera);
+
             _placement =
                 _storeRuntime.AddComponent<
                     StorePlacementCoordinator>();
@@ -321,11 +550,14 @@ public static StoreRuntimeCompositionRoot
                 new StoreOperationalGate(
                     _service,
                     catalog,
-                    _settings.MaximumCustomers);
+                    _settings.MaximumCustomers,
+                    application.ActiveSession);
             s15.RegisterStoreOperationalGate(
                 _operationalGate);
             s15.RegisterStoreClosingEconomyService(
                 _service);
+            s15.RegisterEmployeePayrollClosingService(
+                _employeePayroll);
             s15.RegisterStoreManagementStateProvider(
                 _service);
             s15.RegisterManualSaveCheckpointParticipant(
@@ -343,7 +575,18 @@ public static StoreRuntimeCompositionRoot
                 _binder.ReceivingAnchor,
                 _settings
                     .MaximumCustomers,
-                sceneContext.CustomerSpawnAnchors);
+                sceneContext.CustomerSpawnAnchors,
+                _operationalGate);
+
+            _employeePresencePresenter =
+                _storeRuntime.AddComponent<
+                    EmployeePresencePresenter>();
+            _employeePresencePresenter.Configure(
+                _employeeHiring,
+                _employeePresence,
+                _employeeSchedule,
+                _presentationAsset,
+                _binder.BackroomAnchor);
 
             _inventoryVisuals =
                 _storeRuntime.AddComponent<
@@ -379,6 +622,11 @@ public static StoreRuntimeCompositionRoot
                     catalog),
                 _placement,
                 _characters,
+                _employeeHiring,
+                _employeePayroll,
+                _employeeSchedule,
+                _employeeState,
+                _employeePresence,
                 _binder,
                 _audio);
 
@@ -418,7 +666,8 @@ public static StoreRuntimeCompositionRoot
                 _contentAsset != null &&
                 _shellAsset != null &&
                 _presentationAsset != null &&
-                _audioAsset != null)
+                _audioAsset != null &&
+                _employeeHiringAsset != null)
             {
                 return true;
             }
@@ -464,6 +713,150 @@ public static StoreRuntimeCompositionRoot
                 !string.IsNullOrWhiteSpace(feedback.CorrelationId))
             {
                 _supplierDeliveries?.Present(feedback.CorrelationId);
+            }
+        }
+
+        private void HandlePlayerInteractionAttempted(
+            PlayerInteractionAttempt attempt)
+        {
+            if (attempt.Status ==
+                PlayerInteractionAttemptStatus.NoTarget)
+            {
+                return;
+            }
+
+            string target =
+                string.IsNullOrWhiteSpace(attempt.TargetId)
+                    ? attempt.TargetKind.ToString()
+                    : attempt.TargetKind +
+                      " [" + attempt.TargetId + "]";
+
+            switch (attempt.Status)
+            {
+                case PlayerInteractionAttemptStatus.Accepted:
+                    IWorldInteractionTarget interactionTarget =
+                        _playerInteraction == null
+                            ? null
+                            : _playerInteraction.CurrentTarget;
+
+                    string workFailure = string.Empty;
+
+                    if (interactionTarget != null &&
+                        _contextInspection != null &&
+                        TryExecuteInspectionWork(
+                            interactionTarget,
+                            attempt.Distance,
+                            out workFailure))
+                    {
+                        break;
+                    }
+
+                    if (!string.IsNullOrWhiteSpace(workFailure))
+                    {
+                        HandleFeedback(
+                            new GameplayFeedbackEvent(
+                                GameplayFeedbackType.ObjectHovered,
+                                workFailure));
+                        break;
+                    }
+
+                    HandleFeedback(
+                        new GameplayFeedbackEvent(
+                            GameplayFeedbackType.ObjectSelected,
+                            "Interaction ready: " + target + "."));
+                    break;
+
+                case PlayerInteractionAttemptStatus.OutOfRange:
+                    HandleFeedback(
+                        new GameplayFeedbackEvent(
+                            GameplayFeedbackType.ObjectHovered,
+                            "Move closer to interact with " +
+                            target + "."));
+                    break;
+
+                case PlayerInteractionAttemptStatus.Unavailable:
+                    HandleFeedback(
+                        new GameplayFeedbackEvent(
+                            GameplayFeedbackType.ObjectHovered,
+                            target + " is not interactive."));
+                    break;
+            }
+        }
+
+        private bool TryExecuteInspectionWork(
+            IWorldInteractionTarget interactionTarget,
+            float distance,
+            out string failure)
+        {
+            failure = string.Empty;
+
+            if (_physicalWork == null ||
+                interactionTarget == null ||
+                _contextInspection == null)
+            {
+                return false;
+            }
+
+            PhysicalWorkRequest request;
+
+            try
+            {
+                request = new PhysicalWorkRequest(
+                    PhysicalWorkKind.InspectTarget,
+                    PhysicalWorkActorRef.Player,
+                    new PhysicalWorkTargetRef(
+                        interactionTarget.InteractionKind.ToString(),
+                        interactionTarget.InteractionId));
+            }
+            catch (Exception exception)
+            {
+                failure =
+                    "Interaction cannot start: " +
+                    exception.Message;
+                return false;
+            }
+
+            PhysicalWorkBeginResult begin =
+                _physicalWork.TryBegin(request);
+
+            if (!begin.Started || begin.Execution == null)
+            {
+                failure = string.IsNullOrWhiteSpace(begin.Reason)
+                    ? "Interaction cannot start."
+                    : begin.Reason;
+                return false;
+            }
+
+            try
+            {
+                _contextInspection.Open(
+                    interactionTarget,
+                    distance);
+
+                PhysicalWorkTransitionResult complete =
+                    _physicalWork.TryComplete(
+                        begin.Execution.WorkId);
+
+                if (!complete.Succeeded)
+                {
+                    _physicalWork.TryCancel(
+                        begin.Execution.WorkId);
+                    failure = string.IsNullOrWhiteSpace(complete.Reason)
+                        ? "Interaction could not complete."
+                        : complete.Reason;
+                    return false;
+                }
+
+                return true;
+            }
+            catch (Exception exception)
+            {
+                _physicalWork.TryCancel(
+                    begin.Execution.WorkId);
+                failure =
+                    "Interaction failed: " +
+                    exception.Message;
+                return false;
             }
         }
 
@@ -534,6 +927,7 @@ public static StoreRuntimeCompositionRoot
             }
 
             _service?.SynchronizeManagementDay();
+            _employeeHiring?.RefreshForCurrentDay();
 
             string state = snapshot.DayCycle.State;
             bool stateChanged = !string.Equals(
@@ -602,6 +996,12 @@ public static StoreRuntimeCompositionRoot
                         _operationalGate);
                 }
 
+                if (_employeePayroll != null)
+                {
+                    s15.UnregisterEmployeePayrollClosingService(
+                        _employeePayroll);
+                }
+
                 if (_service != null)
                 {
                     s15.UnregisterStoreClosingEconomyService(
@@ -613,6 +1013,8 @@ public static StoreRuntimeCompositionRoot
                 }
             }
 
+            _employeeHiring?.DetachStoreAccess();
+            _employeePayroll?.DetachStoreAccess();
             _operationalGate?.ClearCustomers();
 
             if (_service != null)
@@ -635,6 +1037,12 @@ public static StoreRuntimeCompositionRoot
                         HandleDoorStateChanged;
             }
 
+            if (_playerInteraction != null)
+            {
+                _playerInteraction.InteractionAttempted -=
+                    HandlePlayerInteractionAttempted;
+            }
+
             if (_storeRuntime != null)
             {
                 Destroy(_storeRuntime);
@@ -651,6 +1059,16 @@ public static StoreRuntimeCompositionRoot
             _inventoryVisuals = null;
             _navMesh = null;
             _supplierDeliveries = null;
+            _employeePresencePresenter = null;
+            _contextInspection = null;
+            _contextualWorldFeedback = null;
+            _playerToolWheelPresenter = null;
+            _playerToolWheelInput = null;
+            _playerMovementInput = null;
+            _playerCarryLoad = null;
+            _physicalWork = null;
+            _playerToolSelection = null;
+            _playerInteraction = null;
             _operationalGate = null;
         }
     }

@@ -1,7 +1,6 @@
 using System;
 using VRMGames.CartridgeAndCloud.Application.DayCycle;
 using VRMGames.CartridgeAndCloud.Application.GameSession;
-using VRMGames.CartridgeAndCloud.Application.UIUX;
 using VRMGames.CartridgeAndCloud.Domain.Persistence;
 
 namespace VRMGames.CartridgeAndCloud.Application.Persistence
@@ -75,7 +74,7 @@ namespace VRMGames.CartridgeAndCloud.Application.Persistence
     {
         private readonly IIntegratedSaveRepository
             _repository;
-        private readonly ActiveGameSessionService
+        private readonly IActiveGameSession
             _activeSession;
         private readonly IPauseService _pauseService;
         private readonly ISaveMutationRegistry
@@ -95,7 +94,7 @@ namespace VRMGames.CartridgeAndCloud.Application.Persistence
 
         public ManualSaveService(
             IIntegratedSaveRepository repository,
-            ActiveGameSessionService activeSession,
+            IActiveGameSession activeSession,
             IPauseService pauseService,
             ISaveMutationRegistry mutations,
             IUtcClock clock)

@@ -66,7 +66,9 @@ namespace VRMGames.CartridgeAndCloud.Domain.Economy
     {
         CheckoutRevenue = 0,
         SupplierReceivingCost = 1,
-        WeeklyTax = 2
+        WeeklyTax = 2,
+        EmployeeRecruitmentCost = 3,
+        EmployeeSalaryCost = 4
     }
 
     public readonly struct EconomyPostingKey :

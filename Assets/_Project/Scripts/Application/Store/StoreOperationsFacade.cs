@@ -25,7 +25,7 @@ namespace VRMGames.CartridgeAndCloud.Application.Store
         private readonly IStoreContentCatalog _catalog;
         private readonly IStoreOperationsStateRepository
             _repository;
-        private readonly ActiveGameSessionService
+        private readonly IActiveGameSession
             _activeSession;
         private readonly IUtcClock _clock;
         private readonly ISaveMutationRegistry _mutations;
@@ -94,7 +94,7 @@ namespace VRMGames.CartridgeAndCloud.Application.Store
         public StoreOperationsFacade(
             IStoreContentCatalog catalog,
             IStoreOperationsStateRepository repository,
-            ActiveGameSessionService activeSession,
+            IActiveGameSession activeSession,
             IUtcClock clock,
             ISaveMutationRegistry mutations = null)
         {
@@ -392,7 +392,13 @@ namespace VRMGames.CartridgeAndCloud.Application.Store
 
                 if (State.LastSettledWeek < weekNumber)
                 {
-                    long gross = State.WeeklyGrossResultCents;
+                    long salaryCostCents =
+                        SumEmployeeSalaryCostsForWeek(
+                            snapshot.LedgerEntries,
+                            weekNumber);
+                    long gross = checked(
+                        State.WeeklyGrossResultCents -
+                        salaryCostCents);
                     taxForDay = new WeeklyTaxPolicy()
                         .CalculateTaxCents(gross);
 
@@ -2362,6 +2368,53 @@ namespace VRMGames.CartridgeAndCloud.Application.Store
                 order.OrderedUnits,
                 order.ReceivedUnits,
                 order.UnitCostCents);
+        }
+
+        private static long SumEmployeeSalaryCostsForWeek(
+            IReadOnlyList<EconomyLedgerSaveRecord> ledgerEntries,
+            int weekNumber)
+        {
+            if (ledgerEntries == null || weekNumber < 1)
+            {
+                return 0;
+            }
+
+            int firstDay = checked((weekNumber - 1) * 7 + 1);
+            int lastDay = checked(weekNumber * 7);
+            long total = 0;
+
+            foreach (EconomyLedgerSaveRecord entry in ledgerEntries)
+            {
+                if (!string.Equals(
+                        entry.PostingType,
+                        EconomyPostingType.EmployeeSalaryCost.ToString(),
+                        StringComparison.Ordinal) ||
+                    !TryParseDayNumber(entry.DayId, out int dayNumber) ||
+                    dayNumber < firstDay ||
+                    dayNumber > lastDay)
+                {
+                    continue;
+                }
+
+                total = checked(total + entry.MinorUnits);
+            }
+
+            return total;
+        }
+
+        private static bool TryParseDayNumber(
+            string dayId,
+            out int dayNumber)
+        {
+            dayNumber = 0;
+            const string prefix = "day-";
+
+            return !string.IsNullOrWhiteSpace(dayId) &&
+                dayId.StartsWith(prefix, StringComparison.Ordinal) &&
+                int.TryParse(
+                    dayId.Substring(prefix.Length),
+                    out dayNumber) &&
+                dayNumber > 0;
         }
 
         private static bool IsPristineState(

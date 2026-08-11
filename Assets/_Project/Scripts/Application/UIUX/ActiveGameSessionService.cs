@@ -1,10 +1,12 @@
 using System;
+using VRMGames.CartridgeAndCloud.Application.GameSession;
 using VRMGames.CartridgeAndCloud.Domain.Identifiers;
 using VRMGames.CartridgeAndCloud.Domain.Persistence;
 
 namespace VRMGames.CartridgeAndCloud.Application.UIUX
 {
-    public sealed class ActiveGameSessionService
+    public sealed class ActiveGameSessionService :
+        IActiveGameSession
     {
         public bool HasActiveSession =>
             Snapshot != null;

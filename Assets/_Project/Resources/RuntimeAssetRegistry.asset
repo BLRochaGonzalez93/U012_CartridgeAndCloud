@@ -18,4 +18,5 @@ MonoBehaviour:
   _materialPalette: {fileID: 11400000, guid: a20e0b0558be3f1d3d781b49cfc99403, type: 2}
   _presentationCatalog: {fileID: 11400000, guid: 0c42349cfba6aa4db3c45d877eba589e, type: 2}
   _audioCatalog: {fileID: 11400000, guid: abce973f3500d5704e237a9c1030f3df, type: 2}
+  _employeeHiringCatalog: {fileID: 11400000, guid: 9e42739792f3471c9be5a8b266a53b1b, type: 2}
   _visualPrefabs: {fileID: 11400000, guid: 17c4e5c5ea042bd4dbf99c493a2a9298, type: 2}

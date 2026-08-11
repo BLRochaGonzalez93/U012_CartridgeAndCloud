@@ -1,0 +1,81 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6dd5d74a4bcc8234ab5c18d90142f9fb, type: 3}
+  m_Name: RetailProductCatalog
+  m_EditorClassIdentifier: 
+  _entries:
+  - productId: game-neon-drift
+    displayName: Neon Drift
+    kind: 0
+    wholesalePriceCents: 1500
+    salePriceCents: 2999
+    unitsPerCase: 12
+    materialVariantId: product-game
+    labelId: label-neon-drift
+    iconResourcePath: Products/Icons/game-neon-drift_icon
+    coverResourcePath: Products/Covers/game-neon-drift_cover
+    prefabResourcePath: Products/NeonDrift
+  - productId: case-cloud-runner
+    displayName: Cloud Runner Case
+    kind: 1
+    wholesalePriceCents: 800
+    salePriceCents: 1499
+    unitsPerCase: 16
+    materialVariantId: product-case
+    labelId: label-cloud-runner
+    iconResourcePath: Products/Icons/case-cloud-runner_icon
+    coverResourcePath: Products/Covers/case-cloud-runner_cover
+    prefabResourcePath: Products/CloudRunnerCase
+  - productId: console-vertex-one
+    displayName: Vertex One Console
+    kind: 2
+    wholesalePriceCents: 18000
+    salePriceCents: 24999
+    unitsPerCase: 2
+    materialVariantId: product-console
+    labelId: label-vertex-one
+    iconResourcePath: Products/Icons/console-vertex-one_icon
+    coverResourcePath: Products/Covers/console-vertex-one_cover
+    prefabResourcePath: Products/VertexOneConsole
+  - productId: controller-orbit-pad
+    displayName: Orbit Pad Controller
+    kind: 3
+    wholesalePriceCents: 3000
+    salePriceCents: 4999
+    unitsPerCase: 6
+    materialVariantId: product-controller
+    labelId: label-orbit-pad
+    iconResourcePath: Products/Icons/controller-orbit-pad_icon
+    coverResourcePath: Products/Covers/controller-orbit-pad_cover
+    prefabResourcePath: Products/OrbitPadController
+  - productId: headset-signal-pro
+    displayName: Signal Pro Headset
+    kind: 4
+    wholesalePriceCents: 4500
+    salePriceCents: 6999
+    unitsPerCase: 4
+    materialVariantId: product-headset
+    labelId: label-signal-pro
+    iconResourcePath: Products/Icons/headset-signal-pro_icon
+    coverResourcePath: Products/Covers/headset-signal-pro_cover
+    prefabResourcePath: Products/SignalProHeadset
+  - productId: accessory-memory-core
+    displayName: Memory Core Accessory
+    kind: 5
+    wholesalePriceCents: 900
+    salePriceCents: 1999
+    unitsPerCase: 10
+    materialVariantId: product-accessory
+    labelId: label-memory-core
+    iconResourcePath: Products/Icons/accessory-memory-core_icon
+    coverResourcePath: Products/Covers/accessory-memory-core_cover
+    prefabResourcePath: Products/MemoryCoreAccessory

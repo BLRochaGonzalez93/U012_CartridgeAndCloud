@@ -36,7 +36,8 @@ namespace VRMGames.CartridgeAndCloud.Application.Persistence
                     transactions = null,
                 IEnumerable<
                     EconomyLedgerSaveRecord>
-                        ledgerEntries = null)
+                        ledgerEntries = null,
+                EmployeeSystemSaveRecord employeeSystem = null)
         {
             if (source == null)
             {
@@ -67,7 +68,8 @@ namespace VRMGames.CartridgeAndCloud.Application.Persistence
                 transactions ?? source.Transactions,
                 source.DayCycle,
                 ledgerEntries ??
-                    source.LedgerEntries);
+                    source.LedgerEntries,
+                employeeSystem ?? source.EmployeeSystem);
         }
 
         public static List<

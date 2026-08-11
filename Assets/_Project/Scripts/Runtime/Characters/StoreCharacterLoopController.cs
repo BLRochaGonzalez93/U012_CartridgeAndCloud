@@ -13,7 +13,6 @@ using VRMGames.CartridgeAndCloud.Domain.Store;
 using VRMGames.CartridgeAndCloud.Infrastructure.Store;
 using VRMGames.CartridgeAndCloud.Infrastructure.Customers;
 using VRMGames.CartridgeAndCloud.Runtime.Placement;
-using VRMGames.CartridgeAndCloud.Runtime.Composition;
 using VRMGames.CartridgeAndCloud.Presentation.Placement;
 using VRMGames.CartridgeAndCloud.Presentation.Characters;
 using VRMGames.CartridgeAndCloud.Presentation.Grounding;
@@ -91,7 +90,8 @@ namespace VRMGames.CartridgeAndCloud.Runtime.Characters
             Transform checkout,
             Transform receiving,
             int maximumCustomers,
-            IReadOnlyList<Transform> exteriorSpawnAnchors)
+            IReadOnlyList<Transform> exteriorSpawnAnchors,
+            ICustomerActivityRuntime customerActivity = null)
         {
             _service = service ??
                 throw new ArgumentNullException(
@@ -115,10 +115,7 @@ namespace VRMGames.CartridgeAndCloud.Runtime.Characters
                 Mathf.Max(1, maximumCustomers);
             _exteriorSpawnAnchors =
                 exteriorSpawnAnchors ?? Array.Empty<Transform>();
-            _customerActivity =
-                UIRuntimeCompositionRoot.Instance
-                    ?.StoreOperationalGate as
-                    ICustomerActivityRuntime;
+            _customerActivity = customerActivity;
             _nextRuntimeCustomerSequence = 1;
 
             GameObject root =

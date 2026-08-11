@@ -617,12 +617,24 @@ namespace VRMGames.CartridgeAndCloud.Application.UIUX
             long revenue = day == null ? 0 : day.RevenueCents;
             long costs = day == null ? 0 : day.SupplierCostCents;
             long tax = day == null ? 0 : day.TaxCents;
+            long salaries = SumLedgerForDay(
+                snapshot.LedgerEntries,
+                snapshot.DayCycle.DayId,
+                EconomyPostingType.EmployeeSalaryCost);
 
             if (day == null)
             {
                 foreach (EconomyLedgerSaveRecord entry
                          in snapshot.LedgerEntries)
                 {
+                    if (!string.Equals(
+                            entry.DayId,
+                            snapshot.DayCycle.DayId,
+                            StringComparison.Ordinal))
+                    {
+                        continue;
+                    }
+
                     if (string.Equals(
                             entry.PostingType,
                             "CheckoutRevenue",
@@ -665,16 +677,28 @@ namespace VRMGames.CartridgeAndCloud.Application.UIUX
                         FormatMoney(costs, snapshot.CurrencyCode),
                         "Received costs"),
                     Row(
+                        "Employee salaries",
+                        FormatMoney(salaries, snapshot.CurrencyCode),
+                        "Salary payments recognized today"),
+                    Row(
                         "Gross result",
                         FormatMoney(revenue - costs, snapshot.CurrencyCode),
                         "Revenue minus received costs"),
+                    Row(
+                        "Operating result",
+                        FormatMoney(
+                            revenue - costs - salaries,
+                            snapshot.CurrencyCode),
+                        "Gross result minus employee salaries"),
                     Row(
                         "Tax",
                         FormatMoney(tax, snapshot.CurrencyCode),
                         "Weekly tax recognized once"),
                     Row(
                         "Net result",
-                        FormatMoney(revenue - costs - tax, snapshot.CurrencyCode),
+                        FormatMoney(
+                            revenue - costs - salaries - tax,
+                            snapshot.CurrencyCode),
                         day != null && day.IsClosed ? "Final" : "In progress")
                 });
         }
@@ -758,7 +782,12 @@ namespace VRMGames.CartridgeAndCloud.Application.UIUX
             long costs = operationsState == null
                 ? 0
                 : operationsState.WeeklySupplierCostCents;
-            long gross = checked(revenue - costs);
+            int currentWeek = ((snapshot.CurrentDay - 1) / 7) + 1;
+            long salaries = SumLedgerForWeek(
+                snapshot.LedgerEntries,
+                currentWeek,
+                EconomyPostingType.EmployeeSalaryCost);
+            long gross = checked(revenue - costs - salaries);
 
             return Panel(
                 ManagementPanelId.Weekly,
@@ -773,6 +802,10 @@ namespace VRMGames.CartridgeAndCloud.Application.UIUX
                         "Current supplier costs",
                         FormatMoney(costs, snapshot.CurrencyCode),
                         "Recognized this week"),
+                    Row(
+                        "Current salaries",
+                        FormatMoney(salaries, snapshot.CurrencyCode),
+                        "Paid employee salaries this week"),
                     Row(
                         "Current gross",
                         FormatMoney(gross, snapshot.CurrencyCode),
@@ -795,6 +828,85 @@ namespace VRMGames.CartridgeAndCloud.Application.UIUX
                             snapshot.CurrencyCode),
                         "10% of positive gross result")
                 });
+        }
+
+        private static long SumLedgerForDay(
+            IReadOnlyList<EconomyLedgerSaveRecord> entries,
+            string dayId,
+            EconomyPostingType postingType)
+        {
+            long total = 0;
+            string postingTypeName = postingType.ToString();
+
+            foreach (EconomyLedgerSaveRecord entry in entries)
+            {
+                if (!string.Equals(
+                        entry.DayId,
+                        dayId,
+                        StringComparison.Ordinal) ||
+                    !string.Equals(
+                        entry.PostingType,
+                        postingTypeName,
+                        StringComparison.Ordinal))
+                {
+                    continue;
+                }
+
+                total = checked(total + entry.MinorUnits);
+            }
+
+            return total;
+        }
+
+        private static long SumLedgerForWeek(
+            IReadOnlyList<EconomyLedgerSaveRecord> entries,
+            int weekNumber,
+            EconomyPostingType postingType)
+        {
+            if (weekNumber < 1)
+            {
+                return 0;
+            }
+
+            int firstDay = checked((weekNumber - 1) * 7 + 1);
+            int lastDay = checked(weekNumber * 7);
+            long total = 0;
+            string postingTypeName = postingType.ToString();
+
+            foreach (EconomyLedgerSaveRecord entry in entries)
+            {
+                if (!string.Equals(
+                        entry.PostingType,
+                        postingTypeName,
+                        StringComparison.Ordinal) ||
+                    !TryParseDayNumber(entry.DayId, out int dayNumber) ||
+                    dayNumber < firstDay ||
+                    dayNumber > lastDay)
+                {
+                    continue;
+                }
+
+                total = checked(total + entry.MinorUnits);
+            }
+
+            return total;
+        }
+
+        private static bool TryParseDayNumber(
+            string dayId,
+            out int dayNumber)
+        {
+            dayNumber = 0;
+            const string prefix = "day-";
+
+            return !string.IsNullOrWhiteSpace(dayId) &&
+                dayId.StartsWith(prefix, StringComparison.Ordinal) &&
+                int.TryParse(
+                    dayId.Substring(prefix.Length),
+                    NumberStyles.None,
+                    CultureInfo.InvariantCulture,
+                    out dayNumber) &&
+                dayNumber > 0;
         }
 
         private static StoreManagementDayDetailRecord CurrentDay(

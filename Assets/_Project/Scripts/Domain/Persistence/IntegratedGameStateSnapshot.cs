@@ -10,7 +10,7 @@ namespace VRMGames.CartridgeAndCloud.Domain.Persistence
 {
     public sealed class IntegratedGameStateSnapshot
     {
-        public const int CurrentSchemaVersion = 2;
+        public const int CurrentSchemaVersion = 3;
 
         private readonly ReadOnlyCollection<
             InventoryContainerSaveRecord> _inventories;
@@ -80,6 +80,8 @@ namespace VRMGames.CartridgeAndCloud.Domain.Persistence
             EconomyLedgerSaveRecord> LedgerEntries =>
                 _ledgerEntries;
 
+        public EmployeeSystemSaveRecord EmployeeSystem { get; }
+
         public int TotalRecordCount =>
             _inventories.Count +
             _supplierOrders.Count +
@@ -90,7 +92,8 @@ namespace VRMGames.CartridgeAndCloud.Domain.Persistence
             _queueEntries.Count +
             _transactions.Count +
             _ledgerEntries.Count +
-            2;
+            EmployeeSystem.TotalRecordCount +
+            3;
 
         public IntegratedGameStateSnapshot(
             int schemaVersion,
@@ -118,7 +121,8 @@ namespace VRMGames.CartridgeAndCloud.Domain.Persistence
                 transactions,
             DayCycleSaveRecord dayCycle,
             IEnumerable<EconomyLedgerSaveRecord>
-                ledgerEntries)
+                ledgerEntries,
+            EmployeeSystemSaveRecord employeeSystem = null)
         {
             if (schemaVersion != CurrentSchemaVersion)
             {
@@ -227,6 +231,8 @@ namespace VRMGames.CartridgeAndCloud.Domain.Persistence
                 SaveRecordGuard.Copy(
                     ledgerEntries,
                     nameof(ledgerEntries));
+            EmployeeSystem = employeeSystem ??
+                EmployeeSystemSaveRecord.Empty();
 
             Validate();
         }

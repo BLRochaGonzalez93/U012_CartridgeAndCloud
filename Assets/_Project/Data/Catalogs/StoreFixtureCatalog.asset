@@ -1,0 +1,119 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8f8064e58a4e00d438eeb1ed732be005, type: 3}
+  m_Name: StoreFixtureCatalog
+  m_EditorClassIdentifier: 
+  _entries:
+  - definitionId: checkout-counter
+    displayName: Checkout Counter
+    kind: 0
+    widthCells: 4
+    depthCells: 2
+    heightMeters: 1.1
+    capacity: 0
+    unitCostCents: 45000
+    isInteractive: 1
+    isPurchasable: 1
+    supportsProducts: 0
+    materialVariantId: furniture-checkout
+    prefabResourcePath: Furniture/CheckoutCounter
+  - definitionId: wall-shelf
+    displayName: Wall Shelf
+    kind: 1
+    widthCells: 4
+    depthCells: 1
+    heightMeters: 2.2
+    capacity: 24
+    unitCostCents: 18000
+    isInteractive: 1
+    isPurchasable: 1
+    supportsProducts: 1
+    materialVariantId: furniture-wall-shelf
+    prefabResourcePath: Furniture/WallShelf
+  - definitionId: central-shelf
+    displayName: Central Shelf
+    kind: 2
+    widthCells: 4
+    depthCells: 2
+    heightMeters: 1.6
+    capacity: 32
+    unitCostCents: 26000
+    isInteractive: 1
+    isPurchasable: 1
+    supportsProducts: 1
+    materialVariantId: furniture-central-shelf
+    prefabResourcePath: Furniture/CentralShelf
+  - definitionId: low-display
+    displayName: Low Display
+    kind: 3
+    widthCells: 3
+    depthCells: 2
+    heightMeters: 0.9
+    capacity: 12
+    unitCostCents: 16000
+    isInteractive: 1
+    isPurchasable: 1
+    supportsProducts: 1
+    materialVariantId: furniture-low-display
+    prefabResourcePath: Furniture/LowDisplay
+  - definitionId: featured-display
+    displayName: Featured Display
+    kind: 4
+    widthCells: 2
+    depthCells: 2
+    heightMeters: 1.1
+    capacity: 8
+    unitCostCents: 24000
+    isInteractive: 1
+    isPurchasable: 1
+    supportsProducts: 1
+    materialVariantId: furniture-featured
+    prefabResourcePath: Furniture/FeaturedDisplay
+  - definitionId: backroom-storage
+    displayName: Backroom Storage
+    kind: 5
+    widthCells: 5
+    depthCells: 2
+    heightMeters: 2.4
+    capacity: 80
+    unitCostCents: 22000
+    isInteractive: 1
+    isPurchasable: 0
+    supportsProducts: 0
+    materialVariantId: furniture-storage
+    prefabResourcePath: Furniture/BackroomStorage
+  - definitionId: receiving-crate
+    displayName: Receiving Crate
+    kind: 6
+    widthCells: 2
+    depthCells: 2
+    heightMeters: 0.8
+    capacity: 24
+    unitCostCents: 3500
+    isInteractive: 1
+    isPurchasable: 0
+    supportsProducts: 0
+    materialVariantId: furniture-crate
+    prefabResourcePath: Furniture/ReceivingCrate
+  - definitionId: decoration-plant
+    displayName: Decorative Plant
+    kind: 7
+    widthCells: 1
+    depthCells: 1
+    heightMeters: 1.2
+    capacity: 0
+    unitCostCents: 2500
+    isInteractive: 0
+    isPurchasable: 0
+    supportsProducts: 0
+    materialVariantId: decoration
+    prefabResourcePath: Furniture/DecorationPlant

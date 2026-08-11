@@ -4,6 +4,8 @@ using VRMGames.CartridgeAndCloud.Application.Placement;
 using VRMGames.CartridgeAndCloud.Presentation.Camera;
 using VRMGames.CartridgeAndCloud.Presentation.Placement;
 using VRMGames.CartridgeAndCloud.Presentation.PlayerMovement;
+using VRMGames.CartridgeAndCloud.Presentation.Interaction;
+using VRMGames.CartridgeAndCloud.Presentation.PlayerAgency;
 using VRMGames.CartridgeAndCloud.Infrastructure.Store;
 
 namespace VRMGames.CartridgeAndCloud.Infrastructure.InputSystem.Actions
@@ -21,7 +23,17 @@ namespace VRMGames.CartridgeAndCloud.Infrastructure.InputSystem.Actions
         private OrbitCameraRig _cameraRig;
 
         [SerializeField]
+        private PlayerWorldInteractionController
+            _interactionController;
+
+        [SerializeField]
         private PlacementRuntimeController _placementRuntimeController;
+
+        [SerializeField]
+        private PlayerToolWheelInputBridge _toolWheelInputBridge;
+
+        [SerializeField]
+        private PlayerMovementInputBridge _playerMovementInputBridge;
 
         [SerializeField, Min(0f)]
         private float _orbitSensitivity = 0.2f;
@@ -38,6 +50,10 @@ namespace VRMGames.CartridgeAndCloud.Infrastructure.InputSystem.Actions
         public OrbitCameraRig CameraRig =>
             _cameraRig;
 
+        public PlayerWorldInteractionController
+            InteractionController =>
+                _interactionController;
+
         public PlacementRuntimeController PlacementRuntimeController =>
             _placementRuntimeController;
 
@@ -53,6 +69,12 @@ namespace VRMGames.CartridgeAndCloud.Infrastructure.InputSystem.Actions
             ResolveReferences();
         }
 
+        private void OnDisable()
+        {
+            _playerMovementInputBridge?
+                .SetSprintRequested(false);
+        }
+
         private void Update()
         {
             ResolveReferences();
@@ -60,6 +82,8 @@ namespace VRMGames.CartridgeAndCloud.Infrastructure.InputSystem.Actions
             if (_contextRouter == null ||
                 !_contextRouter.IsGameplayMapEnabled)
             {
+                _playerMovementInputBridge?
+                    .SetSprintRequested(false);
                 return;
             }
 
@@ -72,6 +96,16 @@ namespace VRMGames.CartridgeAndCloud.Infrastructure.InputSystem.Actions
                         .ReadValue<Vector2>(),
                     actions.SetDestination
                         .WasPressedThisFrame(),
+                    actions.Interact
+                        .WasPressedThisFrame(),
+                    actions.Sprint.IsPressed(),
+                    actions.ToolWheel
+                        .WasPressedThisFrame(),
+                    actions.ToolWheel.IsPressed(),
+                    actions.ToolWheel
+                        .WasReleasedThisFrame(),
+                    actions.ToolWheelNavigate
+                        .ReadValue<Vector2>(),
                     actions.OrbitHold.IsPressed(),
                     actions.OrbitDelta
                         .ReadValue<Vector2>(),
@@ -85,12 +119,16 @@ namespace VRMGames.CartridgeAndCloud.Infrastructure.InputSystem.Actions
             InputActionContextRouter contextRouter,
             ClickDestinationInput destinationInput,
             OrbitCameraRig cameraRig,
+            PlayerWorldInteractionController
+                interactionController,
             float orbitSensitivity,
             float zoomSensitivity)
         {
             _contextRouter = contextRouter;
             _destinationInput = destinationInput;
             _cameraRig = cameraRig;
+            _interactionController =
+                interactionController;
             _orbitSensitivity =
                 Mathf.Max(0f, orbitSensitivity);
             _zoomSensitivity =
@@ -137,6 +175,8 @@ namespace VRMGames.CartridgeAndCloud.Infrastructure.InputSystem.Actions
             if (_contextRouter == null ||
                 !_contextRouter.IsGameplayMapEnabled)
             {
+                _playerMovementInputBridge?
+                    .SetSprintRequested(false);
                 return false;
             }
 
@@ -145,6 +185,57 @@ namespace VRMGames.CartridgeAndCloud.Infrastructure.InputSystem.Actions
                 _placementRuntimeController != null &&
                 _placementRuntimeController
                     .IsPlacementModeActive;
+
+            if (_toolWheelInputBridge != null)
+            {
+                if (placementModeActive)
+                {
+                    _toolWheelInputBridge.Cancel();
+                }
+                else
+                {
+                    _toolWheelInputBridge.ApplyInput(
+                        frame.ToolWheelPressed,
+                        frame.ToolWheelHeld,
+                        frame.ToolWheelReleased,
+                        frame.PointerPosition,
+                        frame.ToolWheelNavigation);
+
+                    if (_toolWheelInputBridge.IsOpen ||
+                        frame.ToolWheelPressed ||
+                        frame.ToolWheelReleased)
+                    {
+                        _playerMovementInputBridge?
+                            .SetSprintRequested(false);
+                        _interactionController?.ClearTarget();
+                        return true;
+                    }
+                }
+            }
+
+            _playerMovementInputBridge?.SetSprintRequested(
+                frame.SprintHeld && !placementModeActive);
+
+            if (_interactionController != null)
+            {
+                if (placementModeActive)
+                {
+                    _interactionController.ClearTarget();
+                }
+                else
+                {
+                    _interactionController
+                        .UpdateTargetFromScreenPosition(
+                            frame.PointerPosition);
+
+                    if (frame.InteractionPressed)
+                    {
+                        _interactionController
+                            .TryRequestCurrentInteraction();
+                        handled = true;
+                    }
+                }
+            }
 
             if (GameplayDestinationInputPolicy
                     .ShouldSetDestination(
@@ -218,11 +309,32 @@ namespace VRMGames.CartridgeAndCloud.Infrastructure.InputSystem.Actions
                     GetComponent<OrbitCameraRig>();
             }
 
+            if (_interactionController == null)
+            {
+                _interactionController =
+                    Object.FindFirstObjectByType<
+                        PlayerWorldInteractionController>();
+            }
+
             if (_placementRuntimeController == null)
             {
                 _placementRuntimeController =
                     Object.FindFirstObjectByType<
                         PlacementRuntimeController>();
+            }
+
+            if (_toolWheelInputBridge == null)
+            {
+                _toolWheelInputBridge =
+                    Object.FindFirstObjectByType<
+                        PlayerToolWheelInputBridge>();
+            }
+
+            if (_playerMovementInputBridge == null)
+            {
+                _playerMovementInputBridge =
+                    Object.FindFirstObjectByType<
+                        PlayerMovementInputBridge>();
             }
         }
     }
@@ -231,6 +343,12 @@ namespace VRMGames.CartridgeAndCloud.Infrastructure.InputSystem.Actions
     {
         public Vector2 PointerPosition { get; }
         public bool DestinationPressed { get; }
+        public bool InteractionPressed { get; }
+        public bool SprintHeld { get; }
+        public bool ToolWheelPressed { get; }
+        public bool ToolWheelHeld { get; }
+        public bool ToolWheelReleased { get; }
+        public Vector2 ToolWheelNavigation { get; }
         public bool OrbitHeld { get; }
         public Vector2 OrbitDelta { get; }
         public float ZoomDelta { get; }
@@ -238,12 +356,24 @@ namespace VRMGames.CartridgeAndCloud.Infrastructure.InputSystem.Actions
         public GameplayInputFrame(
             Vector2 pointerPosition,
             bool destinationPressed,
+            bool interactionPressed,
+            bool sprintHeld,
+            bool toolWheelPressed,
+            bool toolWheelHeld,
+            bool toolWheelReleased,
+            Vector2 toolWheelNavigation,
             bool orbitHeld,
             Vector2 orbitDelta,
             float zoomDelta)
         {
             PointerPosition = pointerPosition;
             DestinationPressed = destinationPressed;
+            InteractionPressed = interactionPressed;
+            SprintHeld = sprintHeld;
+            ToolWheelPressed = toolWheelPressed;
+            ToolWheelHeld = toolWheelHeld;
+            ToolWheelReleased = toolWheelReleased;
+            ToolWheelNavigation = toolWheelNavigation;
             OrbitHeld = orbitHeld;
             OrbitDelta = orbitDelta;
             ZoomDelta = zoomDelta;
